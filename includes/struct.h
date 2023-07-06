@@ -23,7 +23,7 @@ typedef struct s_list_token {
 	int					red;
 	int					quote;
 	struct s_list_token	*next;
-	struct s_list_token	*previous;
+	struct s_list_token	*prev;
 }						t_list_token;
 
 typedef t_list_token	t_tok;

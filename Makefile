@@ -1,6 +1,6 @@
 	### COMPILATION ###
 CC			:=	gcc
-CFLAGS		:=	-Wall -Wextra -Werror
+# CFLAGS		:=	-Wall -Wextra -Werror
 
 	### EXECUTABLE ###
 NAME		:=	minishell
@@ -24,14 +24,22 @@ LIBPRINTF_DIRECTORY		:= $(LIB_DIRECTORY)ftprintf/ #/libs/ftprintf
 	### SOURCE FILES ###
 MAIN_FILE	:= minishell.c
 
-PARSE_FILES	:= ft_get_word.c
+UTILS_FILES	:=	utils_parsing.c				\
+				utils_linked_list.c			\
+
+
+PARSE_FILES	:=	get_token_type.c			\
+				get_len_word.c				\
+				get_word.c					\
 
 	### OBJECTS ###
 PARSE_FILES	:= $(addprefix $(OBJS_PATH)/parser/, $(PARSE_FILES:.c=.o))
+UTILS_FILES := $(addprefix $(OBJS_PATH)/utils/, $(UTILS_FILES:.c=.o))
 MAIN_FILE	:= $(addprefix $(OBJS_PATH)/, $(MAIN_FILE:.c=.o))
 # PARSE_FILES	:= $(addprefix $(OBJS_PATH)/parser/, $(PARSE_FILES))
 
 OBJS		:=	$(PARSE_FILES)	\
+				$(UTILS_FILES)	\
 				$(MAIN_FILE)	\
 # OBJS		:= $(patsubst $(SRCS_PATH)/%.c, $(OBJS_PATH)/%.o, $(PARSE_FILES))
 

@@ -19,8 +19,33 @@
 # include "../libs/libft/libft.h"
 # include "../libs/ftprintf/ft_printf.h"
 
-/* PARSER */
-int	ft_len_word(char *arg);
+/*
+	PARSER
+*/
 
+/*	---	get_len_word.c	---*/
+
+int			ft_len_red(char *str, char c);
+int			ft_len_space(char *str);
+int			ft_len_word(char *str);
+int			ft_len_quote(char *str, char c);
+
+/*	---	get_token_type.c	--- */
+int			ft_is_red(char *prompt);
+int			ft_red_type(char *prompt);
+int			ft_is_pipe(char *prompt);
+int			ft_is_space(char *prompt);
+
+/*	---	get_word.c	--- */
+char	*ft_get_word_space(char **str);
+char	*ft_get_word_red(char **str, char c);
+
+
+/*	
+	UTILS
+*/
+
+/* utils1.c */
+int	ft_strcmp(char *str, char *comp);
 
 #endif
