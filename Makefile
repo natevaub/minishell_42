@@ -63,7 +63,7 @@ $(LIBPRINTF):
 	cp libs/ftprintf/libftprintf.a .
 
 $(NAME):	$(LIBFT) $(LIBPRINTF) $(OBJS)
-			@$(CC) $(CFLAGS) -o $@ $(OBJS) $(LIBS)
+			@$(CC) $(CFLAGS) -Llibs/ftprintf -lftprintf -Llibs/libft -lft -o $@ $(OBJS) $(LIBS)
 
 tmp:
 			@mkdir -p objs
@@ -72,13 +72,22 @@ $(OBJS_PATH)/%.o:	$(SRCS_PATH)/%.c
 					@mkdir -p $(@D)
 					@$(CC) $(CFLAGS) $(INCS_PATH) -c $< -o $@
 
+	$(MAKE) -sC $(LIBPRINTF_DIRECTORY) clean
+
 clean:
-			@make fclean -C $(LIBFT)
-			@make fclean -C $(FTPRINTF)
+			$(MAKE) -sC $(LIBPRINTF_DIRECTORY) clean
+			$(MAKE) -sC $(LIBFT_DIRECTORY) clean
 			@rm -rf $(OBJS_PATH)
+			# rm libft.a
+			# rm libftprinf.a
 
 fclean:		clean
-			@rm -rf $(NAME)
+			$(MAKE) -sC $(LIBFT_DIRECTORY) fclean
+			$(MAKE) -sC $(LIBPRINTF_DIRECTORY) fclean
+			rm -f libft.a
+			rm -f libftprintf.a
+			rm -f $(NAME)
+			# @rm -rf $(NAME)
 
 re:			fclean all
 
