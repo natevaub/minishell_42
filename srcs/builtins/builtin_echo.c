@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ck_builtin_echo.c                                  :+:      :+:    :+:   */
+/*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:38:36 by ckarl             #+#    #+#             */
-/*   Updated: 2023/07/05 18:04:42 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/07/07 17:33:00 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ char	*get_value(t_venv *env, void *var)
 	len = ft_strlen((char *)var);
 	while (env)
 	{
-		if (ft_strncmp(env->element, var, len) == 0)
-			value = env->element;
+		if (ft_strncmp(env->word, var, len) == 0)
+			value = env->word;
 		env = env->next;
 	}
 	return (ft_strdup(value + len + 1));
