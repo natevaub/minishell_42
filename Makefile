@@ -32,15 +32,27 @@ PARSE_FILES	:=	get_token_type.c			\
 				get_len_word.c				\
 				get_word.c					\
 
+BUILTIN_FILES :=	builtin_decide.c		\
+					builtin_echo.c			\
+					builtin_env.c			\
+					builtin_exit.c			\
+					builtin_export.c		\
+					builtin_pwd_cd.c		\
+					builtin_unset.c			\
+					utils_linked_list_1.c	\
+					utils_linked_list_2.c	\
+
 	### OBJECTS ###
 PARSE_FILES	:= $(addprefix $(OBJS_PATH)/parser/, $(PARSE_FILES:.c=.o))
 UTILS_FILES := $(addprefix $(OBJS_PATH)/utils/, $(UTILS_FILES:.c=.o))
+BUILTIN_FILES := $(addprefix $(OBJS_PATH)/builtins/, $(BUILTIN_FILES:.c=.o))
 MAIN_FILE	:= $(addprefix $(OBJS_PATH)/, $(MAIN_FILE:.c=.o))
 # PARSE_FILES	:= $(addprefix $(OBJS_PATH)/parser/, $(PARSE_FILES))
 
 OBJS		:=	$(PARSE_FILES)	\
 				$(UTILS_FILES)	\
 				$(MAIN_FILE)	\
+				$(BUILTIN_FILES)\
 # OBJS		:= $(patsubst $(SRCS_PATH)/%.c, $(OBJS_PATH)/%.o, $(PARSE_FILES))
 
 
