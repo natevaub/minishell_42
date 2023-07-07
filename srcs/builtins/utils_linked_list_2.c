@@ -1,40 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ck_list_helpers2.c                                 :+:      :+:    :+:   */
+/*   utils_linked_list_2.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/06/30 12:59:57 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/07/07 17:40:51 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-//append new node to list
-void	list_append(t_venv **lst, char *element)
-{
-	t_venv	*addback;
-	t_venv	*copy;
-
-	addback = (t_venv *)malloc(sizeof(t_venv));
-	if (!addback)
-		return ;
-	addback->next = NULL;
-	addback->word = ft_strdup(element);
-	if (!addback->word)							//add error message
-		return ;
-	if (*lst == NULL)
-	{
-		*lst = addback;
-		addback->prev = NULL;
-		return ;
-	}
-	copy = last_node(*lst);
-	copy->next = addback;
-	addback->prev = copy;
-}
 
 //create a new list out of parameter **tab, check **tab for errors
 t_venv	*new_env_list(char **tab)
