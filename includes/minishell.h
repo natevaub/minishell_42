@@ -39,20 +39,28 @@ int			ft_is_space(char *prompt);
 /*	---	get_word.c	--- */
 char	*ft_get_word_space(char **str);
 char	*ft_get_word_red(char **str, char c);
+char	*ft_get_word(char **str);
+
+/*	---tokenize_prompt.c	--- */
+void	ft_tokenize_prompt(t_minishell *global, char *prompt);
+char	*ft_get_tk(char **prompt);
+int		ft_get_tk_type(char *str);
 
 /*
 	UTILS
 */
 
-/* utils1.c */
-int	ft_strcmp(char *str, char *comp);
+/*	--- utils1.c	--- */
+int		ft_strcmp(char *str, char *comp);
+
+/*	--- utils_linked_list.c --- */
 
 /*
 	BUILTINS
 */
 
 /*	---	builtin_decide.c	---*/
-void	builtin_redirect(t_global *global, char *cmd, char *var);
-int		builtin_check(char *cmd);
+// void	builtin_redirect(t_global *global, char *cmd, char *var);
+// int		builtin_check(char *cmd);
 
 #endif

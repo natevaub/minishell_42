@@ -14,3 +14,19 @@ t_list_token	*ft_newlst_token(char *word)
 	new->next = NULL;
 	new->prev = NULL;
 }
+
+void	ft_lstadd_back_token(t_list_token **lst, t_list_token *nw)
+{
+	t_list_token	*node;
+
+	node = *lst;
+	if (node == NULL)
+		node = nw;
+	else
+	{
+		while (node->next != NULL)
+			node = node->next;
+		node->next = nw;
+		nw->prev = node;
+	}
+}

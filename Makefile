@@ -31,6 +31,7 @@ UTILS_FILES	:=	utils_parsing.c				\
 PARSE_FILES	:=	get_token_type.c			\
 				get_len_word.c				\
 				get_word.c					\
+				tokenize_prompt.c			\
 
 BUILTIN_FILES :=	builtin_decide.c		\
 					builtin_echo.c			\

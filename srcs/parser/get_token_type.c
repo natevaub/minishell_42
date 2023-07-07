@@ -35,7 +35,7 @@ int	ft_is_pipe(char *prompt)
 
 int	ft_is_space(char *prompt)
 {
-	if (*prompt == ' ' || *prompt == '/t')
+	if (*prompt == ' ' || *prompt == '\t')
 		return (1);
 	return (0);
 }

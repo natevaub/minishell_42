@@ -6,8 +6,7 @@ int main(int ac, char **av, char **envp)
 
 	prompt = readline(">> ");
 	ft_printf("%s\n", prompt);
-	char *s = "nathan"; char *b = "nathan";
-	printf("%d\n", ft_strcmp(s, b));
-	free(prompt);
+	char *res = ft_get_word(&prompt);
+	printf("%s\n", res);
 	return (0);
 }
