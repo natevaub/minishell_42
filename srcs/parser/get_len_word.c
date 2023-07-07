@@ -1,4 +1,4 @@
-#include "../includes/minishell.c"
+#include "../includes/minishell.h"
 
 int	ft_len_red(char *str, char c)
 {

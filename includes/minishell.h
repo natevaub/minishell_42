@@ -40,12 +40,19 @@ int			ft_is_space(char *prompt);
 char	*ft_get_word_space(char **str);
 char	*ft_get_word_red(char **str, char c);
 
-
-/*	
+/*
 	UTILS
 */
 
 /* utils1.c */
 int	ft_strcmp(char *str, char *comp);
+
+/*
+	BUILTINS
+*/
+
+/*	---	builtin_decide.c	---*/
+void	builtin_redirect(t_global *global, char *cmd, char *var);
+int		builtin_check(char *cmd);
 
 #endif

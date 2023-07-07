@@ -1,4 +1,4 @@
-#include "../includes/minishell.c"
+#include "../includes/minishell.h"
 
 char	*ft_get_word_space(char **str)
 {
