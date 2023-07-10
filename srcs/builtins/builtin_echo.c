@@ -34,30 +34,38 @@ char	*get_value(t_venv *env, void *var)
 }
 
 /*check if var is in env table, if yes, need to print its value and not the var name,
-check quotes ('$USER' should output $USER), inner and outer*/
-int	cmd_echo(char **cmd, char *option, t_venv *head, bool single_quotes, bool double_quotes)
+check quotes ('$USER' should output $USER), inner and outer
+if option is $?, we need to print last exit status*/
+int	cmd_echo(char **option, t_global *global, bool single_quotes, bool double_quotes)
 {
 	char	*print;
 	(void)	single_quotes;
 	(void)	double_quotes;
+	bool	backslash;
 
-	while (*cmd != 0)
+	if (*option && ft_strncmp(*option, "-n", 2) == 0)
 	{
-		if (*cmd[0] == '$' && (*cmd + 1))
-		{
-			if	(existing_var_in_env(*cmd + 1, head) == true)
-				print = get_value(head, *cmd + 1);	//prints the value found in env
-			else
-				print = ft_strdup(*cmd);		//or print nothing if ""
-		}
-		else if (!(print = ft_strdup(*cmd)));
-			return (errno);
-		if (option && ft_strncmp(option, "-n", 2) == 0)
-			ft_printf("print without backslash n: %s", print);					//need to print % at the end like for cat
-		else
-			ft_printf("print with backslash n: %s\n", print);
-		free(print);
-		cmd++;
+		backslash = false;
+		option++;
 	}
+	else
+		backslash = true;
+	while (*option != 0)
+	{
+		if (*option[0] == '$' && (*option + 1))
+		{
+			if	(existing_var_in_env(*option + 1, global->copy_env) == true)
+				print = get_value(global->copy_env, *option + 1);	//prints the value found in env
+			else
+				print = ft_strdup(*option);		//or print nothing if ""
+		}
+		else if (!(print = ft_strdup(*option)));
+			return (errno);
+		ft_printf("echo print: %s", print);
+		free(print);
+		option++;
+	}
+	if (backslash == true)
+		ft_printf("\n");
 	return (EXIT_SUCCESS);
 }

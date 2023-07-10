@@ -57,7 +57,7 @@ typedef struct	s_cmd
 typedef struct	s_global
 {
 	t_venv				*copy_env;
-	int					last_exit_status;
+	int					*last_exit_status;
 }						t_global;
 
 extern t_global			global;
