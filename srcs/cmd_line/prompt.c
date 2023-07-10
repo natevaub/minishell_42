@@ -1,6 +1,6 @@
 #include "../includes/minishell.h"
 
-static char	*ft_get_command_line(void)
+char	*ft_get_command_line(void)
 {
 	char	*cmd_line;
 

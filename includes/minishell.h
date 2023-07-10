@@ -23,8 +23,22 @@
 	CMD_LINE
 */
 /*	--- prompt.c	--- */
-static char	*ft_get_command_line(void);
+char		*ft_get_command_line(void);
 char		*ft_output_command_line(void);
+
+/*
+	INIT_MINISHELL
+*/
+/*	--- init_global.c	--- */
+char		**ft_get_opt(char **option, char **tmp);
+int			ft_len_cmd_opt(char **options);
+t_cmd		*ft_init_cmds(t_tok **tokens);
+char		**ft_store_cmd_options(t_tok **tokens, t_cmd *cmd);
+
+/*	--- init_env.c	--- */
+char		**ft_get_env(void);
+void		free_two_dimension_array(char **arr);
+
 
 /*
 	PARSER
@@ -70,6 +84,7 @@ void		ft_lstadd_back_token(t_tok **lst, t_tok *nw);
 
 /* utils1.c */
 int			ft_strcmp(char *str, char *comp);
+char 		*ft_strcat(char *dest, char *src);
 
 /*
 	BUILTINS

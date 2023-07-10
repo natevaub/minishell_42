@@ -7,7 +7,7 @@ int main(int ac, char **av, char **envp)
 	char	*prompt;
 
 
-	prompt = readline(">> ");
+	prompt = ft_output_command_line();
 	ft_printf("%s\n", prompt);
 	ft_tokenize_prompt(ms, prompt);
 	ft_printlist_tk(ms->token);

@@ -29,6 +29,9 @@ CMDLINE_FILES	:=	prompt.c					\
 UTILS_FILES	:=		utils_parsing.c				\
 					utils_linked_list.c			\
 
+INITMS_FILES :=		init_global.c				\
+					init_env.c					\
+
 
 PARSE_FILES	:=		get_token_type.c			\
 					get_len_word.c				\
@@ -47,18 +50,19 @@ BUILTIN_FILES :=	builtin_decide.c		\
 					utils_linked_list_2.c	\
 
 	### OBJECTS ###
-CMDLINE_FILES := $(addprefix $(OBJS_PATH)/cmd_line/, $(PARSE_FILES:.c=.o))
+CMDLINE_FILES := $(addprefix $(OBJS_PATH)/cmd_line/, $(CMDLINE_FILES:.c=.o))
+INITMS_FILES := $(addprefix $(OBJS_PATH)/init_minishell/, $(INITMS_FILES:.c=.o))
 PARSE_FILES	:= $(addprefix $(OBJS_PATH)/parser/, $(PARSE_FILES:.c=.o))
 UTILS_FILES := $(addprefix $(OBJS_PATH)/utils/, $(UTILS_FILES:.c=.o))
 BUILTIN_FILES := $(addprefix $(OBJS_PATH)/builtins/, $(BUILTIN_FILES:.c=.o))
 MAIN_FILE	:= $(addprefix $(OBJS_PATH)/, $(MAIN_FILE:.c=.o))
-# PARSE_FILES	:= $(addprefix $(OBJS_PATH)/parser/, $(PARSE_FILES))
 
-OBJS		:=	$(PARSE_FILES)	\
-				$(UTILS_FILES)	\
-				$(MAIN_FILE)	\
-				$(BUILTIN_FILES)\
-# OBJS		:= $(patsubst $(SRCS_PATH)/%.c, $(OBJS_PATH)/%.o, $(PARSE_FILES))
+OBJS		:=	$(PARSE_FILES)			\
+				$(UTILS_FILES)			\
+				$(MAIN_FILE)			\
+				$(BUILTIN_FILES)		\
+				$(CMDLINE_FILES)		\
+				$(INITMS_FILES)			\
 
 
 	### COLORS ###
