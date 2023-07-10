@@ -1,5 +1,5 @@
 	### COMPILATION ###
-CC			:=	gcc
+CC			:=	gcc -g
 # CFLAGS		:=	-Wall -Wextra -Werror
 
 	### EXECUTABLE ###
@@ -24,14 +24,17 @@ LIBPRINTF_DIRECTORY		:= $(LIB_DIRECTORY)ftprintf/ #/libs/ftprintf
 	### SOURCE FILES ###
 MAIN_FILE	:= minishell.c
 
-UTILS_FILES	:=	utils_parsing.c				\
-				utils_linked_list.c			\
+CMDLINE_FILES	:=	prompt.c					\
+
+UTILS_FILES	:=		utils_parsing.c				\
+					utils_linked_list.c			\
 
 
-PARSE_FILES	:=	get_token_type.c			\
-				get_len_word.c				\
-				get_word.c					\
-				tokenize_prompt.c			\
+PARSE_FILES	:=		get_token_type.c			\
+					get_len_word.c				\
+					get_word.c					\
+					parsing_checker.c			\
+					tokenize_prompt.c			\
 
 BUILTIN_FILES :=	builtin_decide.c		\
 					builtin_echo.c			\
@@ -44,6 +47,7 @@ BUILTIN_FILES :=	builtin_decide.c		\
 					utils_linked_list_2.c	\
 
 	### OBJECTS ###
+CMDLINE_FILES := $(addprefix $(OBJS_PATH)/cmd_line/, $(PARSE_FILES:.c=.o))
 PARSE_FILES	:= $(addprefix $(OBJS_PATH)/parser/, $(PARSE_FILES:.c=.o))
 UTILS_FILES := $(addprefix $(OBJS_PATH)/utils/, $(UTILS_FILES:.c=.o))
 BUILTIN_FILES := $(addprefix $(OBJS_PATH)/builtins/, $(BUILTIN_FILES:.c=.o))

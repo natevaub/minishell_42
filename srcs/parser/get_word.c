@@ -27,7 +27,7 @@ char	*ft_get_word_red(char **str, char c)
 	i = 0;
 	if (!word)
 		return (NULL);
-	while (**str && **str)
+	while (**str == c)
 	{
 		word[i] = **str;
 		i++;

@@ -6,7 +6,7 @@
 /*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 11:34:10 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/01/11 21:08:28 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/07/08 22:41:14 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	contains_newline(char *s, int *i, int n_bytes)
 
 void	set_new_megabuff(char **mbuff, char **new_mbuff, char *buff, int bytes)
 {
-	*new_mbuff = ft_strjoin(*mbuff, buff, bytes);
+	*new_mbuff = ft_gnl_strjoin(*mbuff, buff, bytes);
 	free(*mbuff);
 	*mbuff = *new_mbuff;
 }
@@ -53,8 +53,8 @@ int	extract_line(char **megabuff, char **line)
 		j = i;
 	else
 		j = ft_strlen(*megabuff);
-	*line = ft_substr(*megabuff, 0, j + 1);
-	new_megabuff = ft_substr(*megabuff, j + 1, ft_strlen(*megabuff));
+	*line = ft_gnl_substr(*megabuff, 0, j + 1);
+	new_megabuff = ft_gnl_substr(*megabuff, j + 1, ft_strlen(*megabuff));
 	free(*megabuff);
 	*megabuff = new_megabuff;
 	if (ft_strlen(*line) == 0)
@@ -77,7 +77,7 @@ int	read_while_newline(int fd, char **megabuff)
 		return (0);
 	while (1)
 	{
-		buff = ft_calloc(BUFFER_SIZE, sizeof(char));
+		buff = ft_gnl_calloc(BUFFER_SIZE, sizeof(char));
 		bytes = read(fd, buff, BUFFER_SIZE);
 		if (bytes < 0)
 		{
@@ -103,7 +103,7 @@ char	*get_next_line(int fd)
 
 	if (megabuff == NULL)
 	{
-		megabuff = ft_calloc(1, sizeof(char));
+		megabuff = ft_gnl_calloc(1, sizeof(char));
 	}
 	read_error = read_while_newline(fd, &megabuff);
 	if (read_error)
