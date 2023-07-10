@@ -21,20 +21,21 @@ Example: myvar="This variable is defined." > export myvar > bash > echo $myvar >
 "This variable is defined."*/
 
 //check if var is in allowed format (no #, $ or @ in name, starts with letter or _)
-int	check_var_format(void *var)
+int	check_var_format(char *var)
 {
 	int		i;
-	char	*copy;
 	int		err;
 
 	i = 0;
-	copy = (char *)var;
-	if (((copy[0] > 'Z' && copy[0] < 'a') || copy[0] < 'A'
-		|| copy[0] > 'z') && copy[0] != '_')
-			err = -1;
-	while (copy[i] != '=' && copy[i])
+	if (((var[0] > 'Z' && var[0] < 'a') || var[0] < 'A' \
+		|| var[0] > 'z') && var[0] != '_')
 	{
-		if (copy[i] == '#' || copy[i] == '@' || copy[i] == '$')
+		printf("in first error check var: %s\n", var);
+			err = -1;
+	}
+	while (var[i] != '=' && var[i] && err != -1)
+	{
+		if (var[i] == '#' || var[i] == '@' || var[i] == '$')
 			err = -1;
 		i++;
 	}
@@ -49,7 +50,7 @@ int	check_var_format(void *var)
 }
 
 //trim the end of str to get only the var name (without the value if there is any)
-char	*trim_back(void *var)
+char	*trim_back(char *var)
 {
 	char	*untrimmed;
 	char	*trimmed;
@@ -72,7 +73,7 @@ char	*trim_back(void *var)
 }
 
 //check if a variable exists in environment
-bool	existing_var_in_env(void *var, t_venv *head)
+bool	existing_var_in_env(char *var, t_venv *head)
 {
 	char	*copy_var;
 	int		len;
@@ -94,29 +95,23 @@ bool	existing_var_in_env(void *var, t_venv *head)
 }
 
 //add *var to env tableau
-int	add_var_export(void *var, t_venv **head)
+int	add_var_to_export(char **var, t_venv **head)
 {
 	t_venv	*addback;
 	t_venv	*pre_copy;
 	t_venv	*post_copy;
 
-	if (check_var_format(var) == 1)
-		return (EXIT_FAILURE);								//included error msg here (bash: export: `=1': not a valid identifier)
-	if (existing_var_in_env(var, *head) == true)
-		cmd_unset(trim_back(var), head);
-	addback = (t_venv *)malloc(sizeof(t_venv));
-	if (!addback)													//included errno here
-		return (errno);
-	addback->word = ft_strdup(var);
-	if (!addback->word)											//included errno here
-		return (errno);
-	pre_copy = get_node(*head, 10);
-	post_copy = pre_copy->next;
-	pre_copy->next = addback;
-	post_copy->prev = addback;
-	addback->prev = pre_copy;
-	addback->next = post_copy;
-	return (EXIT_SUCCESS);
+	while (*var)
+	{
+		if (check_var_format(*var) == EXIT_FAILURE)
+			return (EXIT_FAILURE);								//included error msg here (bash: export: `=1': not a valid identifier)
+		if (existing_var_in_env(*var, *head) == true)
+			cmd_unset(trim_back(*var), head);
+		if (insert_node_in_list(*var, head) == EXIT_FAILURE)
+			return (EXIT_FAILURE);
+		var++;
+	}
+		return (EXIT_SUCCESS);
 }
 
 //cmd: export (without args), prints env in ascii order without the last arg path

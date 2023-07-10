@@ -19,12 +19,20 @@ directory to different directories in our System.*/
 
 //On success, zero is returned.  On error, -1 is returned, and
 //errno is set to indicate the error.
-int	cmd_cd(char *to_go_path)
+int	cmd_cd(t_venv *copy_env, char *to_go_path)
 {
-	if (chdir(to_go_path) != 0)		//if no to go path is defined, go back to home (initial) directory
-	{
+	char	*path;
 
+	if (!to_go_path)
+		path = ft_strdup(get_value(copy_env, "HOME"));
+	else
+		path = ft_strdup(to_go_path);
+	if (chdir(path) < 0)
+	{
+		free (path);
+		return (errno);
 	}
+	free(path);
 	return (EXIT_SUCCESS);
 }
 
@@ -33,6 +41,8 @@ int	cmd_cd(char *to_go_path)
 to the standard output.*/
 int	cmd_pwd(void)
 {
+	if (getcwd(NULL, 0) == NULL)
+		return (errno);
 	ft_printf("%s\n", getcwd(NULL, 0));
 	return (EXIT_SUCCESS);
 }

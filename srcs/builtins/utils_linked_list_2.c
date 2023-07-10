@@ -65,3 +65,25 @@ void	bubble_sort(t_venv **head)
 		i++;
 	}
 }
+
+//insert a new node after the 10th node in the list
+int	insert_node_in_list(char *var, t_venv **head)
+{
+	t_venv	*addback;
+	t_venv	*pre_copy;
+	t_venv	*post_copy;
+
+	addback = (t_venv *)malloc(sizeof(t_venv));
+	if (!addback)													//included errno here
+		return (EXIT_FAILURE);
+	addback->word = ft_strdup(var);
+	if (!addback->word)											//included errno here
+		return (EXIT_FAILURE);
+	pre_copy = get_node(*head, 10);
+	post_copy = pre_copy->next;
+	pre_copy->next = addback;
+	post_copy->prev = addback;
+	addback->prev = pre_copy;
+	addback->next = post_copy;
+	return (EXIT_SUCCESS);
+}
