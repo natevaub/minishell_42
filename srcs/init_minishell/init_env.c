@@ -1,4 +1,4 @@
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 char	**ft_get_env(void)
 {
@@ -11,7 +11,7 @@ char	**ft_get_env(void)
 	k = 0;
 	while (environ[i] != NULL)
 		i++;
-	var = (char **)malloc(sizeof(char *) * (i + 1));	
+	var = (char **)malloc(sizeof(char *) * (i + 1));
 	if (!var)
 		return (NULL);
 	while (environ[k] != NULL)

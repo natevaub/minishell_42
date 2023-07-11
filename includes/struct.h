@@ -56,7 +56,7 @@ typedef struct	s_cmd
 // global variable: env, exit status
 typedef struct	s_global
 {
-	char				**env;
+	t_venv				*copy_env;
 	int					last_exit_status;
 }						t_global;
 

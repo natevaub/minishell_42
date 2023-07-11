@@ -34,6 +34,7 @@ char		**ft_get_opt(char **option, char **tmp);
 int			ft_len_cmd_opt(char **options);
 t_cmd		*ft_init_cmds(t_tok **tokens);
 char		**ft_store_cmd_options(t_tok **tokens, t_cmd *cmd);
+void		ft_init_minishell(t_minishell *shell, t_global *global, char **env);
 
 /*	--- init_env.c	--- */
 char		**ft_get_env(void);
