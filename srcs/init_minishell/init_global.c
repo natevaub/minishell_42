@@ -42,7 +42,17 @@ t_cmd	*ft_init_cmds(t_tok **tokens)
 	{
 		if ((*tokens)->type == E_STRING)
 			ft_store_cmd_options(tokens, cmd);
+		else if ((*tokens)->type = E_REDIRECTION)
+			ft_open_files_redirection(tokens, cmd);
+		else if ((*tokens)->type = E_PIPE)
+		{
+			(*tokens) = (*tokens)->next;
+			break ;
+		}
+		else if ((*tokens) != NULL)
+			(*tokens) = (*tokens)->next;
 	}
+	return (cmd);
 }
 
 char	**ft_store_cmd_options(t_tok **tokens, t_cmd *cmd)

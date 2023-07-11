@@ -30,6 +30,7 @@ UTILS_FILES	:=		utils_parsing.c				\
 					utils_linked_list.c			\
 
 INITMS_FILES :=		init_global.c				\
+					init_fd_redirection.c		\
 					init_env.c					\
 
 
