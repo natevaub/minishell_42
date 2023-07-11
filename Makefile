@@ -32,7 +32,6 @@ UTILS_FILES	:=		utils_parsing.c				\
 INITMS_FILES :=		init_global.c				\
 					init_env.c					\
 
-
 PARSE_FILES	:=		get_token_type.c			\
 					get_len_word.c				\
 					get_word.c					\
@@ -49,12 +48,15 @@ BUILTIN_FILES :=	builtin_decide.c		\
 					utils_linked_list_1.c	\
 					utils_linked_list_2.c	\
 
+SIGNAL_FILES :=		signals.c				\
+
 	### OBJECTS ###
 CMDLINE_FILES := $(addprefix $(OBJS_PATH)/cmd_line/, $(CMDLINE_FILES:.c=.o))
 INITMS_FILES := $(addprefix $(OBJS_PATH)/init_minishell/, $(INITMS_FILES:.c=.o))
 PARSE_FILES	:= $(addprefix $(OBJS_PATH)/parser/, $(PARSE_FILES:.c=.o))
 UTILS_FILES := $(addprefix $(OBJS_PATH)/utils/, $(UTILS_FILES:.c=.o))
 BUILTIN_FILES := $(addprefix $(OBJS_PATH)/builtins/, $(BUILTIN_FILES:.c=.o))
+SIGNALS_FILES := $(addprefix $(OBJS_PATH)/signals/, $(SIGNAL_FILES:.c=.o))
 MAIN_FILE	:= $(addprefix $(OBJS_PATH)/, $(MAIN_FILE:.c=.o))
 
 OBJS		:=	$(PARSE_FILES)			\
@@ -63,6 +65,7 @@ OBJS		:=	$(PARSE_FILES)			\
 				$(BUILTIN_FILES)		\
 				$(CMDLINE_FILES)		\
 				$(INITMS_FILES)			\
+				$(SIGNALS_FILES)		\
 
 
 	### COLORS ###

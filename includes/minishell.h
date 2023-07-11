@@ -40,7 +40,6 @@ void		ft_init_minishell(t_minishell *shell, t_global *global, char **env);
 char		**ft_get_env(void);
 void		free_two_dimension_array(char **arr);
 
-
 /*
 	PARSER
 */
@@ -120,16 +119,24 @@ int		cmd_pwd(void);
 int		cmd_unset(char **var, t_venv **head);
 
 /*	---	utils_linked_list_1.c	---*/
-int			list_size(t_venv *lst);
-t_venv		*last_node(t_venv *lst);
-t_venv		*first_node(t_venv *lst);
-t_venv		*get_node(t_venv *head, int index);
-void		list_append(t_venv **lst, char *element);
+int		list_size(t_venv *lst);
+t_venv	*last_node(t_venv *lst);
+t_venv	*first_node(t_venv *lst);
+t_venv	*get_node(t_venv *head, int index);
+void	list_append(t_venv **lst, char *element);
 
 /*	---	utils_linked_list_2.c	---*/
 t_venv	*new_env_list(char **tab);
 void	content_swap(t_venv *one, t_venv *two);
 void	bubble_sort(t_venv **head);
 int		insert_node_in_list(char *var, t_venv **head);
+
+/*
+	SIGNALS
+*/
+
+/*	---	signals.c	---*/
+void	init_signals(struct sigaction *s);
+void	signal_handler(int signal);
 
 #endif
