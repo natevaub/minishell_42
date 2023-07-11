@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ck_builtin_export.c                                :+:      :+:    :+:   */
+/*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/07/05 14:59:10 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/07/11 10:28:31 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,7 @@ int	check_var_format(char *var)
 	i = 0;
 	if (((var[0] > 'Z' && var[0] < 'a') || var[0] < 'A' \
 		|| var[0] > 'z') && var[0] != '_')
-	{
-		printf("in first error check var: %s\n", var);
-			err = -1;
-	}
+		err = -1;
 	while (var[i] != '=' && var[i] && err != -1)
 	{
 		if (var[i] == '#' || var[i] == '@' || var[i] == '$')
@@ -79,7 +76,6 @@ bool	existing_var_in_env(char *var, t_venv *head)
 	int		len;
 
 	copy_var = trim_back(var);
-	// printf("trimmed var: \n%s\n", copy_var);
 	len = ft_strlen(copy_var);
 	while (head)
 	{
