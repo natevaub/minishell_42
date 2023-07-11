@@ -1,10 +1,10 @@
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
-void	ft_init_minishell(t_minishell *shell, t_global *env)
+void	ft_init_minishell(t_minishell *shell, t_global *global, char **env)
 {
 	*shell = (t_minishell){};
-	env->env = ft_get_env();
-	env->last_exit_status = EXIT_SUCCESS;
+	global->copy_env = new_env_list(env);
+	global->last_exit_status = EXIT_SUCCESS;
 }
 
 
@@ -55,7 +55,7 @@ char	**ft_store_cmd_options(t_tok **tokens, t_cmd *cmd)
 	tokens[0]->word = cmd->cmd;
 	while ((*tokens) != NULL)
 	{
-		if ((*tokens)->type == E_STRING)	
+		if ((*tokens)->type == E_STRING)
 		{
 			tmp[i] = (*tokens)->word;
 			i++;
