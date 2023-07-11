@@ -1,4 +1,5 @@
-// // #include "../includes/minishell.h"
+#include "../includes/minishell.h"
+
 
 // t_tok	*ft_newlst_token(char *word)
 // {
@@ -35,3 +36,4 @@
 // // 		nw->prev = node;
 // // 	}
 // // }
+
