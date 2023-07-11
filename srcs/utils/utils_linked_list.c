@@ -1,4 +1,4 @@
-// #include "../includes/minishell.h"
+#include "../includes/minishell.h"
 
 t_tok	*ft_newlst_token(char *word)
 {
@@ -19,19 +19,14 @@ void	ft_lstadd_back_token(t_tok **lst, t_tok *nw)
 {
 	t_tok	*node;
 
-
-// void	ft_lstadd_back_token(t_list_token **lst, t_list_token *nw)
-// {
-// 	t_list_token	*node;
-
-// 	node = *lst;
-// 	if (node == NULL)
-// 		node = nw;
-// 	else
-// 	{
-// 		while (node->next != NULL)
-// 			node = node->next;
-// 		node->next = nw;
-// 		nw->prev = node;
-// 	}
-// }
+	node = *lst;
+	if (node == NULL)
+		node = nw;
+	else
+	{
+		while (node->next != NULL)
+			node = node->next;
+		node->next = nw;
+		nw->prev = node;
+	}
+}

@@ -1,4 +1,4 @@
-// #include "../includes/minishell.h"
+#include "../includes/minishell.h"
 
 void	ft_tokenize_prompt(t_minishell *global, char *prompt)
 {
@@ -15,19 +15,19 @@ void	ft_tokenize_prompt(t_minishell *global, char *prompt)
 }
 
 
-// char	*ft_get_tk(char **prompt)
-// {
-// 	char	*ret;
+char	*ft_get_tk(char **prompt)
+{
+	char	*ret;
 
-// 	ret = NULL;
-// 	if (**prompt == '<' || **prompt == '>' || **prompt == '|')
-// 		ret = ft_get_word_red(prompt, (char)**prompt);
-// 	else if (**prompt == ' ' || **prompt == '\t')
-// 		ret = ft_get_word_space(prompt);
-// 	else
-// 		ret = ft_get_word(prompt);
-// 	return (ret);
-// }
+	ret = NULL;
+	if (**prompt == '<' || **prompt == '>' || **prompt == '|')
+		ret = ft_get_word_red(prompt, (char)**prompt);
+	else if (**prompt == ' ' || **prompt == '\t')
+		ret = ft_get_word_space(prompt);
+	else
+		ret = ft_get_word(prompt);
+	return (ret);
+}
 
 int	ft_get_tk_type(char *prompt)
 {
