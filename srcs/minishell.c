@@ -1,17 +1,14 @@
 #include "../includes/minishell.h"
 
-extern t_global		*global;
+t_global		global;
 
 int main(int ac, char **av, char **envp)
 {
-	// t_global		vgl;
 	t_minishell			shell;
 	char				*prompt;
 
-
 	ft_init_minishell(&shell, envp);
 	init_signals();
-	print_env();
 
 	// prompt = ft_output_command_line();
 	while (1)
