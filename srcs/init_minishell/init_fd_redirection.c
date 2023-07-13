@@ -12,6 +12,7 @@ int	ft_get_infile_fd(t_tok **tk)
 {
 	int	fd;
 
+
 	fd = 0;
 	(*tk) = (*tk)->next;
 	if ((*tk) == NULL)
@@ -34,9 +35,11 @@ int	ft_get_infile_fd(t_tok **tk)
 	return (fd);
 }
 
+
 int	ft_get_outfile_fd(t_tok **tk)
 {
 	int	fd;
+
 
 	fd = 1;
 	(*tk) = (*tk)->next;
@@ -55,9 +58,11 @@ int	ft_get_outfile_fd(t_tok **tk)
 	return (fd);
 }
 
+
 int	ft_get_append_outfile_fd(t_tok **tk)
 {
 	int	fd;
+
 
 	fd = 1;
 	(*tk) = (*tk)->next;
@@ -98,3 +103,4 @@ void	ft_open_files_redirection(t_tok **tk, t_cmd *cmd)
 			((*tk)) = (*tk)->next;
 	}
 }
+

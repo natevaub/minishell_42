@@ -141,7 +141,8 @@ int			insert_node_in_list(char *var, t_venv **head);
 */
 
 /*	---	signals.c	---*/
-void	init_signals(struct sigaction *s);
-void	signal_handler(int signal);
+extern void	rl_replace_line(const char *, int);
+void		init_signals(struct sigaction *s);
+void		signal_handler(int signal);
 
 #endif

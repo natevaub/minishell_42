@@ -32,6 +32,7 @@ t_cmd	*ft_init_cmds(t_tok **tokens)
 {
 	t_cmd	*cmd;
 
+
 	cmd = malloc(sizeof(t_cmd));
 	if (!cmd)
 		return (NULL);
@@ -54,6 +55,7 @@ t_cmd	*ft_init_cmds(t_tok **tokens)
 	}
 	return (cmd);
 }
+
 
 char	**ft_store_cmd_options(t_tok **tokens, t_cmd *cmd)
 {
