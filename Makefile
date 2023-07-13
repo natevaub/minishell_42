@@ -120,7 +120,7 @@ fclean:		clean
 			rm -f libft.a
 			rm -f libftprintf.a
 			rm -f $(NAME)
-			# @rm -rf $(NAME)
+			@rm -rf $(NAME)
 
 re:			fclean all
 
