@@ -12,6 +12,8 @@
 
 #include "../../includes/minishell.h"
 
+extern t_global	global;
+
 //ECHO WITH OPTION -N
 /*The echo utility writes any specified operands, separated by single blank (` ')
 characters and followed by a newline (`\n') character, to the standard output.
@@ -36,7 +38,7 @@ char	*get_value(t_venv *env, void *var)
 /*check if var is in env table, if yes, need to print its value and not the var name,
 check quotes ('$USER' should output $USER), inner and outer
 if option is $?, we need to print last exit status*/
-int	cmd_echo(char **option, t_global *global, bool single_quotes, bool double_quotes)
+int	cmd_echo(char **option, bool single_quotes, bool double_quotes)
 {
 	char	*print;
 	(void)	single_quotes;
@@ -54,8 +56,8 @@ int	cmd_echo(char **option, t_global *global, bool single_quotes, bool double_qu
 	{
 		if (*option[0] == '$' && (*option + 1))
 		{
-			if	(existing_var_in_env(*option + 1, global->copy_env) == true)
-				print = get_value(global->copy_env, *option + 1);	//prints the value found in env
+			if	(existing_var_in_env(*option + 1) == true)
+				print = get_value(global.copy_env, *option + 1);	//prints the value found in env
 			else
 				print = ft_strdup(*option);		//or print nothing if ""
 		}

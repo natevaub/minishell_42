@@ -12,6 +12,8 @@
 
 #include "../../includes/minishell.h"
 
+extern t_global	global;
+
 //CD WITH ONLY A RELATIVE OR ABSOLUTE PATH
 /*The cd command in Linux is known as the change directory command.
 It is used to move efficiently from the current working
@@ -19,12 +21,12 @@ directory to different directories in our System.*/
 
 //On success, zero is returned.  On error, -1 is returned, and
 //errno is set to indicate the error.
-int	cmd_cd(t_venv *copy_env, char *to_go_path)
+int	cmd_cd( char *to_go_path)
 {
 	char	*path;
 
 	if (!to_go_path)
-		path = ft_strdup(get_value(copy_env, "HOME"));
+		path = ft_strdup(get_value(global.copy_env, "HOME"));
 	else
 		path = ft_strdup(to_go_path);
 	if (chdir(path) < 0)

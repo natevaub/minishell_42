@@ -12,6 +12,8 @@
 
 #include "../../includes/minishell.h"
 
+extern t_global	global;
+
 //EXPORT WITH NO OPTIONS (BUT WITH POTENTIAL ARGUMENTS)
 /*Normally, when you run a command at the bash prompt, a dedicated process is
 created with its own environment, exclusively for running your command. Any
@@ -70,11 +72,13 @@ char	*trim_back(char *var)
 }
 
 //check if a variable exists in environment
-bool	existing_var_in_env(char *var, t_venv *head)
+bool	existing_var_in_env(char *var)
 {
 	char	*copy_var;
 	int		len;
+	t_venv	*head;
 
+	head = global.copy_env;
 	copy_var = trim_back(var);
 	len = ft_strlen(copy_var);
 	while (head)
@@ -91,7 +95,7 @@ bool	existing_var_in_env(char *var, t_venv *head)
 }
 
 //add *var to env tableau
-int	add_var_to_export(char **var, t_venv **head)
+int	add_var_to_export(char **var)
 {
 	t_venv	*addback;
 	t_venv	*pre_copy;
@@ -101,9 +105,9 @@ int	add_var_to_export(char **var, t_venv **head)
 	{
 		if (check_var_format(*var) == EXIT_FAILURE)
 			return (EXIT_FAILURE);								//included error msg here (bash: export: `=1': not a valid identifier)
-		if (existing_var_in_env(*var, *head) == true)
-			cmd_unset(trim_back(*var), head);
-		if (insert_node_in_list(*var, head) == EXIT_FAILURE)
+		if (existing_var_in_env(*var) == true)
+			cmd_unset(trim_back(*var));
+		if (insert_node_in_list(*var, &global.copy_env) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 		var++;
 	}
@@ -111,11 +115,13 @@ int	add_var_to_export(char **var, t_venv **head)
 }
 
 //cmd: export (without args), prints env in ascii order without the last arg path
-int	print_export(t_venv *env_for_export)
+int	print_export(void)
 {
 	char	**lines;
+	t_venv	*env_for_export;
 
 	//check if last history was "minishell", if yes, add line list_append() with "_="/bin/bash""
+	env_for_export = global.copy_env;
 	bubble_sort(&env_for_export);
 	while (env_for_export)
 	{

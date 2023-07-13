@@ -12,10 +12,12 @@
 
 #include "../../includes/minishell.h"
 
+extern t_global	global;
+
 //UNSET WITH NO OPTIONS
 /*Using the unset command, you can unset values and attributes of shell
 variables.*/
-int	cmd_unset(char **var, t_venv **head)
+int	cmd_unset(char **var)
 {
 	t_venv	*list;
 	t_venv	*pre_copy;
@@ -23,7 +25,7 @@ int	cmd_unset(char **var, t_venv **head)
 
 	while (*var)
 	{
-		list = *head;
+		list = global.copy_env;
 		while (list)
 		{
 			if (ft_strncmp(list->word, *var, ft_strlen(*var)) == 0)
