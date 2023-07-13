@@ -16,7 +16,13 @@ int main(int ac, char **av, char **envp)
 	while (1)
 	{
 		prompt = readline(">> ");
-		add_history(prompt);
+		if (prompt == NULL)//Exit on Ctrl-D
+		{
+			// printf("\n");
+			exit(0);
+		}
+		if (prompt)
+			add_history(prompt);
 	}
 	return (0);
 }

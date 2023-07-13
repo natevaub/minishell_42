@@ -6,7 +6,7 @@
 /*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/07/13 14:48:35 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/07/13 13:47:59 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,17 @@ void	signal_handler(int signal)
 {
 	if (signal == SIGINT)
 	{
+		rl_replace_line("  ", 0); // Clear the previous text				//cannot find it in readline header
+		rl_on_new_line(); // Regenerate the prompt on a newline
+		rl_redisplay();
 		ft_putstr_fd("\n", STDOUT_FILENO);
-		rl_replace_line("", 0); // Clear the previous text				//cannot find it in readline header
 		rl_on_new_line(); // Regenerate the prompt on a newline
 		rl_redisplay();
 	}
 	else if (signal == SIGQUIT)
-		SIG_IGN;					//should do nothing
+	{
+		rl_replace_line("  ", 0);
+		rl_on_new_line(); // Regenerate the prompt on a newline
+		rl_redisplay();				//should do nothing
+	}
 }
