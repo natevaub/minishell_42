@@ -43,7 +43,12 @@ void	init_signals(struct sigaction *s)
 void	signal_handler(int signal)
 {
 	if (signal == SIGINT)
-		printf("\n");
+	{
+		ft_printf("\n");
+		rl_on_new_line(); // Regenerate the prompt on a newline
+		rl_replace_line("", 0); // Clear the previous text				//cannot find it in readline header
+		rl_redisplay();
+	}
 	else if (signal == SIGQUIT)
-		SIG_IGN;      //should do nothing
+		SIG_IGN;					//should do nothing
 }
