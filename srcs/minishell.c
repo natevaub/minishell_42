@@ -2,13 +2,17 @@
 
 int main(int ac, char **av, char **envp)
 {
+	t_global			vgl;
+	t_minishell			shell;
 	char				*prompt;
 	struct sigaction	s;
 
+	ft_init_minishell(&shell, &vgl, envp);
 	init_signals(&s);
 	sigaction(SIGINT, &s, NULL);
 	sigaction(SIGQUIT, &s, NULL);
-	// signal(SIGQUIT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+	// prompt = ft_output_command_line();
 	while (1)
 	{
 		prompt = readline(">> ");
