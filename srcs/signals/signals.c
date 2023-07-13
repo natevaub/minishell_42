@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/07/13 13:47:59 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/07/13 15:13:08 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,28 +33,32 @@ Ctrl-C = display a new line
 Ctrl-D = exit the program
 Ctrl-\ = do nothing*/
 
-void	init_signals(struct sigaction *s)
+void	init_signals(void)
 {
-	s->sa_handler = &(signal_handler);
-	sigemptyset(&s->sa_mask);
-	s->sa_flags = SA_RESTART;
+	struct sigaction	s;
+
+	s.sa_handler = &(signal_handler);
+	sigemptyset(&s.sa_mask);
+	s.sa_flags = SA_RESTART;
+	sigaction(SIGINT, &s, NULL);
+	sigaction(SIGQUIT, &s, NULL);
 }
 
 void	signal_handler(int signal)
 {
 	if (signal == SIGINT)
 	{
-		rl_replace_line("  ", 0); // Clear the previous text				//cannot find it in readline header
-		rl_on_new_line(); // Regenerate the prompt on a newline
+		rl_replace_line("  ", 0);
+		rl_on_new_line();
 		rl_redisplay();
 		ft_putstr_fd("\n", STDOUT_FILENO);
-		rl_on_new_line(); // Regenerate the prompt on a newline
+		rl_on_new_line();
 		rl_redisplay();
 	}
 	else if (signal == SIGQUIT)
 	{
 		rl_replace_line("  ", 0);
-		rl_on_new_line(); // Regenerate the prompt on a newline
-		rl_redisplay();				//should do nothing
+		rl_on_new_line();
+		rl_redisplay();
 	}
 }

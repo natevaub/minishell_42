@@ -1,26 +1,24 @@
 #include "../includes/minishell.h"
 
+extern t_global		*global;
+
 int main(int ac, char **av, char **envp)
 {
-	t_global			vgl;
+	// t_global		vgl;
 	t_minishell			shell;
 	char				*prompt;
-	struct sigaction	s;
 
-	ft_init_minishell(&shell, &vgl, envp);
-	init_signals(&s);
-	sigaction(SIGINT, &s, NULL);
-	sigaction(SIGQUIT, &s, NULL);
-	signal(SIGQUIT, SIG_IGN);
+
+	ft_init_minishell(&shell, envp);
+	init_signals();
+	print_env();
+
 	// prompt = ft_output_command_line();
 	while (1)
 	{
 		prompt = readline(">> ");
-		if (prompt == NULL)//Exit on Ctrl-D
-		{
-			// printf("\n");
+		if (prompt == NULL)//Exit on Ctrl-D, very slow, takes about 3 - 5 seconds
 			exit(0);
-		}
 		if (prompt)
 			add_history(prompt);
 	}

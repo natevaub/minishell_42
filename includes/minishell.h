@@ -34,7 +34,7 @@ char		**ft_get_opt(char **option, char **tmp);
 int			ft_len_cmd_opt(char **options);
 t_cmd		*ft_init_cmds(t_tok **tokens);
 char		**ft_store_cmd_options(t_tok **tokens, t_cmd *cmd);
-void		ft_init_minishell(t_minishell *shell, t_global *global, char **env);
+void		ft_init_minishell(t_minishell *shell, char **env);
 
 /*	--- init_env.c	--- */
 char		**ft_get_env(void);
@@ -104,7 +104,7 @@ int			cmd_echo(char **option, t_global *global, bool single_quotes, bool double_
 
 /*	---	builtin_env.c	---*/
 int			find_c(char *str, char c);
-int			print_env(t_venv *copy_env);
+int			print_env(void);
 
 /*	---	builtin_exit.c	---*/
 void		cmd_exit(int status);
@@ -142,7 +142,7 @@ int			insert_node_in_list(char *var, t_venv **head);
 
 /*	---	signals.c	---*/
 extern void	rl_replace_line(const char *, int);
-void		init_signals(struct sigaction *s);
+void		init_signals(void);
 void		signal_handler(int signal);
 
 #endif
