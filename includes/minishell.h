@@ -95,12 +95,12 @@ char 		*ft_strcat(char *dest, char *src);
 	BUILTINS
 */
 /*	---	builtin_decide.c	---*/
-void		builtin_redirect(t_global *global, char *cmd, char **option);
+void		builtin_redirect(char *cmd, char **option);
 int			builtin_check(char *cmd);
 
 /*	---	builtin_echo.c	---*/
 char		*get_value(t_venv *env, void *var);
-int			cmd_echo(char **option, t_global *global, bool single_quotes, bool double_quotes);
+int			cmd_echo(char **option, bool single_quotes, bool double_quotes);
 
 /*	---	builtin_env.c	---*/
 int			find_c(char *str, char c);
@@ -112,16 +112,16 @@ void		cmd_exit(int status);
 /*	---	builtin_export.c	---*/
 int			check_var_format(char *var);
 char		*trim_back(char *var);
-bool		existing_var_in_env(char *var, t_venv *head);
-int			add_var_to_export(char **var, t_venv **head);
-int			print_export(t_venv *env_for_export);
+bool		existing_var_in_env(char *var);
+int			add_var_to_export(char **var);
+int			print_export(void);
 
 /*	---	builtin_pwd_cd.c	---*/
-int			cmd_cd(t_venv *copy_env, char *to_go_path);
+int			cmd_cd(char *to_go_path);
 int			cmd_pwd(void);
 
 /*	---	builtin_unset.c	---*/
-int			cmd_unset(char **var, t_venv **head);
+int			cmd_unset(char **var);
 
 /*	---	utils_linked_list_1.c	---*/
 int		list_size(t_venv *lst);

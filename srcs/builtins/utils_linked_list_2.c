@@ -12,6 +12,8 @@
 
 #include "../../includes/minishell.h"
 
+extern t_global	global;
+
 //create a new list out of parameter **tab, check **tab for errors
 t_venv	*new_env_list(char **tab)
 {

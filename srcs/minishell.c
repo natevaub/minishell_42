@@ -6,9 +6,11 @@ int main(int ac, char **av, char **envp)
 {
 	t_minishell			shell;
 	char				*prompt;
+	char				**option;
+	char				*cmd;
 
 	ft_init_minishell(&shell, envp);
-	init_signals();
+	// init_signals();
 
 	// prompt = ft_output_command_line();
 	while (1)
@@ -18,6 +20,12 @@ int main(int ac, char **av, char **envp)
 			exit(0);
 		if (prompt)
 			add_history(prompt);
+		option = ft_split(prompt, ' ');
+		cmd = option[0];
+		if (option + 1)
+			builtin_redirect(cmd, (option + 1));
+		else
+			builtin_redirect(cmd, NULL);
 	}
 	return (0);
 }
