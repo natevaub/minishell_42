@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:38:36 by ckarl             #+#    #+#             */
-/*   Updated: 2023/07/07 17:33:00 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/07/13 12:04:18 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	cmd_echo(char **option, t_global *global, bool single_quotes, bool double_qu
 			else
 				print = ft_strdup(*option);		//or print nothing if ""
 		}
-		else if (!(print = ft_strdup(*option)));
+		else if (!(print = ft_strdup(*option)))
 			return (errno);
 		ft_printf("echo print: %s", print);
 		free(print);
