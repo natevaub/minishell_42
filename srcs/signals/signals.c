@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
 /*   Updated: 2023/07/13 13:47:59 by ckarl            ###   ########.fr       */
