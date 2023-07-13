@@ -56,7 +56,7 @@ INITMS_FILES := $(addprefix $(OBJS_PATH)/init_minishell/, $(INITMS_FILES:.c=.o))
 PARSE_FILES	:= $(addprefix $(OBJS_PATH)/parser/, $(PARSE_FILES:.c=.o))
 UTILS_FILES := $(addprefix $(OBJS_PATH)/utils/, $(UTILS_FILES:.c=.o))
 BUILTIN_FILES := $(addprefix $(OBJS_PATH)/builtins/, $(BUILTIN_FILES:.c=.o))
-SIGNALS_FILES := $(addprefix $(OBJS_PATH)/signals/, $(SIGNAL_FILES:.c=.o))
+SIGNAL_FILES := $(addprefix $(OBJS_PATH)/signals/, $(SIGNAL_FILES:.c=.o))
 MAIN_FILE	:= $(addprefix $(OBJS_PATH)/, $(MAIN_FILE:.c=.o))
 
 OBJS		:=	$(PARSE_FILES)			\
@@ -65,7 +65,7 @@ OBJS		:=	$(PARSE_FILES)			\
 				$(BUILTIN_FILES)		\
 				$(CMDLINE_FILES)		\
 				$(INITMS_FILES)			\
-				$(SIGNALS_FILES)		\
+				$(SIGNAL_FILES)		\
 
 
 	### COLORS ###
@@ -95,7 +95,7 @@ $(LIBPRINTF):
 	cp libs/ftprintf/libftprintf.a .
 
 $(NAME):	$(LIBFT) $(LIBPRINTF) $(OBJS)
-			@$(CC) $(CFLAGS) -Llibs/ftprintf -lftprintf -Llibs/libft -lft -o $@ $(OBJS) $(LIBS)
+			@$(CC) $(CFLAGS) -Llibs/ftprintf -L/usr/local/opt/readline/lib -Llibs/libft -o $@ $(OBJS) $(LIBS)
 
 tmp:
 			@mkdir -p objs
