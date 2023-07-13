@@ -40,7 +40,6 @@ void		ft_init_minishell(t_minishell *shell, t_global *global, char **env);
 char		**ft_get_env(void);
 void		free_two_dimension_array(char **arr);
 
-<<<<<<< HEAD
 /*	--- init_fd_redirection	--- */
 int			ft_error_red_file(char	*file);
 int			ft_get_infile_fd(t_tok **tk);
@@ -49,8 +48,6 @@ int			ft_get_append_outfile_fd(t_tok **tk);
 void		ft_open_files_redirection(t_tok **tk, t_cmd *cmd);
 
 
-=======
->>>>>>> refs/remotes/origin/main
 /*
 	PARSER
 */
