@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:38:36 by ckarl             #+#    #+#             */
-/*   Updated: 2023/07/13 16:19:07 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/07/13 16:30:35 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	print_env(void)
 	head = global.copy_env;
 	while (head)
 	{
-		if (find_c(head->word, '='))			//if var is undefined, it should not be printed
+		if (find_c(head->word, '='))
 			ft_printf("%s\n", head->word);
 		head = head->next;
 	}
