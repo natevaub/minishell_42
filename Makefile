@@ -34,6 +34,7 @@ INITMS_FILES :=		init_global.c				\
 					init_env.c					\
 
 PARSE_FILES	:=		get_token_type.c			\
+					get_parsed_token.c			\
 					get_len_word.c				\
 					get_word.c					\
 					parsing_checker.c			\
@@ -96,7 +97,7 @@ $(LIBPRINTF):
 	cp libs/ftprintf/libftprintf.a .
 
 $(NAME):	$(LIBFT) $(LIBPRINTF) $(OBJS)
-			@$(CC) $(CFLAGS) -Llibs/ftprintf -Llibs/libft -L/Users/ckarl/homebrew/opt/readline/lib -I/Users/ckarl/homebrew/opt/readline/include/readline -o $@ $(OBJS) $(LIBS)
+			@$(CC) $(CFLAGS) -Llibs/ftprintf -Llibs/libft -L/Users/nvaubien/.brew/Cellar/readline/8.2.1/lib -I/Users/nvaubien/.brew/Cellar/readline/8.2.1/include/readline/ -o $@ $(OBJS) $(LIBS)
 # -L/Users/ckarl/homebrew/opt/readline/lib -Llibs/ftprintf -Llibs/libft -I/Users/ckarl/homebrew/opt/readline/include/readline
 # -L/Users/nvaubien/.brew/Cellar/readline/8.2.1/lib -I/Users/nvaubien/.brew/Cellar/readline/8.2.1/include/readline/
 

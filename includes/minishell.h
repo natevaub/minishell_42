@@ -56,7 +56,12 @@ int			ft_len_red(char *str, char c);
 int			ft_len_space(char *str);
 int			ft_len_word(char *str);
 int			ft_len_quote(char *str, char c);
+
+/*	--- get_parsed_token.c	---*/
+void		ft_parse_token(t_minishell *shell);
+
 /*	---	get_token_type.c	--- */
+int			ft_is_builtins(char *prompt);
 int			ft_is_red(char *prompt);
 int			ft_red_type(char *prompt);
 int			ft_is_pipe(char *prompt);
@@ -68,6 +73,7 @@ char		*ft_get_word(char **str);
 
 /*	--- parsing_checker.c	--- */
 void		ft_printlist_tk(t_tok *global);
+void		ft_print_cmds(t_lcmd *cmd);
 
 /*	---tokenize_prompt.c	--- */
 void		ft_tokenize_prompt(t_minishell *global, char *prompt);
@@ -84,8 +90,10 @@ int			ft_strcmp(char *str, char *comp);
 
 
 /*	--- utils_linked_list.c	--- */
+t_lcmd		*ft_newlst_cmd(t_cmd *cmd);
 t_tok		*ft_newlst_token(char *word);
 void		ft_lstadd_back_token(t_tok **lst, t_tok *nw);
+void		ft_lstadd_back_cmd(t_lcmd **lst, t_lcmd *nw);
 
 /* utils1.c */
 int			ft_strcmp(char *str, char *comp);
