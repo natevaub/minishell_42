@@ -51,8 +51,6 @@ int main(int ac, char **av, char **envp)
 		ft_tokenize_prompt(&shell, prompt);
 		ft_printlist_tk(shell.token);
 		ft_parse_token(&shell);
-		ft_print_cmds(shell.cmd);
-		
 	}
 	return (0);
 }

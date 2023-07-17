@@ -22,30 +22,29 @@ void	ft_printlist_tk(t_tok *global)
 
 void	ft_print_cmds(t_lcmd *cmd)
 {
-	t_lcmd	*test;
-	int		i;
-	int		j;
+	t_lcmd *test;
+	int			i;
+	int			j;
 
 	i = 0;
 	j = 1;
 	test = cmd;
-	printf("1\n");
+	printf("--- PARSING TOKEN -> ----\n");
 	while (test != NULL)
 	{
-		printf("2\n");
+		printf(" --- cmd[%d] ---\n", j++);
+		printf("[%s] <- cmd\n", test->cmd);
 		if (test->cmd != NULL)
 		{
-			printf("3\n");
 			while (test->option[i] != NULL)
 			{
-				printf("4\n");
-				printf("---	---	---	---	---	---	---	---\n");
-				printf("---	Option[%d]	-  is	\" %s \"	---\n", i, test->option[i]);
-				printf("---	---	---	---	---	---	---	---\n");
+				printf("[%s] <- option[%d]\n", test->option[i], i);
 				i++;
 			}
 		}
 		i = 0;
+		printf("[%d] <- fd_read\n", test->fd_read);
+		printf("[%d] <- fd_write\n", test->fd_write);
 		test = test->next;
 	}
 }
