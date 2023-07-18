@@ -63,7 +63,7 @@ int	cmd_echo(char **option, bool single_quotes, bool double_quotes)
 		}
 		else if (!(print = ft_strdup(*option)))
 			return (errno);
-		ft_printf("echo print: %s", print);
+		ft_printf("%s", print);
 		free(print);
 		option++;
 	}

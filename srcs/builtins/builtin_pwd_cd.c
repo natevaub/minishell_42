@@ -21,7 +21,7 @@ directory to different directories in our System.*/
 
 //On success, zero is returned.  On error, -1 is returned, and
 //errno is set to indicate the error.
-int	cmd_cd( char *to_go_path)
+int	cmd_cd(char *to_go_path)
 {
 	char	*path;
 
