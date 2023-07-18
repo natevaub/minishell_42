@@ -1,5 +1,20 @@
 #include "../includes/minishell.h"
 
+t_lcmd	*ft_newlst_cmd(t_cmd *cmd)
+{
+	t_lcmd	*new;
+
+	new = malloc(sizeof(t_lcmd));
+	if (!new)
+		return (NULL);
+	new->cmd = cmd->cmd;
+	printf("new->cmd = %s \n", cmd->cmd);
+	new->option = cmd->option;
+	new->fd_read = cmd->read;
+	new->fd_write = cmd->write;
+	return (new);
+}
+
 
 t_tok	*ft_newlst_token(char *word)
 {
@@ -30,6 +45,21 @@ void	ft_lstadd_back_token(t_tok **lst, t_tok *nw)
 			node = node->next;
 		node->next = nw;
 		nw->prev = node;
+	}
+}
+
+void	ft_lstadd_back_cmd(t_lcmd **lst, t_lcmd *nw)
+{
+	t_lcmd	*node;
+
+	node = *lst;
+	if (node == NULL)
+		node = nw;
+	else
+	{
+		while (node->next != NULL)
+			node = node->next;
+		node->next = nw;
 	}
 }
 

@@ -44,8 +44,8 @@ t_cmd	*ft_init_cmds(t_tok **tokens)
 	{
 		if ((*tokens)->type == E_STRING)
 			ft_store_cmd_options(tokens, cmd);
-		// else if ((*tokens)->type == E_REDIRECTION)
-		// 	ft_open_files_redirection(tokens, cmd);
+		else if ((*tokens)->type == E_REDIRECTION)
+			ft_open_files_redirection(tokens, cmd);
 		else if ((*tokens)->type == E_PIPE)
 		{
 			(*tokens) = (*tokens)->next;
@@ -54,9 +54,9 @@ t_cmd	*ft_init_cmds(t_tok **tokens)
 		else if ((*tokens) != NULL)
 			(*tokens) = (*tokens)->next;
 	}
+	// exit(1);
 	return (cmd);
 }
-
 
 char	**ft_store_cmd_options(t_tok **tokens, t_cmd *cmd)
 {
@@ -65,7 +65,9 @@ char	**ft_store_cmd_options(t_tok **tokens, t_cmd *cmd)
 	int		i;
 
 	i = 1;
-	tokens[0]->word = cmd->cmd;
+	cmd->cmd = (*tokens)->word;
+	tmp[0] = cmd->cmd;
+	(*tokens) = (*tokens)->next;
 	while ((*tokens) != NULL)
 	{
 		if ((*tokens)->type == E_STRING)
@@ -81,5 +83,9 @@ char	**ft_store_cmd_options(t_tok **tokens, t_cmd *cmd)
 	tmp[i] = NULL;
 	options = ft_calloc(sizeof(char *), ft_len_cmd_opt(tmp) + 1);
 	options = ft_get_opt(options, tmp);
+	for (int i = 0; options[i]; i++)
+	{
+		printf("Options %d = %s\n", i, options[i]);
+	}
 	return (options);
 }

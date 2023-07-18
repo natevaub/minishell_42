@@ -34,6 +34,7 @@ INITMS_FILES :=		init_global.c				\
 					init_env.c					\
 
 PARSE_FILES	:=		get_token_type.c			\
+					get_parsed_token.c			\
 					get_len_word.c				\
 					get_word.c					\
 					parsing_checker.c			\

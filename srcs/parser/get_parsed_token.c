@@ -2,5 +2,22 @@
 
 void	ft_parse_token(t_minishell *shell)
 {
-	
+	t_tok	*start;
+	t_tok	*parse;
+
+	start = shell->token;
+	parse = shell->token;
+	while (parse != NULL)
+	{
+		if (!shell->cmd)
+		{
+			shell->cmd = ft_newlst_cmd(ft_init_cmds(&parse));
+		}
+		else
+		{
+			ft_lstadd_back_cmd(&shell->cmd,
+				ft_newlst_cmd(ft_init_cmds(&parse)));
+		}
+	}
+	shell->token = start;
 }

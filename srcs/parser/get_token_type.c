@@ -1,5 +1,25 @@
 #include "../includes/minishell.h"
 
+int	ft_is_builtins(char *prompt)
+{
+	if (ft_strcmp(prompt, D_ECHO) == 0)
+		return (1);
+	else if (ft_strcmp(prompt, D_CD) == 0)
+		return (1);
+	else if (ft_strcmp(prompt, D_PWD) == 0)
+		return (1);
+	else if (ft_strcmp(prompt, D_EXPORT) == 0)
+		return (1);
+	else if (ft_strcmp(prompt, D_UNSET) == 0)
+		return (1);
+	else if (ft_strcmp(prompt, D_ENV) == 0)
+		return (1);
+	else if (ft_strcmp(prompt, D_EXIT) == 0)
+		return (1);
+	return (0);
+
+}
+
 int	ft_is_red(char *prompt)
 {
 	if (ft_strcmp(prompt, D_INFILE) == 0)
