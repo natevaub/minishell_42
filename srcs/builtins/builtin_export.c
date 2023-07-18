@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/07/18 11:36:59 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/07/18 14:08:41 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	*trim_back(char *var)
 }
 
 //check if a variable exists in environment
-int	existing_var_in_env(char *var)
+int	change_existing_var_in_env(char *var)
 {
 	char	*copy_var;
 	int		len;
@@ -103,7 +103,7 @@ int	add_var_to_export(char **var)
 	{
 		if (check_var_format(*var) == EXIT_FAILURE)
 			return (EXIT_FAILURE);								//included error msg here (bash: export: `=1': not a valid identifier)
-		if (existing_var_in_env(*var) == 0)
+		if (change_existing_var_in_env(*var) == 0)
 		{
 			if (insert_node_in_list(*var, &global.copy_env) == EXIT_FAILURE)
 				return (EXIT_FAILURE);
