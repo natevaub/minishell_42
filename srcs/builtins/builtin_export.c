@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/07/13 12:05:34 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/07/18 11:36:59 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	*trim_back(char *var)
 }
 
 //check if a variable exists in environment
-bool	existing_var_in_env(char *var)
+int	existing_var_in_env(char *var)
 {
 	char	*copy_var;
 	int		len;
@@ -85,30 +85,29 @@ bool	existing_var_in_env(char *var)
 	{
 		if (ft_strncmp(head->word, copy_var, len) == 0)
 		{
+			free(head->word);
+			head->word = ft_strdup(var);
 			free(copy_var);
-			return (true);
+			return (1);
 		}
 		head = head->next;
 	}
 	free(copy_var);
-	return (false);
+	return (0);
 }
 
 //add *var to env tableau
 int	add_var_to_export(char **var)
 {
-	t_venv	*addback;
-	t_venv	*pre_copy;
-	t_venv	*post_copy;
-
 	while (*var)
 	{
 		if (check_var_format(*var) == EXIT_FAILURE)
 			return (EXIT_FAILURE);								//included error msg here (bash: export: `=1': not a valid identifier)
-		if (existing_var_in_env(*var) == true)
-			cmd_unset(trim_back(*var));
-		if (insert_node_in_list(*var, &global.copy_env) == EXIT_FAILURE)
-			return (EXIT_FAILURE);
+		if (existing_var_in_env(*var) == 0)
+		{
+			if (insert_node_in_list(*var, &global.copy_env) == EXIT_FAILURE)
+				return (EXIT_FAILURE);
+		}
 		var++;
 	}
 		return (EXIT_SUCCESS);

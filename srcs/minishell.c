@@ -3,7 +3,7 @@
 t_global		global;
 
 /* Christina's Main :D */
-/*
+
 int main(int ac, char **av, char **envp)
 {
 	t_minishell			shell;
@@ -14,8 +14,6 @@ int main(int ac, char **av, char **envp)
 	ft_init_minishell(&shell, envp);
 	init_signals();
 
-	// change_shvl_in_env(1);
-	// prompt = ft_output_command_line();
 	while (1)
 	{
 		prompt = readline(">> ");
@@ -32,27 +30,27 @@ int main(int ac, char **av, char **envp)
 	}
 	return (0);
 }
-*/
+
 
 /* Nate's Main :-) */
-int main(int ac, char **av, char **envp)
-{
-	t_minishell			shell;
-	char				*prompt;
+// int main(int ac, char **av, char **envp)
+// {
+// 	t_minishell			shell;
+// 	char				*prompt;
 
-	ft_init_minishell(&shell, envp);
-	init_signals();
+// 	ft_init_minishell(&shell, envp);
+// 	init_signals();
 
-	while (1)
-	{
-		prompt = ft_output_command_line();
-		if (prompt == NULL) //Exit on Ctrl-D, very slow, takes about 3 - 5 seconds
-			exit(0);
-		if (prompt)
-			add_history(prompt);
-		ft_tokenize_prompt(&shell, prompt);
-		ft_printlist_tk(shell.token);
-		ft_parse_token(&shell);
-	}
-	return (0);
-}
+// 	while (1)
+// 	{
+// 		prompt = ft_output_command_line();
+// 		if (prompt == NULL) //Exit on Ctrl-D, very slow, takes about 3 - 5 seconds
+// 			exit(0);
+// 		if (prompt)
+// 			add_history(prompt);
+// 		ft_tokenize_prompt(&shell, prompt);
+// 		ft_printlist_tk(shell.token);
+// 		ft_parse_token(&shell);
+// 	}
+// 	return (0);
+// }

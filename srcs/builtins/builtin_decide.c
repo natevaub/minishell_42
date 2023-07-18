@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/07/13 16:33:11 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/07/18 11:50:08 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int	builtin_check(char *cmd)
 and redirects to right builtin function for execution*/
 void	builtin_redirect(char *cmd, char **option)
 {
+	if (!cmd)
+		return ;
 	if (ft_strncmp(cmd, "echo", 4) == 0)
 		global.last_exit_status = cmd_echo(option, true, true);	//TBC
 	else if (ft_strncmp(cmd, "cd", 2) == 0)
@@ -58,4 +60,6 @@ void	builtin_redirect(char *cmd, char **option)
 		global.last_exit_status = print_env();
 	else if (ft_strncmp(cmd, "exit", 4) == 0)								//TBC
 		cmd_exit(*option);
+	else if (ft_strncmp(cmd, "minishell", 9) == 0)
+		change_shvl_in_env(1);
 }
