@@ -12,13 +12,36 @@
 
 #include "../../includes/minishell.h"
 
+extern t_global	global;
+
+/*if "minishell" is called again (nbr = 1), we need to increase SHLVL variable,
+when exit is called (nbr = 0), we need to decrease it*/
+void	change_shvl_in_env(int nbr)
+{
+	int		shlvl_value;
+	char	*value;
+
+	value = get_value(global.copy_env, "SHLVL");
+	shlvl_value = ft_atoi(value);
+	printf("%d\n", shlvl_value);
+	// if (nbr == 1)
+
+
+}
+
+
 //EXIT WITH NO OPTIONS
 /*The exit() function causes normal process termination and the
 least significant byte of status (i.e., status & 0xFF) is
 returned to the parent (see wait(2)).*/
-void	cmd_exit(int status)
+void	cmd_exit(char *status)
 {
-	exit(status);
+	//check SHVL variable, if not 1, then only decrease it and don't exit
+
+	if (status)
+		exit(status);
+	else
+		exit(global.last_exit_status);
 }
 
 /*

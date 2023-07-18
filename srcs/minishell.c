@@ -10,8 +10,9 @@ int main(int ac, char **av, char **envp)
 	char				*cmd;
 
 	ft_init_minishell(&shell, envp);
-	// init_signals();
+	init_signals();
 
+	// change_shvl_in_env(1);
 	// prompt = ft_output_command_line();
 	while (1)
 	{

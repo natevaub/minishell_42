@@ -57,5 +57,5 @@ void	builtin_redirect(char *cmd, char **option)
 	else if (ft_strncmp(cmd, "env", 3) == 0)
 		global.last_exit_status = print_env();
 	else if (ft_strncmp(cmd, "exit", 4) == 0)								//TBC
-		cmd_exit(global.last_exit_status);
+		cmd_exit(*option);
 }

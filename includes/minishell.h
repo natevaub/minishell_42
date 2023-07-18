@@ -107,7 +107,8 @@ int			find_c(char *str, char c);
 int			print_env(void);
 
 /*	---	builtin_exit.c	---*/
-void		cmd_exit(int status);
+void		cmd_exit(char *status);
+void		change_shvl_in_env(int nbr);
 
 /*	---	builtin_export.c	---*/
 int			check_var_format(char *var);

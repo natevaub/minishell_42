@@ -96,9 +96,10 @@ $(LIBPRINTF):
 	cp libs/ftprintf/libftprintf.a .
 
 $(NAME):	$(LIBFT) $(LIBPRINTF) $(OBJS)
-			@$(CC) $(CFLAGS) -Llibs/ftprintf -Llibs/libft -L/Users/ckarl/homebrew/opt/readline/lib -I/Users/ckarl/homebrew/opt/readline/include/readline -o $@ $(OBJS) $(LIBS)
+			@$(CC) $(CFLAGS) -Llibs/ftprintf -Llibs/libft -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include/readline -o $@ $(OBJS) $(LIBS)
 # -L/Users/ckarl/homebrew/opt/readline/lib -Llibs/ftprintf -Llibs/libft -I/Users/ckarl/homebrew/opt/readline/include/readline
-# -L/Users/nvaubien/.brew/Cellar/readline/8.2.1/lib -I/Users/nvaubien/.brew/Cellar/readline/8.2.1/include/readline/
+# -L/Users/nvaubien/.brew/Cellar/readline/8.2.1/lib -I/Users/nvaubien/.brew/Cellar/readline/8.2.1/include/readline
+# -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include/readline
 
 tmp:
 			@mkdir -p objs
