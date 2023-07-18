@@ -37,6 +37,8 @@ char	*ft_get_tk(char **prompt)
 		ret = ft_get_word_red(prompt, (char)**prompt);
 	else if (**prompt == ' ' || **prompt == '\t')
 		ret = ft_get_word_space(prompt);
+	else if (**prompt == '\'' || **prompt == '"')
+		ret = ft_get_word_quote(prompt, **prompt);
 	else
 		ret = ft_get_word(prompt);
 	return (ret);

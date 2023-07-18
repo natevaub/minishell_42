@@ -36,6 +36,31 @@ char	*ft_get_word_red(char **str, char c)
 	return (word);
 }
 
+char	*ft_get_word_quote(char **prompt, char c)
+{
+	char	*word;
+	int		i;
+
+	i = 0;
+	word = ft_calloc(sizeof(char), ft_len_quote(*prompt, c) + 1);
+	if (!word)
+		return (NULL);
+	word[i] = (**prompt);
+	i++;
+	(*prompt)++;
+	while (**prompt != '\0')
+	{
+		word[i] = (**prompt);
+		if (**prompt == c)
+			break ;
+		i++;
+		(*prompt)++;
+	}
+	if (**prompt == c)
+		(*prompt)++;
+	return (word);
+}
+
 char	*ft_get_word(char **str)
 {
 	char	*word;
