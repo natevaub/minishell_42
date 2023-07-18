@@ -121,7 +121,7 @@ void		change_shvl_in_env(int nbr);
 /*	---	builtin_export.c	---*/
 int			check_var_format(char *var);
 char		*trim_back(char *var);
-bool		existing_var_in_env(char *var);
+int			existing_var_in_env(char *var);
 int			add_var_to_export(char **var);
 int			print_export(void);
 
