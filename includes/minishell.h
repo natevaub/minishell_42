@@ -108,7 +108,7 @@ int			builtin_check(char *cmd);
 
 /*	---	builtin_echo.c	---*/
 char		*get_value(t_venv *env, void *var);
-int			cmd_echo(char **option, bool single_quotes, bool double_quotes);
+int			cmd_echo(char **option);
 
 /*	---	builtin_env.c	---*/
 int			find_c(char *str, char c);
@@ -121,7 +121,7 @@ void		change_shvl_in_env(int nbr);
 /*	---	builtin_export.c	---*/
 int			check_var_format(char *var);
 char		*trim_back(char *var);
-int			existing_var_in_env(char *var);
+int			change_existing_var_in_env(char *var);
 int			add_var_to_export(char **var);
 int			print_export(void);
 
