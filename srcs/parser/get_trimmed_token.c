@@ -1,14 +1,20 @@
 #include "../includes/minishell.h"
 
-char	*ft_remove_tk_quote(char **prompt)
+char	*ft_remove_tk_quote(char *word)
 {
 	char	*new;
 	char	quote;
 	int		i;
 	int		j;
 
-	new = ft_calloc(sizeof(char), ft_strlen(*prompt) + 1);
-	printf("Len of prompt = %zu\n", ft_strlen(*prompt));
+	new = ft_calloc(sizeof(char), ft_strlen(*word) + 1 - 2);
+	printf("Len of new = %zu\n", ft_strlen(*word));
+	if (!new)
+		exit(printf("Malloc Error\n") + 247);
+	while (word[i] != '\0')
+	{
+
+	}
 	return (new);
 }
 
