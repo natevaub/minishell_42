@@ -71,7 +71,7 @@ char	*trim_back(char *var)
 	return (trimmed);
 }
 
-//check if a variable exists in environment
+//check if a variable exists in environment & change it to *var
 int	change_existing_var_in_env(char *var)
 {
 	char	*copy_var;
@@ -83,7 +83,8 @@ int	change_existing_var_in_env(char *var)
 	len = ft_strlen(copy_var);
 	while (head)
 	{
-		if (ft_strncmp(head->word, copy_var, len) == 0)
+		if (ft_strncmp(head->word, copy_var, len) == 0 && \
+		(head->word[len] == '=' || head->word[len] == '\0'))
 		{
 			free(head->word);
 			head->word = ft_strdup(var);

@@ -145,6 +145,13 @@ void		content_swap(t_venv *one, t_venv *two);
 void		bubble_sort(t_venv **head);
 int			insert_node_in_list(char *var, t_venv **head);
 
+/*	---	var_expand.c	---*/
+int			tab_size(char **tab);
+char		*expanded_value(char *trimmed);
+char		**expanded_tab(char *trimmed);
+char		*get_expand_var(char *var);
+char		*ft_strndup(char *s, char n);
+
 /*
 	SIGNALS
 */
