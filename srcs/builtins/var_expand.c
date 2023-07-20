@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/07/18 15:00:26 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/07/20 14:55:25 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,26 +32,15 @@ char	*expanded_value(char *word)
 		(head->word[len_word] == '=' || head->word[len_word] == '\0'))
 		{
 			if (head->word[len_word + 1])
-			{
 				expanded = ft_strdup(head->word[len_word + 1]);
-				return (expanded);
-			}
+			else
+				expanded = ft_strdup("");
+			return (expanded);
 		}
 		head = head->next;
 	}
 	return (ft_strdup(""));
 }
-
-int	tab_size(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i])
-		i++;
-	return (i);
-}
-
 
 char	**expanded_tab(char *trimmed)
 {
@@ -72,30 +61,35 @@ char	**expanded_tab(char *trimmed)
 	}
 	*expanded_tab = '\0';
 	free_two_dimension_array(tab);
-	//get expand_tab with the expanded values
 	return (expanded_tab);
 }
 
-char	*ft_strndup(char *s, char n)
+char	*expand_join(char *front, char *trimmed, char *value)
 {
-	int		size;
-	int		index;
-	char	*dup;
+	char	*joined;
+	int		i;
+	int		len;
+	char	**exp_tab;
 
-	index = 0;
-	size = ft_strlen(s);
-	if (n == 0)
-		return (NULL);
-	dup = malloc(sizeof(char) * size);
-	if (!dup)
-		return (0);
-	while (index < size && s[index] != n)
+	i = 0;
+	exp_tab = expanded_tab(trimmed);
+	len = ft_strlen(front) + total_len_tab(exp_tab) + ft_strlen(value);
+	joined = (char *)malloc(len + 1);
+	if (!joined)
+		return (NULL);															//include error here
+	while (*front)
+		joined[i++] = *front++;
+	while (*exp_tab)
 	{
-		dup[index] = s[index];
-		index++;
+		while (**exp_tab)
+			joined[i++] = **exp_tab++;
+		exp_tab++;
 	}
-	dup[index] = '\0';
-	return (dup);
+	while (*value)
+		joined[i++] = *value++;
+	joined[i] = '\0';
+	free_two_dimension_array(exp_tab);
+	return (joined);
 }
 
 //expand variable if necessary
@@ -104,12 +98,9 @@ char	*get_expand_var(char *var)
 	char	*trimmed;
 	char	*value;
 	char	*front;
-	t_venv	*head;
+	char	*expanded_str;
 	int		len;
-	int		i;
 
-	i = 0;
-	head = global.copy_env;
 	trimmed = trim_back(var);
 	len = ft_strlen(trimmed);
 	if (find_c(trimmed, '$') == 0 || len == 1)
@@ -117,11 +108,14 @@ char	*get_expand_var(char *var)
 		free(trimmed);
 		return (var);
 	}
-	if (var + len)
-		value = ft_strdup(var + len);
+	// if (var + len)
+	value = ft_strdup(var + len);
 	front = ft_strndup(var, '$');
-	//for strjoin, need to check if front == NULL
-
-	//saved front, then get_expand_tab >> join
+	expanded_str = expand_join(front, value, trimmed);
+	if (!expanded_str)
+		return (NULL);													//include error here
 	free(trimmed);
+	free(front);
+	free(value);
+	return (expanded_str);
 }

@@ -132,6 +132,11 @@ int			cmd_pwd(void);
 /*	---	builtin_unset.c	---*/
 int			cmd_unset(char **var);
 
+/*	---	var_expand.c	---*/
+char		*expanded_value(char *trimmed);
+char		**expanded_tab(char *trimmed);
+char		*get_expand_var(char *var);
+
 /*	---	utils_linked_list_1.c	---*/
 int		list_size(t_venv *lst);
 t_venv	*last_node(t_venv *lst);
@@ -145,11 +150,9 @@ void		content_swap(t_venv *one, t_venv *two);
 void		bubble_sort(t_venv **head);
 int			insert_node_in_list(char *var, t_venv **head);
 
-/*	---	var_expand.c	---*/
+/*	---	utils_tab.c	---*/
+int			total_len_tab(char **tab);
 int			tab_size(char **tab);
-char		*expanded_value(char *trimmed);
-char		**expanded_tab(char *trimmed);
-char		*get_expand_var(char *var);
 char		*ft_strndup(char *s, char n);
 
 /*

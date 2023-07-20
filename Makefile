@@ -49,7 +49,8 @@ BUILTIN_FILES :=	builtin_decide.c		\
 					builtin_unset.c			\
 					utils_linked_list_1.c	\
 					utils_linked_list_2.c	\
-					var_expand.c
+					var_expand.c			\
+					utils_tab.c				\
 
 SIGNAL_FILES :=		signals.c				\
 
