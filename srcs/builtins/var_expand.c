@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/07/20 14:55:25 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/07/20 18:21:30 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,7 @@
 
 extern t_global	global;
 
-//save value ("=xyz") in a char *value
-//check how many $ there are, check each if existing in var
-
-//check for $ (even if more than one)
+//get the expanded value of a var from global.copy_env
 char	*expanded_value(char *word)
 {
 	char	*expanded;
@@ -32,7 +29,7 @@ char	*expanded_value(char *word)
 		(head->word[len_word] == '=' || head->word[len_word] == '\0'))
 		{
 			if (head->word[len_word + 1])
-				expanded = ft_strdup(head->word[len_word + 1]);
+				expanded = ft_strdup(head->word + len_word + 1);
 			else
 				expanded = ft_strdup("");
 			return (expanded);
@@ -42,10 +39,12 @@ char	*expanded_value(char *word)
 	return (ft_strdup(""));
 }
 
+//get the expanded values of all vars in a **tab
 char	**expanded_tab(char *trimmed)
 {
 	char	**tab;
 	char	**expanded_tab;
+	int		i;
 
 	tab = ft_split(trimmed, '$');
 	if (!tab)
@@ -53,37 +52,39 @@ char	**expanded_tab(char *trimmed)
 	expanded_tab = (char **)malloc(sizeof(char *) * (tab_size(tab) + 1));
 	if (!expanded_tab)
 		return (NULL);
-	while (*tab)
+	i = 0;
+	while (tab[i])
 	{
-		*expanded_tab = expanded_value(*tab);
-		expanded_tab++;
-		tab++;
+		expanded_tab[i] = expanded_value(tab[i]);
+		i++;
 	}
-	*expanded_tab = '\0';
+	expanded_tab[i] = 0;
 	free_two_dimension_array(tab);
 	return (expanded_tab);
 }
 
-char	*expand_join(char *front, char *trimmed, char *value)
+//join the **expanded_tab to a *char
+char	*expanded_join(char *front, char **exp_tab, char *value)
 {
 	char	*joined;
 	int		i;
-	int		len;
-	char	**exp_tab;
+	int		j;
+	int		k;
 
 	i = 0;
-	exp_tab = expanded_tab(trimmed);
-	len = ft_strlen(front) + total_len_tab(exp_tab) + ft_strlen(value);
-	joined = (char *)malloc(len + 1);
+	j = 0;
+	joined = (char *)malloc(ft_strlen(front) + total_len_tab(exp_tab) \
+			+ ft_strlen(value) + 1);
 	if (!joined)
-		return (NULL);															//include error here
+		return (NULL);																				//include error here
 	while (*front)
 		joined[i++] = *front++;
-	while (*exp_tab)
+	while (exp_tab[j])
 	{
-		while (**exp_tab)
-			joined[i++] = **exp_tab++;
-		exp_tab++;
+		k = 0;
+		while (exp_tab[j][k])
+			joined[i++] = exp_tab[j][k++];
+		j++;
 	}
 	while (*value)
 		joined[i++] = *value++;
@@ -92,7 +93,7 @@ char	*expand_join(char *front, char *trimmed, char *value)
 	return (joined);
 }
 
-//expand variable if necessary
+//expand variable if necessary, keep front and back the same
 char	*get_expand_var(char *var)
 {
 	char	*trimmed;
@@ -108,10 +109,9 @@ char	*get_expand_var(char *var)
 		free(trimmed);
 		return (var);
 	}
-	// if (var + len)
 	value = ft_strdup(var + len);
 	front = ft_strndup(var, '$');
-	expanded_str = expand_join(front, value, trimmed);
+	expanded_str = expanded_join(front, expanded_tab(trimmed), value);
 	if (!expanded_str)
 		return (NULL);													//include error here
 	free(trimmed);

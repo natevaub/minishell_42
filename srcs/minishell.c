@@ -10,9 +10,17 @@ int main(int ac, char **av, char **envp)
 	char				*prompt;
 	char				**option;
 	char				*cmd;
+	char				*test_exp[2];
+	(void)	ac;
+	(void)	av;
 
 	ft_init_minishell(&shell, envp);
 	init_signals();
+
+	test_exp[0] = "myvar=7";
+	test_exp[1] = "myvar1=hello";
+	add_var_to_export(test_exp);
+	printf("%s\n", get_expand_var("$myv"));
 
 	while (1)
 	{
@@ -23,6 +31,7 @@ int main(int ac, char **av, char **envp)
 			add_history(prompt);
 		option = ft_split(prompt, ' ');
 		cmd = option[0];
+
 		if (option + 1)
 			builtin_redirect(cmd, (option + 1));
 		else

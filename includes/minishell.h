@@ -135,6 +135,7 @@ int			cmd_unset(char **var);
 /*	---	var_expand.c	---*/
 char		*expanded_value(char *trimmed);
 char		**expanded_tab(char *trimmed);
+char		*expanded_join(char *front, char **exp_tab, char *value);
 char		*get_expand_var(char *var);
 
 /*	---	utils_linked_list_1.c	---*/
