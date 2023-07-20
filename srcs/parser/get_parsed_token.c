@@ -34,9 +34,13 @@ void	ft_parsing(t_minishell *shell, char *prompt)
 		// err = ft_expand(shell);
 		// if (ft_syntax(shell) == 0)
 		// {
+			printf("0\n");
 			ft_trim_quote(shell);
+			printf("1\n");
 			err = ft_join_tk(shell->token);
+			printf("2\n");
 			ft_parse_token(shell);
+			printf("3\n");
 		// }
 	}
 

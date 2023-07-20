@@ -23,7 +23,10 @@ int	ft_join_tk(t_tok *tk)
 	while (tk != NULL)
 	{
 		if (ft_is_joinable(tk) == 1)
+		{
 			tk = tk->next;
+		}
+			
 		else if (tk->next != NULL && *tk->word != ' ' && *tk->next->word != ' ')
 		{
 			i = 0;
@@ -35,6 +38,7 @@ int	ft_join_tk(t_tok *tk)
 			ft_strcat_join_tk(new_word, tk->word, &i, &j);
 			i = 0;
 			ft_strcat_join_tk(new_word, tk->next->word, &i, &j);
+			ft_get_joined_tk(tk, new_word);
 		}
 		else
 			tk = tk->next;
@@ -50,4 +54,17 @@ void	ft_strcat_join_tk(char *s1, char *s2, int *i, int *j)
 		(*i)++;
 		(*j)++;
 	}
+}
+
+void	ft_get_joined_tk(t_tok *tok, char *n_tk)
+{
+	t_tok	*curr;
+
+	free(tok->word);
+	tok->word = n_tk;
+	printf("tok->word = %s\n", tok->word);
+	curr = tok->next;
+	tok->next = curr->next;
+	free(curr->word);
+	free(curr);
 }

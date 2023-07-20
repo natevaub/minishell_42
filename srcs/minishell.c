@@ -50,6 +50,7 @@ int main(int ac, char **av, char **envp)
 		if (prompt)
 			add_history(prompt);
 		ft_parsing(&shell, prompt);
+		ft_printlist_tk(shell.token);
 		// ft_tokenize_prompt(&shell, prompt);
 		// ft_printlist_tk(shell.token);
 		// ft_parse_token(&shell);

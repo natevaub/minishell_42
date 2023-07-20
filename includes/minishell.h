@@ -56,6 +56,7 @@ void		ft_open_files_redirection(t_tok **tk, t_cmd *cmd);
 int			ft_is_joinable(t_tok *token);
 int			ft_join_tk(t_tok *tk);
 void		ft_strcat_join_tk(char *s1, char *s2, int *i, int *j);
+void		ft_get_joined_tk(t_tok *tok, char *n_tk);
 
 /*	---	get_len_word.c	--- */
 int			ft_len_red(char *str, char c);
