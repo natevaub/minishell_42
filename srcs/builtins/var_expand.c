@@ -6,13 +6,34 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/07/20 18:21:30 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/07/20 19:14:04 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 extern t_global	global;
+
+//get exit expand value
+char	*expanded_exit_value(char *word)
+{
+	char	*exit_status;
+	char	*expanded_word;
+	int		i;
+
+	i = 0;
+	exit_status = ft_itoa(global.last_exit_status);
+	expanded_word = (char *)malloc(ft_strlen(exit_status + ft_strlen(word)));
+	if (!expanded_word)
+		return (NULL);
+	while (*exit_status)
+		expanded_word[i++] = *exit_status++;
+	word++;
+	while(*word)
+		expanded_word[i++] = *word++;
+	expanded_word[i] = '\0';
+	return (expanded_word);
+}
 
 //get the expanded value of a var from global.copy_env
 char	*expanded_value(char *word)
@@ -23,6 +44,8 @@ char	*expanded_value(char *word)
 
 	head = global.copy_env;
 	len_word = ft_strlen(word);
+	if (word[0] == '?')
+		return (expanded_exit_value(word));
 	while (head)
 	{
 		if (ft_strncmp(head->word, word, len_word) == 0 && \
