@@ -38,6 +38,7 @@ void	ft_parsing(t_minishell *shell, char *prompt)
 			ft_trim_quote(shell);
 			printf("1\n");
 			err = ft_join_tk(shell->token);
+			ft_printlist_tk(shell->token);
 			printf("2\n");
 			ft_parse_token(shell);
 			printf("3\n");
