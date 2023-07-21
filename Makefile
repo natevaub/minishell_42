@@ -1,6 +1,6 @@
 	### COMPILATION ###
 CC			:=	gcc -g
-# CFLAGS		:=	-Wall -Wextra -Werror
+# CFLAGS		:=	-Wall -Wextra -Werror -fsanitize=address -g3
 
 	### EXECUTABLE ###
 NAME		:=	minishell
@@ -51,6 +51,8 @@ BUILTIN_FILES :=	builtin_decide.c		\
 					builtin_unset.c			\
 					utils_linked_list_1.c	\
 					utils_linked_list_2.c	\
+					var_expand.c			\
+					utils_tab.c				\
 
 SIGNAL_FILES :=		signals.c				\
 
@@ -99,8 +101,8 @@ $(LIBPRINTF):
 	cp libs/ftprintf/libftprintf.a .
 
 $(NAME):	$(LIBFT) $(LIBPRINTF) $(OBJS)
-			@$(CC) $(CFLAGS) -Llibs/ftprintf -Llibs/libft -L/Users/nvaubien/.brew/Cellar/readline/8.2.1/lib -I/Users/nvaubien/.brew/Cellar/readline/8.2.1/include/readline -o $@ $(OBJS) $(LIBS)
-# -L/Users/ckarl/homebrew/opt/readline/lib -Llibs/ftprintf -Llibs/libft -I/Users/ckarl/homebrew/opt/readline/include/readline
+			@$(CC) $(CFLAGS) -Llibs/ftprintf -Llibs/libft -L/Users/ckarl/homebrew/opt/readline/lib -Llibs/ftprintf -I/Users/ckarl/homebrew/opt/readline/include/readline -Llibs/ftprintf -Llibs/libft -o $@ $(OBJS) $(LIBS)
+# -L/Users/ckarl/homebrew/opt/readline/lib -Llibs/ftprintf -I/Users/ckarl/homebrew/opt/readline/include/readline
 # -L/Users/nvaubien/.brew/Cellar/readline/8.2.1/lib -I/Users/nvaubien/.brew/Cellar/readline/8.2.1/include/readline
 # -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include/readline
 

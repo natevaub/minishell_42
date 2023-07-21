@@ -5,7 +5,7 @@ extern t_global	global;
 int	ft_error_red_file(char	*file)
 {
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
-	ft_putstr_fd("%s", STDERR_FILENO);
+	ft_putstr_fd(file, STDERR_FILENO);
 	ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
 	return (1);
 }

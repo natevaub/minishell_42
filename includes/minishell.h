@@ -120,7 +120,7 @@ int			builtin_check(char *cmd);
 
 /*	---	builtin_echo.c	---*/
 char		*get_value(t_venv *env, void *var);
-int			cmd_echo(char **option, bool single_quotes, bool double_quotes);
+int			cmd_echo(char **option);
 
 /*	---	builtin_env.c	---*/
 int			find_c(char *str, char c);
@@ -133,7 +133,7 @@ void		change_shvl_in_env(int nbr);
 /*	---	builtin_export.c	---*/
 int			check_var_format(char *var);
 char		*trim_back(char *var);
-int			existing_var_in_env(char *var);
+int			change_existing_var_in_env(char *var);
 int			add_var_to_export(char **var);
 int			print_export(void);
 
@@ -143,6 +143,13 @@ int			cmd_pwd(void);
 
 /*	---	builtin_unset.c	---*/
 int			cmd_unset(char **var);
+
+/*	---	var_expand.c	---*/
+char		*expanded_value(char *trimmed);
+char		**expanded_tab(char *trimmed);
+char		*expanded_exit_value(char *word);
+char		*expanded_join(char *front, char **exp_tab, char *value);
+char		*get_expand_var(char *var);
 
 /*	---	utils_linked_list_1.c	---*/
 int		list_size(t_venv *lst);
@@ -156,6 +163,11 @@ t_venv		*new_env_list(char **tab);
 void		content_swap(t_venv *one, t_venv *two);
 void		bubble_sort(t_venv **head);
 int			insert_node_in_list(char *var, t_venv **head);
+
+/*	---	utils_tab.c	---*/
+int			total_len_tab(char **tab);
+int			tab_size(char **tab);
+char		*ft_strndup(char *s, char n);
 
 /*
 	SIGNALS

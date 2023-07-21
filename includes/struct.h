@@ -58,7 +58,7 @@ typedef struct	s_global
 {
 	t_venv				*copy_env;
 	int					last_exit_status;
-}						t_global;
+}						t_global;						//need to call it g_global
 
 
 #endif

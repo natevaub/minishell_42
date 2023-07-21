@@ -1,33 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/13 13:26:56 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/07/18 14:18:07 by ckarl            ###   ########.fr       */
+/*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
+/*   Updated: 2023/07/20 19:40:16 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/minishell.h"
 
-char	*ft_strdup(const char *s)
-{
-	int		size;
-	int		index;
-	char	*dup;
-
-	index = 0;
-	size = ft_strlen(s);
-	dup = malloc(sizeof(char) * (size + 1));
-	if (!dup)
-		return (0);
-	while (index < size)
-	{
-		dup[index] = s[index];
-		index++;
-	}
-	dup[index] = '\0';
-	return (dup);
-}
+extern t_global	global;

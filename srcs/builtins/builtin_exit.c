@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:38:36 by ckarl             #+#    #+#             */
-/*   Updated: 2023/07/18 11:42:28 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/07/20 16:35:11 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	change_shvl_in_env(int nbr)
 	free(shlvl_char);
 	if (nbr == 1)
 		shlvl_changed = ft_itoa(shlvl_int + 1);
-	else if (nbr == -1)
+	else
 		shlvl_changed = ft_itoa(shlvl_int - 1);
 	shlvl_char = ft_strjoin("SHLVL=", shlvl_changed);
 	free(shlvl_changed);

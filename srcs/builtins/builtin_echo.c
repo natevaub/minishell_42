@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:38:36 by ckarl             #+#    #+#             */
-/*   Updated: 2023/07/13 12:04:18 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/07/18 13:37:15 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,9 @@ char	*get_value(t_venv *env, void *var)
 /*check if var is in env table, if yes, need to print its value and not the var name,
 check quotes ('$USER' should output $USER), inner and outer
 if option is $?, we need to print last exit status*/
-int	cmd_echo(char **option, bool single_quotes, bool double_quotes)
+int	cmd_echo(char **option)
 {
 	char	*print;
-	(void)	single_quotes;
-	(void)	double_quotes;
 	bool	backslash;
 
 	if (*option && ft_strncmp(*option, "-n", 2) == 0)
@@ -54,14 +52,14 @@ int	cmd_echo(char **option, bool single_quotes, bool double_quotes)
 		backslash = true;
 	while (*option != 0)
 	{
-		if (*option[0] == '$' && (*option + 1))
-		{
-			if	(existing_var_in_env(*option + 1) == true)
-				print = get_value(global.copy_env, *option + 1);	//prints the value found in env
-			else
-				print = ft_strdup(*option);		//or print nothing if ""
-		}
-		else if (!(print = ft_strdup(*option)))
+		// if (*option[0] == '$' && (*option + 1))					//expand variable if necessary
+		// {
+		// 	if	(existing_var_in_env(*option + 1) == true)
+		// 		print = get_value(global.copy_env, *option + 1);
+		// 	else
+		// 		print = ft_strdup(*option);		//or print nothing if ""
+		// }
+		if (!(print = ft_strdup(*option)))
 			return (errno);
 		ft_printf("%s", print);
 		free(print);

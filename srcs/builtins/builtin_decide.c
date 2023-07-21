@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/07/18 11:50:08 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/07/18 13:35:23 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,23 +42,23 @@ void	builtin_redirect(char *cmd, char **option)
 	if (!cmd)
 		return ;
 	if (ft_strncmp(cmd, "echo", 4) == 0)
-		global.last_exit_status = cmd_echo(option, true, true);	//TBC
+		global.last_exit_status = cmd_echo(option);					//TBC, missing expand variable option
 	else if (ft_strncmp(cmd, "cd", 2) == 0)
-		global.last_exit_status = cmd_cd(*option);		//ready
+		global.last_exit_status = cmd_cd(*option);					//ready
 	else if (ft_strncmp(cmd, "pwd", 3) == 0)
-		global.last_exit_status = cmd_pwd();								//ready
+		global.last_exit_status = cmd_pwd();						//ready
 	else if (ft_strncmp(cmd, "export", 6) == 0)
 	{
 		if (!*option)
 			global.last_exit_status = print_export();
 		else if (*option)
-			global.last_exit_status = add_var_to_export(option);		//ready
+			global.last_exit_status = add_var_to_export(option);	//ready
 	}
 	else if (ft_strncmp(cmd, "unset", 5) == 0)
 		global.last_exit_status = cmd_unset(option);				//ready
 	else if (ft_strncmp(cmd, "env", 3) == 0)
 		global.last_exit_status = print_env();
-	else if (ft_strncmp(cmd, "exit", 4) == 0)								//TBC
+	else if (ft_strncmp(cmd, "exit", 4) == 0)						//ready
 		cmd_exit(*option);
 	else if (ft_strncmp(cmd, "minishell", 9) == 0)
 		change_shvl_in_env(1);
