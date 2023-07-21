@@ -13,6 +13,7 @@ void	ft_tokenize_prompt(t_minishell *global, char *prompt)
 	{
 		ft_lstadd_back_token(&global->token, ft_newlst_token(ft_get_tk(&prompt)));
 	}
+	ft_printlist_tk(global->token);
 }
 
 
@@ -37,6 +38,8 @@ char	*ft_get_tk(char **prompt)
 		ret = ft_get_word_red(prompt, (char)**prompt);
 	else if (**prompt == ' ' || **prompt == '\t')
 		ret = ft_get_word_space(prompt);
+	else if (**prompt == '\'' || **prompt == '"')
+		ret = ft_get_word_quote(prompt, **prompt);
 	else
 		ret = ft_get_word(prompt);
 	return (ret);

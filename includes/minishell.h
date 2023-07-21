@@ -51,7 +51,14 @@ void		ft_open_files_redirection(t_tok **tk, t_cmd *cmd);
 /*
 	PARSER
 */
-/*	---	get_len_word.c	---*/
+
+/* ---	get_joined_token.c	--- */
+int			ft_is_joinable(t_tok *token);
+int			ft_join_tk(t_tok *tk);
+void		ft_strcat_join_tk(char *s1, char *s2, int *i, int *j);
+void		ft_get_joined_tk(t_tok *tok, char *n_tk);
+
+/*	---	get_len_word.c	--- */
 int			ft_len_red(char *str, char c);
 int			ft_len_space(char *str);
 int			ft_len_word(char *str);
@@ -59,6 +66,10 @@ int			ft_len_quote(char *str, char c);
 
 /*	--- get_parsed_token.c	---*/
 void		ft_parse_token(t_minishell *shell);
+void		ft_parsing(t_minishell *shell, char *prompt);
+
+/*	--- get_trimmed_quote	--- */
+void		ft_trim_quote(t_minishell *shell);
 
 /*	---	get_token_type.c	--- */
 int			ft_is_builtins(char *prompt);
@@ -67,6 +78,7 @@ int			ft_red_type(char *prompt);
 int			ft_is_pipe(char *prompt);
 int			ft_is_space(char *prompt);
 /*	---	get_word.c	--- */
+char		*ft_get_word_quote(char **prompt, char c);
 char		*ft_get_word_space(char **str);
 char		*ft_get_word_red(char **str, char c);
 char		*ft_get_word(char **str);
