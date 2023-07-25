@@ -26,12 +26,22 @@ MAIN_FILE	:= minishell.c
 
 CMDLINE_FILES	:=	prompt.c					\
 
+SYNTAX_FILES	:=	syntax_pipe.c				\
+					syntax_quote.c				\
+					syntax_red.c				\
+					syntax.c					\
+
 UTILS_FILES	:=		utils_parsing.c				\
 					utils_linked_list.c			\
 
-INITMS_FILES :=		init_global.c				\
+INITMS_FILES	:=	init_global.c				\
 					init_fd_redirection.c		\
 					init_env.c					\
+					close.c						\
+
+EXEC_FILES	:=		builtins_exec.c				\
+
+# EXPAND_FILES	:=
 
 PARSE_FILES	:=		get_token_type.c			\
 					get_joined_token.c			\
@@ -40,6 +50,7 @@ PARSE_FILES	:=		get_token_type.c			\
 					get_len_word.c				\
 					get_word.c					\
 					parsing_checker.c			\
+					parsing_free_memory.c		\
 					tokenize_prompt.c			\
 
 BUILTIN_FILES :=	builtin_decide.c		\
@@ -51,7 +62,6 @@ BUILTIN_FILES :=	builtin_decide.c		\
 					builtin_unset.c			\
 					utils_linked_list_1.c	\
 					utils_linked_list_2.c	\
-					var_expand.c			\
 					utils_tab.c				\
 
 SIGNAL_FILES :=		signals.c				\
@@ -60,9 +70,12 @@ SIGNAL_FILES :=		signals.c				\
 CMDLINE_FILES := $(addprefix $(OBJS_PATH)/cmd_line/, $(CMDLINE_FILES:.c=.o))
 INITMS_FILES := $(addprefix $(OBJS_PATH)/init_minishell/, $(INITMS_FILES:.c=.o))
 PARSE_FILES	:= $(addprefix $(OBJS_PATH)/parser/, $(PARSE_FILES:.c=.o))
+EXEC_FILES	:= $(addprefix $(OBJS_PATH)/execute/, $(EXEC_FILES:.c=.o))
+# EXPAND_FILES	:= $(addprefix $(OBJS_PATH)/expand/, $(EXPAND_FILES:.c=.o))
 UTILS_FILES := $(addprefix $(OBJS_PATH)/utils/, $(UTILS_FILES:.c=.o))
 BUILTIN_FILES := $(addprefix $(OBJS_PATH)/builtins/, $(BUILTIN_FILES:.c=.o))
 SIGNAL_FILES := $(addprefix $(OBJS_PATH)/signals/, $(SIGNAL_FILES:.c=.o))
+SYNTAX_FILES := $(addprefix $(OBJS_PATH)/syntax/, $(SYNTAX_FILES:.c=.o))
 MAIN_FILE	:= $(addprefix $(OBJS_PATH)/, $(MAIN_FILE:.c=.o))
 
 OBJS		:=	$(PARSE_FILES)			\
@@ -71,7 +84,12 @@ OBJS		:=	$(PARSE_FILES)			\
 				$(BUILTIN_FILES)		\
 				$(CMDLINE_FILES)		\
 				$(INITMS_FILES)			\
-				$(SIGNAL_FILES)		\
+				$(SIGNAL_FILES)			\
+				$(EXEC_FILES)			\
+				$(SYNTAX_FILES)			\
+				# $(EXPAND_FILES)			\
+				
+
 
 
 	### COLORS ###

@@ -19,6 +19,8 @@
 # include "../libs/libft/libft.h"
 # include "../libs/ftprintf/ft_printf.h"
 
+extern t_global	global;
+
 /*
 	CMD_LINE
 */
@@ -47,6 +49,28 @@ int			ft_get_outfile_fd(t_tok **tk);
 int			ft_get_append_outfile_fd(t_tok **tk);
 void		ft_open_files_redirection(t_tok **tk, t_cmd *cmd);
 
+/*	--- close.c	--- */
+void 		free_env_list(t_venv *env_list);
+
+/*
+	SYNTAX
+*/
+/*	--- syntax_pipe.c	--- */
+int			ft_syntax_pipe_check(t_tok *syntax);
+int			ft_pipe_error(t_tok *syntax);
+
+/*	--- syntax_red.c	--- */
+int			ft_syntax_red_check(t_tok *tok);
+int			ft_red_error(t_tok *tk);
+
+/*	--- syntax_quote.c	--- */
+int			ft_syntax_quote_check(char *str);
+int			ft_syntax_open_quote_check(char *str, char c, int *i);
+
+/*	--- syntax.c	--- */
+int			ft_syntax_checker(t_minishell *shell);
+int			ft_look_for_err(t_tok *tok);
+void		ft_print_error(int err);
 
 /*
 	PARSER
@@ -84,8 +108,13 @@ char		*ft_get_word_red(char **str, char c);
 char		*ft_get_word(char **str);
 
 /*	--- parsing_checker.c	--- */
-void		ft_printlist_tk(t_tok *global);
+void		ft_print_tokens(t_tok *token);
 void		ft_print_cmds(t_lcmd *cmd);
+
+/*	--- parsing_free_memory.c	--- */
+void		ft_free_token(t_minishell *shell);
+void		ft_free_cmd(t_minishell *shell);
+void		ft_free_parsing(t_minishell *shell);
 
 /*	---tokenize_prompt.c	--- */
 void		ft_tokenize_prompt(t_minishell *global, char *prompt);
@@ -96,11 +125,6 @@ int			ft_get_quoted_tk(char *prompt);
 /*
 	UTILS
 */
-
-/*	--- utils1.c	--- */
-int			ft_strcmp(char *str, char *comp);
-
-
 /*	--- utils_linked_list.c	--- */
 t_lcmd		*ft_newlst_cmd(t_cmd *cmd);
 t_tok		*ft_newlst_token(char *word);
@@ -177,5 +201,10 @@ char		*ft_strndup(char *s, char n);
 extern void	rl_replace_line(const char *, int);
 void		init_signals(void);
 void		signal_handler(int signal);
+
+/*
+	EXECUTE
+*/
+int			ft_exec_builtins(t_minishell *ms);
 
 #endif

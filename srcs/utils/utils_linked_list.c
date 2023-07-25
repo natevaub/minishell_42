@@ -8,10 +8,11 @@ t_lcmd	*ft_newlst_cmd(t_cmd *cmd)
 	if (!new)
 		return (NULL);
 	new->cmd = cmd->cmd;
-	printf("new->cmd = %s \n", cmd->cmd);
 	new->option = cmd->option;
 	new->fd_read = cmd->read;
 	new->fd_write = cmd->write;
+	new->next = NULL;
+	free(cmd);
 	return (new);
 }
 

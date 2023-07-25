@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_linked_list_2.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/07/07 17:40:51 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/07/24 15:36:19 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ extern t_global	global;
 t_venv	*new_env_list(char **tab)
 {
 	int			a;
-	t_venv	*new_list;
+	t_venv		*new_list;
 
 	a = 0;
 	new_list = NULL;

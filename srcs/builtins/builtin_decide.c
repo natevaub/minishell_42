@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_decide.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/07/18 13:35:23 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/07/24 11:59:13 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	builtin_check(char *cmd)
 	else if (ft_strncmp(cmd, "exit", 4) == 0)
 		return (1);
 	else
-	return (0);
+		return (0);
 }
 
 /*if yes, checks if there are given arguments
