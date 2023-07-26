@@ -13,7 +13,6 @@ void	ft_tokenize_prompt(t_minishell *global, char *prompt)
 	{
 		ft_lstadd_back_token(&global->token, ft_newlst_token(ft_get_tk(&prompt)));
 	}
-	ft_printlist_tk(global->token);
 }
 
 

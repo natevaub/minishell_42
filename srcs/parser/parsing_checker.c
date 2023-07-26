@@ -1,22 +1,21 @@
 #include "../includes/minishell.h"
 
-void	ft_printlist_tk(t_tok *global)
+void ft_print_tokens(t_tok *token)
 {
-	t_tok	*test;
-	int		i;
+	t_tok *current = token;
+	int index = 1;
 
-	test = global;
-	i = 0;
-	while (test != NULL)
+	printf("--- PRINTING TOKENS ---\n");
+	
+	while (current != NULL)
 	{
-		printf("---	---	---	---	---	---	---	---\n");
-		printf("---	Token[%d]	- Word is	\" %s \"	---\n", i, test->word);
-		printf("---	Token[%d]	- Type is	\" %d \"		---\n", i, test->type);
-		printf("---	Token[%d]	- Red is	\" %d \"		---\n", i, test->red);
-		printf("---	Token[%d]	- Quote is	\" %d \"		---\n", i, test->quote);
-		printf("---	---	---	---	---	---	---	---\n");
-		test = test->next;
-		i++;
+		printf(" --- token[%d] ---\n", index++);
+		printf("[%s] <- word\n", current->word);
+		printf("[%d] <- type\n", current->type);
+		printf("[%d] <- red\n", current->red);
+		printf("[%d] <- quote\n", current->quote);
+		
+		current = current->next;
 	}
 }
 

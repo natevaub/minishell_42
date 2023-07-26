@@ -14,9 +14,12 @@ char	**ft_get_opt(char **option, char **tmp)
 {
 	size_t	i;
 
-	i = -1;
-	while (tmp[++i] != NULL)
+	i = 0;
+	while (tmp[i] != NULL)
+	{
 		option[i] = tmp[i];
+		i++;
+	}
 	return (option);
 }
 
@@ -43,7 +46,7 @@ t_cmd	*ft_init_cmds(t_tok **tokens)
 	while ((*tokens) != NULL)
 	{
 		if ((*tokens)->type == E_STRING)
-			ft_store_cmd_options(tokens, cmd);
+			cmd->option = ft_store_cmd_options(tokens, cmd);
 		else if ((*tokens)->type == E_REDIRECTION)
 			ft_open_files_redirection(tokens, cmd);
 		else if ((*tokens)->type == E_PIPE)
@@ -83,9 +86,5 @@ char	**ft_store_cmd_options(t_tok **tokens, t_cmd *cmd)
 	tmp[i] = NULL;
 	options = ft_calloc(sizeof(char *), ft_len_cmd_opt(tmp) + 1);
 	options = ft_get_opt(options, tmp);
-	for (int i = 0; options[i]; i++)
-	{
-		printf("Options %d = %s\n", i, options[i]);
-	}
 	return (options);
 }

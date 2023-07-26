@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:38:36 by ckarl             #+#    #+#             */
-/*   Updated: 2023/07/18 13:37:15 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/07/24 12:25:05 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	cmd_echo(char **option)
 	char	*print;
 	bool	backslash;
 
+	option++;
 	if (*option && ft_strncmp(*option, "-n", 2) == 0)
 	{
 		backslash = false;
@@ -61,7 +62,10 @@ int	cmd_echo(char **option)
 		// }
 		if (!(print = ft_strdup(*option)))
 			return (errno);
-		ft_printf("%s", print);
+		if (*(option + 1) != NULL)
+			ft_printf("%s ", print);
+		else
+			ft_printf("%s", print);
 		free(print);
 		option++;
 	}
