@@ -187,6 +187,13 @@ void		signal_handler(int signal);
 
 /*	---	pipes_execution.c	---*/
 int			pipe_exec(int argc, char **argv);
+void		child_exec(t_pipex *p, char **envp);
+
+/*	---	pipes_init.c	---*/
+void		init_pipex_struct(int argc, char **argv, t_pipex *pipex);
+t_lcmd		*set_p_command_list(int argc, char **argv, t_pipex *pipex);
+
+/*	---	improved_syscalls.c	---*/
 
 
 #endif

@@ -22,7 +22,7 @@ extern t_global	global;
 int	pipe_exec(int argc, char **argv)													//adjust parameters
 {
 	t_pipex	*p;
-	char	**env_for_pipe;
+	char	**env_tab;
 
 	// if (argc < 5)
 	// {
@@ -35,10 +35,10 @@ int	pipe_exec(int argc, char **argv)													//adjust parameters
 	init_pipex_struct(argc, argv, p);
 	while (p->idx < p->count_cmds)
 	{
-		env_for_pipe = env_list_to_env_tab();
-		child_execution(p, env_for_pipe);
+		env_tab = env_list_to_env_tab();
+		child_execution(p, env_tab);
 		p->idx++;
-		free_two_dimension_array(env_for_pipe);
+		free_two_dimension_array(env_tab);
 	}
 	final_free_and_close(p);								//need to check if first close, waitpid, then free or if okay like this
 	exit(0);													//necessary here??
@@ -51,6 +51,7 @@ void	child_exec(t_pipex *p, char **envp)
 	char	*cmd_with_path;
 	t_lcmd	*todo;
 
+	//if builtin >>>> no fork, directly to built-in decide and return
 	p->pid = improved_fork();
 	todo = get_node_pipes(p->commands, p->idx);
 	if (p->pid < 0)
