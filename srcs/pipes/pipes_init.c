@@ -16,9 +16,9 @@ void	init_pipex_struct(int argc, char **argv, t_pipex *pipex)
 {
 	pipe(pipex->pipe_fd[0]);
 	pipe(pipex->pipe_fd[1]);
-	pipex->file1_fd = open(argv[1], O_RDONLY);
-	pipex->file2_fd = open(argv[argc - 1], O_CREAT | O_RDWR | O_TRUNC, 0666);
-	if (pipex->file1_fd < 0 || pipex->file2_fd < 0)
+	pipex->infile_fd = open(argv[1], O_RDONLY);
+	pipex->outfile_fd = open(argv[argc - 1], O_CREAT | O_RDWR | O_TRUNC, 0666);
+	if (pipex->infile_fd < 0 || pipex->outfile_fd < 0)
 		return ;																	//set errno
 	pipex->commands = set_p_command_list(argc, argv, pipex);
 	pipex->count_cmds = total_len_cmd(pipex->commands);
@@ -39,13 +39,13 @@ t_lcmd	*set_p_command_list(int argc, char **argv, t_pipex *pipex)
 	while (++i < (argc - 1))
 	{
 		if (i == 2)												//need to change this when switching to tokens from argv
-			r_pipe = pipex->file1_fd;
+			r_pipe = pipex->infile_fd;
 		else if (i % 2 != 0)
 			r_pipe = pipex->pipe_fd[0][0];
 		else
 			r_pipe = pipex->pipe_fd[1][0];
 		if (i == argc - 2)										//need to change this when switching to tokens from argv
-			w_pipe = pipex->file2_fd;
+			w_pipe = pipex->outfile_fd;
 		else if (i % 2 == 0 || i == 0)
 			w_pipe = pipex->pipe_fd[0][1];
 		else

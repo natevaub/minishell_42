@@ -212,9 +212,41 @@ void		signal_handler(int signal);
 */
 int			ft_exec_builtins(t_minishell *ms);
 
+/*
+	PIPES
 */
 
 /*	---	pipes_execution.c	---*/
 int			pipe_exec(int argc, char **argv);
+void		child_exec(t_pipex *p);
+
+/*	---	pipes_init.c	---*/
+void		init_pipex_struct(int argc, char **argv, t_pipex *pipex);
+t_lcmd		*set_p_command_list(int argc, char **argv, t_pipex *pipex);
+
+/*	---	improved_syscalls.c	---*/
+int			improved_dup2(int fildes, int fildes2);
+void		sub_dup2(int read, int write);
+int			improved_pipe(int fd[2]);
+pid_t		improved_fork(void);
+
+/*	---	utils_list_pipes.c	---*/
+void		list_append_pipes(t_lcmd **lst, char *command, int w_pipe, int r_pipe);
+t_lcmd		*last_node_pipes(t_lcmd *lst);
+t_lcmd		*get_node_pipes(t_lcmd *head, int index);
+int			total_len_cmd(t_lcmd *commands);
+
+/*	---	utils_memory_pipes.c	---*/
+int			error(char *str);
+void		close_pipes(t_pipex *pipex);
+void		final_free_and_close(t_pipex *pipex);
+
+/*	---	utils_path_pipes.c	---*/
+char		*get_path_line(void);
+char		*get_right_path(char *cmd);
+
+/*	---	utils_strings_pipes.c	---*/
+char		*ft_join_path(char const *s1, char const *s2);
+char		**env_list_to_env_tab(void);
 
 #endif
