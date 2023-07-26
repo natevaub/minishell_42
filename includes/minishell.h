@@ -19,7 +19,12 @@
 # include "../libs/libft/libft.h"
 # include "../libs/ftprintf/ft_printf.h"
 
+
 extern t_global	global;
+
+# define ERR_CMD		"Enter valid command "
+# define ERR_EXEC		"Execve "
+
 
 /*
 	CMD_LINE
@@ -206,5 +211,10 @@ void		signal_handler(int signal);
 	EXECUTE
 */
 int			ft_exec_builtins(t_minishell *ms);
+
+*/
+
+/*	---	pipes_execution.c	---*/
+int			pipe_exec(int argc, char **argv);
 
 #endif
