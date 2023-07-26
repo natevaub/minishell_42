@@ -7,14 +7,11 @@ int	ft_syntax_checker(t_minishell *shell)
 
 	curr = shell->token;
 	err = 0;
-	printf("LO\n");
 	err = ft_look_for_err(shell->token);
-	printf("LI\n");
 	if (err != 0)
 	{
 		shell->syntax = 1;
 		shell->token = curr;
-		printf("Err = %d\n", err);
 		ft_print_error(err);
 		return (1);
 	}
