@@ -53,12 +53,24 @@ typedef struct	s_cmd
 	int					write;
 }						t_cmd;
 
-// global variable: env, exit status
+// 		### Global Variable ###
 typedef struct	s_global
 {
 	t_venv				*copy_env;
 	int					last_exit_status;
 }						t_global;						//need to call it g_global
+
+//		### Pipe Structure ###
+typedef struct	s_pipex
+{
+	pid_t		pid;
+	int			infile_fd;
+	int			outfile_fd;
+	int			count_cmds;
+	int			idx;
+	int			pipe_fd[2][2];
+	t_lcmd		*commands;
+}				t_pipex;
 
 
 #endif
