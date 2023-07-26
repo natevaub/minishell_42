@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../../includes/minishell.h"
 
 //append new node to t_lcmd command list, setting read & write fd
 void	list_append_pipes(t_lcmd **lst, char *command, int w_pipe, int r_pipe)

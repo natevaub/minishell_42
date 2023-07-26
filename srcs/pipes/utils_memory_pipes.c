@@ -30,8 +30,8 @@ void	close_pipes(t_pipex *pipex)
 
 void	final_free_and_close(t_pipex *pipex)
 {
-	close(p->file1_fd);
-	close(p->file2_fd);
+	close(pipex->infile_fd);
+	close(pipex->outfile_fd);
 	close_pipes(pipex);
 	waitpid(-1, NULL, 0);
 	while (pipex->commands)
