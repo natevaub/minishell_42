@@ -5,9 +5,9 @@
 
 typedef struct	s_minishell
 {
-	char				**env;
-	int					fd_pipe[2];
-	int					fd_tmp_pipe;
+	// char				**env;
+	// int					fd_pipe[2];
+	// int					fd_tmp_pipe;
 	int					syntax;
 	struct s_list_token	*token;
 	struct s_list_cmd	*cmd;

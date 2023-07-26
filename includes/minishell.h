@@ -19,6 +19,9 @@
 # include "../libs/libft/libft.h"
 # include "../libs/ftprintf/ft_printf.h"
 
+# define ERR_CMD		"Enter valid command "
+# define ERR_EXEC		"Execve "
+
 /*
 	CMD_LINE
 */
@@ -177,5 +180,13 @@ char		*ft_strndup(char *s, char n);
 extern void	rl_replace_line(const char *, int);
 void		init_signals(void);
 void		signal_handler(int signal);
+
+/*
+	PIPES
+*/
+
+/*	---	pipes_execution.c	---*/
+int			pipe_exec(int argc, char **argv);
+
 
 #endif

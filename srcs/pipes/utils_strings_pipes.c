@@ -12,6 +12,8 @@
 
 #include "../../includes/minishell.h"
 
+extern t_global	global;
+
 //join two strings and add '/' at the end
 char	*ft_join_path(char const *s1, char const *s2)
 {
@@ -38,4 +40,23 @@ char	*ft_join_path(char const *s1, char const *s2)
 		copy[i++] = s2[j++];
 	copy[i] = '\0';
 	return (copy);
+}
+
+char	**env_list_to_env_tab(void)
+{
+	char	**env;
+	int		len;
+
+	len = list_size(global.copy_env);
+	env = (char **)malloc (sizeof(char *) * (len + 1));
+	while (global.copy_env)
+	{
+		*env = ft_strdup(global.copy_env->word);
+		if (!*env)
+			return (NULL);															//set error msg
+		env++;
+		global.copy_env = global.copy_env->next;
+	}
+	*env = 0;
+	return (env);
 }

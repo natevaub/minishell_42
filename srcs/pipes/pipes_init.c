@@ -12,8 +12,6 @@
 
 #include "../../includes/minishell.h"
 
-extern t_global	global;
-
 void	init_pipex_struct(int argc, char **argv, t_pipex *pipex)
 {
 	pipe(pipex->pipe_fd[0]);

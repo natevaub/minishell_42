@@ -22,22 +22,25 @@ extern t_global	global;
 int	pipe_exec(int argc, char **argv)													//adjust parameters
 {
 	t_pipex	*p;
+	char	**env_for_pipe;
 
-	if (argc < 5)
-	{
-		ft_putstr_fd(ERR_ARG, 2);
-		return (-1);
-	}
+	// if (argc < 5)
+	// {
+	// 	ft_putstr_fd(ERR_ARG, 2);
+	// 	return (-1);
+	// }
 	p = malloc(sizeof(t_pipex));
 	if (!p)
-		return (-1);																//set errno
+		return (-1);																	//set errno
 	init_pipex_struct(argc, argv, p);
 	while (p->idx < p->count_cmds)
 	{
-		child_execution(p, global.copy_env);
+		env_for_pipe = env_list_to_env_tab();
+		child_execution(p, env_for_pipe);
 		p->idx++;
+		free_two_dimension_array(env_for_pipe);
 	}
-	final_free_and_close(pipex);								//need to check if first close, waitpid, then free or if okay like this
+	final_free_and_close(p);								//need to check if first close, waitpid, then free or if okay like this
 	exit(0);													//necessary here??
 	return (0);
 }
