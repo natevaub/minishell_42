@@ -28,7 +28,7 @@ int	ft_syntax_open_quote_check(char *str, char c, int *i)
 	{
 		if (str[*i] == c)
 		{
-			(*i++);
+			(*i)++;
 			return (0);
 		}
 		(*i)++;
