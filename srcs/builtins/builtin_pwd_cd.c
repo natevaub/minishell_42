@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ck_builtin_others.c                                :+:      :+:    :+:   */
+/*   builtin_pwd_cd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:38:36 by ckarl             #+#    #+#             */
-/*   Updated: 2023/07/05 17:08:20 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/07/27 19:52:24 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,6 @@ int	cmd_pwd(void)
 	if (getcwd(NULL, 0) == NULL)
 		return (errno);
 	ft_putstr_fd(getcwd(NULL, 0), 1);								//adjust fd if redirection
+	ft_putstr_fd("\n", 1);
 	return (EXIT_SUCCESS);
 }

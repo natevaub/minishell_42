@@ -35,14 +35,26 @@ int	ft_is_red(char *prompt)
 
 int	ft_red_type(char *prompt)
 {
-	if (ft_strcmp(prompt, D_INFILE) == 0)
+	if (*prompt == '\0')
+	{
+		return (E_NORED);
+	}
+	else if (ft_strcmp(prompt, D_INFILE) == 0)
+	{
 		return (E_INFILE);
+	}
 	else if (ft_strcmp(prompt, D_OUTFILE) == 0)
+	{
 		return (E_OUTFILE);
+	}
 	else if (ft_strcmp(prompt, D_HEREDOC) == 0)
+	{
 		return (E_HEREDOC);
+	}
 	else if (ft_strcmp(prompt, D_APPEND) == 0)
+	{
 		return (E_APPEND);
+	}
 	return (E_NORED);
 }
 
