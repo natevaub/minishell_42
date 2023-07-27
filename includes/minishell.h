@@ -144,12 +144,12 @@ char 		*ft_strcat(char *dest, char *src);
 	BUILTINS
 */
 /*	---	builtin_decide.c	---*/
-void		builtin_redirect(char *cmd, char **option);
+void		builtin_redirect(t_minishell *ms);
 int			builtin_check(char *cmd);
 
 /*	---	builtin_echo.c	---*/
 char		*get_value(t_venv *env, void *var);
-int			cmd_echo(char **option);
+int			cmd_echo(t_minishell *ms);
 
 /*	---	builtin_env.c	---*/
 int			find_c(char *str, char c);

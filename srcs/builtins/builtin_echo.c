@@ -37,39 +37,33 @@ char	*get_value(t_venv *env, void *var)
 
 /*check if var is in env table, if yes, need to print its value and not the var name,
 check quotes ('$USER' should output $USER), inner and outer
-if option is $?, we need to print last exit status*/
-int	cmd_echo(char **option)
+if option is $?, we need to print last exit status
+>>>var is already expanded if necessary*/
+int	cmd_echo(t_minishell *ms)
 {
-	char	*print;
 	bool	backslash;
+	int		i;
 
-	option++;
-	if (*option && ft_strncmp(*option, "-n", 2) == 0)
+	i = 1;
+	backslash = true;
+	if (!((ms->cmd->option)[i]))
+	{
+		ft_putstr_fd("\n", 1);								//adjust fd if redirection
+		return (EXIT_SUCCESS);
+	}
+	if (ft_strncmp((ms->cmd->option)[i], "-n", 2) == 0)
 	{
 		backslash = false;
-		option++;
+		i++;
 	}
-	else
-		backslash = true;
-	while (*option != 0)
+	while ((ms->cmd->option)[i] != 0)
 	{
-		// if (*option[0] == '$' && (*option + 1))					//expand variable if necessary
-		// {
-		// 	if	(existing_var_in_env(*option + 1) == true)
-		// 		print = get_value(global.copy_env, *option + 1);
-		// 	else
-		// 		print = ft_strdup(*option);		//or print nothing if ""
-		// }
-		if (!(print = ft_strdup(*option)))
-			return (errno);
-		if (*(option + 1) != NULL)
-			ft_printf("%s ", print);
-		else
-			ft_printf("%s", print);
-		free(print);
-		option++;
+		ft_putstr_fd((ms->cmd->option)[i], 1);								//adjust fd if redirection
+		if ((ms->cmd->option)[i + 1] != 0)
+			ft_putstr_fd(" ", 1);								//adjust fd if redirection
+		i++;
 	}
 	if (backslash == true)
-		ft_printf("\n");
+		ft_putstr_fd("\n", 1);								//adjust fd if redirection
 	return (EXIT_SUCCESS);
 }

@@ -31,35 +31,37 @@ int	builtin_check(char *cmd)
 		return (1);
 	else if (ft_strncmp(cmd, "exit", 4) == 0)
 		return (1);
+	else if (ft_strncmp(cmd, "minishell", 9) == 0)
+		return (1);
 	else
 		return (0);
 }
 
 /*if yes, checks if there are given arguments
 and redirects to right builtin function for execution*/
-void	builtin_redirect(char *cmd, char **option)
+void	builtin_redirect(t_minishell *ms)
 {
-	if (!cmd)
+	if (!ms->cmd->cmd)
 		return ;
-	if (ft_strncmp(cmd, "echo", 4) == 0)
-		global.last_exit_status = cmd_echo(option);					//TBC, missing expand variable option
-	else if (ft_strncmp(cmd, "cd", 2) == 0)
-		global.last_exit_status = cmd_cd(*option);					//ready
-	else if (ft_strncmp(cmd, "pwd", 3) == 0)
-		global.last_exit_status = cmd_pwd();						//ready
-	else if (ft_strncmp(cmd, "export", 6) == 0)
-	{
-		if (!*option)
-			global.last_exit_status = print_export();
-		else if (*option)
-			global.last_exit_status = add_var_to_export(option);	//ready
-	}
-	else if (ft_strncmp(cmd, "unset", 5) == 0)
-		global.last_exit_status = cmd_unset(option);				//ready
-	else if (ft_strncmp(cmd, "env", 3) == 0)
-		global.last_exit_status = print_env();
-	else if (ft_strncmp(cmd, "exit", 4) == 0)						//ready
-		cmd_exit(*option);
-	else if (ft_strncmp(cmd, "minishell", 9) == 0)
-		change_shvl_in_env(1);
+	if (ft_strncmp(ms->cmd->cmd, "echo", 4) == 0)
+		global.last_exit_status = cmd_echo(ms);					//TBC, missing expand variable option
+	// else if (ft_strncmp(ms->cmd->cmd, "cd", 2) == 0)
+	// 	global.last_exit_status = cmd_cd(*option);					//ready
+	// else if (ft_strncmp(ms->cmd->cmd, "pwd", 3) == 0)
+	// 	global.last_exit_status = cmd_pwd();						//ready
+	// else if (ft_strncmp(ms->cmd->cmd, "export", 6) == 0)
+	// {
+	// 	if (!*option)
+	// 		global.last_exit_status = print_export();
+	// 	else if (*option)
+	// 		global.last_exit_status = add_var_to_export(option);	//ready
+	// }
+	// else if (ft_strncmp(ms->cmd->cmd, "unset", 5) == 0)
+	// 	global.last_exit_status = cmd_unset(option);				//ready
+	// else if (ft_strncmp(ms->cmd->cmd, "env", 3) == 0)
+	// 	global.last_exit_status = print_env();
+	// else if (ft_strncmp(ms->cmd->cmd, "exit", 4) == 0)						//ready
+	// 	cmd_exit(*option);
+	// else if (ft_strncmp(ms->cmd->cmd, "minishell", 9) == 0)
+	// 	change_shvl_in_env(1);
 }

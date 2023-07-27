@@ -25,5 +25,4 @@ int main(int ac, char **av, char **envp)
 	}
 	free_env_list(global.copy_env);
 	return (0);
-} 
-	
+}
