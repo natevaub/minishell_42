@@ -98,44 +98,46 @@ int	change_existing_var_in_env(char *var)
 }
 
 //add *var to env tableau
-int	add_var_to_export(char **var)
+int	add_var_to_export(char **option)
 {
-	while (*var)
+	while (*option)
 	{
-		if (check_var_format(*var) == EXIT_FAILURE)
+		if (check_var_format(*option) == EXIT_FAILURE)
 			return (EXIT_FAILURE);								//included error msg here (bash: export: `=1': not a valid identifier)
-		if (change_existing_var_in_env(*var) == 0)
+		if (change_existing_var_in_env(*option) == 0)
 		{
-			if (insert_node_in_list(*var, &global.copy_env) == EXIT_FAILURE)
+			if (insert_node_in_list(*option, &global.copy_env) == EXIT_FAILURE)
 				return (EXIT_FAILURE);
 		}
-		var++;
+		option++;
 	}
 		return (EXIT_SUCCESS);
 }
 
 //cmd: export (without args), prints env in ascii order without the last arg path
-int	print_export(void)
+//check if last history was "minishell", if yes, add line list_append() with "_="/bin/bash""
+int	print_export(t_minishell *ms)
 {
 	char	**lines;
 	t_venv	*env_for_export;
 
-	//check if last history was "minishell", if yes, add line list_append() with "_="/bin/bash""
 	env_for_export = global.copy_env;
 	bubble_sort(&env_for_export);
 	while (env_for_export)
 	{
 		lines = ft_split(env_for_export->word, '=');
 		if (!lines)
-			return (errno);												//included errno here
-		ft_printf("declare -x %s=%c", lines[0], '"');
+			return (errno);
+		ft_putstr_fd("declare -x ", 1);											//adjust fd if redirection
+		ft_putstr_fd(lines[0], 1);
+		ft_putstr_fd("=", 1);
+		ft_putchar_fd('"', 1);
 		if (lines[1])
-			ft_printf("%s", lines[1]);
-		ft_printf("%c\n", '"');
+			ft_putstr_fd(lines[1], 1);
+		ft_putchar_fd('"', 1);
+		ft_putchar_fd('\n', 1);
 		env_for_export = env_for_export->next;
-		free(lines[0]);
-		free(lines[1]);
-		free(lines);
+		free_two_dimension_array(lines);
 	}
 	return (EXIT_SUCCESS);
 }

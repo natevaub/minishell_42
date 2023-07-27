@@ -31,7 +31,7 @@ int	find_c(char *str, char c)
 }
 
 //print environment when command env is called
-int	print_env(void)
+int	print_env(t_minishell *ms)
 {
 	t_venv	*head;
 
@@ -39,10 +39,12 @@ int	print_env(void)
 	while (head)
 	{
 		if (find_c(head->word, '='))
-			ft_printf("%s\n", head->word);
+		{
+			ft_putstr_fd(head->word, 1);								//adjust fd if redirection
+			ft_putchar_fd('\n', 1);
+		}
 		head = head->next;
 	}
-	ft_printf("_=/usr/bin/env\n");
+	ft_putstr_fd("_=/usr/bin/env\n", 1);								//adjust fd if redirection
 	return(EXIT_SUCCESS);
-	//make sure to change level if "minishell" is called again
 }
