@@ -23,12 +23,13 @@ int	ft_syntax_quote_check(char *str)
 
 int	ft_syntax_open_quote_check(char *str, char c, int *i)
 {
+	printf("Here\n");
 	(*i)++;
 	while (str[*i] != '\0')
 	{
 		if (str[*i] == c)
 		{
-			(*i++);
+			(*i)++;
 			return (0);
 		}
 		(*i)++;
