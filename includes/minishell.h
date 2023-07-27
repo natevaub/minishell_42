@@ -153,7 +153,7 @@ int			cmd_echo(t_minishell *ms);
 
 /*	---	builtin_env.c	---*/
 int			find_c(char *str, char c);
-int			print_env(void);
+int			print_env(t_minishell *ms);
 
 /*	---	builtin_exit.c	---*/
 void		cmd_exit(char *status);
@@ -163,11 +163,11 @@ void		change_shvl_in_env(int nbr);
 int			check_var_format(char *var);
 char		*trim_back(char *var);
 int			change_existing_var_in_env(char *var);
-int			add_var_to_export(char **var);
-int			print_export(void);
+int			add_var_to_export(char **option);
+int			print_export(t_minishell *ms);
 
 /*	---	builtin_pwd_cd.c	---*/
-int			cmd_cd(char *to_go_path);
+int			cmd_cd(t_minishell *ms);
 int			cmd_pwd(void);
 
 /*	---	builtin_unset.c	---*/
@@ -181,11 +181,11 @@ char		*expanded_join(char *front, char **exp_tab, char *value);
 char		*get_expand_var(char *var);
 
 /*	---	utils_linked_list_1.c	---*/
-int		list_size(t_venv *lst);
-t_venv	*last_node(t_venv *lst);
-t_venv	*first_node(t_venv *lst);
-t_venv	*get_node(t_venv *head, int index);
-void	list_append(t_venv **lst, char *element);
+int			list_size(t_venv *lst);
+t_venv		*last_node(t_venv *lst);
+t_venv		*first_node(t_venv *lst);
+t_venv		*get_node(t_venv *head, int index);
+void		list_append(t_venv **lst, char *element);
 
 /*	---	utils_linked_list_2.c	---*/
 t_venv		*new_env_list(char **tab);

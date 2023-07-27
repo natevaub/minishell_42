@@ -21,14 +21,14 @@ directory to different directories in our System.*/
 
 //On success, zero is returned.  On error, -1 is returned, and
 //errno is set to indicate the error.
-int	cmd_cd(char *to_go_path)
+int	cmd_cd(t_minishell *ms)
 {
 	char	*path;
 
-	if (!to_go_path)
+	if (!(ms->cmd->option[1]))
 		path = ft_strdup(get_value(global.copy_env, "HOME"));
 	else
-		path = ft_strdup(to_go_path);
+		path = ft_strdup(ms->cmd->option[1]);
 	if (chdir(path) < 0)
 	{
 		free (path);
@@ -45,6 +45,6 @@ int	cmd_pwd(void)
 {
 	if (getcwd(NULL, 0) == NULL)
 		return (errno);
-	ft_printf("%s\n", getcwd(NULL, 0));
+	ft_putstr_fd(getcwd(NULL, 0), 1);								//adjust fd if redirection
 	return (EXIT_SUCCESS);
 }
