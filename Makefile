@@ -120,17 +120,21 @@ LIBS		:= -L$(LIB_DIRECTORY) -lft -lftprintf -lreadline
 all:	$(NAME)
 
 $(LIBFT):
-	echo compilating libft
-	$(MAKE) -sC $(LIBFT_DIRECTORY)
-	cp libs/libft/libft.a .
+	@echo "$(GREEN)Compilating Libft$(RESET)"
+	@$(MAKE) -sC $(LIBFT_DIRECTORY)
+	@echo "$(CYAN)✔️  Compilation Done$(RESET)"
+	@cp libs/libft/libft.a .
 
 $(LIBPRINTF):
-	echo "$(NAME): Creating $(LIBPRINTF)..."
-	$(MAKE) -sC $(LIBPRINTF_DIRECTORY)
-	cp libs/ftprintf/libftprintf.a .
+	@echo "$(GREEN)Compilating Libftprinf$(RESET)"
+	@$(MAKE) -sC $(LIBPRINTF_DIRECTORY)
+	@echo "$(CYAN)✔️  Compilation Done$(RESET)"
+	@cp libs/ftprintf/libftprintf.a .
 
 $(NAME):	$(LIBFT) $(LIBPRINTF) $(OBJS)
+			@echo "$(GREEN)Compilating minishell$(RESET)"
 			@$(CC) $(CFLAGS) -Llibs/ftprintf -Llibs/libft -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include/readline -Llibs/ftprintf -Llibs/libft -o $@ $(OBJS) $(LIBS)
+			@echo "$(CYAN)✔️  Compilation Done$(RESET)"
 # -L/Users/ckarl/homebrew/opt/readline/lib -I/Users/ckarl/homebrew/opt/readline/include/readline
 # -L/Users/nvaubien/.brew/Cellar/readline/8.2.1/lib -I/Users/nvaubien/.brew/Cellar/readline/8.2.1/include/readline
 # -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include/readline
@@ -142,21 +146,20 @@ $(OBJS_PATH)/%.o:	$(SRCS_PATH)/%.c
 					@mkdir -p $(@D)
 					@$(CC) $(CFLAGS) $(INCS_PATH) -c $< -o $@
 
-	$(MAKE) -sC $(LIBPRINTF_DIRECTORY) clean
-
 clean:
-			$(MAKE) -sC $(LIBPRINTF_DIRECTORY) clean
-			$(MAKE) -sC $(LIBFT_DIRECTORY) clean
+			@echo "$(RED) Cleaning Directory /libs/libftprinf$(RESET)"
+			@$(MAKE) -sC $(LIBPRINTF_DIRECTORY) clean
+			@echo "$(RED) Cleaning Directory /libs/libft$(RESET)"
+			@$(MAKE) -sC $(LIBFT_DIRECTORY) clean
+			@echo "$(RED) Cleaning Directory /objs$(RESET)"
 			@rm -rf $(OBJS_PATH)
-			# rm libft.a
-			# rm libftprinf.a
 
 fclean:		clean
-			$(MAKE) -sC $(LIBFT_DIRECTORY) fclean
-			$(MAKE) -sC $(LIBPRINTF_DIRECTORY) fclean
-			rm -f libft.a
-			rm -f libftprintf.a
-			rm -f $(NAME)
+			@$(MAKE) -sC $(LIBFT_DIRECTORY) fclean
+			@$(MAKE) -sC $(LIBPRINTF_DIRECTORY) fclean
+			@echo "$(RED) rm libft.a libftprintf.a minishell$(RESET)"
+			@rm -f libft.a
+			@rm -f libftprintf.a
 			@rm -rf $(NAME)
 
 re:			fclean all
