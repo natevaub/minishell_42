@@ -48,7 +48,7 @@ void	builtin_redirect(t_minishell *ms)
 	else if (ft_strncmp(ms->cmd->cmd, "cd", 2) == 0)
 		global.last_exit_status = cmd_cd(ms);
 	else if (ft_strncmp(ms->cmd->cmd, "pwd", 3) == 0)
-		global.last_exit_status = cmd_pwd();
+		global.last_exit_status = cmd_pwd(ms);
 	else if (ft_strncmp(ms->cmd->cmd, "export", 6) == 0)
 	{
 		if (!(ms->cmd->option[1]))

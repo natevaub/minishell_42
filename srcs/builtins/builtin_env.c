@@ -40,11 +40,11 @@ int	print_env(t_minishell *ms)
 	{
 		if (find_c(head->word, '='))
 		{
-			ft_putstr_fd(head->word, 1);								//adjust fd if redirection
-			ft_putchar_fd('\n', 1);
+			ft_putstr_fd(head->word, ms->cmd->fd_write);								//adjust fd if redirection
+			ft_putchar_fd('\n', ms->cmd->fd_write);
 		}
 		head = head->next;
 	}
-	ft_putstr_fd("_=/usr/bin/env\n", 1);								//adjust fd if redirection
+	ft_putstr_fd("_=/usr/bin/env\n", ms->cmd->fd_write);								//adjust fd if redirection
 	return(EXIT_SUCCESS);
 }

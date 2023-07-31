@@ -18,14 +18,15 @@ extern t_global	global;
 char	*get_path_line(void)
 {
 	char	*envp_path;
+	t_venv	*head;
 
-	while (global.copy_env)
+	head = global.copy_env;
+	while (head)
 	{
-		if (ft_strncmp(global.copy_env->word, "PATH", 4) == 0)
-			envp_path = global.copy_env->word;
-		global.copy_env = global.copy_env->next;
+		if (ft_strncmp(head->word, "PATH", 4) == 0)
+			envp_path = head->word;
+		head = head->next;
 	}
-	global.copy_env = first_node(global.copy_env);
 	return (envp_path + 5);
 }
 

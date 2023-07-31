@@ -12,45 +12,45 @@
 
 #include "../../includes/minishell.h"
 
-void	init_pipex_struct(int argc, char **argv, t_pipex *pipex)
+void	init_pipex_struct(t_minishell *ms)
 {
-	pipe(pipex->pipe_fd[0]);
-	pipe(pipex->pipe_fd[1]);
-	pipex->infile_fd = open(argv[1], O_RDONLY);
-	pipex->outfile_fd = open(argv[argc - 1], O_CREAT | O_RDWR | O_TRUNC, 0666);
-	if (pipex->infile_fd < 0 || pipex->outfile_fd < 0)
-		return ;																	//set errno
-	pipex->commands = set_p_command_list(argc, argv, pipex);
-	pipex->count_cmds = total_len_cmd(pipex->commands);
-	pipex->idx = 0;
-		// print_list_fds(pipex->commands);
+	pipe(ms->p->pipe_fd[0]);
+	pipe(ms->p->pipe_fd[1]);
+	// ms->infile_fd = open(argv[1], O_RDONLY);
+	// ms->outfile_fd = open(argv[argc - 1], O_CREAT | O_RDWR | O_TRUNC, 0666);
+	// if (ms->infile_fd < 0 || ms->outfile_fd < 0)
+	// 	return ;																	//set errno
+	ms->p->count_cmds = total_len_cmd(ms->cmd);
+	ms->p->idx = 0;
+	set_pipe_fds(ms);
+	// print_list_fds(pipex->commands);
 }
 
 //set command list & read/write fds
-t_lcmd	*set_p_command_list(int argc, char **argv, t_pipex *pipex)
+void	set_pipe_fds(t_minishell *ms)
 {
 	t_lcmd	*list;
 	int		i;
-	int		w_pipe;
-	int		r_pipe;
+	// int		w_pipe;
+	// int		r_pipe;
 
-	i = 1;
-	list = NULL;
-	while (++i < (argc - 1))
+	i = -1;
+	list = ms->cmd;
+	while (list && ++i < ms->p->count_cmds)
 	{
-		if (i == 2)												//need to change this when switching to tokens from argv
-			r_pipe = pipex->infile_fd;
+		if (i == 0 && !list->fd_read)
+			list->fd_read = STDIN_FILENO;
 		else if (i % 2 != 0)
-			r_pipe = pipex->pipe_fd[0][0];
+			list->fd_read = ms->p->pipe_fd[0][0];
 		else
-			r_pipe = pipex->pipe_fd[1][0];
-		if (i == argc - 2)										//need to change this when switching to tokens from argv
-			w_pipe = pipex->outfile_fd;
+			list->fd_read = ms->p->pipe_fd[1][0];
+		if (i == ms->p->count_cmds - 1 && list->fd_write)
+			list->fd_write = STDOUT_FILENO;
 		else if (i % 2 == 0 || i == 0)
-			w_pipe = pipex->pipe_fd[0][1];
+			list->fd_write = ms->p->pipe_fd[0][1];
 		else
-			w_pipe = pipex->pipe_fd[1][1];
-		list_append_pipes(&list, argv[i], w_pipe, r_pipe);
+			list->fd_write = ms->p->pipe_fd[1][1];
+		// list_append_pipes(&list, argv[i], w_pipe, r_pipe);
+		list = list->next;
 	}
-	return (list);
 }
