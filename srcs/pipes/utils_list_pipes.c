@@ -78,14 +78,14 @@ int	total_len_cmd(t_lcmd *commands)
 	return (i);
 }
 
-// //print all fds for t_lcmd list
-// void	print_list_fds(t_lcmd *list)
-// {
-// 	while (list)
-// 	{
-// 		printf("list fd read: %d and write %d\n", list->fd_read, list->fd_write);
-// 		printf("list cmd: %s\n", list->cmd);
-// 		list = list->next;
-// 	}
-// 	printf("\n");
-// }
+//print all fds for t_lcmd list
+void	print_list_fds(t_lcmd *list)
+{
+	while (list)
+	{
+		printf("list fd read: %d and write %d\n", list->fd_read, list->fd_write);
+		printf("list cmd: %s\n", list->cmd);
+		list = list->next;
+	}
+	printf("\n");
+}

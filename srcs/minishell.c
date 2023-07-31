@@ -19,8 +19,12 @@ int main(int ac, char **av, char **envp)
 		if (prompt)
 			add_history(prompt);
 		ft_parsing(&shell, prompt);
-		if (shell.syntax == 0)
-			ft_exec_builtins(&shell);
+
+		print_list_fds(shell.cmd);
+		if (shell.syntax == 0 && total_len_cmd(shell.cmd) < 2)
+		{
+			ft_exec_no_pipe(&shell);
+		}
 		ft_free_parsing(&shell);
 	}
 	free_env_list(global.copy_env);

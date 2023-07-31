@@ -46,16 +46,18 @@ char	**env_list_to_env_tab(void)
 {
 	char	**env;
 	int		len;
+	t_venv	*head;
 
-	len = list_size(global.copy_env);
+	head = global.copy_env;
+	len = list_size(head);
 	env = (char **)malloc (sizeof(char *) * (len + 1));
-	while (global.copy_env)
+	while (head)
 	{
-		*env = ft_strdup(global.copy_env->word);
+		*env = ft_strdup(head->word);
 		if (!*env)
 			return (NULL);															//set error msg
 		env++;
-		global.copy_env = global.copy_env->next;
+		head = head->next;
 	}
 	*env = 0;
 	return (env);
