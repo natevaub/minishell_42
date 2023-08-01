@@ -48,7 +48,7 @@ int	cmd_echo(t_minishell *ms)
 	backslash = true;
 	if (!((ms->cmd->option)[i]))
 	{
-		ft_putstr_fd("\n", 1);								//adjust fd if redirection
+		ft_putstr_fd("\n", ms->cmd->fd_write);								//adjust fd if redirection
 		return (EXIT_SUCCESS);
 	}
 	if (ft_strncmp((ms->cmd->option)[i], "-n", 2) == 0 && ft_strlen(ms->cmd->option[i]) == 2)
@@ -58,12 +58,12 @@ int	cmd_echo(t_minishell *ms)
 	}
 	while ((ms->cmd->option)[i] != 0)
 	{
-		ft_putstr_fd((ms->cmd->option)[i], 1);								//adjust fd if redirection
+		ft_putstr_fd((ms->cmd->option)[i], ms->cmd->fd_write);								//adjust fd if redirection
 		if ((ms->cmd->option)[i + 1] != 0)
-			ft_putstr_fd(" ", 1);								//adjust fd if redirection
+			ft_putstr_fd(" ", ms->cmd->fd_write);								//adjust fd if redirection
 		i++;
 	}
 	if (backslash == true)
-		ft_putstr_fd("\n", 1);								//adjust fd if redirection
+		ft_putstr_fd("\n", ms->cmd->fd_write);								//adjust fd if redirection
 	return (EXIT_SUCCESS);
 }

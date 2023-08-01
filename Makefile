@@ -39,7 +39,7 @@ INITMS_FILES	:=	init_global.c				\
 					init_env.c					\
 					close.c						\
 
-EXEC_FILES	:=		builtins_exec.c				\
+EXEC_FILES	:=		exec_no_pipe.c				\
 
 EXPAND_FILES	:=	expand.c					\
 

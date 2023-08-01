@@ -168,17 +168,10 @@ int			print_export(t_minishell *ms);
 
 /*	---	builtin_pwd_cd.c	---*/
 int			cmd_cd(t_minishell *ms);
-int			cmd_pwd(void);
+int			cmd_pwd(t_minishell *ms);
 
 /*	---	builtin_unset.c	---*/
 int			cmd_unset(char **var);
-
-/*	---	var_expand.c	---*/
-char		*expanded_value(char *trimmed);
-char		**expanded_tab(char *trimmed);
-char		*expanded_exit_value(char *word);
-char		*expanded_join(char *front, char **exp_tab, char *value);
-char		*get_expand_var(char *var);
 
 /*	---	utils_linked_list_1.c	---*/
 int			list_size(t_venv *lst);
@@ -197,6 +190,16 @@ int			insert_node_in_list(char *var, t_venv **head);
 int			total_len_tab(char **tab);
 int			tab_size(char **tab);
 char		*ft_strndup(char *s, char n);
+
+/*
+	EXPAND
+*/
+/*	---	var_expand.c	---*/
+char		*expanded_value(char *trimmed);
+char		**expanded_tab(char *trimmed);
+char		*expanded_exit_value(char *word);
+char		*expanded_join(char *front, char **exp_tab, char *value);
+char		*get_expand_var(char *var);
 
 /*
 	SIGNALS
@@ -223,19 +226,19 @@ char		*ft_join_array(char *temp[256]);
 /*
 	EXECUTE
 */
-int			ft_exec_builtins(t_minishell *ms);
+void		ft_exec_no_pipe(t_minishell *ms);
 
 /*
 	PIPES
 */
 
 /*	---	pipes_execution.c	---*/
-int			pipe_exec(int argc, char **argv);
-void		child_exec(t_pipex *p);
+int			pipe_exec(t_minishell *ms);
+void		child_exec(t_minishell *ms);
 
 /*	---	pipes_init.c	---*/
-void		init_pipex_struct(int argc, char **argv, t_pipex *pipex);
-t_lcmd		*set_p_command_list(int argc, char **argv, t_pipex *pipex);
+void		init_pipex_struct(t_minishell *ms);
+void		set_pipe_fds(t_minishell *ms);
 
 /*	---	improved_syscalls.c	---*/
 int			improved_dup2(int fildes, int fildes2);
@@ -248,11 +251,12 @@ void		list_append_pipes(t_lcmd **lst, char *command, int w_pipe, int r_pipe);
 t_lcmd		*last_node_pipes(t_lcmd *lst);
 t_lcmd		*get_node_pipes(t_lcmd *head, int index);
 int			total_len_cmd(t_lcmd *commands);
+void		print_list_fds(t_lcmd *list);
 
 /*	---	utils_memory_pipes.c	---*/
 int			error(char *str);
 void		close_pipes(t_pipex *pipex);
-void		final_free_and_close(t_pipex *pipex);
+void		final_free_and_close(t_minishell *ms);
 
 /*	---	utils_path_pipes.c	---*/
 char		*get_path_line(void);

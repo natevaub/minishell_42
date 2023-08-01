@@ -41,11 +41,11 @@ int	cmd_cd(t_minishell *ms)
 //PWD WITH NO OPTIONS
 /*The pwd utility writes the absolute pathname of the current working directory
 to the standard output.*/
-int	cmd_pwd(void)
+int	cmd_pwd(t_minishell *ms)
 {
 	if (getcwd(NULL, 0) == NULL)
 		return (errno);
-	ft_putstr_fd(getcwd(NULL, 0), 1);								//adjust fd if redirection
-	ft_putstr_fd("\n", 1);
+	ft_putstr_fd(getcwd(NULL, 0), ms->cmd->fd_write);								//adjust fd if redirection
+	ft_putchar_fd('\n', ms->cmd->fd_write);
 	return (EXIT_SUCCESS);
 }

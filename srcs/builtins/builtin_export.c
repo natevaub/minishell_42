@@ -128,14 +128,14 @@ int	print_export(t_minishell *ms)
 		lines = ft_split(env_for_export->word, '=');
 		if (!lines)
 			return (errno);
-		ft_putstr_fd("declare -x ", 1);											//adjust fd if redirection
-		ft_putstr_fd(lines[0], 1);
-		ft_putstr_fd("=", 1);
-		ft_putchar_fd('"', 1);
+		ft_putstr_fd("declare -x ", ms->cmd->fd_write);											//adjust fd if redirection
+		ft_putstr_fd(lines[0], ms->cmd->fd_write);
+		ft_putstr_fd("=", ms->cmd->fd_write);
+		ft_putchar_fd('"', ms->cmd->fd_write);
 		if (lines[1])
-			ft_putstr_fd(lines[1], 1);
-		ft_putchar_fd('"', 1);
-		ft_putchar_fd('\n', 1);
+			ft_putstr_fd(lines[1], ms->cmd->fd_write);
+		ft_putchar_fd('"', ms->cmd->fd_write);
+		ft_putchar_fd('\n', ms->cmd->fd_write);
 		env_for_export = env_for_export->next;
 		free_two_dimension_array(lines);
 	}
