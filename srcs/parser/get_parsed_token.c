@@ -12,11 +12,13 @@ void	ft_parse_token(t_minishell *shell)
 		if (!shell->cmd)
 		{
 			shell->cmd = ft_newlst_cmd(ft_init_cmds(&parse));
+			printf("IN FT_PARSE_TOKEN !sehll->cmd : CMD = %s\n", shell->cmd->cmd);
 		}
 		else
 		{
 			ft_lstadd_back_cmd(&shell->cmd,
 				ft_newlst_cmd(ft_init_cmds(&parse)));
+			printf("IN FT_PARSE_TOKEN : CMD = %s\n", shell->cmd->cmd);
 		}
 	}
 	shell->token = start;
@@ -32,7 +34,7 @@ void	ft_parsing(t_minishell *shell, char *prompt)
 	err = 0;
 	if (shell->syntax == 0)
 	{
-		// err = ft_expand(shell);
+		ft_expand_token(shell);
 		if (ft_syntax_checker(shell) == 0)
 		{
 			ft_trim_quote(shell);

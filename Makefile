@@ -41,7 +41,7 @@ INITMS_FILES	:=	init_global.c				\
 
 EXEC_FILES	:=		builtins_exec.c				\
 
-# EXPAND_FILES	:=
+EXPAND_FILES	:=	expand.c					\
 
 PARSE_FILES	:=		get_token_type.c			\
 					get_joined_token.c			\
@@ -79,7 +79,7 @@ CMDLINE_FILES := $(addprefix $(OBJS_PATH)/cmd_line/, $(CMDLINE_FILES:.c=.o))
 INITMS_FILES := $(addprefix $(OBJS_PATH)/init_minishell/, $(INITMS_FILES:.c=.o))
 PARSE_FILES	:= $(addprefix $(OBJS_PATH)/parser/, $(PARSE_FILES:.c=.o))
 EXEC_FILES	:= $(addprefix $(OBJS_PATH)/execute/, $(EXEC_FILES:.c=.o))
-# EXPAND_FILES	:= $(addprefix $(OBJS_PATH)/expand/, $(EXPAND_FILES:.c=.o))
+EXPAND_FILES	:= $(addprefix $(OBJS_PATH)/expand/, $(EXPAND_FILES:.c=.o))
 UTILS_FILES := $(addprefix $(OBJS_PATH)/utils/, $(UTILS_FILES:.c=.o))
 BUILTIN_FILES := $(addprefix $(OBJS_PATH)/builtins/, $(BUILTIN_FILES:.c=.o))
 SIGNAL_FILES := $(addprefix $(OBJS_PATH)/signals/, $(SIGNAL_FILES:.c=.o))
@@ -97,7 +97,7 @@ OBJS		:=	$(PARSE_FILES)			\
 				$(EXEC_FILES)			\
 				$(SYNTAX_FILES)			\
 				$(PIPE_FILES)			\
-				# $(EXPAND_FILES)			\
+				$(EXPAND_FILES)			\
 
 
 

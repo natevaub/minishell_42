@@ -1,0 +1,16 @@
+ 
+includes
+infile
+la
+la.txt
+libft.a
+libftprintf.a
+libs
+log.txt
+Makefile
+minishell
+objs
+outfile
+ressources
+srcs
+txt

@@ -11,6 +11,8 @@ int	ft_is_joinable(t_tok *token)
 		else if (token->type == E_STRING && token->next->type == E_REDIRECTION)
 			return (1);
 	}
+	if (token->next != NULL)
+		printf("Token is joinable : %s ---- %s\n", token->word, token->next->word);
 	return (0);
 }
 
@@ -62,7 +64,6 @@ void	ft_get_joined_tk(t_tok *tok, char *n_tk)
 
 	free(tok->word);
 	tok->word = n_tk;
-	printf("tok->word = %s\n", tok->word);
 	curr = tok->next;
 	tok->next = curr->next;
 	free(curr->word);

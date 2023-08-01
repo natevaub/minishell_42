@@ -49,13 +49,21 @@ int	ft_get_outfile_fd(t_tok **tk)
 		return (fd);
 	while ((*tk)->type == E_SPACE)
 	{
+		printf("E_SPACE Tk Word = %s\n", (*tk)->word);
 		if ((*tk)->next == NULL)
+		{
 			(*tk) = (*tk)->next;
 			break ;
+		}
+			
 		(*tk) = (*tk)->next;
 	}
 	if ((*tk) != NULL)
+	{
+		printf("Open Tk Word = %s\n", (*tk)->word);
 		fd = open((*tk)->word, O_CREAT, O_TRUNC, O_WRONLY, 0644);
+		printf("FD = %d\n", fd);
+	}
 	global.last_exit_status = 0;
 	return (fd);
 }
@@ -73,8 +81,10 @@ int	ft_get_append_outfile_fd(t_tok **tk)
 	while ((*tk)->type == E_SPACE)
 	{
 		if ((*tk)->next == NULL)
+		{
 			(*tk) = (*tk)->next;
 			break ;
+		}
 		(*tk) = (*tk)->next;
 	}
 	if ((*tk) != NULL)
@@ -85,6 +95,7 @@ int	ft_get_append_outfile_fd(t_tok **tk)
 }
 void	ft_open_files_redirection(t_tok **tk, t_cmd *cmd)
 {
+	printf("In ft_open_red : Tk = %s --- \n", (*tk)->word);
 	if (ft_strcmp((*tk)->word, D_INFILE) == 0)
 	{
 		cmd->read = ft_get_infile_fd(tk);
@@ -94,9 +105,14 @@ void	ft_open_files_redirection(t_tok **tk, t_cmd *cmd)
 	}
 	else if (ft_strcmp((*tk)->word, D_OUTFILE) == 0)
 	{
+		printf("Tk = %s --- Tk Next = %s\n", (*tk)->word, (*tk)->next->word);
 		cmd->write = ft_get_outfile_fd(tk);
 		if ((*tk) != NULL)
+		{
+			// printf("Tk = %s --- Tk Next = %s\n", (*tk)->word, (*tk)->next->word);
 			((*tk)) = (*tk)->next;
+		}
+			
 	}
 	else if (ft_strcmp((*tk)->word, D_APPEND) == 0)
 	{
