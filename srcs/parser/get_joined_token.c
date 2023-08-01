@@ -11,8 +11,6 @@ int	ft_is_joinable(t_tok *token)
 		else if (token->type == E_STRING && token->next->type == E_REDIRECTION)
 			return (1);
 	}
-	if (token->next != NULL)
-		printf("Token is joinable : %s ---- %s\n", token->word, token->next->word);
 	return (0);
 }
 

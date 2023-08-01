@@ -61,7 +61,7 @@ int	ft_get_outfile_fd(t_tok **tk)
 	if ((*tk) != NULL)
 	{
 		printf("Open Tk Word = %s\n", (*tk)->word);
-		fd = open((*tk)->word, O_CREAT, O_TRUNC, O_WRONLY, 0644);
+		fd = open((*tk)->word, O_CREAT | O_TRUNC | O_RDWR, 0666);
 		printf("FD = %d\n", fd);
 	}
 	global.last_exit_status = 0;
@@ -88,7 +88,7 @@ int	ft_get_append_outfile_fd(t_tok **tk)
 		(*tk) = (*tk)->next;
 	}
 	if ((*tk) != NULL)
-		fd = open((*tk)->word, O_CREAT, O_APPEND, O_WRONLY, 0644);
+		fd = open((*tk)->word, O_CREAT | O_APPEND | O_RDWR, 0644);
 	global.last_exit_status = 0;
 	return (fd);
 

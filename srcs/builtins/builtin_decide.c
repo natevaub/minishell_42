@@ -6,7 +6,7 @@
 /*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/07/24 11:59:13 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/01 15:32:04 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	builtin_check(char *cmd)
 and redirects to right builtin function for execution*/
 void	builtin_redirect(t_minishell *ms)
 {
+	printf("In builtin redirect\n");
 	if (!ms->cmd->cmd)
 		return ;																	//add error msg
 	if (ft_strncmp(ms->cmd->cmd, "echo", 4) == 0)

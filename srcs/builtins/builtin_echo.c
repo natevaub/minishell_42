@@ -6,7 +6,7 @@
 /*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:38:36 by ckarl             #+#    #+#             */
-/*   Updated: 2023/07/28 16:33:58 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/01 15:48:45 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ if option is $?, we need to print last exit status
 >>>var is already expanded if necessary*/
 int	cmd_echo(t_minishell *ms)
 {
+	printf("In cmd echo\n");
 	bool	backslash;
 	int		i;
 
@@ -58,9 +59,12 @@ int	cmd_echo(t_minishell *ms)
 	}
 	while ((ms->cmd->option)[i] != 0)
 	{
-		ft_putstr_fd((ms->cmd->option)[i], ms->cmd->fd_write);								//adjust fd if redirection
+		printf("ms->cmd = %s, Write %d Read %d\n", ms->cmd->option[i], ms->cmd->fd_write, ms->cmd->fd_read);
+		ft_putstr_fd(ms->cmd->option[i], ms->cmd->fd_write);								//adjust fd if redirection
 		if ((ms->cmd->option)[i + 1] != 0)
+		{
 			ft_putstr_fd(" ", ms->cmd->fd_write);								//adjust fd if redirection
+		}
 		i++;
 	}
 	if (backslash == true)
