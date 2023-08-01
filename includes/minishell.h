@@ -211,6 +211,19 @@ void		init_signals(void);
 void		signal_handler(int signal);
 
 /*
+	EXPAND
+*/
+void		ft_expand_token(t_minishell *shell);
+void		ft_skip_dollar_alone(char *word);
+int			ft_token_has_dollar(char *word);
+char		*ft_expand_last_exit_status(void);
+char		*ft_fill_word(char *word, int *start, int *i);
+void		ft_expand_venv(t_minishell *shell, char	*word);
+char		*ft_get_venv_value(char *word, int *start, int *i);
+char		*ft_join_array(char *temp[256]);
+
+
+/*
 	EXECUTE
 */
 void		ft_exec_no_pipe(t_minishell *ms);

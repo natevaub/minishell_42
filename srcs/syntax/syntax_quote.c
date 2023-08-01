@@ -27,6 +27,7 @@ int	ft_syntax_open_quote_check(char *str, char c, int *i)
 	(*i)++;
 	while (str[*i] != '\0')
 	{
+		printf("str[%d] = %c\n", *i, str[*i]);
 		if (str[*i] == c)
 		{
 			(*i)++;

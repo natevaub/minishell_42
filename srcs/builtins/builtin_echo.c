@@ -6,7 +6,7 @@
 /*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:38:36 by ckarl             #+#    #+#             */
-/*   Updated: 2023/07/24 12:25:05 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/07/28 16:33:58 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	cmd_echo(t_minishell *ms)
 		ft_putstr_fd("\n", ms->cmd->fd_write);								//adjust fd if redirection
 		return (EXIT_SUCCESS);
 	}
-	if (ft_strncmp((ms->cmd->option)[i], "-n", 2) == 0)
+	if (ft_strncmp((ms->cmd->option)[i], "-n", 2) == 0 && ft_strlen(ms->cmd->option[i]) == 2)
 	{
 		backslash = false;
 		i++;

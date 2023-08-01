@@ -20,6 +20,7 @@ int	ft_syntax_red_check(t_tok *tok)
 	{
 		return (2);
 	}
+	return (0);
 }
 
 int	ft_red_error(t_tok *tk)
