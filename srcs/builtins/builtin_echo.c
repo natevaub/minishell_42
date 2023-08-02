@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:38:36 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/01 15:48:45 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/02 12:23:28 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,33 +39,31 @@ char	*get_value(t_venv *env, void *var)
 check quotes ('$USER' should output $USER), inner and outer
 if option is $?, we need to print last exit status
 >>>var is already expanded if necessary*/
-int	cmd_echo(t_minishell *ms)
+int	cmd_echo(t_lcmd *cmd)
 {
 	bool	backslash;
 	int		i;
 
 	i = 1;
 	backslash = true;
-	if (!((ms->cmd->option)[i]))
+	if (!((cmd->option)[i]))
 	{
-		ft_putstr_fd("\n", ms->cmd->fd_write);								//adjust fd if redirection
+		ft_putstr_fd("\n", cmd->fd_write);								//adjust fd if redirection
 		return (EXIT_SUCCESS);
 	}
-	if (ft_strncmp((ms->cmd->option)[i], "-n", 2) == 0 && ft_strlen(ms->cmd->option[i]) == 2)
+	if (ft_strncmp((cmd->option)[i], "-n", 2) == 0 && ft_strlen(cmd->option[i]) == 2)
 	{
 		backslash = false;
 		i++;
 	}
-	while ((ms->cmd->option)[i] != 0)
+	while ((cmd->option)[i] != 0)
 	{
-		ft_putstr_fd(ms->cmd->option[i], ms->cmd->fd_write);								//adjust fd if redirection
-		if ((ms->cmd->option)[i + 1] != 0)
-		{
-			ft_putstr_fd(" ", ms->cmd->fd_write);								//adjust fd if redirection
-		}
+		ft_putstr_fd(cmd->option[i], cmd->fd_write);								//adjust fd if redirection
+		if ((cmd->option)[i + 1] != 0)
+			ft_putstr_fd(" ", cmd->fd_write);								//adjust fd if redirection
 		i++;
 	}
 	if (backslash == true)
-		ft_putstr_fd("\n", ms->cmd->fd_write);								//adjust fd if redirection
+		ft_putstr_fd("\n", cmd->fd_write);								//adjust fd if redirection
 	return (EXIT_SUCCESS);
 }

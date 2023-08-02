@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_pwd_cd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:38:36 by ckarl             #+#    #+#             */
-/*   Updated: 2023/07/27 19:52:24 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/02 12:25:03 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ directory to different directories in our System.*/
 
 //On success, zero is returned.  On error, -1 is returned, and
 //errno is set to indicate the error.
-int	cmd_cd(t_minishell *ms)
+int	cmd_cd(t_lcmd *cmd)
 {
 	char	*path;
 
-	if (!(ms->cmd->option[1]))
+	if (!(cmd->option[1]))
 		path = ft_strdup(get_value(global.copy_env, "HOME"));
 	else
-		path = ft_strdup(ms->cmd->option[1]);
+		path = ft_strdup(cmd->option[1]);
 	if (chdir(path) < 0)
 	{
 		free (path);
@@ -41,11 +41,11 @@ int	cmd_cd(t_minishell *ms)
 //PWD WITH NO OPTIONS
 /*The pwd utility writes the absolute pathname of the current working directory
 to the standard output.*/
-int	cmd_pwd(t_minishell *ms)
+int	cmd_pwd(t_lcmd *cmd)
 {
 	if (getcwd(NULL, 0) == NULL)
 		return (errno);
-	ft_putstr_fd(getcwd(NULL, 0), ms->cmd->fd_write);								//adjust fd if redirection
-	ft_putchar_fd('\n', ms->cmd->fd_write);
+	ft_putstr_fd(getcwd(NULL, 0), cmd->fd_write);								//adjust fd if redirection
+	ft_putchar_fd('\n', cmd->fd_write);
 	return (EXIT_SUCCESS);
 }

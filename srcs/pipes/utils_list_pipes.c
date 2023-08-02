@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_2.c                                          :+:      :+:    :+:   */
+/*   utils_list_pipes.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:10:31 by ckarl             #+#    #+#             */
-/*   Updated: 2023/06/22 16:22:32 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/02 13:45:03 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_lcmd	*last_node_pipes(t_lcmd *lst)
 }
 
 //get a node in the t_lcmd command list
-t_lcmd	*get_node_pipes(t_lcmd *head, int index)
+t_lcmd	*get_node_lcmd(t_lcmd *head, int index)
 {
 	t_lcmd	*copy;
 	int			i;

@@ -1,4 +1,4 @@
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 void	child_exec_no_pipe(t_minishell *ms, char **env_tab)
 {
@@ -33,7 +33,7 @@ void	ft_exec_no_pipe(t_minishell *ms)
 	if (ms->cmd->cmd != NULL)
 	{
 		if ((builtin_check(ms->cmd->cmd)) == 1)
-			builtin_redirect(ms);
+			builtin_redirect(ms->cmd);
 		else
 		{
 			child_exec_no_pipe(ms, env_tab);
