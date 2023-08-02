@@ -24,11 +24,11 @@ char	*ft_get_command_line(void)
 	else
 	{
 		char* home_path = getenv("HOME");
-		if (home_path != NULL && ft_strncmp(cmd_line, home_path, strlen(home_path)) == 0)
+		if (home_path != NULL && ft_strncmp(cmd_line, home_path, ft_strlen(home_path)) == 0)
 		{
 			// Replace home directory with ~
 			ft_memmove(cmd_line, "~", 1);
-			ft_memmove(cmd_line + 1, cmd_line + strlen(home_path), ft_strlen(cmd_line) - ft_strlen(home_path) + 1);
+			ft_memmove(cmd_line + 1, cmd_line + ft_strlen(home_path), ft_strlen(cmd_line) - ft_strlen(home_path) + 1);
 		}
 		ft_strcat(cmd_line, "$ ");
 	}

@@ -1,38 +1,44 @@
 #include "../includes/minishell.h"
 
+void	child_exec_no_pipe(t_minishell *ms, char **env_tab)
+{
+	char	*cmd_with_path;
+	pid_t	pid;
+
+	pid = improved_fork();
+	if (pid < 0)
+		return (perror("Fork"));
+	if (pid == 0)
+	{
+		sub_dup2(ms->cmd->fd_read, ms->cmd->fd_write);
+		cmd_with_path = get_right_path(ms->cmd->cmd);
+		if (!cmd_with_path)
+		{
+			global.last_exit_status = 1;										//check if this is correct
+		}
+		if (execve(cmd_with_path, ms->cmd->option, env_tab) < 0)
+		{
+			return (perror("Execve"));
+		}
+	}
+	// else
+	// 	waitpid(-1, NULL, 0);
+}
+
 void	ft_exec_no_pipe(t_minishell *ms)
 {
-	printf("In ft_exec_no_pipe\n");
 	char	**env_tab;
-	char	*cmd_w_path;
 
 	env_tab = env_list_to_env_tab();
-	if (!env_tab)
-		return(perror("Env tab: "));															//set error msg
 	if (ms->cmd->cmd != NULL)
 	{
 		if ((builtin_check(ms->cmd->cmd)) == 1)
-		{
-			printf("In builtin check\n");
 			builtin_redirect(ms);
-		}
 		else
 		{
-			if (ms->cmd->fd_write != 0)
-				improved_dup2(ms->cmd->fd_write, STDOUT_FILENO);
-			if (ms->cmd->fd_read != 1)
-				improved_dup2(ms->cmd->fd_read, STDIN_FILENO);
-			cmd_w_path = get_right_path(ms->cmd->cmd);
-			if (execve(cmd_w_path, ms->cmd->option, env_tab) < 0)
-			{
-				free(cmd_w_path);
-				return (perror("Execve: "));															//set error msg
-			}
-			// printf("after execve\n");
-			free(cmd_w_path);
+			child_exec_no_pipe(ms, env_tab);
+			waitpid(-1, NULL, 0);
 		}
 	}
-
-	// free_two_dimension_array(env_tab);
-	// return (global.last_exit_status);
+	free_two_dimension_array(env_tab);
 }

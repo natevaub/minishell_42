@@ -28,16 +28,16 @@ void	close_pipes(t_pipex *pipex)
 	close(pipex->pipe_fd[1][1]);
 }
 
-void	final_free_and_close(t_minishell *ms)
-{
-	close(ms->infile_fd);
-	close(ms->outfile_fd);
-	close_pipes(ms->p);
-	waitpid(-1, NULL, 0);
-	// while (ms->cmd)
-	// {
-	// 	free(ms->cmd->cmd);
-	// 	free_two_dimension_array(pipex->commands->option);
-	// 	pipex->commands = pipex->commands->next;
-	// }
-}
+// void	final_free_and_close(t_minishell *ms)
+// {
+// 	// close(ms->infile_fd);
+// 	// close(ms->outfile_fd);
+// 	close_pipes(ms->p);
+// 	waitpid(-1, NULL, 0);
+// 	// while (ms->cmd)
+// 	// {
+// 	// 	free(ms->cmd->cmd);
+// 	// 	free_two_dimension_array(pipex->commands->option);
+// 	// 	pipex->commands = pipex->commands->next;
+// 	// }
+// }

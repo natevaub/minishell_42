@@ -227,6 +227,7 @@ char		*ft_join_array(char *temp[256]);
 	EXECUTE
 */
 void		ft_exec_no_pipe(t_minishell *ms);
+void		child_exec_no_pipe(t_minishell *ms, char **env_tab);
 
 /*
 	PIPES
@@ -234,7 +235,7 @@ void		ft_exec_no_pipe(t_minishell *ms);
 
 /*	---	pipes_execution.c	---*/
 int			pipe_exec(t_minishell *ms);
-void		child_exec(t_minishell *ms);
+void		child_exec(t_minishell *ms, char **env_tab);
 
 /*	---	pipes_init.c	---*/
 void		init_pipex_struct(t_minishell *ms);
