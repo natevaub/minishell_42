@@ -41,7 +41,6 @@ if option is $?, we need to print last exit status
 >>>var is already expanded if necessary*/
 int	cmd_echo(t_minishell *ms)
 {
-	printf("In cmd echo\n");
 	bool	backslash;
 	int		i;
 
@@ -59,7 +58,6 @@ int	cmd_echo(t_minishell *ms)
 	}
 	while ((ms->cmd->option)[i] != 0)
 	{
-		printf("ms->cmd = %s, Write %d Read %d\n", ms->cmd->option[i], ms->cmd->fd_write, ms->cmd->fd_read);
 		ft_putstr_fd(ms->cmd->option[i], ms->cmd->fd_write);								//adjust fd if redirection
 		if ((ms->cmd->option)[i + 1] != 0)
 		{

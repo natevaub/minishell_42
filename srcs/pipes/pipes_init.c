@@ -16,14 +16,10 @@ void	init_pipex_struct(t_minishell *ms)
 {
 	pipe(ms->p->pipe_fd[0]);
 	pipe(ms->p->pipe_fd[1]);
-	// ms->infile_fd = open(argv[1], O_RDONLY);
-	// ms->outfile_fd = open(argv[argc - 1], O_CREAT | O_RDWR | O_TRUNC, 0666);
-	// if (ms->infile_fd < 0 || ms->outfile_fd < 0)
-	// 	return ;																	//set errno
 	ms->p->count_cmds = total_len_cmd(ms->cmd);
 	ms->p->idx = 0;
 	set_pipe_fds(ms);
-	// print_list_fds(pipex->commands);
+	print_list_fds(ms->cmd);
 }
 
 //set command list & read/write fds
@@ -31,26 +27,23 @@ void	set_pipe_fds(t_minishell *ms)
 {
 	t_lcmd	*list;
 	int		i;
-	// int		w_pipe;
-	// int		r_pipe;
 
 	i = -1;
 	list = ms->cmd;
 	while (list && ++i < ms->p->count_cmds)
 	{
-		if (i == 0 && !list->fd_read)
-			list->fd_read = STDIN_FILENO;
+		if (i == 0)
+			list->fd_read = list->fd_read;
 		else if (i % 2 != 0)
 			list->fd_read = ms->p->pipe_fd[0][0];
 		else
 			list->fd_read = ms->p->pipe_fd[1][0];
-		if (i == ms->p->count_cmds - 1 && list->fd_write)
-			list->fd_write = STDOUT_FILENO;
-		else if (i % 2 == 0 || i == 0)
+		if (i == ms->p->count_cmds - 1)
+			list->fd_write = list->fd_write;
+		else if ((i % 2 == 0 || i == 0))
 			list->fd_write = ms->p->pipe_fd[0][1];
 		else
 			list->fd_write = ms->p->pipe_fd[1][1];
-		// list_append_pipes(&list, argv[i], w_pipe, r_pipe);
 		list = list->next;
 	}
 }
