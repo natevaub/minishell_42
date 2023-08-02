@@ -117,8 +117,8 @@ void		ft_print_tokens(t_tok *token);
 void		ft_print_cmds(t_lcmd *cmd);
 
 /*	--- parsing_free_memory.c	--- */
-void		ft_free_token(t_minishell *shell);
-void		ft_free_cmd(t_minishell *shell);
+void		ft_free_token(t_minishell **shell);
+void		ft_free_cmd(t_minishell **shell);
 void		ft_free_parsing(t_minishell *shell);
 
 /*	---tokenize_prompt.c	--- */
@@ -144,16 +144,16 @@ char 		*ft_strcat(char *dest, char *src);
 	BUILTINS
 */
 /*	---	builtin_decide.c	---*/
-void		builtin_redirect(t_minishell *ms);
+void		builtin_redirect(t_lcmd *cmd);
 int			builtin_check(char *cmd);
 
 /*	---	builtin_echo.c	---*/
 char		*get_value(t_venv *env, void *var);
-int			cmd_echo(t_minishell *ms);
+int			cmd_echo(t_lcmd *cmd);
 
 /*	---	builtin_env.c	---*/
 int			find_c(char *str, char c);
-int			print_env(t_minishell *ms);
+int			print_env(t_lcmd *cmd);
 
 /*	---	builtin_exit.c	---*/
 void		cmd_exit(char *status);
@@ -164,11 +164,11 @@ int			check_var_format(char *var);
 char		*trim_back(char *var);
 int			change_existing_var_in_env(char *var);
 int			add_var_to_export(char **option);
-int			print_export(t_minishell *ms);
+int			print_export(t_lcmd *cmd);
 
 /*	---	builtin_pwd_cd.c	---*/
-int			cmd_cd(t_minishell *ms);
-int			cmd_pwd(t_minishell *ms);
+int			cmd_cd(t_lcmd *cmd);
+int			cmd_pwd(t_lcmd *cmd);
 
 /*	---	builtin_unset.c	---*/
 int			cmd_unset(char **var);
@@ -250,7 +250,7 @@ pid_t		improved_fork(void);
 /*	---	utils_list_pipes.c	---*/
 void		list_append_pipes(t_lcmd **lst, char *command, int w_pipe, int r_pipe);
 t_lcmd		*last_node_pipes(t_lcmd *lst);
-t_lcmd		*get_node_pipes(t_lcmd *head, int index);
+t_lcmd		*get_node_lcmd(t_lcmd *head, int index);
 int			total_len_cmd(t_lcmd *commands);
 void		print_list_fds(t_lcmd *list);
 

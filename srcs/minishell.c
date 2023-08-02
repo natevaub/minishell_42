@@ -27,7 +27,7 @@ int main(int ac, char **av, char **envp)
 		}
 		else
 			pipe_exec(&shell);
-		ft_free_parsing(&shell);							//need to close the infile & outfile
+		ft_free_parsing(&shell);
 	}
 	free_env_list(global.copy_env);
 	return (0);

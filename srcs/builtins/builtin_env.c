@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:38:36 by ckarl             #+#    #+#             */
-/*   Updated: 2023/07/13 16:30:35 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/02 12:27:03 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	find_c(char *str, char c)
 }
 
 //print environment when command env is called
-int	print_env(t_minishell *ms)
+int	print_env(t_lcmd *cmd)
 {
 	t_venv	*head;
 
@@ -40,11 +40,11 @@ int	print_env(t_minishell *ms)
 	{
 		if (find_c(head->word, '='))
 		{
-			ft_putstr_fd(head->word, ms->cmd->fd_write);								//adjust fd if redirection
-			ft_putchar_fd('\n', ms->cmd->fd_write);
+			ft_putstr_fd(head->word, cmd->fd_write);								//adjust fd if redirection
+			ft_putchar_fd('\n', cmd->fd_write);
 		}
 		head = head->next;
 	}
-	ft_putstr_fd("_=/usr/bin/env\n", ms->cmd->fd_write);								//adjust fd if redirection
+	ft_putstr_fd("_=/usr/bin/env\n", cmd->fd_write);								//adjust fd if redirection
 	return(EXIT_SUCCESS);
 }

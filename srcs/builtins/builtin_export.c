@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/07/18 14:08:41 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/02 12:26:22 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int	add_var_to_export(char **option)
 
 //cmd: export (without args), prints env in ascii order without the last arg path
 //check if last history was "minishell", if yes, add line list_append() with "_="/bin/bash""
-int	print_export(t_minishell *ms)
+int	print_export(t_lcmd *cmd)
 {
 	char	**lines;
 	t_venv	*env_for_export;
@@ -128,14 +128,14 @@ int	print_export(t_minishell *ms)
 		lines = ft_split(env_for_export->word, '=');
 		if (!lines)
 			return (errno);
-		ft_putstr_fd("declare -x ", ms->cmd->fd_write);											//adjust fd if redirection
-		ft_putstr_fd(lines[0], ms->cmd->fd_write);
-		ft_putstr_fd("=", ms->cmd->fd_write);
-		ft_putchar_fd('"', ms->cmd->fd_write);
+		ft_putstr_fd("declare -x ", cmd->fd_write);											//adjust fd if redirection
+		ft_putstr_fd(lines[0], cmd->fd_write);
+		ft_putstr_fd("=", cmd->fd_write);
+		ft_putchar_fd('"', cmd->fd_write);
 		if (lines[1])
-			ft_putstr_fd(lines[1], ms->cmd->fd_write);
-		ft_putchar_fd('"', ms->cmd->fd_write);
-		ft_putchar_fd('\n', ms->cmd->fd_write);
+			ft_putstr_fd(lines[1], cmd->fd_write);
+		ft_putchar_fd('"', cmd->fd_write);
+		ft_putchar_fd('\n', cmd->fd_write);
 		env_for_export = env_for_export->next;
 		free_two_dimension_array(lines);
 	}

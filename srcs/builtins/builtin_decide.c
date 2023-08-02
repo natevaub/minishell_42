@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_decide.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/01 15:32:04 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/02 14:35:04 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,33 +39,30 @@ int	builtin_check(char *cmd)
 
 /*if yes, checks if there are given arguments
 and redirects to right builtin function for execution*/
-void	builtin_redirect(t_minishell *ms)
+void	builtin_redirect(t_lcmd *cmd)
 {
-	printf("In builtin redirect\n");
-	if (!ms->cmd->cmd)
-		return ;																	//add error msg
-	if (ft_strncmp(ms->cmd->cmd, "echo", 4) == 0)
-		global.last_exit_status = cmd_echo(ms);
-	else if (ft_strncmp(ms->cmd->cmd, "cd", 2) == 0)
-		global.last_exit_status = cmd_cd(ms);
-	else if (ft_strncmp(ms->cmd->cmd, "pwd", 3) == 0)
-		global.last_exit_status = cmd_pwd(ms);
-	else if (ft_strncmp(ms->cmd->cmd, "export", 6) == 0)
+	if (ft_strncmp(cmd->cmd, "echo", 4) == 0)
+		global.last_exit_status = cmd_echo(cmd);
+	else if (ft_strncmp(cmd->cmd, "cd", 2) == 0)
+		global.last_exit_status = cmd_cd(cmd);
+	else if (ft_strncmp(cmd->cmd, "pwd", 3) == 0)
+		global.last_exit_status = cmd_pwd(cmd);
+	else if (ft_strncmp(cmd->cmd, "export", 6) == 0)
 	{
-		if (!(ms->cmd->option[1]))
-			global.last_exit_status = print_export(ms);
+		if (!(cmd->option[1]))
+			global.last_exit_status = print_export(cmd);
 		else
-			global.last_exit_status = add_var_to_export((ms->cmd->option) + 1);
+			global.last_exit_status = add_var_to_export((cmd->option) + 1);
 	}
-	else if (ft_strncmp(ms->cmd->cmd, "unset", 5) == 0)
+	else if (ft_strncmp(cmd->cmd, "unset", 5) == 0)
 	{
-		if((ms->cmd->option) + 1)
-			global.last_exit_status = cmd_unset((ms->cmd->option) + 1);
+		if((cmd->option) + 1)
+			global.last_exit_status = cmd_unset((cmd->option) + 1);
 	}
-	else if (ft_strncmp(ms->cmd->cmd, "env", 3) == 0)
-		global.last_exit_status = print_env(ms);
-	else if (ft_strncmp(ms->cmd->cmd, "exit", 4) == 0)
-		cmd_exit(*((ms->cmd->option) + 1));
-	else if (ft_strncmp(ms->cmd->cmd, "minishell", 9) == 0)
+	else if (ft_strncmp(cmd->cmd, "env", 3) == 0)
+		global.last_exit_status = print_env(cmd);
+	else if (ft_strncmp(cmd->cmd, "exit", 4) == 0)
+		cmd_exit(*((cmd->option) + 1));
+	else if (ft_strncmp(cmd->cmd, "minishell", 9) == 0)
 		change_shvl_in_env(1);
 }
