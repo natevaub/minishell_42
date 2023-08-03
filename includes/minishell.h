@@ -234,8 +234,9 @@ void		child_exec_no_pipe(t_minishell *ms, char **env_tab);
 */
 
 /*	---	pipes_execution.c	---*/
-int			pipe_exec(t_minishell *ms);
-void		child_exec(t_minishell *ms, char **env_tab);
+int			exec_pipe(t_minishell *ms);
+void		child_exec(t_lcmd *cmd, char **env_tab, t_pipex *p);
+void		run_cmd(t_lcmd *cmd, t_pipex *p);
 
 /*	---	pipes_init.c	---*/
 void		init_pipex_struct(t_minishell *ms);

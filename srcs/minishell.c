@@ -20,13 +20,16 @@ int main(int ac, char **av, char **envp)
 			add_history(prompt);
 		ft_parsing(&shell, prompt);
 
-		print_list_fds(shell.cmd);
 		if (shell.syntax == 0 && total_len_cmd(shell.cmd) < 2)
 		{
+			printf("in exec_pipe\n");
 			ft_exec_no_pipe(&shell);
 		}
 		else
-			pipe_exec(&shell);
+		{
+			printf("in exec_pipe\n");
+			exec_pipe(&shell);
+		}
 		ft_free_parsing(&shell);
 	}
 	free_env_list(global.copy_env);
