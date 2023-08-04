@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:10:31 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/04 16:24:55 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/04 19:19:15 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,38 +19,39 @@ int	error(char *str)
 	return (-1);
 }
 
-void	close_pipes(t_minishell *ms)
-{
-	if (ms->p->idx == 0)
-	{
-		close(ms->p->pipe_fd[0][0]);
-		close(ms->p->pipe_fd[1][1]);
-		close(ms->p->pipe_fd[1][0]);
-		// if (ms->cmd->fd_read != STDIN_FILENO)
-		// 	close(ms->cmd->fd_read);
-	}
-	else if (ms->p->idx == ms->p->count_cmds - 1)
-	{
-		if (ms->p->idx % 2 == 0)
-			close(ms->p->pipe_fd[1][0]);
-		else
-			close(ms->p->pipe_fd[0][0]);
-		close(ms->p->pipe_fd[1][1]);
-		close(ms->p->pipe_fd[0][1]);
-		// if (ms->cmd->fd_write != STDOUT_FILENO)
-		// 	close(ms->cmd->fd_write);
-	}
-	else if (ms->p->idx % 2 == 0 && ms->p->idx != 0)
-	{
-		close(ms->p->pipe_fd[0][1]);
-		close(ms->p->pipe_fd[1][0]);
-	}
-	else if (ms->p->idx % 2 != 0)
-	{
-		close(ms->p->pipe_fd[0][0]);
-		close(ms->p->pipe_fd[1][1]);
-	}
-}
+// void	close_pipes(t_minishell *ms)
+// {
+// 	printf("idx in close pipes: %d\n", ms->p->idx);
+// 	if (ms->p->idx == 0)
+// 	{
+// 		// close(ms->p->pipe_fd[0][0]);
+// 		// close(ms->p->pipe_fd[1][1]);
+// 		// close(ms->p->pipe_fd[1][0]);
+// 		if (ms->cmd->fd_read != STDIN_FILENO)
+// 			close(ms->cmd->fd_read);
+// 	}
+// 	else if (ms->p->idx == ms->p->count_cmds - 1)
+// 	{
+// 		// if (ms->p->idx % 2 == 0)
+// 		// 	close(ms->p->pipe_fd[1][0]);
+// 		// else
+// 		// 	close(ms->p->pipe_fd[0][0]);
+// 		// close(ms->p->pipe_fd[1][1]);
+// 		// close(ms->p->pipe_fd[0][1]);
+// 		if (ms->cmd->fd_write != STDOUT_FILENO)
+// 			close(ms->cmd->fd_write);
+// 	}
+// 	else if (ms->p->idx % 2 == 0 && ms->p->idx != 0)
+// 	{
+// 		close(ms->p->pipe_fd[0][1]);
+// 		close(ms->p->pipe_fd[1][0]);
+// 	}
+// 	else if (ms->p->idx % 2 != 0)
+// 	{
+// 		close(ms->p->pipe_fd[0][0]);
+// 		close(ms->p->pipe_fd[1][1]);
+// 	}
+// }
 
 // void	final_free_and_close(t_minishell *ms)
 // {

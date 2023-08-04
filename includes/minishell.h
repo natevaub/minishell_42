@@ -235,12 +235,12 @@ void		child_exec_no_pipe(t_minishell *ms, char **env_tab);
 
 /*	---	pipes_execution.c	---*/
 int			exec_pipe(t_minishell *ms, char **envp);
-void		child_exec(t_lcmd *cmd, char **env_tab, t_minishell *ms);
-void		run_cmd(t_lcmd *cmd, t_minishell *ms, char **envp);
+void		child_exec(t_lcmd *cmd, char **env_tab, t_minishell *ms, int fd[2][2]);
+void		run_cmd(t_lcmd *cmd, t_minishell *ms, char **envp, int fd[2][2]);
 
 /*	---	pipes_init.c	---*/
 void		init_pipex_struct(t_minishell *ms);
-void		set_pipe_fds(t_minishell *ms);
+void		set_pipe_fds(t_lcmd *cmd, int fd[2][2], t_minishell *ms);
 
 /*	---	improved_syscalls.c	---*/
 int			improved_dup2(int fildes, int fildes2);

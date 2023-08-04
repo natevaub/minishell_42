@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:38:36 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/02 13:53:50 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/04 16:41:51 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ int	improved_dup2(int fildes, int fildes2)
 	int	error;
 
 	error = dup2(fildes, fildes2);
-	if (error == -1)
+	if (error < 0)
 	{
 		perror("error dup2");
-		exit(1);
+		exit(errno);
 	}
 	return (error);
 }
