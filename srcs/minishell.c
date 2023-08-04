@@ -22,12 +22,10 @@ int main(int ac, char **av, char **envp)
 
 		if (shell.syntax == 0 && total_len_cmd(shell.cmd) < 2)
 		{
-			printf("in exec_pipe\n");
 			ft_exec_no_pipe(&shell);
 		}
 		else
 		{
-			printf("in exec_pipe\n");
 			exec_pipe(&shell, envp);
 		}
 		ft_free_parsing(&shell);
