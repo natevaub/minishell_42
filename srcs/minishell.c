@@ -28,7 +28,7 @@ int main(int ac, char **av, char **envp)
 		else
 		{
 			printf("in exec_pipe\n");
-			exec_pipe(&shell);
+			exec_pipe(&shell, envp);
 		}
 		ft_free_parsing(&shell);
 	}

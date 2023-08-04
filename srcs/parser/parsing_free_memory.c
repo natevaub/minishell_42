@@ -10,8 +10,10 @@ void	ft_free_token(t_minishell **shell)
 	while (curr != NULL)
 	{
 		next = curr->next;
-		free(curr->word);
-		free(curr);
+		if (curr->word)
+			free(curr->word);
+		if (curr)
+			free(curr);
 		curr = next;
 	}
 	(*shell)->token = NULL;
@@ -39,12 +41,14 @@ void	ft_free_cmd(t_minishell **shell)
 		// 	free(curr->option[i]);
 		// 	i++;
 		// }
-		free(curr->option);
+		if (curr->option)
+			free(curr->option);
 		if (curr->next == NULL && curr->fd_write != 1)
 		{
 			close(curr->fd_write);
 		}
-		free(curr);
+		if (curr)
+			free(curr);
 		curr = next;
 	}
 	(*shell)->cmd = NULL;
