@@ -118,7 +118,7 @@ void		ft_print_cmds(t_lcmd *cmd);
 
 /*	--- parsing_free_memory.c	--- */
 void		ft_free_token(t_minishell **shell);
-void		ft_free_cmd(t_minishell **shell);
+void		ft_free_cmd(t_minishell *shell);
 void		ft_free_parsing(t_minishell *shell);
 
 /*	---tokenize_prompt.c	--- */

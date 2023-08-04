@@ -18,9 +18,10 @@ void	init_pipex_struct(t_minishell *ms)
 	pipe(ms->p->pipe_fd[1]);
 	ms->p->count_cmds = total_len_cmd(ms->cmd);
 	// printf("total len cmd: %d\n", ms->p->count_cmds);
-	ms->p->idx = 0;
 	set_pipe_fds(ms);
-	print_list_fds(ms->cmd);
+	ms->p->idx = 0;
+
+	// print_list_fds(ms->cmd);
 }
 
 //set command list & read/write fds
