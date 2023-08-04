@@ -235,8 +235,8 @@ void		child_exec_no_pipe(t_minishell *ms, char **env_tab);
 
 /*	---	pipes_execution.c	---*/
 int			exec_pipe(t_minishell *ms, char **envp);
-void		child_exec(t_lcmd *cmd, char **env_tab, t_pipex *p);
-void		run_cmd(t_lcmd *cmd, t_pipex *p, char **envp);
+void		child_exec(t_lcmd *cmd, char **env_tab, t_minishell *ms);
+void		run_cmd(t_lcmd *cmd, t_minishell *ms, char **envp);
 
 /*	---	pipes_init.c	---*/
 void		init_pipex_struct(t_minishell *ms);
@@ -257,7 +257,7 @@ void		print_list_fds(t_lcmd *list);
 
 /*	---	utils_memory_pipes.c	---*/
 int			error(char *str);
-void		close_pipes(t_pipex *pipex);
+void		close_pipes(t_minishell *ms);
 void		final_free_and_close(t_minishell *ms);
 
 /*	---	utils_path_pipes.c	---*/

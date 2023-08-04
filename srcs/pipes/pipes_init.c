@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   pipes_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:38:36 by ckarl             #+#    #+#             */
-/*   Updated: 2023/06/22 16:31:20 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/04 16:23:53 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@ void	init_pipex_struct(t_minishell *ms)
 	pipe(ms->p->pipe_fd[1]);
 	ms->p->count_cmds = total_len_cmd(ms->cmd);
 	// printf("total len cmd: %d\n", ms->p->count_cmds);
-	set_pipe_fds(ms);
-	ms->p->idx = 0;
 
-	// print_list_fds(ms->cmd);
+	ms->p->idx = 0;
+	set_pipe_fds(ms);
+	print_list_fds(ms->cmd);
 }
+
+
 
 //set command list & read/write fds
 void	set_pipe_fds(t_minishell *ms)
