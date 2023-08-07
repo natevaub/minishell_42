@@ -34,7 +34,6 @@ int	ft_pipe_error(t_tok *syntax)
 		if (cpy->next->type != E_STRING && cpy->next->type != E_REDIRECTION)
 			return (1);
 	}
-	printf("Pipe Erro\n");
 	if (cpy->next == NULL)
 		return (1);
 	return (0);

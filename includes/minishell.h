@@ -24,6 +24,7 @@ extern t_global	global;
 
 # define ERR_CMD		"Enter valid command "
 # define ERR_EXEC		"Execve "
+# define DEBUG 0
 
 
 /*
@@ -267,5 +268,16 @@ char		*get_right_path(char *cmd);
 /*	---	utils_strings_pipes.c	---*/
 char		*ft_join_path(char const *s1, char const *s2);
 char		**env_list_to_env_tab(void);
+
+/*
+	PIPES2
+*/
+int			ft_count_cmds(t_lcmd *shell);
+void		ft_init_pipes_struct(t_minishell *shell, t_pipex *pipe);
+int			ft_pipeline_execution(t_minishell *shell, char **envp);
+int			ft_set_fd(t_minishell *shell, t_pipex *p);
+int			ft_exec_cmd(t_lcmd *cmd, char **envp);
+char		*ft_get_right_path(char *cmd);
+char		*ft_get_path_line(void);
 
 #endif
