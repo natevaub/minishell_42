@@ -68,7 +68,7 @@ typedef struct	s_pipex
 	// int			outfile_fd;
 	int			count_cmds;
 	int			idx;
-	// int			pipe_fd[2][2];
+	int			pipe_fd[2][2];
 	// t_lcmd		*commands;
 }				t_pipex;
 

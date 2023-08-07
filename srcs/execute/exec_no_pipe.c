@@ -14,7 +14,7 @@ void	child_exec_no_pipe(t_minishell *ms, char **env_tab)
 	if (pid == 0)
 	{
 		sub_dup2(ms->cmd->fd_read, ms->cmd->fd_write);
-		cmd_with_path = get_right_path(ms->cmd->cmd);
+		cmd_with_path = ft_get_right_path(ms->cmd->cmd);
 		if (!cmd_with_path)
 		{
 			global.last_exit_status = 1;										//check if this is correct & set error msg
@@ -33,7 +33,7 @@ void	ft_exec_no_pipe(t_minishell *ms)
 {
 	char	**env_tab;
 
-	env_tab = env_list_to_env_tab();
+	env_tab = ft_env_list_to_env_tab();
 	if (ms->cmd->cmd != NULL)
 	{
 		if ((builtin_check(ms->cmd->cmd)) == 1)

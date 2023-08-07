@@ -66,15 +66,8 @@ BUILTIN_FILES :=	builtin_decide.c		\
 
 SIGNAL_FILES :=		signals.c				\
 
-PIPE_FILES :=		improved_syscalls.c 	\
-					pipes_execution.c		\
-					pipes_init.c			\
-					utils_list_pipes.c		\
-					utils_memory_pipes.c	\
-					utils_strings_pipes.c	\
-					utils_path_pipes.c		\
-
 PIPE2_FILES :=		exec_pipes2.c			\
+
 
 	### OBJECTS ###
 CMDLINE_FILES := $(addprefix $(OBJS_PATH)/cmd_line/, $(CMDLINE_FILES:.c=.o))
@@ -87,7 +80,6 @@ BUILTIN_FILES := $(addprefix $(OBJS_PATH)/builtins/, $(BUILTIN_FILES:.c=.o))
 SIGNAL_FILES := $(addprefix $(OBJS_PATH)/signals/, $(SIGNAL_FILES:.c=.o))
 SYNTAX_FILES := $(addprefix $(OBJS_PATH)/syntax/, $(SYNTAX_FILES:.c=.o))
 MAIN_FILE	:= $(addprefix $(OBJS_PATH)/, $(MAIN_FILE:.c=.o))
-PIPE_FILES :=	$(addprefix $(OBJS_PATH)/pipes/, $(PIPE_FILES:.c=.o))
 PIPE2_FILES :=	$(addprefix $(OBJS_PATH)/pipes2/, $(PIPE2_FILES:.c=.o))
 
 OBJS		:=	$(PARSE_FILES)			\
@@ -99,7 +91,6 @@ OBJS		:=	$(PARSE_FILES)			\
 				$(SIGNAL_FILES)			\
 				$(EXEC_FILES)			\
 				$(SYNTAX_FILES)			\
-				$(PIPE_FILES)			\
 				$(PIPE2_FILES)			\
 				$(EXPAND_FILES)			\
 
@@ -137,7 +128,7 @@ $(LIBPRINTF):
 
 $(NAME):	$(LIBFT) $(LIBPRINTF) $(OBJS)
 			@echo "$(GREEN)Compilating minishell$(RESET)"
-			@$(CC) $(CFLAGS) -Llibs/ftprintf -Llibs/libft -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include/readline -Llibs/ftprintf -Llibs/libft -o $@ $(OBJS) $(LIBS)
+			@$(CC) $(CFLAGS) -Llibs/ftprintf -Llibs/libft -L/Users/nvaubien/.brew/Cellar/readline/8.2.1/lib -I/Users/nvaubien/.brew/Cellar/readline/8.2.1/include/readline -Llibs/ftprintf -Llibs/libft -o $@ $(OBJS) $(LIBS)
 			@echo "$(CYAN)✔️  Compilation Done$(RESET)"
 # -L/Users/ckarl/homebrew/opt/readline/lib -I/Users/ckarl/homebrew/opt/readline/include/readline
 # -L/Users/nvaubien/.brew/Cellar/readline/8.2.1/lib -I/Users/nvaubien/.brew/Cellar/readline/8.2.1/include/readline

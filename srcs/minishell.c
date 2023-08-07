@@ -20,7 +20,7 @@ int main(int ac, char **av, char **envp)
 			add_history(prompt);
 		ft_parsing(&shell, prompt);
 
-		if (shell.syntax == 0 && total_len_cmd(shell.cmd) < 2)
+		if (ft_count_cmds(shell.cmd) < 2)
 		{
 			ft_exec_no_pipe(&shell);
 		}
