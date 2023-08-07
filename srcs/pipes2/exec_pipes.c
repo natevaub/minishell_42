@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_pipes2.c                                      :+:      :+:    :+:   */
+/*   exec_pipes.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/07 17:04:15 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/07 17:50:53 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,15 @@
 
 extern t_global	global;
 
-int	ft_set_fd(t_minishell *shell, t_pipex *p)
+int	ft_set_fd(t_minishell *shell, t_pipex *p, t_lcmd *node)
 {
 	if (p->idx == 0)
 	{
+		if (node->fd_read != 0)
+		{
+			dup2(node->fd_read, STDIN_FILENO);
+			close(node->fd_read);
+		}
 		close(p->pipe_fd[0][0]);
 		dup2(p->pipe_fd[0][1], STDOUT_FILENO);
 	}
@@ -30,6 +35,11 @@ int	ft_set_fd(t_minishell *shell, t_pipex *p)
 	}
 	else
 	{
+		if (node->fd_write != 1)
+		{
+			dup2(node->fd_write, STDOUT_FILENO);
+			close(node->fd_write);
+		}
 		close(p->pipe_fd[(p->idx - 1) % 2][1]);
 		dup2(p->pipe_fd[(p->idx - 1) % 2][0], STDIN_FILENO);
 	}
@@ -81,156 +91,34 @@ void	ft_exec_parent(t_pipex *p, pid_t *pid)
 int	ft_pipeline_execution(t_minishell *shell, char **envp)
 {
 	t_lcmd	*cmd;
-	t_pipex	*p;
 	pid_t	pid;
 
-	p = malloc(sizeof(t_pipex));
-	ft_init_pipes_struct(shell, p);
+	ft_init_pipes_struct(shell);
 	cmd = shell->cmd;
 	while (cmd != NULL)
 	{
-		ft_pipe_dep_mod(p);
+		ft_pipe_dep_mod(shell->p);
 		pid = fork();
 		if (pid == 0)
 		{
-			ft_set_fd(shell, p);
+			ft_set_fd(shell, shell->p, cmd);
 			ft_exec_child(cmd, envp);
 		}
 		else if (pid > 0)
 		{
-			if (p->idx != 0)
+			if (shell->p->idx != 0)
 			{
-				close(p->pipe_fd[(p->idx - 1) % 2][0]);
-				close(p->pipe_fd[(p->idx - 1) % 2][1]);
+				close(shell->p->pipe_fd[(shell->p->idx - 1) % 2][0]);
+				close(shell->p->pipe_fd[(shell->p->idx - 1) % 2][1]);
 			}
 		}
-		p->idx++;
+		shell->p->idx++;
 		cmd = cmd->next;
 	}
-	ft_exec_parent(p, &pid);
+	ft_exec_parent(shell->p, &pid);
 	return (0);
 }
 
 		// close(p->pipe_fd[(p->idx - 1) % 2][0]);
 		// close(p->pipe_fd[(p->idx - 1) % 2][1]);
 		// close(p->pipe_fd[(p->idx - 1) % 2][1]);
-
-char	*ft_join_path(char const *s1, char const *s2)
-{
-	char			*copy;
-	int				i;
-	int				j;
-	unsigned int	len1;
-	unsigned int	len2;
-
-	len1 = ft_strlen(s1);
-	len2 = ft_strlen(s2);
-	i = 0;
-	j = 0;
-	copy = (char *)malloc(sizeof(*copy) * (len1 + len2 + 1));
-	if (!copy)
-		return (NULL);
-	while (s1[i])
-	{
-		copy[i] = s1[i];
-		i++;
-	}
-	copy[i++] = '/';
-	while (s2[j])
-		copy[i++] = s2[j++];
-	copy[i] = '\0';
-	return (copy);
-}
-
-char	**ft_env_list_to_env_tab(void)
-{
-	char	**env;
-	int		len;
-	t_venv	*head;
-	int		i;
-
-	i = 0;
-	head = global.copy_env;
-	len = list_size(head);
-	env = (char **)malloc (sizeof(char *) * (len + 1));
-	while (head)
-	{
-		env[i] = ft_strdup(head->word);
-		if (!env[i])
-			return (NULL);															//set error msg
-		i++;
-		head = head->next;
-	}
-	env[i] = 0;
-
-	return (env);
-}
-
-char	**env_list_to_env_tab(void)
-{
-	char	**env;
-	int		len;
-	t_venv	*head;
-	int		i;
-
-	i = 0;
-	head = global.copy_env;
-	len = list_size(head);
-	env = (char **)malloc (sizeof(char *) * (len + 1));
-	while (head)
-	{
-		env[i] = ft_strdup(head->word);
-		if (!env[i])
-			return (NULL);															//set error msg
-		i++;
-		head = head->next;
-	}
-	env[i] = 0;
-
-	return (env);
-}
-
-int	improved_dup2(int fildes, int fildes2)
-{
-	int	error;
-
-	error = dup2(fildes, fildes2);
-	if (error < 0)
-	{
-		perror("error dup2");
-		exit(errno);
-	}
-	return (error);
-}
-
-int	improved_pipe(int fd[2])
-{
-	int	error;
-
-	error = pipe(fd);
-	if (error == -1)
-	{
-		perror("error pipe");
-		exit(1);
-	}
-	return (error);
-}
-
-pid_t	improved_fork(void)
-{
-	pid_t	error;
-
-	error = fork();
-	if (error == -1)
-	{
-		perror("error fork");
-		exit(1);
-	}
-	return (error);
-}
-
-void	sub_dup2(int read, int write)
-{
-	improved_dup2(read, STDIN_FILENO);
-	improved_dup2(write, STDOUT_FILENO);
-}

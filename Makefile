@@ -66,9 +66,9 @@ BUILTIN_FILES :=	builtin_decide.c		\
 
 SIGNAL_FILES :=		signals.c				\
 
-PIPE2_FILES :=		exec_pipes2.c			\
-					utils_pipes2.c			\
-
+PIPE2_FILES :=		exec_pipes.c			\
+					utils_pipes_1.c			\
+					utils_pipes_2.c			\
 
 	### OBJECTS ###
 CMDLINE_FILES := $(addprefix $(OBJS_PATH)/cmd_line/, $(CMDLINE_FILES:.c=.o))

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_pipes2.c                                     :+:      :+:    :+:   */
+/*   utils_pipes_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/07 17:04:58 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/07 17:21:02 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,33 @@ char	*ft_get_path_line(void)
 	return (envp_path + 5);
 }
 
+char	*ft_join_path(char const *s1, char const *s2)
+{
+	char			*copy;
+	int				i;
+	int				j;
+	unsigned int	len1;
+	unsigned int	len2;
+
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	i = 0;
+	j = 0;
+	copy = (char *)malloc(sizeof(*copy) * (len1 + len2 + 1));
+	if (!copy)
+		return (NULL);
+	while (s1[i])
+	{
+		copy[i] = s1[i];
+		i++;
+	}
+	copy[i++] = '/';
+	while (s2[j])
+		copy[i++] = s2[j++];
+	copy[i] = '\0';
+	return (copy);
+}
+
 //get the right path for a cmd
 char	*ft_get_right_path(char *cmd)
 {
@@ -65,12 +92,6 @@ char	*ft_get_right_path(char *cmd)
 		all_paths++;
 	}
 	return (NULL);
-}
-
-void	ft_init_pipes_struct(t_minishell *shell, t_pipex *pipe)
-{
-	pipe->count_cmds = ft_count_cmds(shell->cmd);
-	pipe->idx = 0;
 }
 
 int		ft_pipe_dep_mod(t_pipex *p)

@@ -22,7 +22,7 @@ int main(int ac, char **av, char **envp)
 
 		if (ft_count_cmds(shell.cmd) < 2)
 		{
-			ft_exec_no_pipe(&shell);
+			ft_exec_no_pipe(&shell, envp);
 		}
 		else
 		{
