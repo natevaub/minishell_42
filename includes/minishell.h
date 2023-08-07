@@ -272,12 +272,17 @@ char		**env_list_to_env_tab(void);
 /*
 	PIPES2
 */
-int			ft_count_cmds(t_lcmd *shell);
-void		ft_init_pipes_struct(t_minishell *shell, t_pipex *pipe);
+/*	---	exec_pipes2.c	---*/
 int			ft_pipeline_execution(t_minishell *shell, char **envp);
+int			ft_exec_child(t_lcmd *cmd, char **envp);
+void		ft_exec_parent(t_pipex *p, pid_t *pid);
 int			ft_set_fd(t_minishell *shell, t_pipex *p);
-int			ft_exec_cmd(t_lcmd *cmd, char **envp);
+
+/*	---	utils_pipes2.c	---*/
 char		*ft_get_right_path(char *cmd);
 char		*ft_get_path_line(void);
+int			ft_count_cmds(t_lcmd *shell);
+int			ft_pipe_dep_mod(t_pipex *p);
+void		ft_init_pipes_struct(t_minishell *shell, t_pipex *pipe);
 
 #endif
