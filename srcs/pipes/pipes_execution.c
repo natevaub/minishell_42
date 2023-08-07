@@ -24,7 +24,7 @@ int exec_pipe(t_minishell *ms, char **envp)
 
 	ms->p = malloc(sizeof(t_pipex));
 	if (!ms->p)
-		return (1);																	//set errno
+		return (1);													//set errno
 	init_pipex_struct(ms);
 	curr = ms->cmd;
 	pipe(fd[0]);
@@ -37,24 +37,22 @@ int exec_pipe(t_minishell *ms, char **envp)
 			printf("ERROR fork\n");
 		if (pid == 0)
 		{
-			run_cmd(curr, ms, envp, fd);											//doesn't follow right order for children, executes last command but pipes don't seem to be working
-																					//I'm not using fd_read and fd_write but I'm using dup2 on the pipes directly
+			run_cmd(curr, ms, envp, fd);
 		}
 
 		curr = curr->next;
 		ms->p->idx++;
 	}
-	// close_pipes(ms);
 	close(fd[0][0]);
 	close(fd[1][1]);
 	close(fd[0][1]);
 	close(fd[1][0]);
-
-	printf("before waitpid\n");
 	while (waitpid(-1, &exit_status, 0) > 0)
 		;
 	if (WIFEXITED(exit_status))
 		global.last_exit_status = WEXITSTATUS(exit_status);
+
+	printf("before waitpid\n");
 
 	free(ms->p);
 	return (global.last_exit_status);
@@ -78,26 +76,9 @@ void	child_exec(t_lcmd *cmd, char **envp, t_minishell *ms, int fd[2][2])
 	char	*cmd_with_path;
 
 	printf("child: idx: %d\n", ms->p->idx);
-
-	if (ms->p->idx > 0)
-	{
-		// Close the write end of the first pipe (for all children except the first)
-		close(fd[0][1]);
-		// Duplicate the read end of the first pipe to STDIN (for all children except the first)
-		dup2(fd[0][0], STDIN_FILENO);
-		// Close the read end of the first pipe (for all children except the first)
-		close(fd[0][0]);
-	}
-	if (ms->p->idx < ms->p->count_cmds - 1)
-	{
-		// Close the read end of the second pipe (for all children except the last)
-		close(fd[1][0]);
-		// Duplicate the write end of the second pipe to STDOUT (for all children except the last)
-		dup2(fd[1][1], STDOUT_FILENO);
-		// Close the write end of the second pipe (for all children except the last)
-		close(fd[1][1]);
-	}
+	set_pipe_fds(cmd, fd, ms->p->idx);
 	cmd_with_path = get_right_path(cmd->cmd);
+	printf("cmd path: %s", cmd_with_path);
 	if (!cmd_with_path)
 	{
 		global.last_exit_status = 1;
@@ -108,3 +89,24 @@ void	child_exec(t_lcmd *cmd, char **envp, t_minishell *ms, int fd[2][2])
 		return (perror("Execve"));
 	}
 }
+
+	// if (ms->p->idx > 0)
+	// {
+	// 	// Close the write end of the first pipe (for all children except the first)
+	// 	close(fd[0][1]);
+	// 	// Duplicate the read end of the first pipe to STDIN (for all children except the first)
+	// 	dup2(fd[0][0], STDIN_FILENO);
+	// 	// Close the read end of the first pipe (for all children except the first)
+	// 	close(fd[0][0]);
+	// }
+	// printf("between the file closings\n");
+	// if (ms->p->idx < (ms->p->count_cmds - 1))
+	// {
+	// 	// Close the read end of the second pipe (for all children except the last)
+	// 	close(fd[1][0]);
+	// 	// Duplicate the write end of the second pipe to STDOUT (for all children except the last)
+	// 	dup2(fd[1][1], STDOUT_FILENO);
+	// 	// Close the write end of the second pipe (for all children except the last)
+	// 	close(fd[1][1]);
+	// }
+	// printf("after the file closings\n");

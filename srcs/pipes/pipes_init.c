@@ -23,45 +23,88 @@ void	init_pipex_struct(t_minishell *ms)
 	print_list_fds(ms->cmd);
 }
 
-
+int	dup_for_pipe(int *fd_rw, int in_out, int *to_close)
+{
+	close(*to_close);
+	if (dup2(*fd_rw, in_out) < 0)
+	{
+		return (-1);
+	}
+	close (*fd_rw);
+	return (0);
+}
 
 //set command list & read/write fds
-void	set_pipe_fds(t_lcmd *cmd, int fd[2][2], t_minishell *ms)
+void	set_pipe_fds(t_lcmd *cmd, int fd[2][2], int idx)
 {
-	// t_lcmd	*list;
-	// int		i;
-
-	// i = -1;
-	// list = ms->cmd;
-	// // printf("fd[0][0]: %d\nfd[0][1]: %d\nfd[1][0]: %d\nfd[1][1]: %d\n", ms->p->pipe_fd[0][0], ms->p->pipe_fd[0][1], ms->p->pipe_fd[1][0], ms->p->pipe_fd[1][1]);
-	// while (list && ++i < ms->p->count_cmds)
-	// {
-		if (ms->p->idx == 0)
-			cmd->fd_read = cmd->fd_read;
-		else if (ms->p->idx % 2 != 0)
+		if (idx == 0)
 		{
-			cmd->fd_read = fd[0][0];
-			close (fd[0][1]);
+			if (dup2(cmd->fd_read, STDIN_FILENO) < 0)
+			{
+				perror("Dup2 stdin: ");
+				global.last_exit_status = 1;
+			}
+		}
+		else if (idx % 2 == 0)
+		{
+			dup_for_pipe(&fd[1][0], STDIN_FILENO, &fd[1][1]);
+			// cmd->fd_read = fd[1][0];
+			// close (fd[1][1]);
 		}
 		else
 		{
-			cmd->fd_read = fd[1][0];
-			close (fd[1][1]);
+			dup_for_pipe(&fd[0][0], STDIN_FILENO, &fd[0][1]);
+			// cmd->fd_read = fd[0][0];
+			// close (fd[0][1]);
 		}
-		dup2(cmd->fd_read, STDIN_FILENO);
-		if (ms->p->idx == ms->p->count_cmds - 1)
-			cmd->fd_write = cmd->fd_write;
-		else if ((ms->p->idx % 2 == 0 || ms->p->idx == 0))
+		printf("In dup2, after read\n");
+		if (cmd->next == NULL)
 		{
-			cmd->fd_write = fd[0][1];
-			close (fd[0][0]);
+			if (dup2(cmd->fd_write, STDOUT_FILENO) < 0)
+			{
+				perror("Dup2 stdout: ");
+				global.last_exit_status = 1;
+			}
+		}
+		else if ((idx % 2 == 0 || idx == 0))
+		{
+			dup_for_pipe(&fd[0][1], STDOUT_FILENO, &fd[0][0]);
+			// cmd->fd_write = fd[0][1];
+			// close (fd[0][0]);
 		}
 		else
 		{
-			cmd->fd_write = fd[1][1];
-			close (fd[1][0]);
+			dup_for_pipe(&fd[1][1], STDOUT_FILENO, &fd[1][0]);
+			// cmd->fd_write = fd[1][1];
+			// close (fd[1][0]);
 		}
-		dup2(cmd->fd_read, STDIN_FILENO);
-	// 	list = list->next;
-	// }
+		printf("In dup2, after write\n");
 }
+
+
+// if (ms->p->idx == 0)
+// 			cmd->fd_read = cmd->fd_read;
+// 		else if (ms->p->idx % 2 == 0)
+// 		{
+// 			cmd->fd_read = fd[1][0];
+// 			close (fd[1][1]);
+// 		}
+// 		else
+// 		{
+// 			cmd->fd_read = fd[0][0];
+// 			close (fd[0][1]);
+// 		}
+// 		dup2(cmd->fd_read, STDIN_FILENO);
+// 		if (ms->p->idx == ms->p->count_cmds - 1)
+// 			cmd->fd_write = cmd->fd_write;
+// 		else if ((ms->p->idx % 2 == 0 || ms->p->idx == 0))
+// 		{
+// 			cmd->fd_write = fd[0][1];
+// 			close (fd[0][0]);
+// 		}
+// 		else
+// 		{
+// 			cmd->fd_write = fd[1][1];
+// 			close (fd[1][0]);
+// 		}
+// 		dup2(cmd->fd_write, STDOUT_FILENO);
