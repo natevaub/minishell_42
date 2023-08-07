@@ -40,7 +40,7 @@ void	ft_exec_no_pipe(t_minishell *ms)
 			builtin_redirect(ms->cmd);
 		else
 		{
-			// child_exec_no_pipe(ms, env_tab);
+			child_exec_no_pipe(ms, env_tab);
 		}
 	}
 	free_two_dimension_array(env_tab);
