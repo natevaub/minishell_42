@@ -74,6 +74,8 @@ PIPE_FILES :=		improved_syscalls.c 	\
 					utils_strings_pipes.c	\
 					utils_path_pipes.c		\
 
+PIPE2_FILES :=		exec_pipes2.c			\
+
 	### OBJECTS ###
 CMDLINE_FILES := $(addprefix $(OBJS_PATH)/cmd_line/, $(CMDLINE_FILES:.c=.o))
 INITMS_FILES := $(addprefix $(OBJS_PATH)/init_minishell/, $(INITMS_FILES:.c=.o))
@@ -86,6 +88,7 @@ SIGNAL_FILES := $(addprefix $(OBJS_PATH)/signals/, $(SIGNAL_FILES:.c=.o))
 SYNTAX_FILES := $(addprefix $(OBJS_PATH)/syntax/, $(SYNTAX_FILES:.c=.o))
 MAIN_FILE	:= $(addprefix $(OBJS_PATH)/, $(MAIN_FILE:.c=.o))
 PIPE_FILES :=	$(addprefix $(OBJS_PATH)/pipes/, $(PIPE_FILES:.c=.o))
+PIPE2_FILES :=	$(addprefix $(OBJS_PATH)/pipes2/, $(PIPE2_FILES:.c=.o))
 
 OBJS		:=	$(PARSE_FILES)			\
 				$(UTILS_FILES)			\
@@ -97,6 +100,7 @@ OBJS		:=	$(PARSE_FILES)			\
 				$(EXEC_FILES)			\
 				$(SYNTAX_FILES)			\
 				$(PIPE_FILES)			\
+				$(PIPE2_FILES)			\
 				$(EXPAND_FILES)			\
 
 

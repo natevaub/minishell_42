@@ -26,7 +26,7 @@ int main(int ac, char **av, char **envp)
 		}
 		else
 		{
-			exec_pipe(&shell, envp);
+			ft_pipeline_execution(&shell, envp);
 		}
 		ft_free_parsing(&shell);
 	}

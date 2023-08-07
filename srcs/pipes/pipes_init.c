@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:38:36 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/04 19:20:07 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/07 12:07:19 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	dup_for_pipe(int *fd_rw, int in_out, int *to_close)
 	return (0);
 }
 
-//set command list & read/write fds
+
 void	set_pipe_fds(t_lcmd *cmd, int fd[2][2], int idx)
 {
 		if (idx == 0)
@@ -108,3 +108,4 @@ void	set_pipe_fds(t_lcmd *cmd, int fd[2][2], int idx)
 // 			close (fd[1][0]);
 // 		}
 // 		dup2(cmd->fd_write, STDOUT_FILENO);
+
