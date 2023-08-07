@@ -227,29 +227,30 @@ char		*ft_join_array(char *temp[256]);
 /*
 	EXECUTE
 */
-void		ft_exec_no_pipe(t_minishell *ms);
+void		ft_exec_no_pipe(t_minishell *ms, char **envp);
 void		child_exec_no_pipe(t_minishell *ms, char **env_tab);
 
 /*
 	PIPES2
 */
-/*	---	exec_pipes2.c	---*/
+/*	---	exec_pipes.c	---*/
 int			ft_pipeline_execution(t_minishell *shell, char **envp);
 int			ft_exec_child(t_lcmd *cmd, char **envp);
 void		ft_exec_parent(t_pipex *p, pid_t *pid);
-int			ft_set_fd(t_minishell *shell, t_pipex *p);
+int			ft_set_fd(t_minishell *shell, t_pipex *p, t_lcmd *node);
 
-/*	---	utils_pipes2.c	---*/
+/*	---	utils_pipes_1.c	---*/
 char		*ft_get_right_path(char *cmd);
 char		*ft_get_path_line(void);
 char		*ft_join_path(char const *s1, char const *s2);
-char		**ft_env_list_to_env_tab(void);
+int			ft_count_cmds(t_lcmd *shell);
+int			ft_pipe_dep_mod(t_pipex *p);
+
+/*	---	utils_pipes_2.c	---*/
 int			improved_dup2(int fildes, int fildes2);
 int			improved_pipe(int fd[2]);
 pid_t		improved_fork(void);
 void		sub_dup2(int read, int write);
-int			ft_count_cmds(t_lcmd *shell);
-int			ft_pipe_dep_mod(t_pipex *p);
-void		ft_init_pipes_struct(t_minishell *shell, t_pipex *pipe);
+void		ft_init_pipes_struct(t_minishell *shell);
 
 #endif

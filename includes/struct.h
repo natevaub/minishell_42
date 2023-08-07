@@ -11,6 +11,7 @@ typedef struct	s_minishell
 	int					syntax;
 	struct s_list_token	*token;
 	struct s_list_cmd	*cmd;
+	struct s_pipex		*p;
 }						t_minishell;
 
 //		### Linked List Token ###

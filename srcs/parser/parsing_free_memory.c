@@ -28,14 +28,7 @@ void	ft_free_cmd(t_minishell *shell)
 	int		i;
 
 	curr = (shell)->cmd;
-	// printf("cmd: %s", (shell)->cmd->cmd);
 	next = NULL;
-	// printf("step 1\n");
-	if (curr->fd_read != 0)
-	{
-		close(curr->fd_read);
-	}
-	// printf("step 2\n");
 	while(curr != NULL)
 	{
 		i = 0;
@@ -49,19 +42,11 @@ void	ft_free_cmd(t_minishell *shell)
 		if (curr->option)
 			free(curr->option);
 		// free_two_dimension_array(curr->option);
-		// printf("step 3\n");
-		if (curr->next == NULL && curr->fd_write != 1)
-		{
-			close(curr->fd_write);
-		}
-		// printf("step 4\n");
 		if (curr)
 			free(curr);
-		// printf("step 5\n");
 		curr = next;
 	}
 	(shell)->cmd = NULL;
-	// printf("step 6\n");
 }
 
 void	ft_free_parsing(t_minishell *shell)
