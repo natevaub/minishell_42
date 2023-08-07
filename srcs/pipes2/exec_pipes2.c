@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/07 16:55:19 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/07 17:04:15 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,41 +114,6 @@ int	ft_pipeline_execution(t_minishell *shell, char **envp)
 		// close(p->pipe_fd[(p->idx - 1) % 2][0]);
 		// close(p->pipe_fd[(p->idx - 1) % 2][1]);
 		// close(p->pipe_fd[(p->idx - 1) % 2][1]);
-char	*ft_get_path_line(void)
-{
-	char	*envp_path = NULL;
-	t_venv	*head;
-
-	head = global.copy_env;
-	while (head)
-	{
-		if (ft_strncmp(head->word, "PATH", 4) == 0)
-			envp_path = head->word;
-		head = head->next;
-	}
-	return (envp_path + 5);
-}
-
-char	*ft_get_right_path(char *cmd)
-{
-	char	**all_paths;
-	char	*temp_path;
-	// printf("command to find = %s\n", cmd);
-
-	all_paths = ft_split(ft_get_path_line(), ':');
-	while (*all_paths)
-	{
-		temp_path = ft_join_path(*all_paths, cmd);
-		if (access(temp_path, F_OK & X_OK) == 0)
-		{
-			// printf("Temp Path = %s\n", temp_path);
-			return (temp_path);
-		}
-		free(temp_path);
-		all_paths++;
-	}
-	return (NULL);
-}
 
 char	*ft_join_path(char const *s1, char const *s2)
 {

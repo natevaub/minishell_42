@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/07 16:36:43 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/07 17:04:58 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*ft_get_right_path(char *cmd)
 	char	**all_paths;
 	char	*temp_path;
 
-	all_paths = ft_split(get_path_line(), ':');
+	all_paths = ft_split(ft_get_path_line(), ':');
 	while (*all_paths)
 	{
 		temp_path = ft_join_path(*all_paths, cmd);
