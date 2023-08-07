@@ -1,4 +1,4 @@
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 int	ft_count_cmds(t_lcmd *cmd)
 {
@@ -142,7 +142,7 @@ char	*ft_get_right_path(char *cmd)
 	char	*temp_path;
 	// printf("command to find = %s\n", cmd);
 
-	all_paths = ft_split(get_path_line(), ':');
+	all_paths = ft_split(ft_get_path_line(), ':');
 	while (*all_paths)
 	{
 		temp_path = ft_join_path(*all_paths, cmd);
@@ -155,4 +155,124 @@ char	*ft_get_right_path(char *cmd)
 		all_paths++;
 	}
 	return (NULL);
+}
+
+char	*ft_join_path(char const *s1, char const *s2)
+{
+	char			*copy;
+	int				i;
+	int				j;
+	unsigned int	len1;
+	unsigned int	len2;
+
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	i = 0;
+	j = 0;
+	copy = (char *)malloc(sizeof(*copy) * (len1 + len2 + 1));
+	if (!copy)
+		return (NULL);
+	while (s1[i])
+	{
+		copy[i] = s1[i];
+		i++;
+	}
+	copy[i++] = '/';
+	while (s2[j])
+		copy[i++] = s2[j++];
+	copy[i] = '\0';
+	return (copy);
+}
+
+char	**ft_env_list_to_env_tab(void)
+{
+	char	**env;
+	int		len;
+	t_venv	*head;
+	int		i;
+
+	i = 0;
+	head = global.copy_env;
+	len = list_size(head);
+	env = (char **)malloc (sizeof(char *) * (len + 1));
+	while (head)
+	{
+		env[i] = ft_strdup(head->word);
+		if (!env[i])
+			return (NULL);															//set error msg
+		i++;
+		head = head->next;
+	}
+	env[i] = 0;
+
+	return (env);
+}
+
+char	**env_list_to_env_tab(void)
+{
+	char	**env;
+	int		len;
+	t_venv	*head;
+	int		i;
+
+	i = 0;
+	head = global.copy_env;
+	len = list_size(head);
+	env = (char **)malloc (sizeof(char *) * (len + 1));
+	while (head)
+	{
+		env[i] = ft_strdup(head->word);
+		if (!env[i])
+			return (NULL);															//set error msg
+		i++;
+		head = head->next;
+	}
+	env[i] = 0;
+
+	return (env);
+}
+
+int	improved_dup2(int fildes, int fildes2)
+{
+	int	error;
+
+	error = dup2(fildes, fildes2);
+	if (error < 0)
+	{
+		perror("error dup2");
+		exit(errno);
+	}
+	return (error);
+}
+
+int	improved_pipe(int fd[2])
+{
+	int	error;
+
+	error = pipe(fd);
+	if (error == -1)
+	{
+		perror("error pipe");
+		exit(1);
+	}
+	return (error);
+}
+
+pid_t	improved_fork(void)
+{
+	pid_t	error;
+
+	error = fork();
+	if (error == -1)
+	{
+		perror("error fork");
+		exit(1);
+	}
+	return (error);
+}
+
+void	sub_dup2(int read, int write)
+{
+	improved_dup2(read, STDIN_FILENO);
+	improved_dup2(write, STDOUT_FILENO);
 }
