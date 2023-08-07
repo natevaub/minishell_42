@@ -236,12 +236,12 @@ void		child_exec_no_pipe(t_minishell *ms, char **env_tab);
 
 /*	---	pipes_execution.c	---*/
 int			exec_pipe(t_minishell *ms, char **envp);
-void		child_exec(t_lcmd *cmd, char **env_tab, t_minishell *ms);
-void		run_cmd(t_lcmd *cmd, t_minishell *ms, char **envp);
+void		child_exec(t_lcmd *cmd, char **env_tab, t_minishell *ms, int fd[2][2]);
+void		run_cmd(t_lcmd *cmd, t_minishell *ms, char **envp, int fd[2][2]);
 
 /*	---	pipes_init.c	---*/
 void		init_pipex_struct(t_minishell *ms);
-void		set_pipe_fds(t_minishell *ms);
+void		set_pipe_fds(t_lcmd *cmd, int fd[2][2], int idx);
 
 /*	---	improved_syscalls.c	---*/
 int			improved_dup2(int fildes, int fildes2);
@@ -258,7 +258,7 @@ void		print_list_fds(t_lcmd *list);
 
 /*	---	utils_memory_pipes.c	---*/
 int			error(char *str);
-void		close_pipes(t_minishell *ms);
+void		close_pipes(t_minishell *ms, int fd[2][2]);
 void		final_free_and_close(t_minishell *ms);
 
 /*	---	utils_path_pipes.c	---*/
