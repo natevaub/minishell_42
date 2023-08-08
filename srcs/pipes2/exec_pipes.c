@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipes.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/07 17:50:53 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/08 09:38:49 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ int	ft_exec_child(t_lcmd *cmd, char **envp)
 	cmd_with_path = ft_get_right_path(cmd->cmd);
 	if (execve(cmd_with_path, cmd->option, envp) < 0)
 	{
-		printf("Ca n'a pas marcher\n");
 		free(cmd_with_path);
 		exit(1);
 		return (1);

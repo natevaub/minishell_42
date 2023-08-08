@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_pipes_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/07 17:21:02 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/08 09:35:14 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,13 +84,15 @@ char	*ft_get_right_path(char *cmd)
 	while (*all_paths)
 	{
 		temp_path = ft_join_path(*all_paths, cmd);
-		if (access(temp_path, F_OK & X_OK) == 0)
+		if (access(temp_path, F_OK | X_OK) == 0)
 		{
 			return (temp_path);
 		}
 		free(temp_path);
 		all_paths++;
 	}
+	ft_putstr_fd(cmd, 2);
+	ft_putstr_fd(": command not found\n", 2);
 	return (NULL);
 }
 
