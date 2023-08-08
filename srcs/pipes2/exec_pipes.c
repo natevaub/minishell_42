@@ -6,7 +6,7 @@
 /*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/08 09:38:49 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/08 10:32:50 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,25 @@ int	ft_set_fd(t_minishell *shell, t_pipex *p, t_lcmd *node)
 	return (0);
 }
 
+int	ft_set_fd_builtins(t_minishell *shell, t_pipex *p, t_lcmd *node)
+{
+	// Handle input redirection if needed
+	if (node->fd_read != 0)
+	{
+		dup2(node->fd_read, STDIN_FILENO);
+		close(node->fd_read);
+	}
+	
+	// Handle output redirection if needed
+	if (node->fd_write != 1)
+	{
+		dup2(node->fd_write, STDOUT_FILENO);
+		close(node->fd_write);
+	}
+
+	return (0);
+}
+
 int	ft_exec_child(t_lcmd *cmd, char **envp)
 {
 	char	*cmd_with_path;
@@ -56,7 +75,6 @@ int	ft_exec_child(t_lcmd *cmd, char **envp)
 	{
 		free(cmd_with_path);
 		exit(1);
-		return (1);
 	}
 	return (0);
 }
@@ -97,6 +115,11 @@ int	ft_pipeline_execution(t_minishell *shell, char **envp)
 	while (cmd != NULL)
 	{
 		ft_pipe_dep_mod(shell->p);
+		// if (builtin_check(cmd->cmd) == 1)
+		// {
+		// 	ft_set_fd_builtins(shell, shell->p, cmd);
+		// 	builtin_redirect(cmd);
+		// }
 		pid = fork();
 		if (pid == 0)
 		{
