@@ -6,7 +6,7 @@
 /*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/08 13:07:29 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/09 23:46:51 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,20 +115,26 @@ int	ft_pipeline_execution(t_minishell *shell, char **envp)
 	cmd = shell->cmd;
 	while (cmd != NULL)
 	{
-		// ft_pipe_dep_mod(shell->p);
+		ft_pipe_dep_mod(shell->p);
 		if (builtin_check(cmd->cmd) == 1)
 		{
-			ft_set_fd_builtins(shell, shell->p, cmd);
-			builtin_redirect(cmd);
+			pid = fork();
+			if (pid == 0)
+			{
+				ft_set_fd(shell, shell->p, cmd);
+				builtin_redirect(cmd);
+				exit(1);
+			}
+		} else {
+			pid = fork();
+			if (pid == 0)
+			{
+				ft_set_fd(shell, shell->p, cmd);
+				ft_exec_child(cmd, envp);
+			}
+			
 		}
-		ft_pipe_dep_mod(shell->p);
-		pid = fork();
-		if (pid == 0)
-		{
-			ft_set_fd(shell, shell->p, cmd);
-			ft_exec_child(cmd, envp);
-		}
-		else if (pid > 0)
+		if (pid > 0)
 		{
 			if (shell->p->idx != 0)
 			{
