@@ -255,4 +255,9 @@ pid_t		improved_fork(void);
 void		sub_dup2(int read, int write);
 void		ft_init_pipes_struct(t_minishell *shell);
 
+/*	---	heredoc_utils1.c	---*/
+char	*ft_get_heredoc_eof(t_minishell *shell);
+int		ft_heredoc(t_minishell *shell);
+int		ft_heredoc_detected(t_minishell *shell);
+
 #endif
