@@ -2,8 +2,7 @@ PARSING
 -> Support Heredoc
 
 EXECUTION
--> Support full path command: /bin/ls
+-> Support full path command: /bin/ls ✅
 
 SIGNAL
--> Support signals:	
-		- Buggy behaviour with: wc + STDIN + Ctrl-C
+-> Support signals:	✅
