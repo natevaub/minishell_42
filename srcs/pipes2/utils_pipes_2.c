@@ -6,7 +6,7 @@
 /*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/08 09:35:14 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/12 05:13:38 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,11 @@ char	*ft_get_right_path(char *cmd)
 	char	*temp_path;
 
 	all_paths = ft_split(ft_get_path_line(), ':');
+	if (access(cmd, F_OK | X_OK) == 0)
+	{
+		printf("Absolute Path\n");
+		return (cmd);
+	}
 	while (*all_paths)
 	{
 		temp_path = ft_join_path(*all_paths, cmd);
