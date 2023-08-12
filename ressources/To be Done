@@ -5,4 +5,4 @@ EXECUTION
 -> Support full path command: /bin/ls ✅
 
 SIGNAL
--> Support signals:	✅
+-> Support signals:	❌
