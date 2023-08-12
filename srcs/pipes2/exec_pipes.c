@@ -6,7 +6,7 @@
 /*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/09 23:46:51 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/12 02:13:53 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,12 @@ int ft_set_fd_builtins(t_minishell *shell, t_pipex *p, t_lcmd *node)
 int	ft_exec_child(t_lcmd *cmd, char **envp)
 {
 	char	*cmd_with_path;
+
 	cmd_with_path = ft_get_right_path(cmd->cmd);
-	// ft_putstr_fd(cmd_with_path, 2);
 	if (execve(cmd_with_path, cmd->option, envp) < 0)
 	{
 		free(cmd_with_path);
-		exit(1);
+		exit(127);
 	}
 	return (0);
 }

@@ -209,9 +209,10 @@ char		*get_expand_var(char *var);
 */
 
 /*	---	signals.c	---*/
+void		ft_init_signals(void (*handle_signals)(int));
+void		signal_prompt_handler(int sig);
+void		signal_exec_handler(int sig);
 extern void	rl_replace_line(const char *, int);
-void		init_signals(void);
-void		signal_handler(int signal);
 
 /*
 	EXPAND

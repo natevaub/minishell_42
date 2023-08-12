@@ -21,7 +21,8 @@ void	child_exec_no_pipe(t_minishell *ms, char **env_tab)
 		}
 		if (execve(cmd_with_path, ms->cmd->option, env_tab) < 0)
 		{
-			return (perror("Execve"));
+			free(cmd_with_path);
+			exit(127);
 		}
 	}
 	waitpid(pid, &exit_status, 0);
