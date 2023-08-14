@@ -26,22 +26,18 @@ int	ft_look_for_err(t_tok *tok)
 	{
 		if (ft_syntax_red_check(tok) == 1)
 		{
-			printf("1\n");
 			return (1);
 		}
 		else if (ft_syntax_red_check(tok) == 2)
 		{
-			printf("2\n");
 			return (2);
 		}
 		else if (ft_syntax_quote_check(tok->word) == 1)
 		{
-			printf("3\n");
 			return (3);
 		}
 		else if (ft_syntax_pipe_check(tok) == 1)
 		{
-			printf("4\n");
 			return (4);
 		}
 		tok = tok->next;
@@ -51,6 +47,7 @@ int	ft_look_for_err(t_tok *tok)
 
 void	ft_print_error(int err)
 {
+	global.last_exit_status = 258;
 	if (err == 1)
 		ft_putstr_fd("minishell : syntax error near unexpected token `<' or `>'\n", 2);
 	else if (err == 2)

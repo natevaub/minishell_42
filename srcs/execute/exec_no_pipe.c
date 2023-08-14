@@ -32,17 +32,15 @@ void	child_exec_no_pipe(t_minishell *ms, char **env_tab)
 
 void	ft_exec_no_pipe(t_minishell *ms, char **envp)
 {
-	// char	**env_tab;
-
-	// env_tab = ft_env_list_to_env_tab();
 	if (ms->cmd->cmd != NULL)
 	{
 		if ((builtin_check(ms->cmd->cmd)) == 1)
+		{
 			builtin_redirect(ms->cmd);
+		}
 		else
 		{
 			child_exec_no_pipe(ms, envp);
 		}
 	}
-	// free_two_dimension_array(env_tab);
 }

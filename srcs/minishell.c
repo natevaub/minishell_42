@@ -21,13 +21,16 @@ int main(int ac, char **av, char **envp)
 		if (prompt)
 			add_history(prompt);
 		ft_parsing(&shell, prompt);
-		if (ft_count_cmds(shell.cmd) < 2)
+		if (shell.syntax == 0)
 		{
-			ft_exec_no_pipe(&shell, envp);
-		}
-		else
-		{
-			ft_pipeline_execution(&shell, envp);
+			if (ft_count_cmds(shell.cmd) < 2)
+			{
+				ft_exec_no_pipe(&shell, envp);
+			}
+			else
+			{
+				ft_pipeline_execution(&shell, envp);
+			}
 		}
 		ft_free_parsing(&shell);
 	}
