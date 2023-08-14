@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/07/13 15:13:08 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/12 03:43:52 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,57 @@ Ctrl-C = display a new line
 Ctrl-D = exit the program
 Ctrl-\ = do nothing*/
 
-void	init_signals(void)
-{
-	struct sigaction	s;
+// void	init_signals(void)
+// {
+// 	struct sigaction	s;
 
-	s.sa_handler = &(signal_handler);
-	sigemptyset(&s.sa_mask);
-	s.sa_flags = SA_RESTART;
-	sigaction(SIGINT, &s, NULL);
-	sigaction(SIGQUIT, &s, NULL);
+// 	s.sa_handler = &(signal_handler);
+// 	sigemptyset(&s.sa_mask);
+// 	s.sa_flags = SA_RESTART;
+// 	sigaction(SIGINT, &s, NULL);
+// 	sigaction(SIGQUIT, &s, NULL);
+// }
+
+void	ft_init_signals(void (*handle_signals)(int))
+{
+	struct sigaction	sa;
+	struct termios		termios;
+
+	if ((tcgetattr(STDIN_FILENO, &termios)) == -1)
+		exit(EXIT_FAILURE);
+	termios.c_lflag &= ~(ECHOCTL);
+	if ((tcsetattr(STDIN_FILENO, TCSANOW, &termios)) == -1)
+		exit(EXIT_FAILURE);
+	sa.sa_handler = handle_signals;
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = SA_RESTART;
+	if (sigaction(SIGINT, &sa, NULL) == -1)
+		perror("Error: cannot handle SIGINT");
+	if (sigaction(SIGQUIT, &sa, NULL) == -1)
+		perror("Error: cannot handle SIGQUIT");
 }
 
-void	signal_handler(int signal)
+void	signal_prompt_handler(int sig)
 {
-	if (signal == SIGINT)
+	if (sig == SIGINT)
+	{
+		ft_putstr_fd("\n", STDOUT_FILENO);
+		rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_redisplay();
+		global.last_exit_status;
+	}
+	else if (sig == SIGQUIT)
+	{
+		rl_replace_line("  ", 0);
+		rl_on_new_line();
+		rl_redisplay();
+	}
+}
+
+void	signal_exec_handler(int sig)
+{
+	if (sig == SIGINT)
 	{
 		rl_replace_line("  ", 0);
 		rl_on_new_line();
@@ -55,7 +92,7 @@ void	signal_handler(int signal)
 		rl_on_new_line();
 		rl_redisplay();
 	}
-	else if (signal == SIGQUIT)
+	else if (sig == SIGQUIT)
 	{
 		rl_replace_line("  ", 0);
 		rl_on_new_line();

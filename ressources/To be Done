@@ -1,0 +1,14 @@
+To Do List! :D
+
+PARSING
+-> Support Heredoc
+-> Support syntax
+	: segfault when syntax isn't correct ✅
+
+EXECUTION
+-> Support full path command: /bin/ls ✅
+
+SIGNAL
+-> Support signals:	❌
+	: buggy output when wc + Ctrl C
+	:

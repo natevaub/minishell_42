@@ -25,6 +25,8 @@ extern t_global	global;
 # define ERR_CMD		"Enter valid command "
 # define ERR_EXEC		"Execve "
 # define DEBUG 0
+# define DBG(str) ft_putstr_fd(str, 2); ft_putstr_fd("\n", 2)
+
 
 
 /*
@@ -207,9 +209,10 @@ char		*get_expand_var(char *var);
 */
 
 /*	---	signals.c	---*/
+void		ft_init_signals(void (*handle_signals)(int));
+void		signal_prompt_handler(int sig);
+void		signal_exec_handler(int sig);
 extern void	rl_replace_line(const char *, int);
-void		init_signals(void);
-void		signal_handler(int signal);
 
 /*
 	EXPAND
@@ -252,5 +255,10 @@ int			improved_pipe(int fd[2]);
 pid_t		improved_fork(void);
 void		sub_dup2(int read, int write);
 void		ft_init_pipes_struct(t_minishell *shell);
+
+/*	---	heredoc_utils1.c	---*/
+char	*ft_get_heredoc_eof(t_minishell *shell);
+int		ft_heredoc(t_minishell *shell);
+int		ft_heredoc_detected(t_minishell *shell);
 
 #endif

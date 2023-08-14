@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:38:36 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/02 12:27:03 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/08 13:29:37 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	print_env(t_lcmd *cmd)
 	{
 		if (find_c(head->word, '='))
 		{
+			// Redirect output to the input of the next command in the pipeline
 			ft_putstr_fd(head->word, cmd->fd_write);								//adjust fd if redirection
 			ft_putchar_fd('\n', cmd->fd_write);
 		}

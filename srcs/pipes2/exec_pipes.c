@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipes.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/07 17:50:53 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/12 02:13:53 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_set_fd(t_minishell *shell, t_pipex *p, t_lcmd *node)
 	else if (p->idx != p->count_cmds - 1)
 	{
 		close(p->pipe_fd[(p->idx - 1) % 2][1]);  // Close write end of previous pipe
-		dup2(p->pipe_fd[(p->idx) - 1 % 2][0], STDIN_FILENO); // Set input from pipe
+		dup2(p->pipe_fd[(p->idx - 1) % 2][0], STDIN_FILENO); // Set input from pipe
 		close(p->pipe_fd[(p->idx) % 2][0]);
 		dup2(p->pipe_fd[(p->idx) % 2][1], STDOUT_FILENO);
 	}
@@ -48,16 +48,34 @@ int	ft_set_fd(t_minishell *shell, t_pipex *p, t_lcmd *node)
 	return (0);
 }
 
+int ft_set_fd_builtins(t_minishell *shell, t_pipex *p, t_lcmd *node)
+{
+	// Handle input redirection if needed
+	if (node->fd_read != 0)
+	{
+		dup2(node->fd_read, STDIN_FILENO);
+		close(node->fd_read);
+	}
+
+	// Handle output redirection if needed
+	if (node->fd_write != 1)
+	{
+		dup2(node->fd_write, STDOUT_FILENO);
+		close(node->fd_write);
+	}
+
+	return (0);
+}
+
 int	ft_exec_child(t_lcmd *cmd, char **envp)
 {
 	char	*cmd_with_path;
+
 	cmd_with_path = ft_get_right_path(cmd->cmd);
 	if (execve(cmd_with_path, cmd->option, envp) < 0)
 	{
-		printf("Ca n'a pas marcher\n");
 		free(cmd_with_path);
-		exit(1);
-		return (1);
+		exit(127);
 	}
 	return (0);
 }
@@ -98,13 +116,25 @@ int	ft_pipeline_execution(t_minishell *shell, char **envp)
 	while (cmd != NULL)
 	{
 		ft_pipe_dep_mod(shell->p);
-		pid = fork();
-		if (pid == 0)
+		if (builtin_check(cmd->cmd) == 1)
 		{
-			ft_set_fd(shell, shell->p, cmd);
-			ft_exec_child(cmd, envp);
+			pid = fork();
+			if (pid == 0)
+			{
+				ft_set_fd(shell, shell->p, cmd);
+				builtin_redirect(cmd);
+				exit(1);
+			}
+		} else {
+			pid = fork();
+			if (pid == 0)
+			{
+				ft_set_fd(shell, shell->p, cmd);
+				ft_exec_child(cmd, envp);
+			}
+			
 		}
-		else if (pid > 0)
+		if (pid > 0)
 		{
 			if (shell->p->idx != 0)
 			{
@@ -118,7 +148,3 @@ int	ft_pipeline_execution(t_minishell *shell, char **envp)
 	ft_exec_parent(shell->p, &pid);
 	return (0);
 }
-
-		// close(p->pipe_fd[(p->idx - 1) % 2][0]);
-		// close(p->pipe_fd[(p->idx - 1) % 2][1]);
-		// close(p->pipe_fd[(p->idx - 1) % 2][1]);

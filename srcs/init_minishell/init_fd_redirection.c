@@ -95,7 +95,6 @@ int	ft_get_append_outfile_fd(t_tok **tk)
 }
 void	ft_open_files_redirection(t_tok **tk, t_cmd *cmd)
 {
-	printf("In ft_open_red : Tk = %s --- \n", (*tk)->word);
 	if (ft_strcmp((*tk)->word, D_INFILE) == 0)
 	{
 		cmd->read = ft_get_infile_fd(tk);
@@ -105,11 +104,9 @@ void	ft_open_files_redirection(t_tok **tk, t_cmd *cmd)
 	}
 	else if (ft_strcmp((*tk)->word, D_OUTFILE) == 0)
 	{
-		printf("Tk = %s --- Tk Next = %s\n", (*tk)->word, (*tk)->next->word);
 		cmd->write = ft_get_outfile_fd(tk);
 		if ((*tk) != NULL)
 		{
-			// printf("Tk = %s --- Tk Next = %s\n", (*tk)->word, (*tk)->next->word);
 			((*tk)) = (*tk)->next;
 		}
 			
