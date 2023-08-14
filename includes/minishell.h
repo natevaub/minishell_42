@@ -24,8 +24,9 @@ extern t_global	global;
 
 # define ERR_CMD		"Enter valid command "
 # define ERR_EXEC		"Execve "
-# define DEBUG 0
+# define DEBUG 1
 # define DBG(str) ft_putstr_fd(str, 2); ft_putstr_fd("\n", 2)
+# define N_DBG(str) ft_putnbr_fd(str, 2); ft_putstr_fd("\n", 2)
 
 
 
@@ -256,9 +257,17 @@ pid_t		improved_fork(void);
 void		sub_dup2(int read, int write);
 void		ft_init_pipes_struct(t_minishell *shell);
 
+/*
+	HEREDOC
+*/
 /*	---	heredoc_utils1.c	---*/
 char	*ft_get_heredoc_eof(t_minishell *shell);
 int		ft_heredoc(t_minishell *shell);
 int		ft_heredoc_detected(t_minishell *shell);
+void	ft_read_until_eof(char *eof);
+
+/*	---	heredoc_expand.c	---	*/
+bool	ft_heredoc_line_got_dollar(char *input);
+char	*ft_get_line_with_expand(char *input);
 
 #endif

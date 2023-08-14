@@ -1,6 +1,8 @@
 #ifndef DEFINE_H
 # define DEFINE_H
 
+# define MAX_INPUT_LINE 1000
+
 //		### ENUM TOKEN TYPE ###
 
 enum e_token_type {
