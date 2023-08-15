@@ -20,11 +20,11 @@
 # include "../libs/ftprintf/ft_printf.h"
 
 
-extern t_global	global;
+// extern g_global	global;
 
 # define ERR_CMD		"Enter valid command "
 # define ERR_EXEC		"Execve "
-# define DEBUG 1
+# define DEBUG 0
 # define DBG(str) ft_putstr_fd(str, 2); ft_putstr_fd("\n", 2)
 
 
@@ -42,7 +42,7 @@ char		*ft_output_command_line(void);
 /*	--- init_global.c	--- */
 char		**ft_get_opt(char **option, char **tmp);
 int			ft_len_cmd_opt(char **options);
-t_cmd		*ft_init_cmds(t_tok **tokens);
+t_cmd		*ft_init_cmds(t_tok **tokens, t_minishell *ms);
 char		**ft_store_cmd_options(t_tok **tokens, t_cmd *cmd);
 void		ft_init_minishell(t_minishell *shell, char **env);
 
@@ -52,10 +52,10 @@ void		free_two_dimension_array(char **arr);
 
 /*	--- init_fd_redirection	--- */
 int			ft_error_red_file(char	*file);
-int			ft_get_infile_fd(t_tok **tk);
-int			ft_get_outfile_fd(t_tok **tk);
-int			ft_get_append_outfile_fd(t_tok **tk);
-void		ft_open_files_redirection(t_tok **tk, t_cmd *cmd);
+int			ft_get_infile_fd(t_tok **tk, t_minishell *ms);
+int			ft_get_outfile_fd(t_tok **tk, t_minishell *ms);
+int			ft_get_append_outfile_fd(t_tok **tk, t_minishell *ms);
+void		ft_open_files_redirection(t_tok **tk, t_cmd *cmd, t_minishell *ms);
 
 /*	--- close.c	--- */
 void 		free_env_list(t_venv *env_list);
@@ -147,7 +147,7 @@ char 		*ft_strcat(char *dest, char *src);
 	BUILTINS
 */
 /*	---	builtin_decide.c	---*/
-void		builtin_redirect(t_minishell *ms, t_lcmd *cmd);
+void		builtin_run(t_minishell *ms, t_lcmd *cmd);
 int			builtin_check(char *cmd);
 
 /*	---	builtin_echo.c	---*/
@@ -220,10 +220,10 @@ extern void	rl_replace_line(const char *, int);
 void		ft_expand_token(t_minishell *shell);
 void		ft_skip_dollar_alone(char *word);
 int			ft_token_has_dollar(char *word);
-char		*ft_expand_last_exit_status(void);
+char		*ft_expand_last_exit_status(t_minishell *ms);
 char		*ft_fill_word(char *word, int *start, int *i);
 void		ft_expand_venv(t_minishell *shell, char	*word);
-char		*ft_get_venv_value(char *word, int *start, int *i);
+char		*ft_get_venv_value(char *word, int *start, int *i, t_minishell *ms);
 char		*ft_join_array(char *temp[256]);
 
 
@@ -239,8 +239,8 @@ void		child_exec_no_pipe(t_minishell *ms, char **env_tab);
 /*	---	exec_pipes.c	---*/
 int			ft_pipeline_execution(t_minishell *shell, char **envp);
 int			ft_exec_child(t_lcmd *cmd, char **envp, t_minishell *ms);
-void		ft_exec_parent(t_pipex *p, pid_t *pid);
-int			ft_set_fd(t_minishell *shell, t_pipex *p, t_lcmd *node);
+void		ft_exec_parent(t_minishell *ms, pid_t *pid);
+int			ft_set_fd(t_pipex *p, t_lcmd *node);
 
 /*	---	utils_pipes_1.c	---*/
 char		*ft_get_right_path(char *cmd, t_minishell *ms);

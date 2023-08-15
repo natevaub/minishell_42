@@ -1,6 +1,6 @@
 #include "../../includes/minishell.h"
 
-extern t_global	global;
+extern g_global	global;
 
 void	child_exec_no_pipe(t_minishell *ms, char **env_tab)
 {
@@ -36,11 +36,10 @@ void	ft_exec_no_pipe(t_minishell *ms, char **envp)
 	{
 		if ((builtin_check(ms->cmd->cmd)) == 1)
 		{
-			builtin_redirect(ms, ms->cmd);
+			builtin_run(ms, ms->cmd);
 		}
 		else
 		{
-			printf("in exec no pipe\n");
 			child_exec_no_pipe(ms, envp);
 		}
 	}

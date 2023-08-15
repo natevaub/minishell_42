@@ -6,13 +6,13 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:38:36 by ckarl             #+#    #+#             */
-/*   Updated: 2023/07/20 16:35:11 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/15 17:15:55 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-extern t_global	global;
+extern g_global	global;
 
 /*if "minishell" is called again (nbr = 1), we need to increase SHLVL variable,
 when exit is called (nbr = -1), we need to decrease it*/

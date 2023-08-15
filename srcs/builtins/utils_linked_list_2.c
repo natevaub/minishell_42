@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils_linked_list_2.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/07/24 15:36:19 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/15 17:16:26 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-extern t_global	global;
+extern g_global	global;
 
 //create a new list out of parameter **tab, check **tab for errors
 t_venv	*new_env_list(char **tab)

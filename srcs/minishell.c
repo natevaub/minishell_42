@@ -1,21 +1,19 @@
 #include "../includes/minishell.h"
 
-t_global		global;
+g_global		global;
 
-/* Nate's Main :-) */
 int main(int ac, char **av, char **envp)
 {
 	t_minishell			shell;
 	char				*prompt;
 
 	ft_init_minishell(&shell, envp);
-	// init_signals();
-
 	while (1)
 	{
-		ft_init_signals(signal_prompt_handler);
-		prompt = ft_output_command_line();
+		// ft_init_signals(signal_prompt_handler);
 		ft_init_signals(signal_exec_handler);
+		prompt = ft_output_command_line();
+
 		if (prompt == NULL)
 			exit(0);
 		if (prompt)
@@ -34,6 +32,8 @@ int main(int ac, char **av, char **envp)
 		}
 		ft_free_parsing(&shell);
 	}
+	if ((tcsetattr(STDIN_FILENO, TCSANOW, &shell.termios_default)) == -1)
+		exit(EXIT_FAILURE);
 	free_env_list(shell.copy_env);
 	return (0);
 }

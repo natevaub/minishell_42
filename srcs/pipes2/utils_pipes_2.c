@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils_pipes_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/12 05:13:38 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/15 17:19:45 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-extern t_global	global;
+extern g_global	global;
 
 //max nbr of commands
 int	ft_count_cmds(t_lcmd *cmd)

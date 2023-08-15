@@ -6,13 +6,13 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:38:36 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/02 12:23:28 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/15 18:38:16 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-extern t_global	global;
+extern g_global	global;
 
 //ECHO WITH OPTION -N
 /*The echo utility writes any specified operands, separated by single blank (` ')

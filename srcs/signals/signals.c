@@ -3,14 +3,66 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/12 03:43:52 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/15 18:11:31 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+extern g_global	global;
+
+void	ft_init_signals(void (*handle_signals)(int))
+{
+	struct sigaction	sa;
+
+	sa.sa_handler = handle_signals;
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = SA_RESTART;
+	if (sigaction(SIGINT, &sa, NULL) == -1)
+		perror("Error: cannot handle SIGINT");
+	if (sigaction(SIGQUIT, &sa, NULL) == -1)
+		perror("Error: cannot handle SIGQUIT");
+}
+
+// void	signal_prompt_handler(int sig)
+// {
+// 	global.sig = sig;
+// 	if (global.sig == SIGINT)
+// 	{
+// 		ft_putstr_fd("\n", STDOUT_FILENO);
+// 		rl_replace_line("", 0);
+// 		rl_on_new_line();
+// 		rl_redisplay();
+// 	}
+// 	else if (global.sig == SIGQUIT)
+// 	{
+// 		rl_replace_line("  ", 0);
+// 		rl_on_new_line();
+// 		rl_redisplay();
+// 	}
+// }
+
+void	signal_exec_handler(int sig)
+{
+	global.sig = sig;
+	if (global.sig == SIGINT)
+	{
+		rl_replace_line("", 0);
+		ft_putstr_fd("\n", STDOUT_FILENO);
+		rl_on_new_line();
+		rl_redisplay();
+	}
+	else if (global.sig == SIGQUIT)
+	{
+		rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_redisplay();
+	}
+}
+
 
 /* function int sigaction(int signum, const struct sigaction *newact, struct sigaction *oldact);
 takes two struct sigaction as parameters
@@ -43,59 +95,3 @@ Ctrl-\ = do nothing*/
 // 	sigaction(SIGINT, &s, NULL);
 // 	sigaction(SIGQUIT, &s, NULL);
 // }
-
-void	ft_init_signals(void (*handle_signals)(int))
-{
-	struct sigaction	sa;
-	struct termios		termios;
-
-	if ((tcgetattr(STDIN_FILENO, &termios)) == -1)
-		exit(EXIT_FAILURE);
-	termios.c_lflag &= ~(ECHOCTL);
-	if ((tcsetattr(STDIN_FILENO, TCSANOW, &termios)) == -1)
-		exit(EXIT_FAILURE);
-	sa.sa_handler = handle_signals;
-	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = SA_RESTART;
-	if (sigaction(SIGINT, &sa, NULL) == -1)
-		perror("Error: cannot handle SIGINT");
-	if (sigaction(SIGQUIT, &sa, NULL) == -1)
-		perror("Error: cannot handle SIGQUIT");
-}
-
-void	signal_prompt_handler(int sig)
-{
-	if (sig == SIGINT)
-	{
-		ft_putstr_fd("\n", STDOUT_FILENO);
-		rl_replace_line("", 0);
-		rl_on_new_line();
-		rl_redisplay();
-		// global.last_exit_status;
-	}
-	else if (sig == SIGQUIT)
-	{
-		rl_replace_line("  ", 0);
-		rl_on_new_line();
-		rl_redisplay();
-	}
-}
-
-void	signal_exec_handler(int sig)
-{
-	if (sig == SIGINT)
-	{
-		rl_replace_line("  ", 0);
-		rl_on_new_line();
-		rl_redisplay();
-		ft_putstr_fd("\n", STDOUT_FILENO);
-		rl_on_new_line();
-		rl_redisplay();
-	}
-	else if (sig == SIGQUIT)
-	{
-		rl_replace_line("  ", 0);
-		rl_on_new_line();
-		rl_redisplay();
-	}
-}

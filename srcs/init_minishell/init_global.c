@@ -1,12 +1,18 @@
 #include "../../includes/minishell.h"
 
-// extern t_global	global;
-
 void	ft_init_minishell(t_minishell *shell, char **env)
 {
+	struct termios	termios_new;
+
 	*shell = (t_minishell){};
 	shell->copy_env = new_env_list(env);
 	shell->last_exit_status = EXIT_SUCCESS;
+	if ((tcgetattr(STDIN_FILENO, &shell->termios_default)) == -1)
+		exit(EXIT_FAILURE);
+	termios_new = shell->termios_default;
+	termios_new.c_lflag &= ~(ECHOCTL);
+	if ((tcsetattr(STDIN_FILENO, TCSANOW, &termios_new)) == -1)
+		exit(EXIT_FAILURE);
 }
 
 
@@ -33,7 +39,7 @@ int	ft_len_cmd_opt(char **options)
 	return (i);
 }
 
-t_cmd	*ft_init_cmds(t_tok **tokens)
+t_cmd	*ft_init_cmds(t_tok **tokens, t_minishell *ms)
 {
 	t_cmd	*cmd;
 
@@ -47,7 +53,7 @@ t_cmd	*ft_init_cmds(t_tok **tokens)
 	{
 		if ((*tokens)->type == E_REDIRECTION)
 		{
-			ft_open_files_redirection(tokens, cmd);
+			ft_open_files_redirection(tokens, cmd, ms);
 		}
 		else if ((*tokens)->type == E_STRING)
 			cmd->option = ft_store_cmd_options(tokens, cmd);

@@ -6,13 +6,13 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/02 12:26:22 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/15 17:16:05 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-extern t_global	global;
+extern g_global	global;
 
 //EXPORT WITH NO OPTIONS (BUT WITH POTENTIAL ARGUMENTS)
 /*Normally, when you run a command at the bash prompt, a dedicated process is

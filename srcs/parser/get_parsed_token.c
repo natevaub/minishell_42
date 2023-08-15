@@ -11,12 +11,12 @@ void	ft_parse_token(t_minishell *shell)
 	{
 		if (!shell->cmd)
 		{
-			shell->cmd = ft_newlst_cmd(ft_init_cmds(&parse));
+			shell->cmd = ft_newlst_cmd(ft_init_cmds(&parse, shell));
 		}
 		else
 		{
 			ft_lstadd_back_cmd(&shell->cmd,
-				ft_newlst_cmd(ft_init_cmds(&parse)));
+				ft_newlst_cmd(ft_init_cmds(&parse, shell)));
 		}
 	}
 	shell->token = start;

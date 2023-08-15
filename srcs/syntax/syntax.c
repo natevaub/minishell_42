@@ -47,7 +47,7 @@ int	ft_look_for_err(t_tok *tok)
 
 void	ft_print_error(int err)
 {
-	global.last_exit_status = 258;
+	// global.last_exit_status = 258;																	need to change it to ms->last_exit_status
 	if (err == 1)
 		ft_putstr_fd("minishell : syntax error near unexpected token `<' or `>'\n", 2);
 	else if (err == 2)

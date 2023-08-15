@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_decide.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/09 23:42:30 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/15 18:24:46 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-extern t_global	global;
+extern g_global	global;
 
 /* function assesses if argument is a built in*/
 int	builtin_check(char *cmd)
@@ -39,7 +39,7 @@ int	builtin_check(char *cmd)
 
 /*if yes, checks if there are given arguments
 and redirects to right builtin function for execution*/
-void	builtin_redirect(t_minishell *ms, t_lcmd *cmd)
+void	builtin_run(t_minishell *ms, t_lcmd *cmd)
 {
 	if (ft_strncmp(ms->cmd->cmd, "echo", 4) == 0)
 		ms->last_exit_status = cmd_echo(cmd);

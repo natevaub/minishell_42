@@ -6,22 +6,20 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/07 17:37:26 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/15 17:19:42 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-extern t_global	global;
+extern g_global	global;
 
 void	sub_dup2(int read, int write)
 {
 	if (read != 0)
 		improved_dup2(read, STDIN_FILENO);
-	DBG("dup 2 stdin");
 	if (write != 1)
 		improved_dup2(write, STDOUT_FILENO);
-	DBG("dup 2 stdout");
 }
 
 int	improved_dup2(int fildes, int fildes2)

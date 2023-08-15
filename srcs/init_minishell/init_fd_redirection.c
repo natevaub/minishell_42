@@ -1,6 +1,6 @@
 #include "../../includes/minishell.h"
 
-extern t_global	global;
+extern g_global	global;
 
 int	ft_error_red_file(char	*file)
 {
@@ -10,7 +10,7 @@ int	ft_error_red_file(char	*file)
 	return (1);
 }
 
-int	ft_get_infile_fd(t_tok **tk)
+int	ft_get_infile_fd(t_tok **tk, t_minishell *ms)
 {
 	int	fd;
 
@@ -31,14 +31,14 @@ int	ft_get_infile_fd(t_tok **tk)
 	if ((*tk) != NULL)
 		fd = open((*tk)->word, O_RDONLY);
 	// if (fd == -1)
-	// 	global.last_exit_status = ft_open_failed((*tk)->word);
+	// 	ms->last_exit_status = ft_open_failed((*tk)->word);
 	else
-		global.last_exit_status = 0;
+		ms->last_exit_status = 0;
 	return (fd);
 }
 
 
-int	ft_get_outfile_fd(t_tok **tk)
+int	ft_get_outfile_fd(t_tok **tk, t_minishell *ms)
 {
 	int	fd;
 
@@ -55,7 +55,7 @@ int	ft_get_outfile_fd(t_tok **tk)
 			(*tk) = (*tk)->next;
 			break ;
 		}
-			
+
 		(*tk) = (*tk)->next;
 	}
 	if ((*tk) != NULL)
@@ -64,12 +64,12 @@ int	ft_get_outfile_fd(t_tok **tk)
 		fd = open((*tk)->word, O_CREAT | O_TRUNC | O_RDWR, 0666);
 		printf("FD = %d\n", fd);
 	}
-	global.last_exit_status = 0;
+	ms->last_exit_status = 0;
 	return (fd);
 }
 
 
-int	ft_get_append_outfile_fd(t_tok **tk)
+int	ft_get_append_outfile_fd(t_tok **tk, t_minishell *ms)
 {
 	int	fd;
 
@@ -89,31 +89,31 @@ int	ft_get_append_outfile_fd(t_tok **tk)
 	}
 	if ((*tk) != NULL)
 		fd = open((*tk)->word, O_CREAT | O_APPEND | O_RDWR, 0644);
-	global.last_exit_status = 0;
+	ms->last_exit_status = 0;
 	return (fd);
 
 }
-void	ft_open_files_redirection(t_tok **tk, t_cmd *cmd)
+void	ft_open_files_redirection(t_tok **tk, t_cmd *cmd, t_minishell *ms)
 {
 	if (ft_strcmp((*tk)->word, D_INFILE) == 0)
 	{
-		cmd->read = ft_get_infile_fd(tk);
+		cmd->read = ft_get_infile_fd(tk, ms);
 		if ((*tk) != NULL)
 			((*tk)) = (*tk)->next;
 
 	}
 	else if (ft_strcmp((*tk)->word, D_OUTFILE) == 0)
 	{
-		cmd->write = ft_get_outfile_fd(tk);
+		cmd->write = ft_get_outfile_fd(tk, ms);
 		if ((*tk) != NULL)
 		{
 			((*tk)) = (*tk)->next;
 		}
-			
+
 	}
 	else if (ft_strcmp((*tk)->word, D_APPEND) == 0)
 	{
-		cmd->write = ft_get_append_outfile_fd(tk);
+		cmd->write = ft_get_append_outfile_fd(tk, ms);
 		if ((*tk) != NULL)
 			((*tk)) = (*tk)->next;
 	}

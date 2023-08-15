@@ -25,7 +25,7 @@ void	ft_expand_token(t_minishell *shell)
 			shell->token = shell->token->next;
 		}
 	}
-	
+
 	shell->token = start;
 }
 
@@ -36,11 +36,11 @@ void	ft_skip_dollar_alone(char *word)
 	return;
 }
 
-char	*ft_expand_last_exit_status(void)
+char	*ft_expand_last_exit_status(t_minishell *ms)
 {
 	char	*exit_status;
 
-	exit_status = ft_itoa(global.last_exit_status);
+	exit_status = ft_itoa(ms->last_exit_status);
 	printf("Last exit status = %s\n", exit_status);
 	return (exit_status);
 }
@@ -66,7 +66,7 @@ void	ft_expand_venv(t_minishell *shell, char	*word)
 		}
 		else if (word[i] == '$' /* && word[i] != '\0' */)
 		{
-			temp[j] = ft_get_venv_value(word, &i, &start);
+			temp[j] = ft_get_venv_value(word, &i, &start, shell);
 			// printf("Temp[%d] = %s END\n", j, temp[j]);
 		}
 		// printf("Start = %d, i = %d\n", start, i);
@@ -91,7 +91,7 @@ char	*ft_fill_word(char *word, int *start, int *i)
 	{
 		(*i)++;
 	}
-		
+
 	len = *i - *start;
 
 	new = ft_calloc(sizeof(char), (len + 1));
@@ -121,7 +121,7 @@ char	*ft_fill_word_expand(char *word, int *start, int *i)
 			break;
 		(*i)++;
 	}
-		
+
 	len = *i - *start;
 
 	new = ft_calloc(sizeof(char), (len + 1));
@@ -136,16 +136,16 @@ char	*ft_fill_word_expand(char *word, int *start, int *i)
 	return (new);
 }
 
-char	*ft_get_venv_value(char *word, int *start, int *i)
+char	*ft_get_venv_value(char *word, int *start, int *i, t_minishell *ms)
 {
 	char 	*new;
 	char	*venv;
-	
+
 	if (word[*start] == '$')
 	{
 		if (word[*start + 1] == '?')
 		{
-			new = ft_expand_last_exit_status();
+			new = ft_expand_last_exit_status(ms);
 			(*start) += 2;
 			(*i) += 2;
 		}

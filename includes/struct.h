@@ -44,9 +44,8 @@ typedef struct	s_cmd
 // 		### Global Variable ###
 typedef struct	s_global
 {
-	t_venv				*copy_env;
-	int					last_exit_status;
-}						t_global;						//need to call it g_global
+	int					sig;
+}						g_global;						//need to call it g_global
 
 //		### Pipe Structure ###
 typedef struct	s_pipex
@@ -70,6 +69,7 @@ typedef struct	s_minishell
 	struct s_pipex		*p;
 	t_venv				*copy_env;
 	int					last_exit_status;
+	struct termios		termios_default;
 }						t_minishell;
 
 #endif
