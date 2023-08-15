@@ -71,7 +71,7 @@ void	signal_prompt_handler(int sig)
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
-		global.last_exit_status;
+		// global.last_exit_status;
 	}
 	else if (sig == SIGQUIT)
 	{

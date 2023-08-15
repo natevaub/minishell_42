@@ -16,8 +16,12 @@ extern t_global	global;
 
 void	sub_dup2(int read, int write)
 {
-	improved_dup2(read, STDIN_FILENO);
-	improved_dup2(write, STDOUT_FILENO);
+	if (read != 0)
+		improved_dup2(read, STDIN_FILENO);
+	DBG("dup 2 stdin");
+	if (write != 1)
+		improved_dup2(write, STDOUT_FILENO);
+	DBG("dup 2 stdout");
 }
 
 int	improved_dup2(int fildes, int fildes2)

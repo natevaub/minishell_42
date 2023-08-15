@@ -21,12 +21,12 @@ directory to different directories in our System.*/
 
 //On success, zero is returned.  On error, -1 is returned, and
 //errno is set to indicate the error.
-int	cmd_cd(t_lcmd *cmd)
+int	cmd_cd(t_lcmd *cmd, t_minishell *ms)
 {
 	char	*path;
 
 	if (!(cmd->option[1]))
-		path = ft_strdup(get_value(global.copy_env, "HOME"));
+		path = ft_strdup(get_value(ms->copy_env, "HOME"));
 	else
 		path = ft_strdup(cmd->option[1]);
 	if (chdir(path) < 0)

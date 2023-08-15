@@ -32,12 +32,12 @@ int	ft_count_cmds(t_lcmd *cmd)
 }
 
 //get the PATH line from env
-char	*ft_get_path_line(void)
+char	*ft_get_path_line(t_minishell *ms)
 {
 	char	*envp_path = NULL;
 	t_venv	*head;
 
-	head = global.copy_env;
+	head = ms->copy_env;
 	while (head)
 	{
 		if (ft_strncmp(head->word, "PATH", 4) == 0)
@@ -75,15 +75,15 @@ char	*ft_join_path(char const *s1, char const *s2)
 }
 
 //get the right path for a cmd
-char	*ft_get_right_path(char *cmd)
+char	*ft_get_right_path(char *cmd, t_minishell *ms)
 {
 	char	**all_paths;
 	char	*temp_path;
 
-	all_paths = ft_split(ft_get_path_line(), ':');
+	all_paths = ft_split(ft_get_path_line(ms), ':');
 	if (access(cmd, F_OK | X_OK) == 0)
 	{
-		printf("Absolute Path\n");
+		// printf("Absolute Path\n");
 		return (cmd);
 	}
 	while (*all_paths)

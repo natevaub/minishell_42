@@ -14,7 +14,7 @@
 
 extern t_global	global;
 
-int	ft_set_fd(t_minishell *shell, t_pipex *p, t_lcmd *node)
+int	ft_set_fd(t_minishell *ms, t_pipex *p, t_lcmd *node)
 {
 	if (p->idx == 0)
 	{
@@ -48,30 +48,30 @@ int	ft_set_fd(t_minishell *shell, t_pipex *p, t_lcmd *node)
 	return (0);
 }
 
-int ft_set_fd_builtins(t_minishell *shell, t_pipex *p, t_lcmd *node)
-{
-	// Handle input redirection if needed
-	if (node->fd_read != 0)
-	{
-		dup2(node->fd_read, STDIN_FILENO);
-		close(node->fd_read);
-	}
+// int ft_set_fd_builtins(t_minishell *ms, t_pipex *p, t_lcmd *node)
+// {
+// 	// Handle input redirection if needed
+// 	if (node->fd_read != 0)
+// 	{
+// 		dup2(node->fd_read, STDIN_FILENO);
+// 		close(node->fd_read);
+// 	}
 
-	// Handle output redirection if needed
-	if (node->fd_write != 1)
-	{
-		dup2(node->fd_write, STDOUT_FILENO);
-		close(node->fd_write);
-	}
+// 	// Handle output redirection if needed
+// 	if (node->fd_write != 1)
+// 	{
+// 		dup2(node->fd_write, STDOUT_FILENO);
+// 		close(node->fd_write);
+// 	}
 
-	return (0);
-}
+// 	return (0);
+// }
 
-int	ft_exec_child(t_lcmd *cmd, char **envp)
+int	ft_exec_child(t_lcmd *cmd, char **envp, t_minishell *ms)
 {
 	char	*cmd_with_path;
 
-	cmd_with_path = ft_get_right_path(cmd->cmd);
+	cmd_with_path = ft_get_right_path(cmd->cmd, ms);
 	if (execve(cmd_with_path, cmd->option, envp) < 0)
 	{
 		free(cmd_with_path);
@@ -106,45 +106,45 @@ void	ft_exec_parent(t_pipex *p, pid_t *pid)
 	}
 }
 
-int	ft_pipeline_execution(t_minishell *shell, char **envp)
+int	ft_pipeline_execution(t_minishell *ms, char **envp)
 {
 	t_lcmd	*cmd;
 	pid_t	pid;
 
-	ft_init_pipes_struct(shell);
-	cmd = shell->cmd;
+	ft_init_pipes_struct(ms);
+	cmd = ms->cmd;
 	while (cmd != NULL)
 	{
-		ft_pipe_dep_mod(shell->p);
+		ft_pipe_dep_mod(ms->p);
 		if (builtin_check(cmd->cmd) == 1)
 		{
 			pid = fork();
 			if (pid == 0)
 			{
-				ft_set_fd(shell, shell->p, cmd);
-				builtin_redirect(cmd);
+				ft_set_fd(ms, ms->p, cmd);
+				builtin_redirect(ms, cmd);
 				exit(1);
 			}
 		} else {
 			pid = fork();
 			if (pid == 0)
 			{
-				ft_set_fd(shell, shell->p, cmd);
-				ft_exec_child(cmd, envp);
+				ft_set_fd(ms, ms->p, cmd);
+				ft_exec_child(cmd, envp, ms);
 			}
-			
+
 		}
 		if (pid > 0)
 		{
-			if (shell->p->idx != 0)
+			if (ms->p->idx != 0)
 			{
-				close(shell->p->pipe_fd[(shell->p->idx - 1) % 2][0]);
-				close(shell->p->pipe_fd[(shell->p->idx - 1) % 2][1]);
+				close(ms->p->pipe_fd[(ms->p->idx - 1) % 2][0]);
+				close(ms->p->pipe_fd[(ms->p->idx - 1) % 2][1]);
 			}
 		}
-		shell->p->idx++;
+		ms->p->idx++;
 		cmd = cmd->next;
 	}
-	ft_exec_parent(shell->p, &pid);
+	ft_exec_parent(ms->p, &pid);
 	return (0);
 }

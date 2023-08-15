@@ -17,7 +17,7 @@ extern t_global	global;
 //UNSET WITH NO OPTIONS
 /*Using the unset command, you can unset values and attributes of shell
 variables.*/
-int	cmd_unset(char **option)
+int	cmd_unset(char **option, t_minishell *ms)
 {
 	t_venv	*list;
 	t_venv	*pre_copy;
@@ -25,7 +25,7 @@ int	cmd_unset(char **option)
 
 	while (*option)
 	{
-		list = global.copy_env;
+		list = ms->copy_env;
 		while (list)
 		{
 			if (ft_strncmp(list->word, *option, ft_strlen(*option)) == 0)

@@ -72,13 +72,13 @@ char	*trim_back(char *var)
 }
 
 //check if a variable exists in environment & change it to *var
-int	change_existing_var_in_env(char *var)
+int	change_existing_var_in_env(char *var, t_minishell *ms)
 {
 	char	*copy_var;
 	int		len;
 	t_venv	*head;
 
-	head = global.copy_env;
+	head = ms->copy_env;
 	copy_var = trim_back(var);
 	len = ft_strlen(copy_var);
 	while (head)
@@ -98,15 +98,15 @@ int	change_existing_var_in_env(char *var)
 }
 
 //add *var to env tableau
-int	add_var_to_export(char **option)
+int	add_var_to_export(char **option, t_minishell *ms)
 {
 	while (*option)
 	{
 		if (check_var_format(*option) == EXIT_FAILURE)
 			return (EXIT_FAILURE);								//included error msg here (bash: export: `=1': not a valid identifier)
-		if (change_existing_var_in_env(*option) == 0)
+		if (change_existing_var_in_env(*option, ms) == 0)
 		{
-			if (insert_node_in_list(*option, &global.copy_env) == EXIT_FAILURE)
+			if (insert_node_in_list(*option, &ms->copy_env) == EXIT_FAILURE)
 				return (EXIT_FAILURE);
 		}
 		option++;
@@ -116,12 +116,12 @@ int	add_var_to_export(char **option)
 
 //cmd: export (without args), prints env in ascii order without the last arg path
 //check if last history was "minishell", if yes, add line list_append() with "_="/bin/bash""
-int	print_export(t_lcmd *cmd)
+int	print_export(t_lcmd *cmd, t_minishell *ms)
 {
 	char	**lines;
 	t_venv	*env_for_export;
 
-	env_for_export = global.copy_env;
+	env_for_export = ms->copy_env;
 	bubble_sort(&env_for_export);
 	while (env_for_export)
 	{

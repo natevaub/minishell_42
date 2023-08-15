@@ -1,19 +1,6 @@
 #ifndef STRUCT_H
 # define STRUCT_H
 
-//		### All Data ###
-
-typedef struct	s_minishell
-{
-	// char				**env;
-	// int					fd_pipe[2];
-	// int					fd_tmp_pipe;
-	int					syntax;
-	struct s_list_token	*token;
-	struct s_list_cmd	*cmd;
-	struct s_pipex		*p;
-}						t_minishell;
-
 //		### Linked List Token ###
 
 typedef struct	s_list_token
@@ -73,5 +60,16 @@ typedef struct	s_pipex
 	// t_lcmd		*commands;
 }				t_pipex;
 
+//		### All Data ###
+
+typedef struct	s_minishell
+{
+	int					syntax;
+	struct s_list_token	*token;
+	struct s_list_cmd	*cmd;
+	struct s_pipex		*p;
+	t_venv				*copy_env;
+	int					last_exit_status;
+}						t_minishell;
 
 #endif

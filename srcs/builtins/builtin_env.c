@@ -31,11 +31,11 @@ int	find_c(char *str, char c)
 }
 
 //print environment when command env is called
-int	print_env(t_lcmd *cmd)
+int	print_env(t_minishell *ms, t_lcmd *cmd)
 {
 	t_venv	*head;
 
-	head = global.copy_env;
+	head = ms->copy_env;
 	while (head)
 	{
 		if (find_c(head->word, '='))

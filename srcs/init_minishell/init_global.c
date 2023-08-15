@@ -1,12 +1,12 @@
 #include "../../includes/minishell.h"
 
-extern t_global	global;
+// extern t_global	global;
 
 void	ft_init_minishell(t_minishell *shell, char **env)
 {
 	*shell = (t_minishell){};
-	global.copy_env = new_env_list(env);
-	global.last_exit_status = EXIT_SUCCESS;
+	shell->copy_env = new_env_list(env);
+	shell->last_exit_status = EXIT_SUCCESS;
 }
 
 

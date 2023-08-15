@@ -24,7 +24,7 @@ extern t_global	global;
 
 # define ERR_CMD		"Enter valid command "
 # define ERR_EXEC		"Execve "
-# define DEBUG 0
+# define DEBUG 1
 # define DBG(str) ft_putstr_fd(str, 2); ft_putstr_fd("\n", 2)
 
 
@@ -147,7 +147,7 @@ char 		*ft_strcat(char *dest, char *src);
 	BUILTINS
 */
 /*	---	builtin_decide.c	---*/
-void		builtin_redirect(t_lcmd *cmd);
+void		builtin_redirect(t_minishell *ms, t_lcmd *cmd);
 int			builtin_check(char *cmd);
 
 /*	---	builtin_echo.c	---*/
@@ -156,25 +156,25 @@ int			cmd_echo(t_lcmd *cmd);
 
 /*	---	builtin_env.c	---*/
 int			find_c(char *str, char c);
-int			print_env(t_lcmd *cmd);
+int			print_env(t_minishell *ms, t_lcmd *cmd);
 
 /*	---	builtin_exit.c	---*/
-void		cmd_exit(char *status);
-void		change_shvl_in_env(int nbr);
+void		cmd_exit(char *status, t_minishell *ms);
+void		change_shvl_in_env(int nbr, t_minishell *ms);
 
 /*	---	builtin_export.c	---*/
 int			check_var_format(char *var);
 char		*trim_back(char *var);
-int			change_existing_var_in_env(char *var);
-int			add_var_to_export(char **option);
-int			print_export(t_lcmd *cmd);
+int			change_existing_var_in_env(char *var, t_minishell *ms);
+int			add_var_to_export(char **option, t_minishell *ms);
+int			print_export(t_lcmd *cmd, t_minishell *ms);
 
 /*	---	builtin_pwd_cd.c	---*/
-int			cmd_cd(t_lcmd *cmd);
+int			cmd_cd(t_lcmd *cmd, t_minishell *ms);
 int			cmd_pwd(t_lcmd *cmd);
 
 /*	---	builtin_unset.c	---*/
-int			cmd_unset(char **var);
+int			cmd_unset(char **var, t_minishell *ms);
 
 /*	---	utils_linked_list_1.c	---*/
 int			list_size(t_venv *lst);
@@ -238,13 +238,13 @@ void		child_exec_no_pipe(t_minishell *ms, char **env_tab);
 */
 /*	---	exec_pipes.c	---*/
 int			ft_pipeline_execution(t_minishell *shell, char **envp);
-int			ft_exec_child(t_lcmd *cmd, char **envp);
+int			ft_exec_child(t_lcmd *cmd, char **envp, t_minishell *ms);
 void		ft_exec_parent(t_pipex *p, pid_t *pid);
 int			ft_set_fd(t_minishell *shell, t_pipex *p, t_lcmd *node);
 
 /*	---	utils_pipes_1.c	---*/
-char		*ft_get_right_path(char *cmd);
-char		*ft_get_path_line(void);
+char		*ft_get_right_path(char *cmd, t_minishell *ms);
+char		*ft_get_path_line(t_minishell *ms);
 char		*ft_join_path(char const *s1, char const *s2);
 int			ft_count_cmds(t_lcmd *shell);
 int			ft_pipe_dep_mod(t_pipex *p);

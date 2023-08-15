@@ -16,14 +16,14 @@ extern t_global	global;
 
 /*if "minishell" is called again (nbr = 1), we need to increase SHLVL variable,
 when exit is called (nbr = -1), we need to decrease it*/
-void	change_shvl_in_env(int nbr)
+void	change_shvl_in_env(int nbr, t_minishell *ms)
 {
 	int		shlvl_int;
 	char	*shlvl_char;
 	char	*shlvl_changed;
 	t_venv	*head;
 
-	shlvl_char = get_value(global.copy_env, "SHLVL");
+	shlvl_char = get_value(ms->copy_env, "SHLVL");
 	shlvl_int = ft_atoi(shlvl_char);
 	free(shlvl_char);
 	if (nbr == 1)
@@ -32,7 +32,7 @@ void	change_shvl_in_env(int nbr)
 		shlvl_changed = ft_itoa(shlvl_int - 1);
 	shlvl_char = ft_strjoin("SHLVL=", shlvl_changed);
 	free(shlvl_changed);
-	head = global.copy_env;
+	head = ms->copy_env;
 	while (head)
 	{
 		if (ft_strncmp(head->word, "SHLVL", 5) == 0)
@@ -49,16 +49,16 @@ void	change_shvl_in_env(int nbr)
 /*The exit() function causes normal process termination and the
 least significant byte of status (i.e., status & 0xFF) is
 returned to the parent (see wait(2)).*/
-void	cmd_exit(char *status)
+void	cmd_exit(char *status, t_minishell *ms)
 {
-	if (ft_strncmp("1", get_value(global.copy_env, "SHLVL"), 1) == 0)
+	if (ft_strncmp("1", get_value(ms->copy_env, "SHLVL"), 1) == 0)
 	{
 		if (status)
-			global.last_exit_status = ft_atoi(status);
-		exit(global.last_exit_status);
+			ms->last_exit_status = ft_atoi(status);
+		exit(ms->last_exit_status);
 	}
 	else
-		change_shvl_in_env(-1);
+		change_shvl_in_env(-1, ms);
 }
 
 /*
