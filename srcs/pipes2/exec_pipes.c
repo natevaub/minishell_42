@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/15 18:32:55 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/15 20:12:28 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,36 +78,20 @@ void	ft_exec_parent(t_minishell *ms, pid_t *pid)
 	}
 }
 
-void	ft_exec_builtin(t_minishell *ms, t_lcmd *cmd)
-{
-	if (ms->p->idx == 0)
-	{
-		cmd->fd_write = ms->p->pipe_fd[0][1];
-		// close(p->pipe_fd[0][0]);
-		// sub_dup2(node->fd_read, p->pipe_fd[0][1]);
-		// if (node->fd_read != 0)
-		// 	close(node->fd_read);
-	}
-	else if (ms->p->idx != ms->p->count_cmds - 1)
-	{
-		// close(p->pipe_fd[(p->idx - 1) % 2][1]);
-		// close(p->pipe_fd[(p->idx) % 2][0]);
-		// sub_dup2(p->pipe_fd[(p->idx - 1) % 2][0], p->pipe_fd[(p->idx) % 2][1]);
-		cmd->fd_write = ms->p->pipe_fd[(ms->p->idx) % 2][1];
-		cmd->fd_read = ms->p->pipe_fd[(ms->p->idx - 1) % 2][0];
-
-	}
-	else
-	{
-		cmd->fd_read = ms->p->pipe_fd[(ms->p->idx - 1) % 2][0];
-		// close(p->pipe_fd[(p->idx - 1) % 2][1]);
-		// sub_dup2(p->pipe_fd[(p->idx - 1) % 2][0], node->fd_write);
-		// if (node->fd_write != 1)
-		// 	close(node->fd_write);
-	}
-	builtin_run(ms, cmd);
-	exit(1);
-}
+// void	ft_exec_builtin(t_minishell *ms, t_lcmd *cmd)
+// {
+// 	if (ms->p->idx == 0)
+// 		cmd->fd_write = ms->p->pipe_fd[0][1];
+// 	else if (ms->p->idx != ms->p->count_cmds - 1)
+// 	{
+// 		cmd->fd_write = ms->p->pipe_fd[(ms->p->idx) % 2][1];
+// 		cmd->fd_read = ms->p->pipe_fd[(ms->p->idx - 1) % 2][0];
+// 	}
+// 	else
+// 		cmd->fd_read = ms->p->pipe_fd[(ms->p->idx - 1) % 2][0];
+// 	builtin_run(ms, cmd);
+// 	exit(1);
+// }
 
 int	ft_pipeline_execution(t_minishell *ms, char **envp)
 {
@@ -124,8 +108,8 @@ int	ft_pipeline_execution(t_minishell *ms, char **envp)
 		// 	pid = fork();
 		// 	if (pid == 0)
 		// 	{
-		// 		ft_set_fd(ms, ms->p, cmd);
-		// 		builtin_redirect(ms, cmd);
+		// 		ft_set_fd(ms->p, cmd);
+		// 		builtin_run(ms, cmd);
 		// 		exit(1);
 		// 	}
 		// } else {
@@ -135,16 +119,18 @@ int	ft_pipeline_execution(t_minishell *ms, char **envp)
 				ft_set_fd(ms->p, cmd);
 				if (builtin_check(cmd->cmd) == 1)
 				{
-					ft_exec_builtin(ms, cmd);
-					// builtin_run(ms, cmd);
-					// exit(1);
+					// ft_exec_builtin(ms, cmd);
+					builtin_run(ms, cmd);
+					exit(1);
 				}
 				else
+				{
 					ft_exec_child(cmd, envp, ms);
+					// exit(1);
+				}
 			}
-
 		// }
-		else if (pid > 0)
+		if (pid > 0)
 		{
 			if (ms->p->idx != 0)
 			{
