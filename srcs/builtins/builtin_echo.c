@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:38:36 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/15 18:38:16 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/16 12:42:17 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	cmd_echo(t_lcmd *cmd)
 	backslash = true;
 	if (!((cmd->option)[i]))
 	{
-		ft_putstr_fd("\n", cmd->fd_write);								//adjust fd if redirection
+		ft_putstr_fd("\n", cmd->fd_write);
 		return (EXIT_SUCCESS);
 	}
 	if (ft_strncmp((cmd->option)[i], "-n", 2) == 0 && ft_strlen(cmd->option[i]) == 2)
@@ -58,12 +58,12 @@ int	cmd_echo(t_lcmd *cmd)
 	}
 	while ((cmd->option)[i] != 0)
 	{
-		ft_putstr_fd(cmd->option[i], cmd->fd_write);								//adjust fd if redirection
+		ft_putstr_fd(cmd->option[i], cmd->fd_write);
 		if ((cmd->option)[i + 1] != 0)
-			ft_putstr_fd(" ", cmd->fd_write);								//adjust fd if redirection
+			ft_putstr_fd(" ", cmd->fd_write);
 		i++;
 	}
 	if (backslash == true)
-		ft_putstr_fd("\n", cmd->fd_write);								//adjust fd if redirection
+		ft_putstr_fd("\n", cmd->fd_write);
 	return (EXIT_SUCCESS);
 }

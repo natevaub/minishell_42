@@ -1,6 +1,6 @@
 #include "../includes/minishell.h"
 
-g_global		global;
+// g_global		global;
 
 int main(int ac, char **av, char **envp)
 {

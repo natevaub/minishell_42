@@ -20,7 +20,7 @@
 # include "../libs/ftprintf/ft_printf.h"
 
 
-// extern g_global	global;
+g_global	global;
 
 # define ERR_CMD		"Enter valid command "
 # define ERR_EXEC		"Execve "
@@ -237,10 +237,10 @@ void		child_exec_no_pipe(t_minishell *ms, char **env_tab);
 	PIPES2
 */
 /*	---	exec_pipes.c	---*/
-int			ft_pipeline_execution(t_minishell *shell, char **envp);
+void		ft_pipeline_execution(t_minishell *shell, char **envp);
 int			ft_exec_child(t_lcmd *cmd, char **envp, t_minishell *ms);
 void		ft_exec_parent(t_minishell *ms, pid_t *pid);
-int			ft_set_fd(t_pipex *p, t_lcmd *node);
+void		ft_set_fd(t_pipex *p, t_lcmd *node);
 
 /*	---	utils_pipes_1.c	---*/
 char		*ft_get_right_path(char *cmd, t_minishell *ms);

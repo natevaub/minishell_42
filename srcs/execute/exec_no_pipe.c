@@ -13,6 +13,7 @@ void	child_exec_no_pipe(t_minishell *ms, char **env_tab)
 		return (perror("Fork"));
 	if (pid == 0)
 	{
+		signal(SIGINT, SIG_DFL);											//does not give exactly the right result, check how to silence SIG_INT in child and reinitialise in parent
 		sub_dup2(ms->cmd->fd_read, ms->cmd->fd_write);
 		cmd_with_path = ft_get_right_path(ms->cmd->cmd, ms);
 		if (!cmd_with_path)
@@ -26,6 +27,14 @@ void	child_exec_no_pipe(t_minishell *ms, char **env_tab)
 		}
 	}
 	waitpid(pid, &exit_status, 0);
+	if (WIFSIGNALED(exit_status) == true)
+		{
+			if (WTERMSIG(exit_status) == SIGQUIT)
+				write(1, "Quit: 3\n", 8);
+			else if (WTERMSIG(exit_status) == SIGINT)
+				write(1, "\n", 1);
+			ms->last_exit_status = 128 + exit_status;
+		}
 	if (WIFEXITED(exit_status))
 		ms->last_exit_status = WEXITSTATUS(exit_status);
 }

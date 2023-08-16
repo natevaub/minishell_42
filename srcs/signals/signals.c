@@ -6,24 +6,23 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/15 18:11:31 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/16 16:52:03 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-extern g_global	global;
+// extern g_global	global;
 
 void	ft_init_signals(void (*handle_signals)(int))
 {
-	struct sigaction	sa;
-
-	sa.sa_handler = handle_signals;
-	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = SA_RESTART;
-	if (sigaction(SIGINT, &sa, NULL) == -1)
+	global.sa.sa_handler = handle_signals;
+	sigemptyset(&global.sa.sa_mask);
+	global.sa.sa_flags = SA_RESTART;
+	signal(SIGINT, SIG_DFL);
+	if (sigaction(SIGINT, &global.sa, NULL) == -1)
 		perror("Error: cannot handle SIGINT");
-	if (sigaction(SIGQUIT, &sa, NULL) == -1)
+	if (sigaction(SIGQUIT, &global.sa, NULL) == -1)
 		perror("Error: cannot handle SIGQUIT");
 }
 
@@ -47,19 +46,19 @@ void	ft_init_signals(void (*handle_signals)(int))
 
 void	signal_exec_handler(int sig)
 {
-	global.sig = sig;
-	if (global.sig == SIGINT)
+	if (sig == SIGINT)
 	{
 		rl_replace_line("", 0);
 		ft_putstr_fd("\n", STDOUT_FILENO);
 		rl_on_new_line();
 		rl_redisplay();
 	}
-	else if (global.sig == SIGQUIT)
+	else if (sig == SIGQUIT)
 	{
-		rl_replace_line("", 0);
-		rl_on_new_line();
-		rl_redisplay();
+		signal(SIGQUIT,SIG_IGN);
+		// rl_replace_line("", 0);
+		// rl_on_new_line();
+		// rl_redisplay();
 	}
 }
 

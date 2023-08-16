@@ -44,7 +44,7 @@ typedef struct	s_cmd
 // 		### Global Variable ###
 typedef struct	s_global
 {
-	int					sig;
+	struct sigaction	sa;
 }						g_global;						//need to call it g_global
 
 //		### Pipe Structure ###
