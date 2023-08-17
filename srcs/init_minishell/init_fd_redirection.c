@@ -42,14 +42,12 @@ int	ft_get_outfile_fd(t_tok **tk)
 {
 	int	fd;
 
-
 	fd = 1;
 	(*tk) = (*tk)->next;
 	if (*tk == NULL)
 		return (fd);
 	while ((*tk)->type == E_SPACE)
 	{
-		printf("E_SPACE Tk Word = %s\n", (*tk)->word);
 		if ((*tk)->next == NULL)
 		{
 			(*tk) = (*tk)->next;
@@ -60,9 +58,7 @@ int	ft_get_outfile_fd(t_tok **tk)
 	}
 	if ((*tk) != NULL)
 	{
-		printf("Open Tk Word = %s\n", (*tk)->word);
 		fd = open((*tk)->word, O_CREAT | O_TRUNC | O_RDWR, 0666);
-		printf("FD = %d\n", fd);
 	}
 	global.last_exit_status = 0;
 	return (fd);
@@ -100,20 +96,22 @@ void	ft_open_files_redirection(t_tok **tk, t_cmd *cmd)
 		cmd->read = ft_get_infile_fd(tk);
 		if ((*tk) != NULL)
 			((*tk)) = (*tk)->next;
-
 	}
 	else if (ft_strcmp((*tk)->word, D_OUTFILE) == 0)
 	{
 		cmd->write = ft_get_outfile_fd(tk);
 		if ((*tk) != NULL)
-		{
 			((*tk)) = (*tk)->next;
-		}
-			
 	}
 	else if (ft_strcmp((*tk)->word, D_APPEND) == 0)
 	{
 		cmd->write = ft_get_append_outfile_fd(tk);
+		if ((*tk) != NULL)
+			((*tk)) = (*tk)->next;
+	}
+	else
+	{
+		cmd->read = ft_get_heredoc_temp_fd(tk);
 		if ((*tk) != NULL)
 			((*tk)) = (*tk)->next;
 	}

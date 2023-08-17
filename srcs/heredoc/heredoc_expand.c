@@ -1,72 +1,51 @@
-
 #include "../includes/minishell.h"
 
-bool	ft_heredoc_line_got_dollar(char *input)
+char	*ft_list_to_char_expands(t_linked_list *head)
 {
-	DBG("In ft heredoc got dollar\n");
-	int	i;
+	int				total_size;
+	t_linked_list	*curr;
+	char			*str;
 
-	i = 0;
-	while (input[i] != '\0')
+	str = NULL;
+	curr = head;
+	total_size = 0;
+	DBG("Here in list to char expands");
+	while (curr != NULL)
 	{
-		if (input[i] == '$')
-		{
-			return (true);
-		}
-		i++;
+		ft_replace_node_content(curr);
 	}
-	DBG("Before Return in ft heredoc got dollar\n");
-	return (false);
+	str = (char *)malloc(sizeof(char) * (total_size + 1));
+	if (str == NULL)
+		ft_memory_allocation_failed();
+	curr = head;
+	str[0] = '\0';
+	while (curr != NULL)
+	{
+		ft_strcat(str, curr->value);
+		ft_strcat(str, "\n");
+		curr = curr->next;
+	}
+	// Free Linked List
+	return (str);
 }
 
-char	*ft_get_line_with_expand(char *input)
+char	*ft_replace_node_content(t_linked_list *node)
 {
-	DBG("In ft get line with expand\n");
 	int		i;
-	int		j;
-	char	*var;
-	char	*var_value;
-	char	*expand_input;
-	char	str[2];
+	char	*new;
+	char	*value;
 
 	i = 0;
-	j = 0;
-	expand_input = "";
-	DBG("Before while\n");
-	while (input[i] != '\0')
+	while (node->value[i] != '\0')
 	{
-		str[0] = input[i];
-		str[1] = '\0';
-		DBG("In while\n");
-		if (input[i] == '$')
-		{
-			j = i;
-			while (input[i] != '\0' && input[i] != ' ')
-			{
-				i++;
-			}
-			var = ft_substr(input, j + 1, i - j - 1);
-			N_DBG(j + 1);
-			N_DBG(i - j);
-			var_value = getenv(var);
-			DBG(var);
-			if (var_value != NULL)
-			{
-				expand_input = ft_strjoin(expand_input, var_value);
-				DBG("Var Value"); DBG(var_value);
-			}
-			else
-			{
-				expand_input = ft_strjoin(expand_input, var);
-			}
-			free(var);
-		}
-		else
-		{
-			expand_input = ft_strjoin(expand_input, str);
-		}
+		printf("Node->Value[%d] = %c\n", i, node->value[i]);
 		i++;
 	}
-	DBG("Before Return ft get line with expand\n");
-	return (expand_input);
+	exit(1);
+	return (NULL);
+}
+
+char	*ft_get_dollar_value(char *word)
+{
+	
 }

@@ -73,5 +73,11 @@ typedef struct	s_pipex
 	// t_lcmd		*commands;
 }				t_pipex;
 
+typedef struct s_linked_list
+{
+	char					*value;
+	struct s_linked_list	*next;
+}				t_linked_list;
+
 
 #endif

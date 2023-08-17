@@ -70,8 +70,12 @@ PIPE2_FILES :=		exec_pipes.c			\
 					utils_pipes_1.c			\
 					utils_pipes_2.c			\
 
-HEREDOC_FILES :=	heredoc_utils1.c		\
+HEREDOC_FILES :=	heredoc_utils.c			\
 					heredoc_expand.c		\
+					heredoc_no_expand.c		\
+					heredoc_list_utils.c	\
+					heredoc_error.c			\
+					heredoc.c				\
 
 	### OBJECTS ###
 CMDLINE_FILES := $(addprefix $(OBJS_PATH)/cmd_line/, $(CMDLINE_FILES:.c=.o))

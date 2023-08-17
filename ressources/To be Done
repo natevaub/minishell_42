@@ -2,6 +2,10 @@ To Do List! :D
 
 PARSING
 -> Support Heredoc
+	: heredoc without expand ❌
+		-> trim quotes when storing the delem ❌
+		-> unlink file when done ❌
+	: heredoc with expand ❌
 -> Support syntax
 	: segfault when syntax isn't correct ✅
 
@@ -12,3 +16,5 @@ SIGNAL
 -> Support signals:	❌
 	: buggy output when wc + Ctrl C
 	:
+
+LEAKS ❌

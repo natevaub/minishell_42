@@ -43,21 +43,31 @@ t_cmd	*ft_init_cmds(t_tok **tokens)
 	*cmd = (t_cmd){};
 	cmd->read = 0;
 	cmd->write = 1;
+	DBG("Inits cmds 1");
 	while ((*tokens) != NULL)
 	{
+		DBG((*tokens)->word);
 		if ((*tokens)->type == E_REDIRECTION)
 		{
+			DBG("Inits cmds 2");
 			ft_open_files_redirection(tokens, cmd);
 		}
 		else if ((*tokens)->type == E_STRING)
+		{
 			cmd->option = ft_store_cmd_options(tokens, cmd);
+			DBG("Inits cmds 3");
+		}
 		else if ((*tokens)->type == E_PIPE)
 		{
 			(*tokens) = (*tokens)->next;
+			DBG("Inits cmds 4");
 			break ;
 		}
 		else if ((*tokens) != NULL)
+		{
+			DBG("Inits cmds 5");
 			(*tokens) = (*tokens)->next;
+		}
 	}
 	return (cmd);
 }

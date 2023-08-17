@@ -23,7 +23,7 @@
 extern t_global	global;
 
 # define ERR_CMD		"Enter valid command "
-# define ERR_EXEC		"Execve "
+# define ERR_EXEC		"Execve"
 # define DEBUG 1
 # define DBG(str) ft_putstr_fd(str, 2); ft_putstr_fd("\n", 2)
 # define N_DBG(str) ft_putnbr_fd(str, 2); ft_putstr_fd("\n", 2)
@@ -260,14 +260,29 @@ void		ft_init_pipes_struct(t_minishell *shell);
 /*
 	HEREDOC
 */
-/*	---	heredoc_utils1.c	---*/
-char	*ft_get_heredoc_eof(t_minishell *shell);
+/*	---	heredoc.c	---	*/
 int		ft_heredoc(t_minishell *shell);
+int		ft_get_heredoc_temp_fd(t_tok **tk);
+
+/*	---	heredoc_utils.c	---*/
+char	*ft_get_heredoc_eof_util(t_tok *tok);
 int		ft_heredoc_detected(t_minishell *shell);
-void	ft_read_until_eof(char *eof);
+char	*ft_get_heredoc_eof(t_minishell *shell);
+bool	ft_eof_quoted(char *eof);
 
 /*	---	heredoc_expand.c	---	*/
-bool	ft_heredoc_line_got_dollar(char *input);
-char	*ft_get_line_with_expand(char *input);
+char	*ft_list_to_char_expands(t_linked_list *head);
+char	*ft_replace_node_content(t_linked_list *node);
+
+/*	---	heredoc_list_utils.c	---	*/
+t_linked_list	*ft_insert_at_tail(t_linked_list *head, char *content);
+
+/*	---	heredoc_no_expand.c	---	*/
+t_linked_list	*ft_store_heredoc_content(char *eof);
+char			*ft_list_to_char(t_linked_list *head);
+void			ft_write_to_temp_file(char *content);
+
+/*	---	heredoc_no_expand.c	---	*/
+void			ft_memory_allocation_failed(void);
 
 #endif

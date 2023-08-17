@@ -23,6 +23,7 @@ int main(int ac, char **av, char **envp)
 		ft_parsing(&shell, prompt);
 		if (shell.syntax == 0)
 		{
+			DBG("10");
 			if (ft_count_cmds(shell.cmd) < 2)
 			{
 				ft_exec_no_pipe(&shell, envp);
