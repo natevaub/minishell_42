@@ -12,14 +12,24 @@
 
 #include "../../includes/minishell.h"
 
-extern g_global	global;
-
 void	sub_dup2(int read, int write)
 {
 	if (read != 0)
-		improved_dup2(read, STDIN_FILENO);
+	{
+		if (improved_dup2(read, STDIN_FILENO) < 0)
+		{
+			global.status = 1;											//need to check, this doesn't set the exit status correctly
+			exit(1);
+		}
+	}
 	if (write != 1)
-		improved_dup2(write, STDOUT_FILENO);
+	{
+		if (improved_dup2(write, STDOUT_FILENO) < 0)
+		{
+			global.status = 1;
+			exit(1);
+		}
+	}
 }
 
 int	improved_dup2(int fildes, int fildes2)
@@ -30,7 +40,6 @@ int	improved_dup2(int fildes, int fildes2)
 	if (error < 0)
 	{
 		perror("error dup2");
-		exit(errno);
 	}
 	return (error);
 }
@@ -68,4 +77,5 @@ void	ft_init_pipes_struct(t_minishell *shell)
 		return ;																				//set right error msg
 	shell->p->count_cmds = ft_count_cmds(shell->cmd);
 	shell->p->idx = 0;
+	global.status = 0;
 }

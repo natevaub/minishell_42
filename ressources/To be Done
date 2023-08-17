@@ -9,6 +9,20 @@ EXECUTION
 -> Support full path command: /bin/ls ✅
 
 SIGNAL
--> Support signals:	❌
-	: buggy output when wc + Ctrl C
-	:
+-> Support signals:
+	: buggy output when wc + Ctrl C ✅
+	: need to test if ctrl + \ gives "Quit: 3" when interrupting a process
+
+ERROR MANAGEMENT
+-> Open pipe:
+	: currently we have this:
+		~/Desktop/minishell_team$ ls |
+		minishell : syntax error near unexpected token `|'
+	it should not give an error but wait for further input:
+		bash-3.2$ ls |
+		>
+-> cat | cat | ls:
+	: should show ls and then wait for further input
+
+-> buffer management
+

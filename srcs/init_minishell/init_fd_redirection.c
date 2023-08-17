@@ -10,6 +10,14 @@ int	ft_error_red_file(char	*file)
 	return (1);
 }
 
+void	ft_open_failed(char *str, t_minishell *ms)
+{
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd(": No such file or directory\n", 2);
+	ms->last_exit_status = 1;
+}
+
 int	ft_get_infile_fd(t_tok **tk, t_minishell *ms)
 {
 	int	fd;
@@ -30,8 +38,8 @@ int	ft_get_infile_fd(t_tok **tk, t_minishell *ms)
 	}
 	if ((*tk) != NULL)
 		fd = open((*tk)->word, O_RDONLY);
-	// if (fd == -1)
-	// 	ms->last_exit_status = ft_open_failed((*tk)->word);
+	if (fd == -1)
+		ft_open_failed((*tk)->word, ms);							//need to create a function for "infile: No such file or directory"
 	else
 		ms->last_exit_status = 0;
 	return (fd);

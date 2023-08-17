@@ -78,7 +78,7 @@ int			ft_syntax_open_quote_check(char *str, char c, int *i);
 /*	--- syntax.c	--- */
 int			ft_syntax_checker(t_minishell *shell);
 int			ft_look_for_err(t_tok *tok);
-void		ft_print_error(int err);
+void		ft_print_error(int err, t_minishell *ms);
 
 /*
 	PARSER
@@ -210,9 +210,9 @@ char		*get_expand_var(char *var);
 
 /*	---	signals.c	---*/
 void		ft_init_signals(void (*handle_signals)(int));
-void		signal_prompt_handler(int sig);
 void		signal_exec_handler(int sig);
 extern void	rl_replace_line(const char *, int);
+void		signal_child_handler(int sig);
 
 /*
 	EXPAND
@@ -232,6 +232,7 @@ char		*ft_join_array(char *temp[256]);
 */
 void		ft_exec_no_pipe(t_minishell *ms, char **envp);
 void		child_exec_no_pipe(t_minishell *ms, char **env_tab);
+void		parent_exec_no_pipe(pid_t *pid, int *exit_status, t_minishell *ms);
 
 /*
 	PIPES2

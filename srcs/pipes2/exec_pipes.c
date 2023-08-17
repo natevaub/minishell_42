@@ -59,29 +59,20 @@ void	ft_parent_close(t_minishell *ms)
 
 void	ft_exec_parent(t_minishell *ms, pid_t *pid)
 {
-	// int	i;
-	int	status;
+	int	exit_status;
 
-	// i = -1;
 	if (ms->p->idx != 0)
 		ft_parent_close(ms);
-	// ft_parent_close(ms);
-	// close(ms->p->pipe_fd[(ms->p->idx) % 2][0]);
-	// close(ms->p->pipe_fd[(ms->p->idx) % 2][1]);
-	// while (++i < ms->p->count_cmds)
-	// {
-		waitpid(*pid, &status, 0);
-		if (WIFSIGNALED(status) == true)
-		{
-			if (WTERMSIG(status) == SIGQUIT)
-				write(1, "Quit: 3\n", 2);
-			else if (WTERMSIG(status) == SIGINT)
-				write(1, "\n", 1);
-			ms->last_exit_status = 128 + status;
-		}
-		if (WIFEXITED(status) == true)
-			ms->last_exit_status = WEXITSTATUS(status);
-	// }
+	waitpid(*pid, &exit_status, 0);
+	if (WIFSIGNALED(exit_status) == true)
+	{
+		if (WEXITSTATUS(exit_status) == SIGINT)
+			ms->last_exit_status = global.status;
+	}
+	if (WIFEXITED(exit_status) == true)
+		ms->last_exit_status = WEXITSTATUS(exit_status);
+	else
+		ms->last_exit_status = global.status;
 }
 
 void	ft_pipeline_execution(t_minishell *ms, char **envp)
@@ -98,7 +89,6 @@ void	ft_pipeline_execution(t_minishell *ms, char **envp)
 		if (pid == 0)
 		{
 			ft_set_fd(ms->p, cmd);
-			signal(SIGINT, SIG_IGN);
 			if (builtin_check(cmd->cmd) == 1)
 			{
 				builtin_run(ms, cmd);

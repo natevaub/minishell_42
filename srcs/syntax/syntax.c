@@ -12,7 +12,7 @@ int	ft_syntax_checker(t_minishell *shell)
 	{
 		shell->syntax = 1;
 		shell->token = curr;
-		ft_print_error(err);
+		ft_print_error(err, shell);
 		return (1);
 	}
 	shell->syntax = 0;
@@ -45,9 +45,9 @@ int	ft_look_for_err(t_tok *tok)
 	return (0);
 }
 
-void	ft_print_error(int err)
+void	ft_print_error(int err, t_minishell *ms)
 {
-	// global.last_exit_status = 258;																	need to change it to ms->last_exit_status
+	ms->last_exit_status = 258;
 	if (err == 1)
 		ft_putstr_fd("minishell : syntax error near unexpected token `<' or `>'\n", 2);
 	else if (err == 2)
