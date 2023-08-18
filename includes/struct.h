@@ -50,13 +50,9 @@ typedef struct	s_global
 //		### Pipe Structure ###
 typedef struct	s_pipex
 {
-	// pid_t		pid;
-	// int			infile_fd;
-	// int			outfile_fd;
 	int			count_cmds;
 	int			idx;
 	int			pipe_fd[2][2];
-	// t_lcmd		*commands;
 }				t_pipex;
 
 //		### All Data ###

@@ -141,6 +141,7 @@ char	*ft_get_venv_value(char *word, int *start, int *i, t_minishell *ms)
 	char 	*new;
 	char	*venv;
 
+	new = NULL;
 	if (word[*start] == '$')
 	{
 		if (word[*start + 1] == '?')
