@@ -33,3 +33,9 @@ ERROR MANAGEMENT
 	: 131 for SIGQUIT interruption ✅
 	: 0 for all good 🚼
 
+bash-3.2$ >a >b
+bash-3.2$ <a <b <c cat
+bash: c: No such file or directory
+bash-3.2$ <a <c <b cat
+bash: c: No such file or directory
+

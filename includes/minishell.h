@@ -240,7 +240,7 @@ void		parent_exec_no_pipe(pid_t *pid, int *exit_status, t_minishell *ms);
 /*	---	exec_pipes.c	---*/
 void		ft_pipeline_execution(t_minishell *shell, char **envp);
 int			ft_exec_child(t_lcmd *cmd, char **envp, t_minishell *ms);
-void		ft_exec_parent(t_minishell *ms, char *cmd, pid_t *pid);
+void		ft_exec_parent(t_minishell *ms, t_lcmd *cmd, pid_t *pid);
 void		ft_set_fd(t_pipex *p, t_lcmd *node);
 
 /*	---	utils_pipes_1.c	---*/

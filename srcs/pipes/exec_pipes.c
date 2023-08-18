@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/18 15:49:28 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/18 17:56:29 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,26 +57,53 @@ int	ft_exec_child(t_lcmd *cmd, char **envp, t_minishell *ms)
 
 void	ft_parent_close(t_minishell *ms)
 {
-	close(ms->p->pipe_fd[(ms->p->idx + 1) % 2][0]);
-	close(ms->p->pipe_fd[(ms->p->idx + 1) % 2][1]);
+	if (ms->p->idx != 0)
+	{
+		close(ms->p->pipe_fd[(ms->p->idx + 1) % 2][0]);
+		close(ms->p->pipe_fd[(ms->p->idx + 1) % 2][1]);
+	}
 }
 
-void	ft_exec_parent(t_minishell *ms, char *cmd, pid_t *pid)
+void	ft_exec_parent(t_minishell *ms, t_lcmd *cmd, pid_t *pid)
 {
+	int	i;
 	int	exit_status;
+	(void)	pid;
+	int tmp;
 
+	i = -1;
 	if (ms->p->idx != 0)
 		ft_parent_close(ms);
-	waitpid(*pid, &exit_status, 0);
-	if (WIFEXITED(exit_status))
-		ms->last_exit_status = WEXITSTATUS(exit_status);
-	else
+	close(ms->p->pipe_fd[(ms->p->idx) % 2][0]);
+	close(ms->p->pipe_fd[(ms->p->idx) % 2][1]);
+	while (++i < ms->p->count_cmds)
 	{
-		if (ft_strncmp(cmd, "top", 3) == 0)
-			ms->last_exit_status = 0;
-		else
-			ms->last_exit_status = global.status;
+		tmp = waitpid(-1, &exit_status, 0);
+		if (pid && tmp == *pid)
+		{
+			if (WIFEXITED(exit_status))
+			ms->last_exit_status = WEXITSTATUS(exit_status);
+			else
+			{
+				if (cmd != NULL && ft_strncmp(cmd->cmd, "top", 3) == 0)
+					ms->last_exit_status = 0;
+				else
+					ms->last_exit_status = global.status;
+			}
+		}
 	}
+}
+
+void	ft_run_multiple_cmds(t_minishell *ms, char **envp, t_lcmd *cmd)
+{
+	if (builtin_check(cmd->cmd) == 1)
+	{
+		builtin_run(ms, cmd);
+		exit(ms->last_exit_status);
+	}
+	else
+		ft_exec_child(cmd, envp, ms);
+
 }
 
 void	ft_pipeline_execution(t_minishell *ms, char **envp)
@@ -93,18 +120,12 @@ void	ft_pipeline_execution(t_minishell *ms, char **envp)
 		if (pid == 0)
 		{
 			ft_set_fd(ms->p, cmd);
-			if (builtin_check(cmd->cmd) == 1)
-			{
-				builtin_run(ms, cmd);
-				exit(ms->last_exit_status);
-			}
-			else
-				ft_exec_child(cmd, envp, ms);
+			ft_run_multiple_cmds(ms, envp, cmd);
 		}
 		if (pid > 0)
-			ft_exec_parent(ms, cmd->cmd, &pid);
+			ft_parent_close(ms);
 		ms->p->idx++;
 		cmd = cmd->next;
 	}
-	waitpid(-1, NULL, 0);
+	ft_exec_parent(ms, cmd, &pid);
 }
