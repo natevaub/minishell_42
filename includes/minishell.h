@@ -19,15 +19,12 @@
 # include "../libs/libft/libft.h"
 # include "../libs/ftprintf/ft_printf.h"
 
-
-g_global	global;
-
 # define ERR_CMD		"Enter valid command "
 # define ERR_EXEC		"Execve "
 # define DEBUG 0
 # define DBG(str) ft_putstr_fd(str, 2); ft_putstr_fd("\n", 2)
 
-
+extern	g_global	global;
 
 /*
 	CMD_LINE

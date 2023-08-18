@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_pwd_cd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:38:36 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/15 17:16:14 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/19 00:06:10 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-extern g_global	global;
 
 //CD WITH ONLY A RELATIVE OR ABSOLUTE PATH
 /*The cd command in Linux is known as the change directory command.

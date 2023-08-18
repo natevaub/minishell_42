@@ -1,5 +1,7 @@
 #include "../../includes/minishell.h"
 
+g_global global;
+
 void	ft_init_minishell(t_minishell *shell, char **env)
 {
 	struct termios	termios_new;
