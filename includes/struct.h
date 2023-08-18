@@ -72,4 +72,10 @@ typedef struct	s_minishell
 	struct termios		termios_default;
 }						t_minishell;
 
+typedef struct s_linked_list
+{
+	char					*value;
+	struct s_linked_list	*next;
+}				t_linked_list;
+
 #endif

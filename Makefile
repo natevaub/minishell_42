@@ -70,7 +70,12 @@ PIPE2_FILES :=		exec_pipes.c			\
 					utils_pipes_1.c			\
 					utils_pipes_2.c			\
 
-HEREDOC_FILES :=	heredoc_utils1.c			\
+HEREDOC_FILES :=	heredoc_error.c			\
+					heredoc_expand.c		\
+					heredoc_list_utils.c	\
+					heredoc_no_expand.c		\
+					heredoc_utils.c			\
+					heredoc.c				\
 
 	### OBJECTS ###
 CMDLINE_FILES := $(addprefix $(OBJS_PATH)/cmd_line/, $(CMDLINE_FILES:.c=.o))
@@ -130,7 +135,7 @@ $(LIBPRINTF):
 
 $(NAME):	$(LIBFT) $(LIBPRINTF) $(OBJS)
 			@echo "$(GREEN)Compilating minishell$(RESET)"
-			@$(CC) $(CFLAGS) -Llibs/ftprintf -Llibs/libft -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include/readline -Llibs/ftprintf -Llibs/libft -o $@ $(OBJS) $(LIBS)
+			@$(CC) $(CFLAGS) -Llibs/ftprintf -Llibs/libft -L/Users/nvaubien/.brew/Cellar/readline/8.2.1/lib -I/Users/nvaubien/.brew/Cellar/readline/8.2.1/include/readline -Llibs/ftprintf -Llibs/libft -o $@ $(OBJS) $(LIBS)
 			@echo "$(CYAN)✔️  Compilation Done$(RESET)"
 # -L/Users/ckarl/homebrew/opt/readline/lib -I/Users/ckarl/homebrew/opt/readline/include/readline
 # -L/Users/nvaubien/.brew/Cellar/readline/8.2.1/lib -I/Users/nvaubien/.brew/Cellar/readline/8.2.1/include/readline
