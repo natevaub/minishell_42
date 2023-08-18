@@ -1,7 +1,5 @@
 #include "../includes/minishell.h"
 
-extern g_global	global;
-
 int main(int ac, char **av, char **envp)
 {
 	t_minishell			shell;

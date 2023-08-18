@@ -2,6 +2,10 @@ To Do List! :D
 
 PARSING
 -> Support Heredoc
+	: handle delimitor : "eof" -> eof ❌
+	: heredoc without expands ✅
+	: heredoc with expands ❌
+
 -> Support syntax
 	: segfault when syntax isn't correct ✅
 
