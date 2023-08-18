@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/16 17:00:15 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/18 15:49:28 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,10 @@ int	ft_exec_child(t_lcmd *cmd, char **envp, t_minishell *ms)
 	char	*cmd_with_path;
 
 	cmd_with_path = ft_get_right_path(cmd->cmd, ms);
+	if (!cmd_with_path)
+	{
+		exit(127);
+	}
 	if (execve(cmd_with_path, cmd->option, envp) < 0)
 	{
 		free(cmd_with_path);
@@ -57,22 +61,22 @@ void	ft_parent_close(t_minishell *ms)
 	close(ms->p->pipe_fd[(ms->p->idx + 1) % 2][1]);
 }
 
-void	ft_exec_parent(t_minishell *ms, pid_t *pid)
+void	ft_exec_parent(t_minishell *ms, char *cmd, pid_t *pid)
 {
 	int	exit_status;
 
 	if (ms->p->idx != 0)
 		ft_parent_close(ms);
 	waitpid(*pid, &exit_status, 0);
-	if (WIFSIGNALED(exit_status) == true)
-	{
-		if (WEXITSTATUS(exit_status) == SIGINT)
-			ms->last_exit_status = global.status;
-	}
-	if (WIFEXITED(exit_status) == true)
+	if (WIFEXITED(exit_status))
 		ms->last_exit_status = WEXITSTATUS(exit_status);
 	else
-		ms->last_exit_status = global.status;
+	{
+		if (ft_strncmp(cmd, "top", 3) == 0)
+			ms->last_exit_status = 0;
+		else
+			ms->last_exit_status = global.status;
+	}
 }
 
 void	ft_pipeline_execution(t_minishell *ms, char **envp)
@@ -98,28 +102,9 @@ void	ft_pipeline_execution(t_minishell *ms, char **envp)
 				ft_exec_child(cmd, envp, ms);
 		}
 		if (pid > 0)
-			ft_exec_parent(ms, &pid);
+			ft_exec_parent(ms, cmd->cmd, &pid);
 		ms->p->idx++;
 		cmd = cmd->next;
 	}
 	waitpid(-1, NULL, 0);
 }
-
-// int ft_set_fd_builtins(t_minishell *ms, t_pipex *p, t_lcmd *node)
-// {
-// 	// Handle input redirection if needed
-// 	if (node->fd_read != 0)
-// 	{
-// 		dup2(node->fd_read, STDIN_FILENO);
-// 		close(node->fd_read);
-// 	}
-
-// 	// Handle output redirection if needed
-// 	if (node->fd_write != 1)
-// 	{
-// 		dup2(node->fd_write, STDOUT_FILENO);
-// 		close(node->fd_write);
-// 	}
-
-// 	return (0);
-// }

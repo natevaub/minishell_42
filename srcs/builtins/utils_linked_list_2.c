@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/15 17:16:26 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/18 13:42:03 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ void	bubble_sort(t_venv **head)
 	i = 0;
 	while (i < list_size(*head))
 	{
-		a = get_node(*head, i);
+		a = get_node_venv(*head, i);
 		x = i + 1;
 		while (x < list_size(*head))
 		{
-			b = get_node(*head, x);
+			b = get_node_venv(*head, x);
 			if (a->word[0] > b->word[0])
 				content_swap(a, b);
 			x++;
@@ -81,7 +81,7 @@ int	insert_node_in_list(char *var, t_venv **head)
 	addback->word = ft_strdup(var);
 	if (!addback->word)											//included errno here
 		return (EXIT_FAILURE);
-	pre_copy = get_node(*head, 10);
+	pre_copy = get_node_venv(*head, 10);
 	post_copy = pre_copy->next;
 	pre_copy->next = addback;
 	post_copy->prev = addback;

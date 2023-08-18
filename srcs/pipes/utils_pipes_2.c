@@ -6,13 +6,11 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/15 17:19:45 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/18 13:36:38 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-extern g_global	global;
 
 //max nbr of commands
 int	ft_count_cmds(t_lcmd *cmd)
@@ -83,7 +81,6 @@ char	*ft_get_right_path(char *cmd, t_minishell *ms)
 	all_paths = ft_split(ft_get_path_line(ms), ':');
 	if (access(cmd, F_OK | X_OK) == 0)
 	{
-		// printf("Absolute Path\n");
 		return (cmd);
 	}
 	while (*all_paths)

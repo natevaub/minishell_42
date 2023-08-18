@@ -11,7 +11,7 @@ EXECUTION
 SIGNAL
 -> Support signals:
 	: buggy output when wc + Ctrl C ✅
-	: need to test if ctrl + \ gives "Quit: 3" when interrupting a process
+	: need to test if ctrl + \ gives "Quit: 3" when interrupting a process ✅
 
 ERROR MANAGEMENT
 -> Open pipe:
@@ -22,7 +22,14 @@ ERROR MANAGEMENT
 		bash-3.2$ ls |
 		>
 -> cat | cat | ls:
-	: should show ls and then wait for further input
+	: should show ls and then wait for further input 🚼
 
 -> buffer management
+
+-> error codes:
+	: 127 for wrong command ✅
+	: 1 for right command with wrong option or "no file or directory" error ✅
+	: 130 for SIGINT interruption ✅
+	: 131 for SIGQUIT interruption ✅
+	: 0 for all good 🚼
 

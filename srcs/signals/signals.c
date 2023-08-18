@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/16 16:52:03 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/18 15:52:34 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,10 @@ void	signal_child_handler(int sig)			//need to test this
 	}
 	else if (sig == SIGQUIT)
 	{
-		ft_putstr_fd("Quit: ", STDOUT_FILENO);
+		ft_putstr_fd("^\\Quit: ", STDOUT_FILENO);
 		ft_putnbr_fd(SIGQUIT, STDOUT_FILENO);
 		ft_putstr_fd("\n", STDOUT_FILENO);
+		global.status = 131;
 	}
 }
 

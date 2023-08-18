@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/07/07 17:41:03 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/18 13:41:35 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_venv	*first_node(t_venv *lst)
 	return (lst);
 }
 
-t_venv	*get_node(t_venv *head, int index)
+t_venv	*get_node_venv(t_venv *head, int index)
 {
 	t_venv	*copy;
 	int			i;

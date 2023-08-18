@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/16 11:50:43 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/18 14:57:40 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	builtin_run(t_minishell *ms, t_lcmd *cmd)
 	else if (ft_strncmp(cmd->cmd, "env", 3) == 0)
 		ms->last_exit_status = print_env(ms, cmd);
 	else if (ft_strncmp(cmd->cmd, "exit", 4) == 0)
-		cmd_exit(*((cmd->option) + 1), ms);
+		cmd_exit(ft_atoi(*((cmd->option) + 1)), ms);
 	else if (ft_strncmp(cmd->cmd, "minishell", 9) == 0)
 		change_shvl_in_env(1, ms);
 }

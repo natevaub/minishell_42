@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:38:36 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/15 17:15:55 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/18 14:59:02 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ void	change_shvl_in_env(int nbr, t_minishell *ms)
 /*The exit() function causes normal process termination and the
 least significant byte of status (i.e., status & 0xFF) is
 returned to the parent (see wait(2)).*/
-void	cmd_exit(char *status, t_minishell *ms)
+void	cmd_exit(int status, t_minishell *ms)
 {
+	ms->last_exit_status = status;
 	if (ft_strncmp("1", get_value(ms->copy_env, "SHLVL"), 1) == 0)
 	{
-		if (status)
-			ms->last_exit_status = ft_atoi(status);
+		ft_putstr_fd("exit\n", 1);
 		exit(ms->last_exit_status);
 	}
 	else

@@ -159,7 +159,7 @@ int			find_c(char *str, char c);
 int			print_env(t_minishell *ms, t_lcmd *cmd);
 
 /*	---	builtin_exit.c	---*/
-void		cmd_exit(char *status, t_minishell *ms);
+void		cmd_exit(int status, t_minishell *ms);
 void		change_shvl_in_env(int nbr, t_minishell *ms);
 
 /*	---	builtin_export.c	---*/
@@ -180,7 +180,7 @@ int			cmd_unset(char **var, t_minishell *ms);
 int			list_size(t_venv *lst);
 t_venv		*last_node(t_venv *lst);
 t_venv		*first_node(t_venv *lst);
-t_venv		*get_node(t_venv *head, int index);
+t_venv		*get_node_venv(t_venv *head, int index);
 void		list_append(t_venv **lst, char *element);
 
 /*	---	utils_linked_list_2.c	---*/
@@ -235,12 +235,12 @@ void		child_exec_no_pipe(t_minishell *ms, char **env_tab);
 void		parent_exec_no_pipe(pid_t *pid, int *exit_status, t_minishell *ms);
 
 /*
-	PIPES2
+	PIPES
 */
 /*	---	exec_pipes.c	---*/
 void		ft_pipeline_execution(t_minishell *shell, char **envp);
 int			ft_exec_child(t_lcmd *cmd, char **envp, t_minishell *ms);
-void		ft_exec_parent(t_minishell *ms, pid_t *pid);
+void		ft_exec_parent(t_minishell *ms, char *cmd, pid_t *pid);
 void		ft_set_fd(t_pipex *p, t_lcmd *node);
 
 /*	---	utils_pipes_1.c	---*/
