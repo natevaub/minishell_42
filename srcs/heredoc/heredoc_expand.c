@@ -6,7 +6,7 @@
 /*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 02:38:28 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/20 02:38:31 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/20 02:40:21 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	*ft_replace_node_content(t_linked_list *node)
 		if (node->value[i] == '$' && node->value[i + 1] != ' ')
 		{
 			i++;
-			while (node->value[i] != ' ' && node->value[i] != '$' && node->value[i] != '\0')
+			while (node->value[i] != ' ' && node->value[i] != '$' && node->value[i] != '\0' && node->value[i] != '\'' && node->value[i] != '\"')
 			{
 				j++;
 				i++;
