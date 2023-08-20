@@ -1,10 +1,13 @@
-To Do List! :D
+NORMINETTE
+	: norminette on my parts (nate) ❌
 
 PARSING
 -> Support Heredoc
-	: handle delimitor : "eof" -> eof ❌
+	: handle multiple eof ❌
+	: handle delimitor : "eof" -> eof ✅
 	: heredoc without expands ✅
-	: heredoc with expands ❌
+	: heredoc with expands ✅
+	: free thr resources and unlink the file ❌
 
 -> Support syntax
 	: segfault when syntax isn't correct ✅
