@@ -42,4 +42,3 @@ bash-3.2$ <a <b <c cat
 bash: c: No such file or directory
 bash-3.2$ <a <c <b cat
 bash: c: No such file or directory
-

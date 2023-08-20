@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_joined_token.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/19 02:10:35 by nvaubien          #+#    #+#             */
+/*   Updated: 2023/08/19 02:11:22 by nvaubien         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 int	ft_is_joinable(t_tok *token)
@@ -23,10 +35,7 @@ int	ft_join_tk(t_tok *tk)
 	while (tk != NULL)
 	{
 		if (ft_is_joinable(tk) == 1)
-		{
 			tk = tk->next;
-		}
-			
 		else if (tk->next != NULL && *tk->word != ' ' && *tk->next->word != ' ')
 		{
 			i = 0;

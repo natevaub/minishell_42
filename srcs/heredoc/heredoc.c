@@ -12,6 +12,7 @@ int	ft_heredoc(t_minishell *shell)
 		if (ft_eof_quoted(del) == 1)
 		{
 			DBG("EOF Quoted\n");
+			del = ft_strtrim(del, "\"'");
 			node = ft_store_heredoc_content(del);
 			content = ft_list_to_char(node);
 			DBG(content);
@@ -22,7 +23,8 @@ int	ft_heredoc(t_minishell *shell)
 			DBG("EOF Unquoted\n");
 			node = ft_store_heredoc_content(del);
 			content = ft_list_to_char_expands(node);
-			return (0);
+			DBG(content);
+			ft_write_to_temp_file(content);
 		}
 	}
 	return (0);
