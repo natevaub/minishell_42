@@ -1,33 +1,46 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/20 19:54:02 by nvaubien          #+#    #+#             */
+/*   Updated: 2023/08/20 22:23:34 by nvaubien         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
-int	ft_heredoc(t_minishell *shell)
+void	ft_heredoc(t_minishell *shell)
 {
 	char			*content;
-	char			*del;
+	t_linked_list	*del;
 	t_linked_list	*node;
-
+	
 	if (ft_heredoc_detected(shell) == 1)
 	{
-		del = ft_get_heredoc_eof(shell);
-		if (ft_eof_quoted(del) == 1)
+		shell->heredoc = 1;
+		del = ft_get_heredocs(shell->token);
+		while (del != NULL)
 		{
-			DBG("EOF Quoted\n");
-			del = ft_strtrim(del, "\"'");
-			node = ft_store_heredoc_content(del);
-			content = ft_list_to_char(node);
-			DBG(content);
-			ft_write_to_temp_file(content);
-		}
-		else
-		{
-			DBG("EOF Unquoted\n");
-			node = ft_store_heredoc_content(del);
-			content = ft_list_to_char_expands(node);
-			DBG(content);
-			ft_write_to_temp_file(content);
+			if (ft_eof_quoted(del->value) == 1)
+			{
+
+				del->value = ft_strtrim(del->value, "\"'");
+				node = ft_store_heredoc_content(del->value);
+				content = ft_list_to_char(node);
+				ft_write_to_temp_file(content);
+			}
+			else
+			{
+				node = ft_store_heredoc_content(del->value);
+				content = ft_list_to_char_expands(node);
+				ft_write_to_temp_file(content);
+			}
+			del = del->next;
 		}
 	}
-	return (0);
 }
 
 int	ft_get_heredoc_temp_fd(t_tok **tk, t_minishell *ms)

@@ -6,7 +6,7 @@
 /*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 01:46:40 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/20 02:10:37 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/20 18:17:31 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -282,9 +282,10 @@ char			*ft_get_heredoc_eof_util(t_tok *tok);
 char			*ft_get_heredoc_eof(t_minishell *shell);
 int				ft_heredoc_detected(t_minishell *shell);
 bool			ft_eof_quoted(char *eof);
+t_linked_list	*ft_get_heredocs(t_tok *tokens);
 
 /*	---	heredoc.c	---*/
-int				ft_heredoc(t_minishell *shell);
+void			ft_heredoc(t_minishell *shell);
 int				ft_get_heredoc_temp_fd(t_tok **tk, t_minishell *ms);
 
 #endif

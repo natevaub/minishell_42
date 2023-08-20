@@ -65,6 +65,7 @@ typedef struct	s_minishell
 	struct s_pipex		*p;
 	t_venv				*copy_env;
 	int					last_exit_status;
+	int					heredoc;
 	struct termios		termios_default;
 }						t_minishell;
 

@@ -51,7 +51,13 @@ void	ft_free_cmd(t_minishell *shell)
 
 void	ft_free_parsing(t_minishell *shell)
 {
+	DBG("Here");
 	ft_free_cmd(shell);
 	ft_free_token(&shell);
-
+	if (shell->heredoc == 1)
+	{
+		if (unlink(".heredoc") != 0)
+			perror("Error removing .hereoc");
+		shell->heredoc = 0;
+	}
 }

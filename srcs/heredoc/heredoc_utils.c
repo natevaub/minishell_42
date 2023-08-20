@@ -45,6 +45,7 @@ int	ft_heredoc_detected(t_minishell *shell)
 		if (ft_strcmp(shell->token->word, D_HEREDOC) == 0)
 		{
 			shell->token = start;
+			// shell->heredoc = 1;
 			return (1);
 		}
 		shell->token = shell->token->next;
@@ -65,4 +66,35 @@ bool	ft_eof_quoted(char *eof)
 		i++;
 	}
 	return (false);
+}
+
+t_linked_list	*ft_get_heredocs(t_tok *tokens)
+{
+	t_linked_list	*delims;
+	t_tok			*ref;
+
+	ref = tokens;
+	delims = NULL;
+	while (tokens != NULL)
+	{
+		if (ft_strncmp(tokens->word, D_HEREDOC, 2) == 0)
+		{
+			tokens = tokens->next;
+			while (tokens != NULL && tokens->type == E_SPACE)
+			{
+				tokens = tokens->next;
+			}
+			if (tokens && tokens->type == E_STRING)
+			{
+				delims = ft_insert_at_tail(delims, ft_strdup(tokens->word));
+				tokens = tokens->next;
+			}
+		}
+		else
+		{
+			tokens = tokens->next;
+		}
+	}
+	tokens = ref;
+	return (delims);
 }

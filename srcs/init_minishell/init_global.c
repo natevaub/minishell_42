@@ -16,6 +16,7 @@ void	ft_init_minishell(t_minishell *shell, char **env)
 	if ((tcsetattr(STDIN_FILENO, TCSANOW, &termios_new)) == -1)
 		exit(EXIT_FAILURE);
 	global.status = 0;
+	shell->heredoc = 0;
 }
 
 
