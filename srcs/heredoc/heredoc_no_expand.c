@@ -10,7 +10,7 @@ t_linked_list	*ft_store_heredoc_content(char *eof)
 	cur = NULL;
 	while ((line = readline("> ")) != NULL)
 	{
-		if (ft_strcmp(line, eof) == 0)
+		if (ft_strncmp(line, eof, ft_strlen(eof)) == 0)
 		{
 			free(line);
 			break ;
