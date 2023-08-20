@@ -45,7 +45,7 @@ typedef struct	s_cmd
 typedef struct	s_global
 {
 	int	status;
-}						g_global;						//need to call it g_global
+}				g_global;						//need to call it g_global
 
 //		### Pipe Structure ###
 typedef struct	s_pipex
@@ -65,7 +65,14 @@ typedef struct	s_minishell
 	struct s_pipex		*p;
 	t_venv				*copy_env;
 	int					last_exit_status;
+	int					heredoc;
 	struct termios		termios_default;
 }						t_minishell;
+
+typedef struct s_linked_list
+{
+	char					*value;
+	struct s_linked_list	*next;
+}				t_linked_list;
 
 #endif

@@ -29,6 +29,7 @@ void	ft_parsing(t_minishell *shell, char *prompt)
 	shell->syntax = 0;
 	ft_tokenize_prompt(shell, prompt);
 	if (DEBUG) ft_print_tokens(shell->token);
+	ft_heredoc(shell);
 	err = 0;
 	if (shell->syntax == 0)
 	{

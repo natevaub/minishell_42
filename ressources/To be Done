@@ -1,7 +1,15 @@
-To Do List! :D
+NORMINETTE
+	: norminette on my parts (nate) ❌
 
 PARSING
 -> Support Heredoc
+	: handle multiple eof ❌
+	: handle delimitor : "eof" -> eof ✅
+	: heredoc without expands ✅
+	: heredoc with expands ✅
+	: free the resources and unlink the file ❌
+	: gestion des erreurs dans le heredoc ❌
+
 -> Support syntax
 	: segfault when syntax isn't correct ✅
 
@@ -38,4 +46,3 @@ bash-3.2$ <a <b <c cat
 bash: c: No such file or directory
 bash-3.2$ <a <c <b cat
 bash: c: No such file or directory
-

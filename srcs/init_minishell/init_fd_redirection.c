@@ -22,7 +22,6 @@ int	ft_get_infile_fd(t_tok **tk, t_minishell *ms)
 {
 	int	fd;
 
-
 	fd = 0;
 	(*tk) = (*tk)->next;
 	if ((*tk) == NULL)
@@ -101,6 +100,7 @@ int	ft_get_append_outfile_fd(t_tok **tk, t_minishell *ms)
 	return (fd);
 
 }
+
 void	ft_open_files_redirection(t_tok **tk, t_cmd *cmd, t_minishell *ms)
 {
 	if (ft_strcmp((*tk)->word, D_INFILE) == 0)
@@ -108,20 +108,22 @@ void	ft_open_files_redirection(t_tok **tk, t_cmd *cmd, t_minishell *ms)
 		cmd->read = ft_get_infile_fd(tk, ms);
 		if ((*tk) != NULL)
 			((*tk)) = (*tk)->next;
-
 	}
 	else if (ft_strcmp((*tk)->word, D_OUTFILE) == 0)
 	{
 		cmd->write = ft_get_outfile_fd(tk, ms);
 		if ((*tk) != NULL)
-		{
 			((*tk)) = (*tk)->next;
-		}
-
 	}
 	else if (ft_strcmp((*tk)->word, D_APPEND) == 0)
 	{
 		cmd->write = ft_get_append_outfile_fd(tk, ms);
+		if ((*tk) != NULL)
+			((*tk)) = (*tk)->next;
+	}
+	else
+	{
+		cmd->read = ft_get_heredoc_temp_fd(tk, ms);
 		if ((*tk) != NULL)
 			((*tk)) = (*tk)->next;
 	}

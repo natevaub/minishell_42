@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_trimmed_token.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/19 03:08:58 by nvaubien          #+#    #+#             */
+/*   Updated: 2023/08/19 03:09:01 by nvaubien         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 char	*ft_remove_tk_quote(char *word)
@@ -13,7 +25,7 @@ char	*ft_remove_tk_quote(char *word)
 
 void	ft_trim_quote(t_minishell *shell)
 {
-	t_tok *tk;
+	t_tok	*tk;
 
 	tk = shell->token;
 	while (tk != NULL)

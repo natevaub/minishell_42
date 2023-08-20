@@ -53,5 +53,9 @@ void	ft_free_parsing(t_minishell *shell)
 {
 	ft_free_cmd(shell);
 	ft_free_token(&shell);
-
+	if (shell->heredoc == 1)
+	{
+		unlink(".heredoc");
+		shell->heredoc = 0;
+	}
 }

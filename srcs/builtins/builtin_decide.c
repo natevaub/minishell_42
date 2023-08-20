@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_decide.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/18 14:57:40 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/19 00:06:03 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-extern g_global	global;
+// extern g_global	global;
 
 /* function assesses if argument is a built in*/
 int	builtin_check(char *cmd)
