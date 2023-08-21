@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/21 15:45:46 by nvaubien          #+#    #+#             */
+/*   Updated: 2023/08/21 15:45:49 by nvaubien         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 char	*ft_get_heredoc_eof_util(t_tok *tok)
@@ -45,7 +57,7 @@ int	ft_heredoc_detected(t_minishell *shell)
 		if (ft_strcmp(shell->token->word, D_HEREDOC) == 0)
 		{
 			shell->token = start;
-			// shell->heredoc = 1;
+			shell->heredoc = 1;
 			return (1);
 		}
 		shell->token = shell->token->next;
@@ -81,9 +93,7 @@ t_linked_list	*ft_get_heredocs(t_tok *tokens)
 		{
 			tokens = tokens->next;
 			while (tokens != NULL && tokens->type == E_SPACE)
-			{
 				tokens = tokens->next;
-			}
 			if (tokens && tokens->type == E_STRING)
 			{
 				delims = ft_insert_at_tail(delims, ft_strdup(tokens->word));
@@ -91,9 +101,7 @@ t_linked_list	*ft_get_heredocs(t_tok *tokens)
 			}
 		}
 		else
-		{
 			tokens = tokens->next;
-		}
 	}
 	tokens = ref;
 	return (delims);

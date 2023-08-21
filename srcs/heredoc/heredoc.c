@@ -6,7 +6,7 @@
 /*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 19:54:02 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/20 22:23:34 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/21 15:45:02 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,11 @@ void	ft_heredoc(t_minishell *shell)
 	
 	if (ft_heredoc_detected(shell) == 1)
 	{
-		shell->heredoc = 1;
 		del = ft_get_heredocs(shell->token);
 		while (del != NULL)
 		{
 			if (ft_eof_quoted(del->value) == 1)
 			{
-
 				del->value = ft_strtrim(del->value, "\"'");
 				node = ft_store_heredoc_content(del->value);
 				content = ft_list_to_char(node);

@@ -6,7 +6,7 @@
 /*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 01:46:40 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/20 18:17:31 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/21 15:18:00 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -266,7 +266,7 @@ void			ft_memory_allocation_failed(void);
 
 /*	---	heredoc_expand.c	---*/
 char			*ft_list_to_char_expands(t_linked_list *head);
-void			*ft_replace_node_content(t_linked_list *node);
+void			ft_replace_node_content(t_linked_list *node);
 
 /*	---	heredoc_list_utils.c	---*/
 t_linked_list	*ft_insert_at_tail(t_linked_list *head, char *content);

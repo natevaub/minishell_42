@@ -1,5 +1,6 @@
 {
 	"files.associations": {
-		"prompt": "c"
+		"prompt": "c",
+		"minishell.h": "c"
 	}
 }

@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tokenize_prompt.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/21 15:20:48 by nvaubien          #+#    #+#             */
+/*   Updated: 2023/08/21 15:21:39 by nvaubien         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
@@ -11,10 +22,10 @@ void	ft_tokenize_prompt(t_minishell *global, char *prompt)
 	global->token = tk;
 	while (*prompt != '\0')
 	{
-		ft_lstadd_back_token(&global->token, ft_newlst_token(ft_get_tk(&prompt)));
+		ft_lstadd_back_token(&global->token,
+			ft_newlst_token(ft_get_tk(&prompt)));
 	}
 }
-
 
 int	ft_get_tk_type(char *prompt)
 {
@@ -43,7 +54,6 @@ char	*ft_get_tk(char **prompt)
 		ret = ft_get_word(prompt);
 	return (ret);
 }
-
 
 int	ft_get_quoted_tk(char *prompt)
 {

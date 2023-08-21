@@ -6,7 +6,7 @@
 /*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 02:38:28 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/20 02:40:21 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/21 15:32:42 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ char	*ft_list_to_char_expands(t_linked_list *head)
 	str = NULL;
 	curr = head;
 	total_size = 0;
-	// DBG("Here in list to char expands");
 	while (curr != NULL)
 	{
 		ft_replace_node_content(curr);
@@ -40,11 +39,10 @@ char	*ft_list_to_char_expands(t_linked_list *head)
 		ft_strcat(str, "\n");
 		curr = curr->next;
 	}
-	// Free Linked List
 	return (str);
 }
 
-void	*ft_replace_node_content(t_linked_list *node)
+void	ft_replace_node_content(t_linked_list *node)
 {
 	int		i;
 	int		j;
@@ -57,7 +55,6 @@ void	*ft_replace_node_content(t_linked_list *node)
 	ret = ft_strdup("");
 	while (node->value[i] != '\0')
 	{
-		// DBG("In while");
 		if (node->value[i] == '$' && node->value[i + 1] != ' ')
 		{
 			i++;
@@ -68,11 +65,8 @@ void	*ft_replace_node_content(t_linked_list *node)
 			}
 			val = ft_substr(node->value, i - j, j);
 			val_env = getenv(val);
-			// DBG(val_env);
 			if (val_env != NULL)
-			{
 				ft_strcat(ret, val_env);
-			}
 			free(val);
 			j = 0;
 		}
@@ -84,5 +78,4 @@ void	*ft_replace_node_content(t_linked_list *node)
 	}
 	free(node->value);
 	node->value = ret;
-	// DBG(node->value);
 }
