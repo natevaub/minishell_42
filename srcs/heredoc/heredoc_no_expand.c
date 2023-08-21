@@ -41,7 +41,7 @@ char	*ft_list_to_char(t_linked_list *head)
 	total_size = 0;
 	while (curr != NULL)
 	{
-		total_size += ft_strlen(curr->value);
+		total_size += ft_strlen(curr->value) + 1;
 		curr = curr->next;
 	}
 	str = (char *)malloc(sizeof(char) * (total_size + 1));

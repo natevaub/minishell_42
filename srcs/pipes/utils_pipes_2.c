@@ -57,7 +57,7 @@ char	*ft_join_path(char const *s1, char const *s2)
 	len2 = ft_strlen(s2);
 	i = 0;
 	j = 0;
-	copy = (char *)malloc(sizeof(*copy) * (len1 + len2 + 1));
+	copy = (char *)malloc(sizeof(*copy) * (len1 + len2 + 2));
 	if (!copy)
 		return (NULL);
 	while (s1[i])
