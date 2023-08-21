@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_linked_list.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/21 16:38:12 by nvaubien          #+#    #+#             */
+/*   Updated: 2023/08/21 16:38:41 by nvaubien         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 t_lcmd	*ft_newlst_cmd(t_cmd *cmd)
@@ -15,7 +27,6 @@ t_lcmd	*ft_newlst_cmd(t_cmd *cmd)
 	free(cmd);
 	return (new);
 }
-
 
 t_tok	*ft_newlst_token(char *word)
 {
@@ -63,4 +74,3 @@ void	ft_lstadd_back_cmd(t_lcmd **lst, t_lcmd *nw)
 		node->next = nw;
 	}
 }
-

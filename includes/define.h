@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   define.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/21 16:50:11 by nvaubien          #+#    #+#             */
+/*   Updated: 2023/08/21 16:51:51 by nvaubien         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef DEFINE_H
 # define DEFINE_H
 
@@ -22,7 +34,6 @@ enum e_token_type {
 # define D_EXIT		"exit"
 
 //		### DEFINE REDIRECTION ###
-
 # define D_INFILE	"<"
 # define D_OUTFILE	">"
 # define D_HEREDOC	"<<"
@@ -51,6 +62,5 @@ enum e_token_quoted {
 	E_SINGLE = 32,
 	E_DOUBLE = 33
 };
-
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 01:46:40 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/21 15:18:00 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/21 16:50:55 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,10 @@
 # include "../libs/libft/libft.h"
 # include "../libs/ftprintf/ft_printf.h"
 
-# define err_cmd		"enter valid command "
-# define err_exec		"execve "
+# define ERR_CMD	"enter valid command "
+# define ERR_EXEC	"execve"
 # define DEBUG 0
-# define DBG(str) ft_putstr_fd(str, 2); ft_putstr_fd("\n", 2)
-# define N_DBG(nbr) ft_putnbr_fd(nbr, 2); ft_putstr_fd("\n", 2)
+
 
 extern g_global	global;
 
