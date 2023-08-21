@@ -1,14 +1,20 @@
 NORMINETTE
 	: norminette on my parts (nate) ❌
 
+EXPAND
+	: fix -> echo $USER $ $USER ❌
+
+ERROR_MESS
+	: fix syntax error ❌
+
 PARSING
 -> Support Heredoc
-	: handle multiple eof ❌
+	: handle multiple eof ✅
 	: handle delimitor : "eof" -> eof ✅
 	: heredoc without expands ✅
 	: heredoc with expands ✅
 	: free the resources and unlink the file ❌
-	: gestion des erreurs dans le heredoc ❌
+	: gestion des erreurs dans le heredoc ✅
 
 -> Support syntax
 	: segfault when syntax isn't correct ✅

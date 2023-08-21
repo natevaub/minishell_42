@@ -6,7 +6,7 @@
 /*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 17:38:07 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/21 17:44:21 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/21 18:10:49 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,11 @@ void	ft_expand_venv(t_minishell *shell, char	*word)
 	start = 0;
 	while (word[i] != '\0')
 	{
+		// if (word[i] == '$' && (word[i + 1] == ' ' || word[i + 1] == '\0'))
+		// {
+		// 	temp[j] = ft_calloc(sizeof(char), 2);
+		// 	temp[j] = ft_strdup("$");
+		// }
 		if (word[i] != '$')
 		{
 			temp[j] = ft_fill_word(word, &i, &start);
@@ -94,9 +99,7 @@ char	*ft_fill_word(char *word, int *start, int *i)
 	{
 		(*i)++;
 	}
-
 	len = *i - *start;
-
 	new = ft_calloc(sizeof(char), (len + 1));
 	if (!new)
 		return (NULL);
