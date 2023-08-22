@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_expand.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 02:38:28 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/20 02:40:21 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/22 23:09:16 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,8 @@ char	*ft_list_to_char_expands(t_linked_list *head)
 	t_linked_list	*curr;
 	char			*str;
 
-	str = NULL;
 	curr = head;
 	total_size = 0;
-	// DBG("Here in list to char expands");
 	while (curr != NULL)
 	{
 		ft_replace_node_content(curr);
@@ -40,49 +38,47 @@ char	*ft_list_to_char_expands(t_linked_list *head)
 		ft_strcat(str, "\n");
 		curr = curr->next;
 	}
-	// Free Linked List
 	return (str);
+}
+
+int	ft_str_advance(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != ' ' && str[i] != '$' \
+			&& str[i] != '\0' && str[i] != '\'' \
+			&& str[i] != '\"')
+	{
+		i++;
+	}
+	return (i);
 }
 
 void	ft_replace_node_content(t_linked_list *node)
 {
 	int		i;
-	int		j;
 	char	*ret;
 	char	*val;
-	char	*val_env;
 
-	i = 0;
-	j = 0;
+	i = -1;
 	ret = ft_strdup("");
-	while (node->value[i] != '\0')
+	while (node->value[++i] != '\0')
 	{
-		// DBG("In while");
 		if (node->value[i] == '$' && node->value[i + 1] != ' ')
 		{
 			i++;
-			while (node->value[i] != ' ' && node->value[i] != '$' && node->value[i] != '\0' && node->value[i] != '\'' && node->value[i] != '\"')
-			{
-				j++;
-				i++;
-			}
-			val = ft_substr(node->value, i - j, j);
-			val_env = getenv(val);
-			// DBG(val_env);
-			if (val_env != NULL)
-			{
-				ft_strcat(ret, val_env);
-			}
-			free(val);
-			j = 0;
+			val = ft_substr(node->value, i, ft_str_advance(&node->value[i]));
+			ft_strcat(ret, getenv(val));
+			i += ft_str_advance(&node->value[i]);
 		}
 		else
 		{
-			ret = ft_strjoin(ret, ft_substr(node->value, i, 1));
-			i++;
+			val = ft_substr(node->value, i, 1);
+			ret = ft_strcat(ret, val);
 		}
+		free(val);
 	}
 	free(node->value);
 	node->value = ret;
-	// DBG(node->value);
 }

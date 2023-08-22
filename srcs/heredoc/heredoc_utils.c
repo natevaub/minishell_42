@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/20 02:38:28 by nvaubien          #+#    #+#             */
+/*   Updated: 2023/08/22 22:48:16 by ckarl            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 char	*ft_get_heredoc_eof_util(t_tok *tok)
@@ -47,7 +59,6 @@ int	ft_heredoc_detected(t_minishell *shell)
 		if (ft_strcmp(shell->token->word, D_HEREDOC) == 0)
 		{
 			shell->token = start;
-			// shell->heredoc = 1;
 			return (1);
 		}
 		shell->token = shell->token->next;
@@ -93,9 +104,7 @@ t_linked_list	*ft_get_heredocs(t_tok *tokens)
 			}
 		}
 		else
-		{
 			tokens = tokens->next;
-		}
 	}
 	tokens = ref;
 	return (delims);

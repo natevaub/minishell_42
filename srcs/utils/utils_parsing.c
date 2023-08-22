@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 16:28:22 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/22 16:28:35 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/22 22:57:02 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ char	*ft_strcat(char *dest, char *src)
 	int	j;
 
 	i = 0;
+	if (!src)
+		return (dest);
 	while (dest[i] != '\0')
 		i++;
 	j = 0;

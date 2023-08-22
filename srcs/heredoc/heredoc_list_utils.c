@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc_list_utils.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/20 19:54:02 by nvaubien          #+#    #+#             */
+/*   Updated: 2023/08/22 22:34:59 by ckarl            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 t_linked_list	*ft_insert_at_tail(t_linked_list *head, char *content)
@@ -10,7 +22,7 @@ t_linked_list	*ft_insert_at_tail(t_linked_list *head, char *content)
 	{
 		return (head);
 	}
-	new_node->value = ft_strdup(content);
+	new_node->value = content;
 	new_node->next = NULL;
 	if (head == NULL)
 	{
@@ -23,4 +35,17 @@ t_linked_list	*ft_insert_at_tail(t_linked_list *head, char *content)
 	}
 	cur->next = new_node;
 	return (head);
+}
+
+void	free_linked_list(t_linked_list *head)
+{
+	t_linked_list	*next;
+
+	while (head != NULL)
+	{
+		next = head->next;
+		free(head->value);
+		free(head);
+		head = next;
+	}
 }

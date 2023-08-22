@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_free_memory.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:52:23 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/22 19:52:25 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/22 21:49:36 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,10 @@ void	ft_free_cmd(t_minishell *shell)
 		next = temp_cmd->next;
 		if (temp_cmd->option)
 			free(temp_cmd->option);
-		// if (temp_cmd->cmd)
-		// 	free(temp_cmd->cmd);
 		if (temp_cmd)
 			free(temp_cmd);
 		temp_cmd = next;
 	}
-	// if (DEBUG) ft_print_cmds(shell->cmd);
 	shell->cmd = NULL;
 }
 
