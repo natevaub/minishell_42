@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_free_memory.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/22 19:52:23 by nvaubien          #+#    #+#             */
+/*   Updated: 2023/08/22 19:52:25 by nvaubien         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
 void	ft_free_token(t_minishell *shell)
@@ -10,44 +22,44 @@ void	ft_free_token(t_minishell *shell)
 	while (curr != NULL)
 	{
 		next = curr->next;
-		// if (curr->word)
-		// 	free(curr->word);
 		if (curr)
+		{
+			free(curr->word);
 			free(curr);
+		}
 		curr = next;
 	}
 	shell->token = NULL;
-
 }
 
 void	ft_free_cmd(t_minishell *shell)
 {
-	// printf("In ft free cmd\n");
 	t_lcmd	*temp_cmd;
 	t_lcmd	*next;
 
 	temp_cmd = shell->cmd;
 	next = NULL;
-	while(temp_cmd != NULL)
+	while (temp_cmd != NULL)
 	{
 		next = temp_cmd->next;
 		if (temp_cmd->option)
 			free(temp_cmd->option);
-		if (temp_cmd->cmd)
-			free(temp_cmd->cmd);
+		// if (temp_cmd->cmd)
+		// 	free(temp_cmd->cmd);
 		if (temp_cmd)
 			free(temp_cmd);
 		temp_cmd = next;
 	}
+	// if (DEBUG) ft_print_cmds(shell->cmd);
 	shell->cmd = NULL;
 }
 
 void	ft_free_parsing(t_minishell *shell, char *prompt)
 {
-	if (shell->cmd)
-		ft_free_cmd(shell);
 	if (shell->token)
 		ft_free_token(shell);
+	if (shell->cmd)
+		ft_free_cmd(shell);
 	if (shell->heredoc == 1)
 	{
 		unlink(".heredoc");

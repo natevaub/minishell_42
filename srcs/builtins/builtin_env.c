@@ -3,20 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:38:36 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/22 16:16:29 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/22 18:22:11 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-// extern g_global	global;
-
-//ENV WITH NO OPTIONS OR ARGUMENTS
-/*If no utility is specified, env prints out the names and values
-of the variables in the environment, with one name/value pair per line.*/
 
 //find character c in string s, similar to ft_strchr
 int	find_c(char *str, char c)

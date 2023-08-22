@@ -25,7 +25,6 @@ void	ft_expand_token(t_minishell *shell)
 			shell->token = shell->token->next;
 		}
 	}
-
 	shell->token = start;
 }
 

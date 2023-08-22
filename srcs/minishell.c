@@ -6,7 +6,7 @@
 /*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/22 17:02:06 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/22 19:53:25 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int main(int ac, char **av, char **envp)
 				ft_pipeline_execution(&shell, envp);
 		}
 		ft_free_parsing(&shell, prompt);
+		// ft_print_tokens(shell.token);
+		// ft_print_cmds(shell.cmd);
 	}
 	ft_finish_minishell(&shell);
 	return (0);

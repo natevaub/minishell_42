@@ -5,9 +5,10 @@ void	ft_tokenize_prompt(t_minishell *global, char *prompt)
 {
 	t_tok	*tk;
 
+	tk = NULL;
 	while (*prompt == ' ' || *prompt == '\t')
 		prompt++;
-	tk = ft_newlst_token(ft_get_tk(&prompt));
+	// tk = ft_newlst_token(ft_get_tk(&prompt));
 	global->token = tk;
 	while (*prompt != '\0')
 	{

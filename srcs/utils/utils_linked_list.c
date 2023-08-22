@@ -54,10 +54,12 @@ t_tok	*ft_newlst_token(char *word)
 void	ft_lstadd_back_token(t_tok **lst, t_tok *nw)
 {
 	t_tok	*node;
-
+	
 	node = *lst;
-	if (node == NULL)
-		node = nw;
+	if ((*lst) == NULL)
+	{
+		(*lst) = nw;
+	}
 	else
 	{
 		while (node->next != NULL)

@@ -39,8 +39,6 @@ void	ft_parsing(t_minishell *shell, char *prompt)
 			ft_trim_quote(shell);
 			err = ft_join_tk(shell->token);
 			ft_parse_token(shell);
-			if (DEBUG) ft_print_tokens(shell->token);
-			if (DEBUG) ft_print_cmds(shell->cmd);
 		}
 	}
 }
