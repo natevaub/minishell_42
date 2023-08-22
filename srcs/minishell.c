@@ -1,12 +1,13 @@
 #include "../includes/minishell.h"
 
+int	g_status;
+
 int main(int ac, char **av, char **envp)
 {
 	t_minishell			shell;
 	char				*prompt;
 	(void)				ac;
 	(void)				av;
-
 	ft_init_minishell(&shell, envp);
 	while (1)
 	{

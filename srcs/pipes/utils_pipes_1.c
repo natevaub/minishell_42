@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_pipes_1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/22 13:16:24 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/22 16:21:57 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	sub_dup2(int read, int write)
 	{
 		if (improved_dup2(read, STDIN_FILENO) < 0)
 		{
-			// global.status = 1;
 			exit(1);
 		}
 	}
@@ -26,7 +25,6 @@ void	sub_dup2(int read, int write)
 	{
 		if (improved_dup2(write, STDOUT_FILENO) < 0)
 		{
-			// global.status = 1;
 			exit(1);
 		}
 	}
@@ -77,5 +75,5 @@ void	ft_init_pipes_struct(t_minishell *shell)
 		exit(1);
 	shell->p->count_cmds = ft_count_cmds(shell->cmd);
 	shell->p->idx = 0;
-	global.status = 0;
+	g_status = 0;
 }

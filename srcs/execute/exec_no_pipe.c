@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_no_pipe.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/22 14:42:38 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/22 16:23:04 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	parent_exec_no_pipe(pid_t *pid, int *exit_status, t_minishell *ms)
 			ms->last_exit_status = 0;
 		else
 		{
-			ms->last_exit_status = global.status;
+			ms->last_exit_status = g_status;
 		}
 	}
 	}

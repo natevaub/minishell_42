@@ -41,12 +41,6 @@ typedef struct	s_cmd
 	int					write;
 }						t_cmd;
 
-// 		### Global Variable ###
-typedef struct	s_global
-{
-	int	status;
-}				g_global;						//need to call it g_global
-
 //		### Pipe Structure ###
 typedef struct	s_pipex
 {

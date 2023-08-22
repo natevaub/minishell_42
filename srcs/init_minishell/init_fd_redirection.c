@@ -1,7 +1,5 @@
 #include "../../includes/minishell.h"
 
-extern g_global	global;
-
 int	ft_error_red_file(char	*file)
 {
 	ft_putstr_fd("minishell: ", STDERR_FILENO);

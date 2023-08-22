@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 01:46:40 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/22 15:54:05 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/22 16:21:05 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 # define DBG(str) ft_putstr_fd(str, 2); ft_putstr_fd("\n", 2)
 # define N_DBG(nbr) ft_putnbr_fd(nbr, 2); ft_putstr_fd("\n", 2)
 
-extern g_global	global;
+extern int	g_status;
 
 /*
 	cmd_line

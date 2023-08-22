@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/18 15:52:34 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/22 16:21:35 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ void	signal_child_handler(int sig)			//need to test this
 	if (sig == SIGINT)
 	{
 		ft_putstr_fd("\n", STDOUT_FILENO);
-		global.status = 130;
+		g_status = 130;
 	}
 	else if (sig == SIGQUIT)
 	{
 		ft_putstr_fd("^\\Quit: ", STDOUT_FILENO);
 		ft_putnbr_fd(SIGQUIT, STDOUT_FILENO);
 		ft_putstr_fd("\n", STDOUT_FILENO);
-		global.status = 131;
+		g_status = 131;
 	}
 }
 

@@ -1,7 +1,5 @@
 #include "../../includes/minishell.h"
 
-g_global global;
-
 void	ft_init_minishell(t_minishell *shell, char **env)
 {
 	struct termios	termios_new;
@@ -15,7 +13,7 @@ void	ft_init_minishell(t_minishell *shell, char **env)
 	termios_new.c_lflag &= ~(ECHOCTL);
 	if ((tcsetattr(STDIN_FILENO, TCSANOW, &termios_new)) == -1)
 		exit(EXIT_FAILURE);
-	global.status = 0;
+	g_status = 0;
 	shell->heredoc = 0;
 }
 
