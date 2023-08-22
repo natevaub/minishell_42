@@ -2,10 +2,12 @@
 
 g_global global;
 
-void	ft_init_minishell(t_minishell *shell, char **env)
+void	ft_init_minishell(t_minishell *shell, char **env, int ac, char **av)
 {
 	struct termios	termios_new;
 
+	(void) av;
+	(void) ac;
 	*shell = (t_minishell){};
 	shell->copy_env = new_env_list(env);
 	shell->last_exit_status = EXIT_SUCCESS;

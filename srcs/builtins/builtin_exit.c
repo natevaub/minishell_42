@@ -6,13 +6,11 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:38:36 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/18 16:24:10 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/22 16:16:53 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-extern g_global	global;
 
 /*if "minishell" is called again (nbr = 1), we need to increase SHLVL variable,
 when exit is called (nbr = -1), we need to decrease it*/
@@ -44,7 +42,6 @@ void	change_shvl_in_env(int nbr, t_minishell *ms)
 	}
 }
 
-
 //EXIT WITH NO OPTIONS
 /*The exit() function causes normal process termination and the
 least significant byte of status (i.e., status & 0xFF) is
@@ -60,10 +57,3 @@ void	cmd_exit(int status, t_minishell *ms)
 	else
 		change_shvl_in_env(-1, ms);
 }
-
-/*
-	$? codes:
-	127 = error code (bash: asdf: command not found)
-	1 = error code (ls: o: No such file or directory), combination of valid command and invalid option
-	0 = everything correct
-*/

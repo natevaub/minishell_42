@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_decide.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/19 00:06:03 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/22 16:11:39 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	builtin_run(t_minishell *ms, t_lcmd *cmd)
 	}
 	else if (ft_strncmp(cmd->cmd, "unset", 5) == 0)
 	{
-		if((ms->cmd->option) + 1)
+		if ((ms->cmd->option) + 1)
 			ms->last_exit_status = cmd_unset((cmd->option) + 1, ms);
 	}
 	else if (ft_strncmp(cmd->cmd, "env", 3) == 0)

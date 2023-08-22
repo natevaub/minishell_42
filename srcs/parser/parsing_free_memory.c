@@ -42,7 +42,7 @@ void	ft_free_cmd(t_minishell *shell)
 	shell->cmd = NULL;
 }
 
-void	ft_free_parsing(t_minishell *shell)
+void	ft_free_parsing(t_minishell *shell, char *prompt)
 {
 	if (shell->cmd)
 		ft_free_cmd(shell);
@@ -53,4 +53,5 @@ void	ft_free_parsing(t_minishell *shell)
 		unlink(".heredoc");
 		shell->heredoc = 0;
 	}
+	free(prompt);
 }
