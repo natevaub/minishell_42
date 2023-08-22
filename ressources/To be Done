@@ -3,15 +3,18 @@ NORMINETTE
 
 PARSING
 -> Support Heredoc
-	: handle multiple eof ❌
+	: handle multiple eof ✅
 	: handle delimitor : "eof" -> eof ✅
 	: heredoc without expands ✅
 	: heredoc with expands ✅
-	: free the resources and unlink the file ❌
-	: gestion des erreurs dans le heredoc ❌
+	: free the resources and unlink the file ✅
+	: gestion des erreurs dans le heredoc ✅
 
 -> Support syntax
 	: segfault when syntax isn't correct ✅
+
+-> EXPAND
+	: segfault
 
 EXECUTION
 -> Support full path command: /bin/ls ✅

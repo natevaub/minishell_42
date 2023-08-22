@@ -42,6 +42,7 @@ INITMS_FILES	:=	init_global.c				\
 EXEC_FILES	:=		exec_no_pipe.c				\
 
 EXPAND_FILES	:=	expand.c					\
+					expand_utils.c				\
 
 PARSE_FILES	:=		get_token_type.c			\
 					get_joined_token.c			\
