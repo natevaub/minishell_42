@@ -6,7 +6,7 @@
 /*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 17:38:07 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/21 18:10:49 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/22 15:57:06 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,13 @@ void	ft_expand_venv(t_minishell *shell, char	*word)
 		// }
 		if (word[i] != '$')
 		{
-			temp[j] = ft_fill_word(word, &i, &start);
+				temp[j] = ft_fill_word(word, &i, &start);
 		}
 		else if (word[i] == '$')
 		{
-			temp[j] = ft_get_venv_value(word, &i, &start, shell);
+			temp[j] = ft_dollar_alone(word, &i, &start);
+			if (temp[j] == NULL)
+				temp[j] = ft_get_venv_value(word, &i, &start, shell);
 		}
 		j++;
 	}
@@ -86,6 +88,21 @@ void	ft_expand_venv(t_minishell *shell, char	*word)
 	if (shell->token->word)
 		free(shell->token->word);
 	shell->token->word = new_tok;
+}
+
+char	*ft_dollar_alone(char *word, int *start, int *i)
+{
+	char	*new;
+
+	new = NULL;
+	if (word[*start + 1] == ' ' || word[*start + 1] == '\0')
+	{
+		new = ft_calloc(sizeof(char), 2);
+		new[0] = word[*start];
+		(*start)++;
+		(*i)++;
+	}
+	return (new);
 }
 
 char	*ft_fill_word(char *word, int *start, int *i)

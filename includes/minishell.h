@@ -6,7 +6,7 @@
 /*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 01:46:40 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/21 16:50:55 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/22 15:52:24 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,6 +225,7 @@ void			ft_expand_venv(t_minishell *shell, char	*word);
 char			*ft_get_venv_value(char *word, int *start, int *i,
 					t_minishell *ms);
 char			*ft_join_array(char *temp[256]);
+char			*ft_dollar_alone(char *word, int *start, int *i);
 
 /*
 	execute
