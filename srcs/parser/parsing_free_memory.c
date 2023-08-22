@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_free_memory.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/21 15:22:18 by nvaubien          #+#    #+#             */
+/*   Updated: 2023/08/21 15:23:14 by nvaubien         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
 void	ft_free_token(t_minishell *shell)
@@ -17,7 +29,6 @@ void	ft_free_token(t_minishell *shell)
 		curr = next;
 	}
 	shell->token = NULL;
-
 }
 
 void	ft_free_cmd(t_minishell *shell)

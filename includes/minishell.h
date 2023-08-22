@@ -6,6 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 01:46:40 by nvaubien          #+#    #+#             */
+/*   Updated: 2023/08/22 15:52:24 by nvaubien         ###   ########.fr       */
 /*   Updated: 2023/08/22 15:54:05 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -31,11 +32,10 @@
 # include "../libs/libft/libft.h"
 # include "../libs/ftprintf/ft_printf.h"
 
-# define err_cmd		"enter valid command "
-# define err_exec		"execve "
+# define ERR_CMD	"enter valid command "
+# define ERR_EXEC	"execve"
 # define DEBUG 0
-# define DBG(str) ft_putstr_fd(str, 2); ft_putstr_fd("\n", 2)
-# define N_DBG(nbr) ft_putnbr_fd(nbr, 2); ft_putstr_fd("\n", 2)
+
 
 extern g_global	global;
 
@@ -227,6 +227,7 @@ void			ft_expand_venv(t_minishell *shell, char	*word);
 char			*ft_get_venv_value(char *word, int *start, int *i,
 					t_minishell *ms);
 char			*ft_join_array(char *temp[256]);
+char			*ft_dollar_alone(char *word, int *start, int *i);
 
 /*
 	execute

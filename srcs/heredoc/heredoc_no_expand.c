@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc_no_expand.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/21 15:38:07 by nvaubien          #+#    #+#             */
+/*   Updated: 2023/08/21 15:40:13 by nvaubien         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 t_linked_list	*ft_store_heredoc_content(char *eof)
@@ -8,8 +20,9 @@ t_linked_list	*ft_store_heredoc_content(char *eof)
 
 	node = NULL;
 	cur = NULL;
-	while ((line = readline("> ")) != NULL)
+	while (1)
 	{
+		line = readline("> ");
 		if (ft_strncmp(line, eof, ft_strlen(eof)) == 0)
 		{
 			free(line);

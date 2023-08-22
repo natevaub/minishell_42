@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_parsed_token.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/21 15:30:09 by nvaubien          #+#    #+#             */
+/*   Updated: 2023/08/21 15:30:11 by nvaubien         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 void	ft_parse_token(t_minishell *shell)
@@ -28,7 +40,6 @@ void	ft_parsing(t_minishell *shell, char *prompt)
 
 	shell->syntax = 0;
 	ft_tokenize_prompt(shell, prompt);
-	if (DEBUG) ft_print_tokens(shell->token);
 	ft_heredoc(shell);
 	err = 0;
 	if (shell->syntax == 0)
@@ -39,8 +50,6 @@ void	ft_parsing(t_minishell *shell, char *prompt)
 			ft_trim_quote(shell);
 			err = ft_join_tk(shell->token);
 			ft_parse_token(shell);
-			if (DEBUG) ft_print_tokens(shell->token);
-			if (DEBUG) ft_print_cmds(shell->cmd);
 		}
 	}
 }

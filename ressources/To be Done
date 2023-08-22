@@ -1,14 +1,20 @@
 NORMINETTE
 	: norminette on my parts (nate) ❌
 
+EXPAND
+	: fix -> echo $USER $ $USER ❌
+
+ERROR_MESS
+	: fix syntax error ❌
+
 PARSING
 -> Support Heredoc
-	: handle multiple eof ❌
+	: handle multiple eof ✅
 	: handle delimitor : "eof" -> eof ✅
 	: heredoc without expands ✅
 	: heredoc with expands ✅
 	: free the resources and unlink the file ❌
-	: gestion des erreurs dans le heredoc ❌
+	: gestion des erreurs dans le heredoc ✅
 
 -> Support syntax
 	: segfault when syntax isn't correct ✅
@@ -43,6 +49,11 @@ bash-3.2$ <a <b <c cat
 bash: c: No such file or directory
 bash-3.2$ <a <c <b cat
 bash: c: No such file or directory
+
+
+/* DEBUG */
+# define DBG(str) ft_putstr_fd(str, 2); ft_putstr_fd("\n", 2)
+# define N_DBG(nbr) ft_putnbr_fd(nbr, 2); ft_putstr_fd("\n", 2)
 
 -> leaks:
 	: 1 root leak when putting a wrong option for execve (and also when just putting ls or normal builtin)

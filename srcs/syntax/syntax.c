@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   syntax.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/21 16:14:57 by nvaubien          #+#    #+#             */
+/*   Updated: 2023/08/21 16:16:29 by nvaubien         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 int	ft_syntax_checker(t_minishell *shell)
@@ -49,15 +61,21 @@ void	ft_print_error(int err, t_minishell *ms)
 {
 	ms->last_exit_status = 258;
 	if (err == 1)
-		ft_putstr_fd("minishell : syntax error near unexpected token `<' or `>'\n", 2);
+	{
+		ft_putstr_fd("minishell : syntax error \
+			near unexpected token `<' or `>'\n", 2);
+	}
 	else if (err == 2)
-		ft_putstr_fd("minishell : syntax error near unexpected token `<<' or `>>'\n", 2);
+		ft_putstr_fd("minishell : syntax error \
+			near unexpected token `<<' or `>>'\n", 2);
 	else if (err == 3)
 	{
-		ft_putstr_fd("minishell : syntax error open quote not being closed\n", 2);
+		ft_putstr_fd("minishell : syntax error \
+			open quote not being closed\n", 2);
 	}
 	else if (err == 4)
 	{
-		ft_putstr_fd("minishell : syntax error near unexpected token `|'\n", 2);
+		ft_putstr_fd("minishell : syntax error \
+			near unexpected token `|'\n", 2);
 	}
 }

@@ -1,12 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_checker.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/21 15:23:45 by nvaubien          #+#    #+#             */
+/*   Updated: 2023/08/21 15:25:31 by nvaubien         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
-void ft_print_tokens(t_tok *token)
+void	ft_print_tokens(t_tok *token)
 {
-	t_tok *current = token;
-	int index = 1;
+	t_tok	*current;
+	int		index;
 
+	current = token;
+	index = 1;
 	printf("--- PRINTING TOKENS ---\n");
-	
 	while (current != NULL)
 	{
 		printf(" --- token[%d] ---\n", index++);
@@ -14,14 +27,13 @@ void ft_print_tokens(t_tok *token)
 		printf("[%d] <- type\n", current->type);
 		printf("[%d] <- red\n", current->red);
 		printf("[%d] <- quote\n", current->quote);
-		
 		current = current->next;
 	}
 }
 
 void	ft_print_cmds(t_lcmd *cmd)
 {
-	t_lcmd *test;
+	t_lcmd		*test;
 	int			i;
 	int			j;
 

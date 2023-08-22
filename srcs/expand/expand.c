@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expand.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/21 17:38:07 by nvaubien          #+#    #+#             */
+/*   Updated: 2023/08/22 15:57:06 by nvaubien         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 void	ft_expand_token(t_minishell *shell)
@@ -5,9 +17,8 @@ void	ft_expand_token(t_minishell *shell)
 	t_tok	*start;
 
 	start = shell->token;
-	while (shell->token != NULL) /* Parcourir la chaine de token */
+	while (shell->token != NULL)
 	{
-		/* Fonction qui check si le token a un $ */
 		if (ft_token_has_dollar(shell->token->word) == 1)
 		{
 			if (shell->token->quote == E_SINGLE)
@@ -25,15 +36,13 @@ void	ft_expand_token(t_minishell *shell)
 			shell->token = shell->token->next;
 		}
 	}
-
 	shell->token = start;
 }
 
 void	ft_skip_dollar_alone(char *word)
 {
 	if (ft_strlen(word) == 1 && *word == '$')
-		return;
-	return;
+		return ;
 }
 
 char	*ft_expand_last_exit_status(t_minishell *ms)
@@ -44,6 +53,7 @@ char	*ft_expand_last_exit_status(t_minishell *ms)
 	// printf("Last exit status = %d\n", ms->last_exit_status);
 	ms->last_exit_status = 0;
 	return (ft_itoa(status));
+
 }
 
 void	ft_expand_venv(t_minishell *shell, char	*word)
@@ -59,18 +69,21 @@ void	ft_expand_venv(t_minishell *shell, char	*word)
 	start = 0;
 	while (word[i] != '\0')
 	{
-		if (word[i] != '$' /* && word[i] != '\0' */)
+		// if (word[i] == '$' && (word[i + 1] == ' ' || word[i + 1] == '\0'))
+		// {
+		// 	temp[j] = ft_calloc(sizeof(char), 2);
+		// 	temp[j] = ft_strdup("$");
+		// }
+		if (word[i] != '$')
 		{
-			// printf("Word[%d] = %c\n", i, word[i]);
-			temp[j] = ft_fill_word(word, &i, &start);
-			// printf("Temp[%d] = %s END\n", j, temp[j]);
+				temp[j] = ft_fill_word(word, &i, &start);
 		}
-		else if (word[i] == '$' /* && word[i] != '\0' */)
+		else if (word[i] == '$')
 		{
-			temp[j] = ft_get_venv_value(word, &i, &start, shell);
-			// printf("Temp[%d] = %s END\n", j, temp[j]);
+			temp[j] = ft_dollar_alone(word, &i, &start);
+			if (temp[j] == NULL)
+				temp[j] = ft_get_venv_value(word, &i, &start, shell);
 		}
-		// printf("Start = %d, i = %d\n", start, i);
 		j++;
 	}
 	temp[j] = NULL;
@@ -80,6 +93,20 @@ void	ft_expand_venv(t_minishell *shell, char	*word)
 	shell->token->word = new_tok;
 }
 
+char	*ft_dollar_alone(char *word, int *start, int *i)
+{
+	char	*new;
+
+	new = NULL;
+	if (word[*start + 1] == ' ' || word[*start + 1] == '\0')
+	{
+		new = ft_calloc(sizeof(char), 2);
+		new[0] = word[*start];
+		(*start)++;
+		(*i)++;
+	}
+	return (new);
+}
 
 char	*ft_fill_word(char *word, int *start, int *i)
 {
@@ -92,20 +119,16 @@ char	*ft_fill_word(char *word, int *start, int *i)
 	{
 		(*i)++;
 	}
-
 	len = *i - *start;
-
 	new = ft_calloc(sizeof(char), (len + 1));
 	if (!new)
 		return (NULL);
 	while (j < len)
 	{
-		// printf("start = %d word start = %c\n", *start, word[*start]);
 		new[j] = word[*start];
 		(*start)++;
 		j++;
 	}
-	// printf("New Check = %s\n", new);
 	return (new);
 }
 
@@ -156,9 +179,7 @@ char	*ft_get_venv_value(char *word, int *start, int *i, t_minishell *ms)
 			(*start)++;
 			(*i)++;
 			venv = ft_fill_word_expand(word, i, start);
-			// printf("Word [%d] = %c ------ Venv check = %s\n", *i, word[*i], venv);
 			new = getenv(venv);
-			// printf("Venv replace = %s\n", new);
 			if (new == NULL)
 			{
 				new = "";
@@ -166,7 +187,6 @@ char	*ft_get_venv_value(char *word, int *start, int *i, t_minishell *ms)
 			}
 		}
 	}
-	// exit(1);
 	return (new);
 }
 
@@ -198,8 +218,6 @@ char	*ft_join_array(char *temp[256])
 	while (temp[i] != NULL)
 	{
 		joined = ft_strjoin(joined, temp[i]);
-		// printf("In while Joined = %s\n", joined);
-		// free(temp[i]);
 		i++;
 	}
 	return (joined);
