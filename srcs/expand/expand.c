@@ -121,7 +121,7 @@ char	*ft_fill_word_expand(char *word, int *start, int *i)
 	while (word[*i] != '\0' && word[*i] != '$')
 	{
 		if (word[*i] == ' ' || word[*i] == '"' || word[*i] == '\'')
-			break;
+			break ;
 		(*i)++;
 	}
 
@@ -161,7 +161,7 @@ char	*ft_get_venv_value(char *word, int *start, int *i, t_minishell *ms)
 			new = getenv(venv);
 			if (new == NULL)
 			{
-				new = "";
+				// new = "";
 				return (new);
 			}
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 01:46:40 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/22 20:13:11 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/22 20:23:04 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -272,6 +272,7 @@ void			ft_replace_node_content(t_linked_list *node);
 
 /*	---	heredoc_list_utils.c	---*/
 t_linked_list	*ft_insert_at_tail(t_linked_list *head, char *content);
+void			free_linked_list(t_linked_list *head);
 
 /*	---	heredoc_no_expand.c	---*/
 t_linked_list	*ft_store_heredoc_content(char *eof);
