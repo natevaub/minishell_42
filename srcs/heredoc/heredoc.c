@@ -17,7 +17,7 @@ void	ft_heredoc(t_minishell *shell)
 	char			*content;
 	t_linked_list	*del;
 	t_linked_list	*node;
-	
+
 	if (ft_heredoc_detected(shell) == 1)
 	{
 		del = ft_get_heredocs(shell->token);
@@ -41,7 +41,7 @@ void	ft_heredoc(t_minishell *shell)
 	}
 }
 
-int	ft_get_heredoc_temp_fd(t_tok **tk, t_minishell *ms)
+int	ft_get_heredoc_temp_fd(t_tok **tk)
 {
 	int	fd;
 

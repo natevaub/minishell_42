@@ -3,10 +3,11 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 01:46:40 by nvaubien          #+#    #+#             */
 /*   Updated: 2023/08/22 15:52:24 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/22 15:54:05 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +70,7 @@ void			ft_open_files_redirection(t_tok **tk, t_cmd *cmd,
 
 /*	--- close.c	--- */
 void			free_env_list(t_venv *env_list);
+void			ft_finish_minishell(t_minishell *ms);
 
 /*
 	syntax
@@ -129,7 +131,7 @@ void			ft_print_tokens(t_tok *token);
 void			ft_print_cmds(t_lcmd *cmd);
 
 /*	--- parsing_free_memory.c	--- */
-void			ft_free_token(t_minishell **shell);
+void			ft_free_token(t_minishell *shell);
 void			ft_free_cmd(t_minishell *shell);
 void			ft_free_parsing(t_minishell *shell);
 
@@ -286,6 +288,6 @@ t_linked_list	*ft_get_heredocs(t_tok *tokens);
 
 /*	---	heredoc.c	---*/
 void			ft_heredoc(t_minishell *shell);
-int				ft_get_heredoc_temp_fd(t_tok **tk, t_minishell *ms);
+int				ft_get_heredoc_temp_fd(t_tok **tk);
 
 #endif

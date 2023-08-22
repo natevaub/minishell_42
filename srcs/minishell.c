@@ -21,18 +21,13 @@ int main(int ac, char **av, char **envp)
 		if (shell.syntax == 0 && shell.last_exit_status != 1)
 		{
 			if (ft_count_cmds(shell.cmd) < 2)
-			{
 				ft_exec_no_pipe(&shell, envp);
-			}
 			else
-			{
 				ft_pipeline_execution(&shell, envp);
-			}
 		}
 		ft_free_parsing(&shell);
+		free(prompt);
 	}
-	if ((tcsetattr(STDIN_FILENO, TCSANOW, &shell.termios_default)) == -1)
-		exit(EXIT_FAILURE);
-	free_env_list(shell.copy_env);
+	ft_finish_minishell(&shell);
 	return (0);
 }

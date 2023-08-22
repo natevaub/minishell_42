@@ -1,6 +1,6 @@
 	### COMPILATION ###
-CC			:=	gcc -g
-# CFLAGS		:=	-Wall -Wextra -Werror -fsanitize=address -g3
+CC			:=	gcc
+CFLAGS		:=	-Wall -Wextra -Werror
 # CFLAGS		:=	-fsanitize=address -g3
 
 	### EXECUTABLE ###

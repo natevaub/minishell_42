@@ -24,7 +24,7 @@ char	*ft_list_to_char_expands(t_linked_list *head)
 	while (curr != NULL)
 	{
 		ft_replace_node_content(curr);
-		total_size += ft_strlen(curr->value);
+		total_size += ft_strlen(curr->value) + 1;
 		curr = curr->next;
 	}
 	curr = head;

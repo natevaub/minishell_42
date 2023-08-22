@@ -14,20 +14,26 @@
 
 void free_env_list(t_venv *env_list)
 {
-	t_venv *current = env_list;
+	t_venv *current;
 	t_venv *next;
 
+	current = env_list;
 	while (current != NULL)
 	{
 		next = current->next;
-
-		// Free the memory for the variables in the current node
-		// Assuming that the 'name' field is a dynamically allocated string
-		free(current->word);
-
-		// Free the current node itself
+		if (current->word)
+			free(current->word);
 		free(current);
-
 		current = next;
 	}
+	env_list = NULL;
+}
+
+void	ft_finish_minishell(t_minishell *ms)
+{
+	if ((tcsetattr(STDIN_FILENO, TCSANOW, &ms->termios_default)) == -1)
+		exit(EXIT_FAILURE);
+	free_env_list(ms->copy_env);
+	free(ms->p);
+	exit(EXIT_SUCCESS);
 }
