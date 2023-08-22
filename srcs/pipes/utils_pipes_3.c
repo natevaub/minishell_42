@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_pipes_3.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/22 16:26:05 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/22 17:05:36 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_init_pipes_struct(t_minishell *shell)
 		exit(1);
 	shell->p->count_cmds = ft_count_cmds(shell->cmd);
 	shell->p->idx = 0;
-	global.status = 0;
+	g_status = 0;
 }
 
 void	ft_parent_close(t_minishell *ms)

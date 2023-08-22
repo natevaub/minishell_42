@@ -6,13 +6,13 @@
 /*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 16:57:28 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/22 16:57:30 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/22 17:04:47 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_init_minishell(t_minishell *shell, char **env)
+void	ft_init_minishell(t_minishell *shell, char **env, int ac, char **av)
 {
 	struct termios	termios_new;
 

@@ -6,13 +6,10 @@
 /*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:38:36 by ckarl             #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/08/22 16:22:56 by nvaubien         ###   ########.fr       */
-=======
-/*   Updated: 2023/08/22 16:16:53 by ckarl            ###   ########.fr       */
->>>>>>> 6446f01d8b15cddf622c3a70a205460fa72c14a8
+/*   Updated: 2023/08/22 17:02:20 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../../includes/minishell.h"
 
