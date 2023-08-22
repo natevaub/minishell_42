@@ -6,21 +6,11 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/15 17:16:05 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/22 12:53:35 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-extern g_global	global;
-
-//EXPORT WITH NO OPTIONS (BUT WITH POTENTIAL ARGUMENTS)
-/*Normally, when you run a command at the bash prompt, a dedicated process is
-created with its own environment, exclusively for running your command. Any
-variables and functions you defined before running the command are not shared
-with new processes — unless you explicitly mark them with export.
-Example: myvar="This variable is defined." > export myvar > bash > echo $myvar >
-"This variable is defined."*/
 
 //check if var is in allowed format (no #, $ or @ in name, starts with letter or _)
 int	check_var_format(char *var)
@@ -63,7 +53,7 @@ char	*trim_back(char *var)
 	}
 	trimmed = (char *)malloc(sizeof(char) * (ft_strlen(untrimmed) + 1));
 	if (!trimmed)
-		return (NULL);																//include error msg here
+		return (NULL);
 	x = -1;
 	while (untrimmed[++x] && untrimmed[x] != '=')
 		trimmed[x] = untrimmed[x];
@@ -80,6 +70,8 @@ int	change_existing_var_in_env(char *var, t_minishell *ms)
 
 	head = ms->copy_env;
 	copy_var = trim_back(var);
+	if (copy_var == NULL)
+		return (1);
 	len = ft_strlen(copy_var);
 	while (head)
 	{
@@ -127,8 +119,8 @@ int	print_export(t_lcmd *cmd, t_minishell *ms)
 	{
 		lines = ft_split(env_for_export->word, '=');
 		if (!lines)
-			return (errno);
-		ft_putstr_fd("declare -x ", cmd->fd_write);											//adjust fd if redirection
+			return (EXIT_FAILURE);
+		ft_putstr_fd("declare -x ", cmd->fd_write);
 		ft_putstr_fd(lines[0], cmd->fd_write);
 		ft_putstr_fd("=", cmd->fd_write);
 		ft_putchar_fd('"', cmd->fd_write);

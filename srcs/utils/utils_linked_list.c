@@ -1,5 +1,23 @@
 #include "../includes/minishell.h"
 
+// char	**ft_strdup_tab(char **option)
+// {
+// 	char	**tab;
+// 	int		i;
+
+// 	i = 0;
+// 	tab = (char **)malloc(sizeof(char *) * (tab_size(option) + 1));
+// 	if (tab == NULL)
+// 		ft_memory_allocation_failed();
+// 	while (option[i])
+// 	{
+// 		tab[i] = ft_strdup(option[i]);
+// 		i++;
+// 	}
+// 	tab[i] = 0;
+// 	return (tab);
+// }
+
 t_lcmd	*ft_newlst_cmd(t_cmd *cmd)
 {
 	t_lcmd	*new;

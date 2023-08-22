@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/18 15:52:28 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/22 14:42:38 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ void	child_exec_no_pipe(t_minishell *ms, char **env_tab)
 void	parent_exec_no_pipe(pid_t *pid, int *exit_status, t_minishell *ms)
 {
 	waitpid(*pid, exit_status, 0);
-	if (WIFEXITED(*exit_status))
+	if (pid)
+	{
+		if (WIFEXITED(*exit_status))
 	{
 		ms->last_exit_status = WEXITSTATUS(*exit_status);
 	}
@@ -57,11 +59,11 @@ void	parent_exec_no_pipe(pid_t *pid, int *exit_status, t_minishell *ms)
 			ms->last_exit_status = global.status;
 		}
 	}
+	}
 }
 
 void	ft_exec_no_pipe(t_minishell *ms, char **envp)
 {
-	global.status = 0;
 	if (ms->cmd->cmd != NULL)
 	{
 		if ((builtin_check(ms->cmd->cmd)) == 1)

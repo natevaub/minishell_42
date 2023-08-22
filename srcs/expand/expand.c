@@ -38,11 +38,12 @@ void	ft_skip_dollar_alone(char *word)
 
 char	*ft_expand_last_exit_status(t_minishell *ms)
 {
-	char	*exit_status;
+	int	status;
 
-	exit_status = ft_itoa(ms->last_exit_status);
-	printf("Last exit status = %s\n", exit_status);
-	return (exit_status);
+	status = ms->last_exit_status;
+	// printf("Last exit status = %d\n", ms->last_exit_status);
+	ms->last_exit_status = 0;
+	return (ft_itoa(status));
 }
 
 void	ft_expand_venv(t_minishell *shell, char	*word)
