@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:38:36 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/19 00:09:57 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/22 16:16:29 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,11 @@ int	print_env(t_minishell *ms, t_lcmd *cmd)
 	{
 		if (find_c(head->word, '='))
 		{
-			// Redirect output to the input of the next command in the pipeline
-			ft_putstr_fd(head->word, cmd->fd_write);								//adjust fd if redirection
+			ft_putstr_fd(head->word, cmd->fd_write);
 			ft_putchar_fd('\n', cmd->fd_write);
 		}
 		head = head->next;
 	}
-	ft_putstr_fd("_=/usr/bin/env\n", cmd->fd_write);								//adjust fd if redirection
-	return(EXIT_SUCCESS);
+	ft_putstr_fd("_=/usr/bin/env\n", cmd->fd_write);
+	return (EXIT_SUCCESS);
 }

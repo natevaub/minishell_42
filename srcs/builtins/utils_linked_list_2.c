@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_linked_list_2.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/19 00:06:06 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/22 16:29:15 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,10 @@ int	insert_node_in_list(char *var, t_venv **head)
 	t_venv	*post_copy;
 
 	addback = (t_venv *)malloc(sizeof(t_venv));
-	if (!addback)													//included errno here
+	if (!addback)
 		return (EXIT_FAILURE);
 	addback->word = ft_strdup(var);
-	if (!addback->word)											//included errno here
+	if (!addback->word)
 		return (EXIT_FAILURE);
 	pre_copy = get_node_venv(*head, 10);
 	post_copy = pre_copy->next;
