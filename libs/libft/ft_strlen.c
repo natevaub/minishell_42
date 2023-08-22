@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 22:08:40 by nvaubien          #+#    #+#             */
-/*   Updated: 2022/10/27 14:08:24 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/22 15:19:43 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ size_t	ft_strlen(const char *string)
 	int	index;
 
 	index = 0;
+	if (!string)
+		return (0);
 	while (string[index] != '\0')
 		index++;
 	return (index);

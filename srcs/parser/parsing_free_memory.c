@@ -10,8 +10,8 @@ void	ft_free_token(t_minishell *shell)
 	while (curr != NULL)
 	{
 		next = curr->next;
-		if (curr->word)
-			free(curr->word);
+		// if (curr->word)
+		// 	free(curr->word);
 		if (curr)
 			free(curr);
 		curr = next;
@@ -32,7 +32,7 @@ void	ft_free_cmd(t_minishell *shell)
 	{
 		next = temp_cmd->next;
 		if (temp_cmd->option)
-			free_two_dimension_array(temp_cmd->option);
+			free(temp_cmd->option);
 		if (temp_cmd->cmd)
 			free(temp_cmd->cmd);
 		if (temp_cmd)
@@ -48,10 +48,6 @@ void	ft_free_parsing(t_minishell *shell)
 		ft_free_cmd(shell);
 	if (shell->token)
 		ft_free_token(shell);
-	if (shell->p)
-	{
-		free(shell->p);
-	}
 	if (shell->heredoc == 1)
 	{
 		unlink(".heredoc");
