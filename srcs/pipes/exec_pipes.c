@@ -6,7 +6,7 @@
 /*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/22 16:22:13 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/22 16:58:02 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,21 +53,11 @@ int	ft_exec_child(t_lcmd *cmd, char **envp, t_minishell *ms)
 	return (0);
 }
 
-void	ft_parent_close(t_minishell *ms)
-{
-	if (ms->p->idx != 0)
-	{
-		close(ms->p->pipe_fd[(ms->p->idx + 1) % 2][0]);
-		close(ms->p->pipe_fd[(ms->p->idx + 1) % 2][1]);
-	}
-}
-
 void	ft_exec_parent(t_minishell *ms, t_lcmd *cmd, pid_t *pid)
 {
 	int	i;
 	int	exit_status;
-	(void)	pid;
-	int tmp;
+	int	tmp;
 
 	i = -1;
 	if (ms->p->idx != 0)
@@ -101,7 +91,6 @@ void	ft_run_multiple_cmds(t_minishell *ms, char **envp, t_lcmd *cmd)
 	}
 	else
 		ft_exec_child(cmd, envp, ms);
-
 }
 
 void	ft_pipeline_execution(t_minishell *ms, char **envp)

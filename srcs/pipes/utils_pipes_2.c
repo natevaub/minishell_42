@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/22 13:05:05 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/22 16:28:10 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,10 @@ int	ft_count_cmds(t_lcmd *cmd)
 //get the PATH line from env
 char	*ft_get_path_line(t_minishell *ms)
 {
-	char	*envp_path = NULL;
+	char	*envp_path;
 	t_venv	*head;
 
+	envp_path = NULL;
 	head = ms->copy_env;
 	while (head)
 	{
@@ -98,17 +99,4 @@ char	*ft_get_right_path(char *cmd, t_minishell *ms)
 	ft_putstr_fd(": command not found\n", 2);
 	free_two_dimension_array(all_paths);
 	return (NULL);
-}
-
-int		ft_pipe_dep_mod(t_pipex *p)
-{
-	if (p->idx % 2 == 0)
-	{
-		pipe(p->pipe_fd[0]);
-	}
-	else
-	{
-		pipe(p->pipe_fd[1]);
-	}
-	return (0);
 }

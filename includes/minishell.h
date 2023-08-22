@@ -6,7 +6,11 @@
 /*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 01:46:40 by nvaubien          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/08/22 16:21:05 by nvaubien         ###   ########.fr       */
+=======
+/*   Updated: 2023/08/22 16:34:07 by ckarl            ###   ########.fr       */
+>>>>>>> 6446f01d8b15cddf622c3a70a205460fa72c14a8
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +58,7 @@ char			**ft_get_opt(char **option, char **tmp);
 int				ft_len_cmd_opt(char **options);
 t_cmd			*ft_init_cmds(t_tok **tokens, t_minishell *ms);
 char			**ft_store_cmd_options(t_tok **tokens, t_cmd *cmd);
-void			ft_init_minishell(t_minishell *shell, char **env);
+void			ft_init_minishell(t_minishell *shell, char **env, int ac, char **av);
 
 /*	--- init_env.c	--- */
 char			**ft_get_env(void);
@@ -133,7 +137,7 @@ void			ft_print_cmds(t_lcmd *cmd);
 /*	--- parsing_free_memory.c	--- */
 void			ft_free_token(t_minishell *shell);
 void			ft_free_cmd(t_minishell *shell);
-void			ft_free_parsing(t_minishell *shell);
+void			ft_free_parsing(t_minishell *shell, char *prompt);
 
 /*	---tokenize_prompt.c	--- */
 void			ft_tokenize_prompt(t_minishell *global, char *prompt);
@@ -201,9 +205,7 @@ void			bubble_sort(t_venv **head);
 int				insert_node_in_list(char *var, t_venv **head);
 
 /*	---	utils_tab.c	---*/
-int				total_len_tab(char **tab);
 int				tab_size(char **tab);
-char			*ft_strndup(char *s, char n);
 
 /*
 	signals
@@ -250,14 +252,17 @@ char			*ft_get_right_path(char *cmd, t_minishell *ms);
 char			*ft_get_path_line(t_minishell *ms);
 char			*ft_join_path(char const *s1, char const *s2);
 int				ft_count_cmds(t_lcmd *shell);
-int				ft_pipe_dep_mod(t_pipex *p);
 
 /*	---	utils_pipes_2.c	---*/
 int				improved_dup2(int fildes, int fildes2);
 int				improved_pipe(int fd[2]);
 pid_t			improved_fork(void);
 void			sub_dup2(int read, int write);
+
+/*	---	utils_pipes_3.c	---*/
 void			ft_init_pipes_struct(t_minishell *shell);
+int				ft_pipe_dep_mod(t_pipex *p);
+void			ft_parent_close(t_minishell *ms);
 
 /*
 	heredoc

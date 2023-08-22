@@ -6,13 +6,13 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/22 12:53:35 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/22 16:20:39 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-//check if var is in allowed format (no #, $ or @ in name, starts with letter or _)
+//check if var is in allowed format (no #, $ or @ in name)
 int	check_var_format(char *var)
 {
 	int		i;
@@ -38,7 +38,7 @@ int	check_var_format(char *var)
 	return (EXIT_SUCCESS);
 }
 
-//trim the end of str to get only the var name (without the value if there is any)
+//trim back of var
 char	*trim_back(char *var)
 {
 	char	*untrimmed;
@@ -95,7 +95,7 @@ int	add_var_to_export(char **option, t_minishell *ms)
 	while (*option)
 	{
 		if (check_var_format(*option) == EXIT_FAILURE)
-			return (EXIT_FAILURE);								//included error msg here (bash: export: `=1': not a valid identifier)
+			return (EXIT_FAILURE);
 		if (change_existing_var_in_env(*option, ms) == 0)
 		{
 			if (insert_node_in_list(*option, &ms->copy_env) == EXIT_FAILURE)
@@ -103,11 +103,10 @@ int	add_var_to_export(char **option, t_minishell *ms)
 		}
 		option++;
 	}
-		return (EXIT_SUCCESS);
+	return (EXIT_SUCCESS);
 }
 
-//cmd: export (without args), prints env in ascii order without the last arg path
-//check if last history was "minishell", if yes, add line list_append() with "_="/bin/bash""
+//cmd: export (without args), prints env in ascii order
 int	print_export(t_lcmd *cmd, t_minishell *ms)
 {
 	char	**lines;

@@ -6,7 +6,7 @@
 /*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/22 16:21:57 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/22 16:58:01 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ pid_t	improved_fork(void)
 	}
 	return (error);
 }
+<<<<<<< HEAD
 
 void	ft_init_pipes_struct(t_minishell *shell)
 {
@@ -77,3 +78,5 @@ void	ft_init_pipes_struct(t_minishell *shell)
 	shell->p->idx = 0;
 	g_status = 0;
 }
+=======
+>>>>>>> 6446f01d8b15cddf622c3a70a205460fa72c14a8

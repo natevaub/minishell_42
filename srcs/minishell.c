@@ -1,5 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
+/*   Updated: 2023/08/22 16:34:20 by ckarl            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
+<<<<<<< HEAD
 int	g_status;
 
 int main(int ac, char **av, char **envp)
@@ -9,6 +22,14 @@ int main(int ac, char **av, char **envp)
 	(void)				ac;
 	(void)				av;
 	ft_init_minishell(&shell, envp);
+=======
+int	main(int ac, char **av, char **envp)
+{
+	t_minishell			shell;
+	char				*prompt;
+
+	ft_init_minishell(&shell, envp, av, ac);
+>>>>>>> 6446f01d8b15cddf622c3a70a205460fa72c14a8
 	while (1)
 	{
 		ft_init_signals(signal_exec_handler);
@@ -26,8 +47,7 @@ int main(int ac, char **av, char **envp)
 			else
 				ft_pipeline_execution(&shell, envp);
 		}
-		ft_free_parsing(&shell);
-		free(prompt);
+		ft_free_parsing(&shell, prompt);
 	}
 	ft_finish_minishell(&shell);
 	return (0);

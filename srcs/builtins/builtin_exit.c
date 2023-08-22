@@ -6,7 +6,11 @@
 /*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:38:36 by ckarl             #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/08/22 16:22:56 by nvaubien         ###   ########.fr       */
+=======
+/*   Updated: 2023/08/22 16:16:53 by ckarl            ###   ########.fr       */
+>>>>>>> 6446f01d8b15cddf622c3a70a205460fa72c14a8
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +46,6 @@ void	change_shvl_in_env(int nbr, t_minishell *ms)
 	}
 }
 
-
 //EXIT WITH NO OPTIONS
 /*The exit() function causes normal process termination and the
 least significant byte of status (i.e., status & 0xFF) is
@@ -58,10 +61,3 @@ void	cmd_exit(int status, t_minishell *ms)
 	else
 		change_shvl_in_env(-1, ms);
 }
-
-/*
-	$? codes:
-	127 = error code (bash: asdf: command not found)
-	1 = error code (ls: o: No such file or directory), combination of valid command and invalid option
-	0 = everything correct
-*/

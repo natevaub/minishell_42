@@ -1,9 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_global.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/22 16:57:28 by nvaubien          #+#    #+#             */
+/*   Updated: 2023/08/22 16:57:30 by nvaubien         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
 void	ft_init_minishell(t_minishell *shell, char **env)
 {
 	struct termios	termios_new;
 
+	(void) av;
+	(void) ac;
 	*shell = (t_minishell){};
 	shell->copy_env = new_env_list(env);
 	shell->last_exit_status = EXIT_SUCCESS;

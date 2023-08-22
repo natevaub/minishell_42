@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/18 13:41:35 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/22 16:21:26 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_venv	*first_node(t_venv *lst)
 t_venv	*get_node_venv(t_venv *head, int index)
 {
 	t_venv	*copy;
-	int			i;
+	int		i;
 
 	i = 0;
 	copy = head;
@@ -65,8 +65,8 @@ void	list_append(t_venv **lst, char *element)
 		return ;
 	addback->next = NULL;
 	addback->word = ft_strdup(element);
-	if (!addback->word)							//add error message
-		return ;
+	if (!addback->word)
+		ft_memory_allocation_failed();
 	if (*lst == NULL)
 	{
 		*lst = addback;

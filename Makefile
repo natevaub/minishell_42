@@ -70,6 +70,7 @@ SIGNAL_FILES :=		signals.c				\
 PIPE_FILES :=		exec_pipes.c			\
 					utils_pipes_1.c			\
 					utils_pipes_2.c			\
+					utils_pipes_3.c			\
 
 HEREDOC_FILES :=	heredoc_error.c			\
 					heredoc_expand.c		\
