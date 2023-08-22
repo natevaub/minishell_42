@@ -44,7 +44,7 @@ char	*ft_list_to_char_expands(t_linked_list *head)
 	return (str);
 }
 
-void	*ft_replace_node_content(t_linked_list *node)
+void	ft_replace_node_content(t_linked_list *node)
 {
 	int		i;
 	int		j;

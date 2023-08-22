@@ -5,6 +5,7 @@ char	*ft_get_heredoc_eof_util(t_tok *tok)
 	char	*eof;
 	t_tok	*start;
 
+	eof = NULL;
 	start = tok;
 	while (tok->type == E_SPACE)
 	{
@@ -24,6 +25,7 @@ char	*ft_get_heredoc_eof(t_minishell *shell)
 	t_tok	*start;
 	char	*eof;
 
+	eof = NULL;
 	start = shell->token;
 	while (ft_strcmp(shell->token->word, D_HEREDOC) != 0)
 	{
@@ -56,7 +58,7 @@ int	ft_heredoc_detected(t_minishell *shell)
 
 bool	ft_eof_quoted(char *eof)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (i < ft_strlen(eof))

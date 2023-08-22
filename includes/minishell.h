@@ -266,7 +266,7 @@ void			ft_memory_allocation_failed(void);
 
 /*	---	heredoc_expand.c	---*/
 char			*ft_list_to_char_expands(t_linked_list *head);
-void			*ft_replace_node_content(t_linked_list *node);
+void			ft_replace_node_content(t_linked_list *node);
 
 /*	---	heredoc_list_utils.c	---*/
 t_linked_list	*ft_insert_at_tail(t_linked_list *head, char *content);
@@ -286,6 +286,6 @@ t_linked_list	*ft_get_heredocs(t_tok *tokens);
 
 /*	---	heredoc.c	---*/
 void			ft_heredoc(t_minishell *shell);
-int				ft_get_heredoc_temp_fd(t_tok **tk, t_minishell *ms);
+int				ft_get_heredoc_temp_fd(t_tok **tk);
 
 #endif

@@ -46,3 +46,16 @@ bash-3.2$ <a <b <c cat
 bash: c: No such file or directory
 bash-3.2$ <a <c <b cat
 bash: c: No such file or directory
+
+-> leaks:
+	: 1 root leak when putting a wrong option for execve (and also when just putting ls or normal builtin)
+	16 leaked bytes
+
+		~/Desktop/minishell_team$ ls 9
+		ls: 9: No such file or directory
+		~/Desktop/minishell_team$ echo $?
+		Last exit status = 1
+		~/Desktop/minishell_team$ asdg
+		~/Desktop/minishell_team$ echo $?
+		Last exit status = 1
+	:

@@ -123,7 +123,7 @@ void	ft_open_files_redirection(t_tok **tk, t_cmd *cmd, t_minishell *ms)
 	}
 	else
 	{
-		cmd->read = ft_get_heredoc_temp_fd(tk, ms);
+		cmd->read = ft_get_heredoc_temp_fd(tk);
 		if ((*tk) != NULL)
 			((*tk)) = (*tk)->next;
 	}
