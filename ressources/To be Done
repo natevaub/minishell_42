@@ -30,7 +30,7 @@ ERROR MANAGEMENT
 		bash-3.2$ ls |
 		>
 -> cat | cat | ls:
-	: should show ls and then wait for further input 🚼
+	: should show ls and then wait for further input ✅
 
 -> buffer management
 

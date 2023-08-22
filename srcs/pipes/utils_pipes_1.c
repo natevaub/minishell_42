@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/18 14:05:50 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/22 13:16:24 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	ft_init_pipes_struct(t_minishell *shell)
 {
 	shell->p = malloc(sizeof(t_pipex));
 	if (!shell->p)
-		exit(1) ;																				//set right error msg
+		exit(1);
 	shell->p->count_cmds = ft_count_cmds(shell->cmd);
 	shell->p->idx = 0;
 	global.status = 0;

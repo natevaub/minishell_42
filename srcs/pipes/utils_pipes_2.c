@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/18 13:36:38 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/22 13:05:05 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,24 +77,26 @@ char	*ft_get_right_path(char *cmd, t_minishell *ms)
 {
 	char	**all_paths;
 	char	*temp_path;
+	int		i;
 
 	all_paths = ft_split(ft_get_path_line(ms), ':');
 	if (access(cmd, F_OK | X_OK) == 0)
-	{
 		return (cmd);
-	}
-	while (*all_paths)
+	i = 0;
+	while (all_paths[i])
 	{
-		temp_path = ft_join_path(*all_paths, cmd);
+		temp_path = ft_join_path(all_paths[i], cmd);
 		if (access(temp_path, F_OK | X_OK) == 0)
 		{
+			free_two_dimension_array(all_paths);
 			return (temp_path);
 		}
 		free(temp_path);
-		all_paths++;
+		i++;
 	}
 	ft_putstr_fd(cmd, 2);
 	ft_putstr_fd(": command not found\n", 2);
+	free_two_dimension_array(all_paths);
 	return (NULL);
 }
 

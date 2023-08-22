@@ -1,11 +1,11 @@
 #include "../../includes/minishell.h"
 
-void	ft_free_token(t_minishell **shell)
+void	ft_free_token(t_minishell *shell)
 {
 	t_tok	*curr;
 	t_tok	*next;
 
-	curr = (*shell)->token;
+	curr = shell->token;
 	next = NULL;
 	while (curr != NULL)
 	{
@@ -16,43 +16,42 @@ void	ft_free_token(t_minishell **shell)
 			free(curr);
 		curr = next;
 	}
-	(*shell)->token = NULL;
+	shell->token = NULL;
 
 }
 
 void	ft_free_cmd(t_minishell *shell)
 {
 	// printf("In ft free cmd\n");
-	t_lcmd	*curr;
+	t_lcmd	*temp_cmd;
 	t_lcmd	*next;
-	int		i;
 
-	curr = (shell)->cmd;
+	temp_cmd = shell->cmd;
 	next = NULL;
-	while(curr != NULL)
+	while(temp_cmd != NULL)
 	{
-		i = 0;
-		next = curr->next;
-		// while (curr->option[i]!= NULL)								//check why this gives error: pointer freed was not allocated
-		// {
-		// 	free(curr->option[i]);
-		// 	i++;
-		// }
-		// printf("curr->option[0]: %s", curr->option[0]);
-		if (curr->option)
-			free(curr->option);
-		// free_two_dimension_array(curr->option);
-		if (curr)
-			free(curr);
-		curr = next;
+		next = temp_cmd->next;
+		if (temp_cmd->option)
+			free_two_dimension_array(temp_cmd->option);
+		if (temp_cmd->cmd)
+			free(temp_cmd->cmd);
+		if (temp_cmd)
+			free(temp_cmd);
+		temp_cmd = next;
 	}
-	(shell)->cmd = NULL;
+	shell->cmd = NULL;
 }
 
 void	ft_free_parsing(t_minishell *shell)
 {
-	ft_free_cmd(shell);
-	ft_free_token(&shell);
+	if (shell->cmd)
+		ft_free_cmd(shell);
+	if (shell->token)
+		ft_free_token(shell);
+	if (shell->p)
+	{
+		free(shell->p);
+	}
 	if (shell->heredoc == 1)
 	{
 		unlink(".heredoc");

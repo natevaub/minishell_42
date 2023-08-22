@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_pwd_cd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:38:36 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/19 00:06:10 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/22 12:53:53 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-//CD WITH ONLY A RELATIVE OR ABSOLUTE PATH
-/*The cd command in Linux is known as the change directory command.
-It is used to move efficiently from the current working
-directory to different directories in our System.*/
 
 //On success, zero is returned.  On error, -1 is returned, and
 //errno is set to indicate the error.
@@ -43,7 +38,7 @@ int	cmd_pwd(t_lcmd *cmd)
 {
 	if (getcwd(NULL, 0) == NULL)
 		return (errno);
-	ft_putstr_fd(getcwd(NULL, 0), cmd->fd_write);								//adjust fd if redirection
+	ft_putstr_fd(getcwd(NULL, 0), cmd->fd_write);
 	ft_putchar_fd('\n', cmd->fd_write);
 	return (EXIT_SUCCESS);
 }

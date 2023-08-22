@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 01:46:40 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/20 18:17:31 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/22 12:13:16 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ void			ft_print_tokens(t_tok *token);
 void			ft_print_cmds(t_lcmd *cmd);
 
 /*	--- parsing_free_memory.c	--- */
-void			ft_free_token(t_minishell **shell);
+void			ft_free_token(t_minishell *shell);
 void			ft_free_cmd(t_minishell *shell);
 void			ft_free_parsing(t_minishell *shell);
 
