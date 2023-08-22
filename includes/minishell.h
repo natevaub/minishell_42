@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 01:46:40 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/22 12:13:16 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/22 15:54:05 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void			ft_open_files_redirection(t_tok **tk, t_cmd *cmd,
 
 /*	--- close.c	--- */
 void			free_env_list(t_venv *env_list);
+void			ft_finish_minishell(t_minishell *ms);
 
 /*
 	syntax

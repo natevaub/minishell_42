@@ -25,10 +25,7 @@ ERROR MANAGEMENT
 -> Open pipe:
 	: currently we have this:
 		~/Desktop/minishell_team$ ls |
-		minishell : syntax error near unexpected token `|'
-	it should not give an error but wait for further input:
-		bash-3.2$ ls |
-		>
+		minishell : syntax error near unexpected token `|' ✅ (not necessary)
 -> cat | cat | ls:
 	: should show ls and then wait for further input ✅
 
@@ -39,7 +36,7 @@ ERROR MANAGEMENT
 	: 1 for right command with wrong option or "no file or directory" error ✅
 	: 130 for SIGINT interruption ✅
 	: 131 for SIGQUIT interruption ✅
-	: 0 for all good 🚼
+	: 0 for all good ✅
 
 bash-3.2$ >a >b
 bash-3.2$ <a <b <c cat
@@ -58,4 +55,3 @@ bash: c: No such file or directory
 		~/Desktop/minishell_team$ asdg
 		~/Desktop/minishell_team$ echo $?
 		Last exit status = 1
-	:
