@@ -70,28 +70,23 @@ void	ft_expand_venv(t_minishell *shell, char	*word)
 	{
 		if (word[i] != '$')
 		{
-			cp = ft_fill_word(word, &i, &start);
-			temp[j] = ft_strdup(cp);
-			free(cp);
+			temp[j] = ft_fill_word(word, &start, &i);
 		}
 		else if (word[i] == '$')
 		{
-			cp = ft_dollar_alone(word, &i, &start);
+			cp = ft_dollar_alone(word, &start, &i);
 			temp[j] = cp;
 			free(cp);
 			if (temp[j] == NULL)
 			{
-				temp[j] = ft_get_venv_value(word, &i, &start, shell);
+				temp[j] = ft_get_venv_value(word, &start, &i, shell);
 			}
 		}
 		j++;
 	}
 	temp[j] = NULL;
 	new_tok = ft_join_array(temp);
-//	for (int i = 0; temp[i]; i++)
-//	{
-//		 free(temp[i]);
-//	}
+	free(temp);
 	ft_safe_free(shell->token->word);
 	shell->token->word = new_tok;
 }

@@ -116,10 +116,6 @@ char	*ft_join_array(char **temp)
 
 	i = 0;
 	size = 0;
-	for (int i = 0; temp[i]; i++)
-	{
-		printf("tmp[%d] = %s\n", i, temp[i]);
-	}
 	while (temp[i] != NULL)
 	{
 		size += ft_strlen(temp[i]);
@@ -129,7 +125,6 @@ char	*ft_join_array(char **temp)
 	joined = ft_calloc(sizeof(char), size + 1);
 	while (temp[i] != NULL)
 	{
-		printf("Joined = %s, Temp[%d] = %s\n", joined, i, temp[i]);
 		joined = ft_strcat(joined, temp[i]);
 		i++;
 	}
