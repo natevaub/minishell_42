@@ -137,7 +137,7 @@ $(LIBPRINTF):
 
 $(NAME):	$(LIBFT) $(LIBPRINTF) $(OBJS)
 			@echo "$(GREEN)Compilating minishell$(RESET)"
-			@$(CC) $(CFLAGS) -Llibs/ftprintf -Llibs/libft -L/Users/ckarl/homebrew/opt/readline/lib -I/Users/ckarl/homebrew/opt/readline/include/readline -Llibs/ftprintf -Llibs/libft -o $@ $(OBJS) $(LIBS)
+			@$(CC) $(CFLAGS) -Llibs/ftprintf -Llibs/libft -L/Users/nvaubien/.brew/Cellar/readline/8.2.1/lib -I/Users/nvaubien/.brew/Cellar/readline/8.2.1/include/readline -Llibs/ftprintf -Llibs/libft -o $@ $(OBJS) $(LIBS)
 			@echo "$(CYAN)✔️  Compilation Done$(RESET)"
 # -L/Users/ckarl/homebrew/opt/readline/lib -I/Users/ckarl/homebrew/opt/readline/include/readline
 # -L/Users/nvaubien/.brew/Cellar/readline/8.2.1/lib -I/Users/nvaubien/.brew/Cellar/readline/8.2.1/include/readline

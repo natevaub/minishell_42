@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 20:20:58 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/23 11:32:09 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/23 15:55:53 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,26 +58,46 @@ void	ft_expand_venv(t_minishell *shell, char	*word)
 	int		i;
 	int		j;
 	int		start;
-	char	*temp[256];
+	char	**temp;
 	char	*new_tok;
+	char	*cp;
 
 	i = 0;
 	j = 0;
 	start = 0;
+	temp = (char **)malloc(sizeof(char) * 256);
 	while (word[i] != '\0')
 	{
 		if (word[i] != '$')
-			temp[j] = ft_fill_word(word, &i, &start);
+		{
+			cp = ft_fill_word(word, &i, &start);
+			temp[j] = ft_strdup(cp);
+			free(cp);
+			// printf("Temp[%d] = %s\n", j, temp[j]);
+		}
 		else if (word[i] == '$')
 		{
-			temp[j] = ft_dollar_alone(word, &i, &start);
+			cp = ft_dollar_alone(word, &i, &start);
+			temp[j] = cp;
+			free(cp);
+			// printf("Temp[%d] = %s\n", j, temp[j]);
 			if (temp[j] == NULL)
+			{
 				temp[j] = ft_get_venv_value(word, &i, &start, shell);
+			}
+			// printf("Temp[%d] = %s\n", j, temp[j]);
 		}
 		j++;
+		// ft_printf("i = %d\n", i);
 	}
+	
 	temp[j] = NULL;
 	new_tok = ft_join_array(temp);
+	for (int i = 0; temp[i]; i++)
+	{
+		printf("temp i = %s\n", temp[i]);
+		// free(temp[i]);
+	}
 	ft_safe_free(shell->token->word);
 	shell->token->word = new_tok;
 }

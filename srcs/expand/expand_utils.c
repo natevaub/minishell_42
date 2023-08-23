@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 20:19:28 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/23 10:48:35 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/23 15:48:30 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,17 +108,29 @@ int	ft_token_has_dollar(char *word)
 	return (0);
 }
 
-char	*ft_join_array(char *temp[256])
+char	*ft_join_array(char **temp)
 {
 	int		i;
+	int		size;
 	char	*joined;
 
-	joined = "";
 	i = 0;
+	size = 0;
+	for (int i = 0; temp[i]; i++)
+	{
+		printf("tmp[%d] = %s\n", i, temp[i]);
+	}
 	while (temp[i] != NULL)
 	{
-		joined = ft_strjoin(joined, temp[i]);
-		// free(temp[i]);
+		size += ft_strlen(temp[i]);
+		i++;
+	}
+	i = 0;
+	joined = ft_calloc(sizeof(char), size + 1);
+	while (temp[i] != NULL)
+	{
+		printf("Joined = %s, Temp[%d] = %s\n", joined, i, temp[i]);
+		joined = ft_strcat(joined, temp[i]);
 		i++;
 	}
 	return (joined);
