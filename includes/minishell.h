@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 01:46:40 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/22 20:22:55 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/23 11:11:20 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@
 # include "../libs/libft/libft.h"
 # include "../libs/ftprintf/ft_printf.h"
 
-# define err_cmd		"enter valid command "
-# define err_exec		"execve "
 # define DEBUG 0
 # define DBG(str) ft_putstr_fd(str, 2); ft_putstr_fd("\n", 2)
 # define N_DBG(nbr) ft_putnbr_fd(nbr, 2); ft_putstr_fd("\n", 2)
@@ -54,7 +52,8 @@ char			**ft_get_opt(char **option, char **tmp);
 int				ft_len_cmd_opt(char **options);
 t_cmd			*ft_init_cmds(t_tok **tokens, t_minishell *ms);
 char			**ft_store_cmd_options(t_tok **tokens, t_cmd *cmd);
-void			ft_init_minishell(t_minishell *shell, char **env, int ac, char **av);
+void			ft_init_minishell(t_minishell *shell, char **env, \
+				int ac, char **av);
 
 /*	--- init_env.c	--- */
 char			**ft_get_env(void);
@@ -221,6 +220,7 @@ void			ft_expand_token(t_minishell *shell);
 char			*ft_expand_last_exit_status(t_minishell *ms);
 void			ft_expand_venv(t_minishell *shell, char	*word);
 char			*ft_dollar_alone(char *word, int *start, int *i);
+void			ft_safe_free(char *str);
 
 /*	---	expand_utils.c	---*/
 int				ft_token_has_dollar(char *word);
@@ -228,7 +228,6 @@ char			*ft_fill_word(char *word, int *start, int *i);
 char			*ft_get_venv_value(char *word, int *start, int *i,
 					t_minishell *ms);
 char			*ft_join_array(char *temp[256]);
-
 
 /*
 	execute

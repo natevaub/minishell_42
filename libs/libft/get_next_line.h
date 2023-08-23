@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 11:34:18 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/07/08 22:41:56 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/23 10:52:38 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-#include "libft.h"
+# include "libft.h"
 
 # include <fcntl.h>
 # include <stdio.h>

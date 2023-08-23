@@ -1,22 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_linked_list.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/19 01:46:40 by nvaubien          #+#    #+#             */
+/*   Updated: 2023/08/23 11:10:54 by ckarl            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
-
-// char	**ft_strdup_tab(char **option)
-// {
-// 	char	**tab;
-// 	int		i;
-
-// 	i = 0;
-// 	tab = (char **)malloc(sizeof(char *) * (tab_size(option) + 1));
-// 	if (tab == NULL)
-// 		ft_memory_allocation_failed();
-// 	while (option[i])
-// 	{
-// 		tab[i] = ft_strdup(option[i]);
-// 		i++;
-// 	}
-// 	tab[i] = 0;
-// 	return (tab);
-// }
 
 t_lcmd	*ft_newlst_cmd(t_cmd *cmd)
 {
@@ -33,7 +27,6 @@ t_lcmd	*ft_newlst_cmd(t_cmd *cmd)
 	free(cmd);
 	return (new);
 }
-
 
 t_tok	*ft_newlst_token(char *word)
 {
@@ -54,7 +47,7 @@ t_tok	*ft_newlst_token(char *word)
 void	ft_lstadd_back_token(t_tok **lst, t_tok *nw)
 {
 	t_tok	*node;
-	
+
 	node = *lst;
 	if ((*lst) == NULL)
 	{
@@ -83,4 +76,3 @@ void	ft_lstadd_back_cmd(t_lcmd **lst, t_lcmd *nw)
 		node->next = nw;
 	}
 }
-

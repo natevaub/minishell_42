@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   close.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/19 01:46:40 by nvaubien          #+#    #+#             */
+/*   Updated: 2023/08/23 11:03:04 by ckarl            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
-void free_env_list(t_venv *env_list)
+void	free_env_list(t_venv *env_list)
 {
-	t_venv *current;
-	t_venv *next;
+	t_venv	*current;
+	t_venv	*next;
 
 	current = env_list;
 	while (current != NULL)

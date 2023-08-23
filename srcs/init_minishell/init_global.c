@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_global.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 16:57:28 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/22 17:04:47 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/23 11:04:18 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	ft_init_minishell(t_minishell *shell, char **env, int ac, char **av)
 	g_status = 0;
 	shell->heredoc = 0;
 }
-
 
 char	**ft_get_opt(char **option, char **tmp)
 {
@@ -102,7 +101,7 @@ char	**ft_store_cmd_options(t_tok **tokens, t_cmd *cmd)
 			i++;
 		}
 		else if ((*tokens)->type == E_REDIRECTION || (*tokens)->type == E_PIPE)
-			break;
+			break ;
 		if ((*tokens) != NULL)
 			(*tokens) = (*tokens)->next;
 	}

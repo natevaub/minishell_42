@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/22 16:58:00 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/23 11:32:55 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	ft_init_signals(void (*handle_signals)(int))
 		perror("Error: cannot handle SIGINT");
 	if (sigaction(SIGQUIT, &sa, NULL) == -1)
 		perror("Error: cannot handle SIGQUIT");
+	else
+		g_status = 0;
 }
 
 void	signal_child_handler(int sig)
@@ -49,6 +51,8 @@ void	signal_exec_handler(int sig)
 		ft_putstr_fd("\n", STDOUT_FILENO);
 		rl_on_new_line();
 		rl_redisplay();
+		g_status = 1;
+		// printf("global status: %d", g_status);
 	}
 	else if (sig == SIGQUIT)
 	{

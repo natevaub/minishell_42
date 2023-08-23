@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   struct.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/19 01:46:40 by nvaubien          #+#    #+#             */
+/*   Updated: 2023/08/23 10:52:23 by ckarl            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef STRUCT_H
 # define STRUCT_H
 
 //		### Linked List Token ###
 
-typedef struct	s_list_token
+typedef struct s_list_token
 {
 	char				*word;
 	int					type;
@@ -15,7 +27,7 @@ typedef struct	s_list_token
 
 //		### Linked List Var_env ####
 
-typedef struct	s_list_venv
+typedef struct s_list_venv
 {
 	char				*word;
 	struct s_list_venv	*next;
@@ -24,7 +36,7 @@ typedef struct	s_list_venv
 
 //		### Linked List Cmd ###
 
-typedef struct	s_list_cmd
+typedef struct s_list_cmd
 {
 	char				*cmd;
 	char				**option;
@@ -33,7 +45,7 @@ typedef struct	s_list_cmd
 	struct s_list_cmd	*next;
 }						t_lcmd;
 
-typedef struct	s_cmd
+typedef struct s_cmd
 {
 	char				*cmd;
 	char				**option;
@@ -42,7 +54,7 @@ typedef struct	s_cmd
 }						t_cmd;
 
 //		### Pipe Structure ###
-typedef struct	s_pipex
+typedef struct s_pipex
 {
 	int			count_cmds;
 	int			idx;
@@ -51,7 +63,7 @@ typedef struct	s_pipex
 
 //		### All Data ###
 
-typedef struct	s_minishell
+typedef struct s_minishell
 {
 	int					syntax;
 	struct s_list_token	*token;

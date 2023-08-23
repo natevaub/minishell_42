@@ -1,12 +1,16 @@
-#include "../../includes/minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_fd_redirection.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/19 01:46:40 by nvaubien          #+#    #+#             */
+/*   Updated: 2023/08/23 11:04:01 by ckarl            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-// int	ft_error_red_file(char	*file)
-// {
-// 	ft_putstr_fd("minishell: ", STDERR_FILENO);
-// 	ft_putstr_fd(file, STDERR_FILENO);
-// 	ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
-// 	return (1);
-// }
+#include "../../includes/minishell.h"
 
 void	ft_open_failed(char *str, t_minishell *ms)
 {
@@ -42,7 +46,6 @@ int	ft_get_infile_fd(t_tok **tk, t_minishell *ms)
 	return (fd);
 }
 
-
 int	ft_get_outfile_fd(t_tok **tk, t_minishell *ms)
 {
 	int	fd;
@@ -71,11 +74,9 @@ int	ft_get_outfile_fd(t_tok **tk, t_minishell *ms)
 	return (fd);
 }
 
-
 int	ft_get_append_outfile_fd(t_tok **tk, t_minishell *ms)
 {
 	int	fd;
-
 
 	fd = 1;
 	(*tk) = (*tk)->next;
@@ -94,7 +95,6 @@ int	ft_get_append_outfile_fd(t_tok **tk, t_minishell *ms)
 		fd = open((*tk)->word, O_CREAT | O_APPEND | O_RDWR, 0644);
 	ms->last_exit_status = 0;
 	return (fd);
-
 }
 
 void	ft_open_files_redirection(t_tok **tk, t_cmd *cmd, t_minishell *ms)

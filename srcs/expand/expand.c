@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 20:20:58 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/22 21:36:10 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/23 11:32:09 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	ft_expand_token(t_minishell *shell)
 			shell->token = shell->token->next;
 		}
 	}
+	shell->last_exit_status = 0;
 	shell->token = start;
 }
 
@@ -43,7 +44,11 @@ char	*ft_expand_last_exit_status(t_minishell *ms)
 {
 	int	status;
 
-	status = ms->last_exit_status;
+	if (g_status != 0)
+		status = g_status;
+	else
+		status = ms->last_exit_status;
+	g_status = 0;
 	ms->last_exit_status = 0;
 	return (ft_itoa(status));
 }
@@ -62,9 +67,7 @@ void	ft_expand_venv(t_minishell *shell, char	*word)
 	while (word[i] != '\0')
 	{
 		if (word[i] != '$')
-		{
 			temp[j] = ft_fill_word(word, &i, &start);
-		}
 		else if (word[i] == '$')
 		{
 			temp[j] = ft_dollar_alone(word, &i, &start);
@@ -75,10 +78,8 @@ void	ft_expand_venv(t_minishell *shell, char	*word)
 	}
 	temp[j] = NULL;
 	new_tok = ft_join_array(temp);
-	if (shell->token->word)
-		free(shell->token->word);
+	ft_safe_free(shell->token->word);
 	shell->token->word = new_tok;
-	// free(new_tok);
 }
 
 char	*ft_dollar_alone(char *word, int *start, int *i)
@@ -96,122 +97,8 @@ char	*ft_dollar_alone(char *word, int *start, int *i)
 	return (new);
 }
 
-char	*ft_fill_word(char *word, int *start, int *i)
+void	ft_safe_free(char *str)
 {
-	char	*new;
-	int		j;
-	int		len;
-
-	j = 0;
-	while (word[*i] != '\0' && word[*i] != '$')
-	{
-		(*i)++;
-	}
-
-	len = *i - *start;
-
-	new = ft_calloc(sizeof(char), (len + 1));
-	if (!new)
-		return (NULL);
-	while (j < len)
-	{
-		// printf("start = %d word start = %c\n", *start, word[*start]);
-		new[j] = word[*start];
-		(*start)++;
-		j++;
-	}
-	// printf("New Check = %s\n", new);
-	return (new);
+	if (str)
+		free(str);
 }
-
-char	*ft_fill_word_expand(char *word, int *start, int *i)
-{
-	char	*new;
-	int		j;
-	int		len;
-
-	j = 0;
-	while (word[*i] != '\0' && word[*i] != '$')
-	{
-		if (word[*i] == ' ' || word[*i] == '"' || word[*i] == '\'')
-			break ;
-		(*i)++;
-	}
-
-	len = *i - *start;
-
-	new = ft_calloc(sizeof(char), (len + 1));
-	if (!new)
-		return (NULL);
-	while (j < len)
-	{
-		new[j] = word[*start];
-		(*start)++;
-		j++;
-	}
-	return (new);
-}
-
-char	*ft_get_venv_value(char *word, int *start, int *i, t_minishell *ms)
-{
-	char 	*new;
-	char	*venv;
-
-	new = NULL;
-	if (word[*start] == '$')
-	{
-		if (word[*start + 1] == '?')
-		{
-			new = ft_expand_last_exit_status(ms);
-			(*start) += 2;
-			(*i) += 2;
-		}
-		else
-		{
-			(*start)++;
-			(*i)++;
-			venv = ft_fill_word_expand(word, i, start);
-			new = getenv(venv);
-			if (new == NULL)
-			{
-				// new = "";
-				return (new);
-			}
-		}
-	}
-	return (new);
-}
-
-int	ft_token_has_dollar(char *word)
-{
-	int		i;
-	char	c;
-
-	i = 0;
-	c = '$';
-	while (word[i] != '\0')
-	{
-		if (word[i] == c)
-		{
-			return (1);
-		}
-		i++;
-	}
-	return (0);
-}
-
-char	*ft_join_array(char *temp[256])
-{
-	int		i;
-	char	*joined;
-
-	joined = "";
-	i = 0;
-	while (temp[i] != NULL)
-	{
-		joined = ft_strjoin(joined, temp[i]);
-		i++;
-	}
-	return (joined);
-}
-
