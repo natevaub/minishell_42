@@ -48,12 +48,16 @@ least significant byte of status (i.e., status & 0xFF) is
 returned to the parent (see wait(2)).*/
 void	cmd_exit(int status, t_minishell *ms)
 {
+	char	*tmp;
+
 	ms->last_exit_status = status;
-	if (ft_strncmp("1", get_value(ms->copy_env, "SHLVL"), 1) == 0)
+	tmp = get_value(ms->copy_env, "SHLVL");
+	if (ft_strncmp("1", tmp, 1) == 0)
 	{
 		ft_putstr_fd("exit\n", 1);
 		exit(ms->last_exit_status);
 	}
 	else
 		change_shvl_in_env(-1, ms);
+	free(tmp);
 }

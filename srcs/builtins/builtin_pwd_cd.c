@@ -36,9 +36,13 @@ int	cmd_cd(t_lcmd *cmd, t_minishell *ms)
 to the standard output.*/
 int	cmd_pwd(t_lcmd *cmd)
 {
-	if (getcwd(NULL, 0) == NULL)
+	char	*tmp;
+
+	tmp = getcwd(NULL, 0);
+	if (tmp == NULL)
 		return (errno);
-	ft_putstr_fd(getcwd(NULL, 0), cmd->fd_write);
+	ft_putstr_fd(tmp, cmd->fd_write);
 	ft_putchar_fd('\n', cmd->fd_write);
+	free(tmp);
 	return (EXIT_SUCCESS);
 }

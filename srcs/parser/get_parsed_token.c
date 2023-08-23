@@ -36,8 +36,6 @@ void	ft_parse_token(t_minishell *shell)
 
 void	ft_parsing(t_minishell *shell, char *prompt)
 {
-	int	err;
-
 	shell->syntax = 0;
 	ft_tokenize_prompt(shell, prompt);
 	// if (DEBUG) ft_print_tokens(shell->token);
@@ -46,14 +44,13 @@ void	ft_parsing(t_minishell *shell, char *prompt)
 		ft_heredoc(shell);
 		shell->heredoc = 1;
 	}
-	err = 0;
 	if (shell->syntax == 0)
 	{
 		ft_expand_token(shell);
 		if (ft_syntax_checker(shell) == 0)
 		{
 			ft_trim_quote(shell);
-			err = ft_join_tk(shell->token);
+			ft_join_tk(shell->token);
 			ft_parse_token(shell);
 		}
 	}
