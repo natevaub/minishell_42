@@ -60,7 +60,6 @@ void	ft_expand_venv(t_minishell *shell, char	*word)
 	int		start;
 	char	**temp;
 	char	*new_tok;
-	char	*cp;
 
 	i = 0;
 	j = 0;
@@ -70,34 +69,23 @@ void	ft_expand_venv(t_minishell *shell, char	*word)
 	{
 		if (word[i] != '$')
 		{
-			cp = ft_fill_word(word, &i, &start);
-			temp[j] = ft_strdup(cp);
-			free(cp);
-			// printf("Temp[%d] = %s\n", j, temp[j]);
+			temp[j] = ft_fill_word(word, &start, &i);
 		}
 		else if (word[i] == '$')
 		{
-			cp = ft_dollar_alone(word, &i, &start);
-			temp[j] = cp;
-			free(cp);
-			// printf("Temp[%d] = %s\n", j, temp[j]);
+			temp[j] = ft_dollar_alone(word, &start, &i);
 			if (temp[j] == NULL)
 			{
-				temp[j] = ft_get_venv_value(word, &i, &start, shell);
+				temp[j] = ft_strdup(ft_get_venv_value(word, &start, &i, shell));
 			}
-			// printf("Temp[%d] = %s\n", j, temp[j]);
 		}
 		j++;
-		// ft_printf("i = %d\n", i);
 	}
-	
 	temp[j] = NULL;
 	new_tok = ft_join_array(temp);
-	for (int i = 0; temp[i]; i++)
-	{
-		printf("temp i = %s\n", temp[i]);
-		// free(temp[i]);
-	}
+	for (int i = 0; temp[i] != NULL; i++)
+		free(temp[i]);
+	free(temp);
 	ft_safe_free(shell->token->word);
 	shell->token->word = new_tok;
 }

@@ -19,7 +19,6 @@ char	*ft_remove_tk_quote(char *word)
 
 	c = word[0];
 	trimmed = ft_strtrim(word, &c);
-	free(word);
 	return (trimmed);
 }
 

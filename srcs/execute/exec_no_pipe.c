@@ -65,7 +65,7 @@ void	parent_exec_no_pipe(pid_t *pid, int *exit_status, t_minishell *ms)
 
 void	ft_exec_no_pipe(t_minishell *ms, char **envp)
 {
-	if (ms->cmd->cmd != NULL)
+	if (ms->cmd != NULL)
 	{
 		if ((builtin_check(ms->cmd->cmd)) == 1)
 			builtin_run(ms, ms->cmd);
