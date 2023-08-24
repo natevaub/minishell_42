@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 02:38:28 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/23 11:05:09 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/24 10:07:28 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,11 @@ void	ft_parsing(t_minishell *shell, char *prompt)
 	{
 		ft_heredoc(shell);
 		shell->heredoc = 1;
+		if (g_status != 0)
+		{
+			shell->last_exit_status = g_status;
+			return ;
+		}
 	}
 	if (shell->syntax == 0)
 	{

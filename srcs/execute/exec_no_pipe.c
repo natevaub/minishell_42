@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_no_pipe.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/22 20:07:03 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/23 14:06:42 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,12 @@ void	ft_exec_no_pipe(t_minishell *ms, char **envp)
 	if (ms->cmd != NULL)
 	{
 		if ((builtin_check(ms->cmd->cmd)) == 1)
+		{
 			builtin_run(ms, ms->cmd);
+		}
 		else
+		{
 			child_exec_no_pipe(ms, envp);
+		}
 	}
 }

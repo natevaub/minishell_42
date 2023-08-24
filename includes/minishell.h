@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 01:46:40 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/23 11:11:20 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/23 14:07:38 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,6 +211,7 @@ void			ft_init_signals(void (*handle_signals)(int));
 void			signal_exec_handler(int sig);
 extern void		rl_replace_line(const char *, int);
 void			signal_child_handler(int sig);
+void			signal_heredoc_handler(int sig);
 
 /*
 	expand

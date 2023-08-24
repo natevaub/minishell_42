@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 19:54:02 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/22 22:46:37 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/23 14:55:59 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,26 @@ t_linked_list	*ft_store_heredoc_content(char *eof)
 	char			*line;
 
 	node = NULL;
-	line = "a";
-	while (line)
+	while (1)
 	{
 		line = readline("> ");
+		if (!line)
+		{
+			rl_replace_line("", 0);
+			// ft_putstr_fd("\n", STDOUT_FILENO);
+			ft_output_command_line();
+			rl_on_new_line();
+			rl_redisplay();
+			return (NULL);
+			// exit(1);
+		}
+		if (g_status != 0)
+			return (NULL);
 		if (ft_strncmp(line, eof, ft_strlen(eof)) == 0)
 		{
 			free(line);
+			if (g_status != 0)
+				return (NULL);
 			break ;
 		}
 		else
