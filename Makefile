@@ -1,6 +1,6 @@
 	### COMPILATION ###
 CC			:=	gcc
-CFLAGS		:=	-Wall -Wextra -Werror -fsanitize=address #-g3
+CFLAGS		:=	-Wall -Wextra -Werror #-fsanitize=address #-g3
 
 	### EXECUTABLE ###
 NAME		:=	minishell
@@ -43,6 +43,7 @@ EXEC_FILES	:=		exec_no_pipe.c				\
 
 EXPAND_FILES	:=	expand.c					\
 					expand_utils.c				\
+					expand_utils2.c				\
 
 PARSE_FILES	:=		get_token_type.c			\
 					get_joined_token.c			\
@@ -137,7 +138,7 @@ $(LIBPRINTF):
 
 $(NAME):	$(LIBFT) $(LIBPRINTF) $(OBJS)
 			@echo "$(GREEN)Compilating minishell$(RESET)"
-			@$(CC) $(CFLAGS) -Llibs/ftprintf -Llibs/libft -L/opt/homebrew/opt/readline/lib -I/opt/homebrew/opt/readline/include -Llibs/ftprintf -Llibs/libft -o $@ $(OBJS) $(LIBS)
+			@$(CC) $(CFLAGS) -Llibs/ftprintf -Llibs/libft -L/Users/nvaubien/.brew/Cellar/readline/8.2.1/lib -I/Users/nvaubien/.brew/Cellar/readline/8.2.1/include/readline -Llibs/libft -o $@ $(OBJS) $(LIBS)
 			@echo "$(CYAN)✔️  Compilation Done$(RESET)"
 # -L/Users/ckarl/homebrew/opt/readline/lib -I/Users/ckarl/homebrew/opt/readline/include/readline
 # -L/Users/nvaubien/.brew/Cellar/readline/8.2.1/lib -I/Users/nvaubien/.brew/Cellar/readline/8.2.1/include/readline

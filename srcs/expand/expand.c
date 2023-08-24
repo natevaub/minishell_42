@@ -6,7 +6,7 @@
 /*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 20:20:58 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/23 15:55:53 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/24 11:54:26 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void	ft_expand_venv(t_minishell *shell, char	*word)
 	int		j;
 	int		start;
 	char	**temp;
-	char	*new_tok;
 
 	i = 0;
 	j = 0;
@@ -68,24 +67,26 @@ void	ft_expand_venv(t_minishell *shell, char	*word)
 	while (word[i] != '\0')
 	{
 		if (word[i] != '$')
-		{
 			temp[j] = ft_fill_word(word, &start, &i);
-		}
 		else if (word[i] == '$')
 		{
 			temp[j] = ft_dollar_alone(word, &start, &i);
 			if (temp[j] == NULL)
-			{
 				temp[j] = ft_strdup(ft_get_venv_value(word, &start, &i, shell));
-			}
 		}
 		j++;
 	}
 	temp[j] = NULL;
-	new_tok = ft_join_array(temp);
-	for (int i = 0; temp[i] != NULL; i++)
-		free(temp[i]);
-	free(temp);
+	ft_replace_token_content(shell, temp);
+}
+
+void	ft_replace_token_content(t_minishell *shell, char **tmp)
+{
+	char	*new_tok;
+
+	new_tok = NULL;
+	new_tok = ft_join_array(tmp);
+	free_two_dimension_array(tmp);
 	ft_safe_free(shell->token->word);
 	shell->token->word = new_tok;
 }
@@ -103,10 +104,4 @@ char	*ft_dollar_alone(char *word, int *start, int *i)
 		(*i)++;
 	}
 	return (new);
-}
-
-void	ft_safe_free(char *str)
-{
-	if (str)
-		free(str);
 }
