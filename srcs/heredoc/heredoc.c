@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 19:54:02 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/23 15:01:18 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/24 11:57:36 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ void	ft_heredoc(t_minishell *shell)
 
 	del = ft_get_heredocs(shell->token);
 	head = del;
-	signal(SIGINT, &signal_heredoc_handler);
-	signal(SIGQUIT, SIG_IGN);
-	while (del != NULL)
+	while (del != NULL && g_status == 0)
 	{
 		if (ft_eof_quoted(del->value) == 1)
 		{

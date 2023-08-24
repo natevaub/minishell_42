@@ -6,11 +6,20 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 19:54:02 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/23 14:55:59 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/24 11:40:13 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	handle_ctrl_d(void)
+{
+	rl_replace_line("", 0);
+	ft_output_command_line();
+	rl_on_new_line();
+	rl_redisplay();
+	g_status = 1;
+}
 
 t_linked_list	*ft_store_heredoc_content(char *eof)
 {
@@ -22,22 +31,12 @@ t_linked_list	*ft_store_heredoc_content(char *eof)
 	{
 		line = readline("> ");
 		if (!line)
-		{
-			rl_replace_line("", 0);
-			// ft_putstr_fd("\n", STDOUT_FILENO);
-			ft_output_command_line();
-			rl_on_new_line();
-			rl_redisplay();
-			return (NULL);
-			// exit(1);
-		}
+			handle_ctrl_d();
 		if (g_status != 0)
 			return (NULL);
 		if (ft_strncmp(line, eof, ft_strlen(eof)) == 0)
 		{
 			free(line);
-			if (g_status != 0)
-				return (NULL);
 			break ;
 		}
 		else
@@ -54,6 +53,8 @@ char	*ft_list_to_char(t_linked_list *head)
 
 	curr = head;
 	total_size = 0;
+	if (curr == NULL)
+		return (NULL);
 	while (curr != NULL)
 	{
 		total_size += ft_strlen(curr->value) + 1;
@@ -77,11 +78,13 @@ void	ft_write_to_temp_file(char *content)
 {
 	int	fd;
 
+	if (content == NULL)
+		return ;
 	fd = open(".heredoc", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1)
 	{
 		free(content);
-		perror("Error opening .hereodc file\n");
+		perror("Error opening .heredoc file\n");
 		exit(EXIT_FAILURE);
 	}
 	if (write(fd, content, ft_strlen(content)) == -1)

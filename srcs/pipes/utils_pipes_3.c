@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/23 12:26:32 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/24 11:59:20 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	ft_init_pipes_struct(t_minishell *shell)
 		exit(1);
 	shell->p->count_cmds = ft_count_cmds(shell->cmd);
 	shell->p->idx = 0;
-	// g_status = 0;
 }
 
 void	ft_parent_close(t_minishell *ms)
