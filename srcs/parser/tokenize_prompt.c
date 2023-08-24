@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 01:46:40 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/23 11:09:24 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/24 11:59:10 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	ft_tokenize_prompt(t_minishell *global, char *prompt)
 	tk = NULL;
 	while (*prompt == ' ' || *prompt == '\t')
 		prompt++;
-	// tk = ft_newlst_token(ft_get_tk(&prompt));
 	global->token = tk;
 	while (*prompt != '\0')
 	{

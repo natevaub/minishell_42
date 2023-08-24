@@ -6,7 +6,7 @@
 /*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 01:46:40 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/24 11:55:14 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/24 11:59:59 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,6 @@
 # include "define.h"
 # include "../libs/libft/libft.h"
 # include "../libs/ftprintf/ft_printf.h"
-
-# define DEBUG 0
-# define DBG(str) ft_putstr_fd(str, 2); ft_putstr_fd("\n", 2)
-# define N_DBG(nbr) ft_putnbr_fd(nbr, 2); ft_putstr_fd("\n", 2)
 
 extern int	g_status;
 
@@ -211,6 +207,8 @@ void			ft_init_signals(void (*handle_signals)(int));
 void			signal_exec_handler(int sig);
 extern void		rl_replace_line(const char *, int);
 void			signal_child_handler(int sig);
+void			signal_heredoc_handler(int sig);
+void			ft_init_hd_signals(void (*handle_signals)(int));
 
 /*
 	expand
@@ -283,7 +281,7 @@ void			free_linked_list(t_linked_list *head);
 
 /*	---	heredoc_no_expand.c	---*/
 t_linked_list	*ft_store_heredoc_content(char *eof);
-
+void			handle_ctrl_d(void);
 char			*ft_list_to_char(t_linked_list *head);
 void			ft_write_to_temp_file(char *content);
 

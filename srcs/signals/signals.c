@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/23 11:32:55 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/24 11:58:03 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,16 @@ void	ft_init_signals(void (*handle_signals)(int))
 		perror("Error: cannot handle SIGQUIT");
 	else
 		g_status = 0;
+}
+
+void	ft_init_hd_signals(void (*handle_signals)(int))
+{
+	struct sigaction	sa;
+
+	sa.sa_handler = handle_signals;
+	if (sigaction(SIGINT, &sa, NULL) == -1)
+		perror("Error: cannot handle SIGINT");
+	signal(SIGQUIT, SIG_IGN);
 }
 
 void	signal_child_handler(int sig)
@@ -52,11 +62,22 @@ void	signal_exec_handler(int sig)
 		rl_on_new_line();
 		rl_redisplay();
 		g_status = 1;
-		// printf("global status: %d", g_status);
 	}
 	else if (sig == SIGQUIT)
 	{
 		rl_on_new_line();
 		rl_redisplay();
+	}
+}
+
+void	signal_heredoc_handler(int sig)
+{
+	if (sig == SIGINT)
+	{
+		ft_putstr_fd("\n", STDOUT_FILENO);
+		ft_output_command_line();
+		rl_on_new_line();
+		rl_redisplay();
+		g_status = 1;
 	}
 }

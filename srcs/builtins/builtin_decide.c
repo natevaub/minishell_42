@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/22 16:11:39 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/23 12:26:44 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 /* function assesses if argument is a built in*/
 int	builtin_check(char *cmd)
 {
+	if (!cmd)
+		return (0);
 	if (ft_strncmp(cmd, "echo", 4) == 0)
 		return (1);
 	else if (ft_strncmp(cmd, "cd", 2) == 0)
