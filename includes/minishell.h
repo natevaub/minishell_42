@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 01:46:40 by nvaubien          #+#    #+#             */
 /*   Updated: 2023/08/24 11:59:59 by ckarl            ###   ########.fr       */
@@ -218,14 +218,18 @@ void			ft_expand_token(t_minishell *shell);
 char			*ft_expand_last_exit_status(t_minishell *ms);
 void			ft_expand_venv(t_minishell *shell, char	*word);
 char			*ft_dollar_alone(char *word, int *start, int *i);
-void			ft_safe_free(char *str);
+void			ft_replace_token_content(t_minishell *shell, char **tmp);
 
 /*	---	expand_utils.c	---*/
-int				ft_token_has_dollar(char *word);
 char			*ft_fill_word(char *word, int *start, int *i);
-char			*ft_get_venv_value(char *word, int *start, int *i,
-					t_minishell *ms);
-char			*ft_join_array(char *temp[256]);
+char			*ft_fill_word_expand(char *word, int *start, int *i);
+char			*ft_get_venv_value(char *word, int *start,
+					int *i, t_minishell *ms);
+int				ft_token_has_dollar(char *word);
+char			*ft_join_array(char **temp);
+
+/*	---	expand_utils.c	---*/
+void			ft_safe_free(char *str);
 
 /*
 	execute
