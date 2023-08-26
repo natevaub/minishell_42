@@ -30,6 +30,7 @@ typedef struct s_list_token
 typedef struct s_list_venv
 {
 	char				*word;
+	int					len;
 	struct s_list_venv	*next;
 	struct s_list_venv	*prev;
 }						t_venv;

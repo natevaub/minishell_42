@@ -40,6 +40,9 @@ int	ft_exec_child(t_lcmd *cmd, char **envp, t_minishell *ms)
 {
 	char	*cmd_with_path;
 
+	ft_putstr_fd("---cmd in exec child:", 2);
+	ft_putstr_fd(cmd->cmd, 2);
+	ft_putstr_fd("\n", 2);
 	cmd_with_path = ft_get_right_path(cmd->cmd, ms);
 	if (!cmd_with_path)
 	{
@@ -47,6 +50,7 @@ int	ft_exec_child(t_lcmd *cmd, char **envp, t_minishell *ms)
 	}
 	if (execve(cmd_with_path, cmd->option, envp) < 0)
 	{
+		ft_path_failed(cmd->cmd);
 		free(cmd_with_path);
 		exit(127);
 	}

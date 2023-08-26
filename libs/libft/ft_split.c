@@ -71,6 +71,8 @@ char	**ft_split(char const *s, char c)
 
 	stri = 0;
 	i = 0;
+	if (!s)
+		return(NULL);
 	strings = gen_memory_strings(s, c);
 	if (!strings)
 		return (0);

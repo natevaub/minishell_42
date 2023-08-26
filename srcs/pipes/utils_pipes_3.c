@@ -42,3 +42,10 @@ int	ft_pipe_dep_mod(t_pipex *p)
 	}
 	return (0);
 }
+
+void	ft_path_failed(char *str)
+{
+	ft_putstr_fd("minishell: ", STDERR_FILENO);
+	ft_putstr_fd(str, STDERR_FILENO);
+	ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
+}

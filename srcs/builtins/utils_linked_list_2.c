@@ -20,7 +20,12 @@ t_venv	*new_env_list(char **tab)
 
 	a = 0;
 	new_list = NULL;
-	while (tab[a + 1])
+	if (!tab)
+	{
+		ft_putstr_fd("in !tab\n", 2);
+		return (new_list);
+	}
+	while (tab[a])
 	{
 		list_append(&new_list, tab[a]);
 		a++;
@@ -37,8 +42,11 @@ void	content_swap(t_venv *one, t_venv *two)
 	if (!temp)
 		return ;
 	temp->word = one->word;
+	temp->len = one->len;
 	one->word = two->word;
+	one->len = two->len;
 	two->word = temp->word;
+	two->len = temp->len;
 	free(temp);
 }
 
@@ -67,7 +75,7 @@ void	bubble_sort(t_venv **head)
 }
 
 //insert a new node after the 10th node in the list
-int	insert_node_in_list(char *var, t_venv **head)
+int	insert_node_in_list(char *var, t_venv *head)
 {
 	t_venv	*addback;
 	t_venv	*pre_copy;
@@ -79,7 +87,7 @@ int	insert_node_in_list(char *var, t_venv **head)
 	addback->word = ft_strdup(var);
 	if (!addback->word)
 		return (EXIT_FAILURE);
-	pre_copy = get_node_venv(*head, 10);
+	pre_copy = get_node_venv(head, 10);
 	post_copy = pre_copy->next;
 	pre_copy->next = addback;
 	post_copy->prev = addback;

@@ -15,31 +15,47 @@
 //UNSET WITH NO OPTIONS
 /*Using the unset command, you can unset values and attributes of shell
 variables.*/
-int	cmd_unset(char **option, t_minishell *ms)
+
+void	remove_var_from_env(t_venv *list, t_minishell *ms)
 {
-	t_venv	*list;
 	t_venv	*pre_copy;
 	t_venv	*post_copy;
 
-	while (*option)
+	pre_copy = list->prev;
+	post_copy = list->next;
+	if (!pre_copy)
+	{
+		ms->copy_env = list->next;
+		list->next->prev = NULL;
+	}
+	else
+	{
+		pre_copy->next = post_copy;
+		if (post_copy)
+			post_copy->prev = pre_copy;
+	}
+	free(list->word);
+	free(list);
+}
+
+int	cmd_unset(char **option, t_minishell *ms)
+{
+	t_venv	*list;
+	int		i;
+
+	i = 0;
+	while (option[i])
 	{
 		list = ms->copy_env;
 		while (list)
 		{
-			if (ft_strncmp(list->word, *option, ft_strlen(*option)) == 0)
+			if (list != NULL && ft_strncmp(list->word, option[i], list->len) == 0)
 			{
-				pre_copy = list->prev;
-				post_copy = list->next;
-				if (pre_copy)
-					pre_copy->next = post_copy;
-				if (post_copy)
-						post_copy->prev = pre_copy;
-				free(list->word);
-				free(list);
+				remove_var_from_env(list, ms);
 			}
 			list = list->next;
 		}
-		option++;
+		i++;
 	}
 	return (EXIT_SUCCESS);
 }

@@ -65,18 +65,15 @@ char	*trim_back(char *var)
 int	change_existing_var_in_env(char *var, t_minishell *ms)
 {
 	char	*copy_var;
-	int		len;
 	t_venv	*head;
 
 	head = ms->copy_env;
 	copy_var = trim_back(var);
 	if (copy_var == NULL)
-		return (1);
-	len = ft_strlen(copy_var);
+		return (EXIT_FAILURE);
 	while (head)
 	{
-		if (ft_strncmp(head->word, copy_var, len) == 0 && \
-		(head->word[len] == '=' || head->word[len] == '\0'))
+		if (ft_strncmp(head->word, copy_var, head->len) == 0)
 		{
 			free(head->word);
 			head->word = ft_strdup(var);
@@ -86,22 +83,25 @@ int	change_existing_var_in_env(char *var, t_minishell *ms)
 		head = head->next;
 	}
 	free(copy_var);
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 //add *var to env tableau
 int	add_var_to_export(char **option, t_minishell *ms)
 {
-	while (*option)
+	int	i;
+
+	i = 0;
+	while (option[i])
 	{
-		if (check_var_format(*option) == EXIT_FAILURE)
+		if (check_var_format(option[i]) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
-		if (change_existing_var_in_env(*option, ms) == 0)
+		if (change_existing_var_in_env(option[i], ms) == 0)
 		{
-			if (insert_node_in_list(*option, &ms->copy_env) == EXIT_FAILURE)
+			if (insert_node_in_list(option[i], ms->copy_env) == EXIT_FAILURE)
 				return (EXIT_FAILURE);
 		}
-		option++;
+		i++;
 	}
 	return (EXIT_SUCCESS);
 }
@@ -112,6 +112,8 @@ int	print_export(t_lcmd *cmd, t_minishell *ms)
 	char	**lines;
 	t_venv	*env_for_export;
 
+	if (!ms->copy_env)
+		return (1);
 	env_for_export = ms->copy_env;
 	bubble_sort(&env_for_export);
 	while (env_for_export)
@@ -120,10 +122,11 @@ int	print_export(t_lcmd *cmd, t_minishell *ms)
 		if (!lines)
 			return (EXIT_FAILURE);
 		ft_putstr_fd("declare -x ", cmd->fd_write);
-		ft_putstr_fd(lines[0], cmd->fd_write);
-		ft_putstr_fd("=", cmd->fd_write);
+		if (lines[0] != NULL)
+			ft_putstr_fd(lines[0], cmd->fd_write);
+		ft_putchar_fd('=', cmd->fd_write);
 		ft_putchar_fd('"', cmd->fd_write);
-		if (lines[1])
+		if (lines[1] != NULL)
 			ft_putstr_fd(lines[1], cmd->fd_write);
 		ft_putchar_fd('"', cmd->fd_write);
 		ft_putchar_fd('\n', cmd->fd_write);

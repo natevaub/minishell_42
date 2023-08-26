@@ -19,21 +19,21 @@ int	builtin_check(char *cmd)
 {
 	if (!cmd)
 		return (0);
-	if (ft_strncmp(cmd, "echo", 4) == 0)
+	if (ft_strncmp(cmd, "echo", ft_strlen(cmd)) == 0)
 		return (1);
-	else if (ft_strncmp(cmd, "cd", 2) == 0)
+	else if (ft_strncmp(cmd, "cd", ft_strlen(cmd)) == 0)
 		return (1);
-	else if (ft_strncmp(cmd, "pwd", 3) == 0)
+	else if (ft_strncmp(cmd, "pwd", ft_strlen(cmd)) == 0)
 		return (1);
-	else if (ft_strncmp(cmd, "export", 6) == 0)
+	else if (ft_strncmp(cmd, "export", ft_strlen(cmd)) == 0)
 		return (1);
-	else if (ft_strncmp(cmd, "unset", 5) == 0)
+	else if (ft_strncmp(cmd, "unset", ft_strlen(cmd)) == 0)
 		return (1);
-	else if (ft_strncmp(cmd, "env", 3) == 0)
+	else if (ft_strncmp(cmd, "env", ft_strlen(cmd)) == 0)
 		return (1);
-	else if (ft_strncmp(cmd, "exit", 4) == 0)
+	else if (ft_strncmp(cmd, "exit", ft_strlen(cmd)) == 0)
 		return (1);
-	else if (ft_strncmp(cmd, "minishell", 9) == 0)
+	else if (ft_strncmp(cmd, "minishell", ft_strlen(cmd)) == 0)
 		return (1);
 	else
 		return (0);
@@ -43,28 +43,28 @@ int	builtin_check(char *cmd)
 and redirects to right builtin function for execution*/
 void	builtin_run(t_minishell *ms, t_lcmd *cmd)
 {
-	if (ft_strncmp(cmd->cmd, "echo", 4) == 0)
+	if (ft_strncmp(cmd->cmd, "echo", ft_strlen(cmd->cmd)) == 0)
 		ms->last_exit_status = cmd_echo(cmd);
-	else if (ft_strncmp(cmd->cmd, "cd", 2) == 0)
+	else if (ft_strncmp(cmd->cmd, "cd", ft_strlen(cmd->cmd)) == 0)
 		ms->last_exit_status = cmd_cd(cmd, ms);
-	else if (ft_strncmp(cmd->cmd, "pwd", 3) == 0)
+	else if (ft_strncmp(cmd->cmd, "pwd", ft_strlen(cmd->cmd)) == 0)
 		ms->last_exit_status = cmd_pwd(cmd);
-	else if (ft_strncmp(cmd->cmd, "export", 6) == 0)
+	else if (ft_strncmp(cmd->cmd, "export", ft_strlen(cmd->cmd)) == 0)
 	{
 		if (!(cmd->option[1]))
 			ms->last_exit_status = print_export(cmd, ms);
 		else
 			ms->last_exit_status = add_var_to_export((cmd->option) + 1, ms);
 	}
-	else if (ft_strncmp(cmd->cmd, "unset", 5) == 0)
+	else if (ft_strncmp(cmd->cmd, "unset", ft_strlen(cmd->cmd)) == 0)
 	{
 		if ((ms->cmd->option) + 1)
 			ms->last_exit_status = cmd_unset((cmd->option) + 1, ms);
 	}
-	else if (ft_strncmp(cmd->cmd, "env", 3) == 0)
+	else if (ft_strncmp(cmd->cmd, "env", ft_strlen(cmd->cmd)) == 0)
 		ms->last_exit_status = print_env(ms, cmd);
-	else if (ft_strncmp(cmd->cmd, "exit", 4) == 0)
+	else if (ft_strncmp(cmd->cmd, "exit", ft_strlen(cmd->cmd)) == 0)
 		cmd_exit(ft_atoi(*((cmd->option) + 1)), ms);
-	else if (ft_strncmp(cmd->cmd, "minishell", 9) == 0)
+	else if (ft_strncmp(cmd->cmd, "minishell", ft_strlen(cmd->cmd)) == 0)
 		change_shvl_in_env(1, ms);
 }

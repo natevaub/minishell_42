@@ -181,6 +181,7 @@ int				cmd_pwd(t_lcmd *cmd);
 
 /*	---	builtin_unset.c	---*/
 int				cmd_unset(char **var, t_minishell *ms);
+void			remove_var_from_env(t_venv *list, t_minishell *ms);
 
 /*	---	utils_linked_list_1.c	---*/
 int				list_size(t_venv *lst);
@@ -193,7 +194,7 @@ void			list_append(t_venv **lst, char *element);
 t_venv			*new_env_list(char **tab);
 void			content_swap(t_venv *one, t_venv *two);
 void			bubble_sort(t_venv **head);
-int				insert_node_in_list(char *var, t_venv **head);
+int				insert_node_in_list(char *var, t_venv *head);
 
 /*	---	utils_tab.c	---*/
 int				tab_size(char **tab);
@@ -264,6 +265,7 @@ void			sub_dup2(int read, int write);
 void			ft_init_pipes_struct(t_minishell *shell);
 int				ft_pipe_dep_mod(t_pipex *p);
 void			ft_parent_close(t_minishell *ms);
+void			ft_path_failed(char *str);
 
 /*
 	heredoc

@@ -25,12 +25,13 @@ void	child_exec_no_pipe(t_minishell *ms, char **env_tab)
 	{
 		sub_dup2(ms->cmd->fd_read, ms->cmd->fd_write);
 		cmd_with_path = ft_get_right_path(ms->cmd->cmd, ms);
-		if (!cmd_with_path)
+		if (cmd_with_path == NULL)
 		{
 			exit(127);
 		}
 		if (execve(cmd_with_path, ms->cmd->option, env_tab) < 0)
 		{
+			ft_path_failed(ms->cmd->cmd);
 			free(cmd_with_path);
 			exit(127);
 		}
@@ -69,10 +70,12 @@ void	ft_exec_no_pipe(t_minishell *ms, char **envp)
 	{
 		if ((builtin_check(ms->cmd->cmd)) == 1)
 		{
+			ft_putstr_fd("in builtin run\n", 2);
 			builtin_run(ms, ms->cmd);
 		}
 		else
 		{
+			ft_putstr_fd("in child exec no pipe\n", 2);
 			child_exec_no_pipe(ms, envp);
 		}
 	}

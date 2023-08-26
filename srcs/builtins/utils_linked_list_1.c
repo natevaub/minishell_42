@@ -59,18 +59,22 @@ void	list_append(t_venv **lst, char *element)
 {
 	t_venv	*addback;
 	t_venv	*copy;
+	int		len;
 
+	len = 0;
 	addback = (t_venv *)malloc(sizeof(t_venv));
 	if (!addback)
 		return ;
 	addback->next = NULL;
 	addback->word = ft_strdup(element);
+	while(addback->word[len] != '\0' && addback->word[len] != '=')
+		len++;
+	addback->len = len;
 	if (!addback->word)
 		ft_memory_allocation_failed();
 	if (*lst == NULL)
 	{
 		*lst = addback;
-		addback->prev = NULL;
 		return ;
 	}
 	copy = last_node(*lst);

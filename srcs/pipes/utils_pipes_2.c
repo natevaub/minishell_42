@@ -39,10 +39,12 @@ char	*ft_get_path_line(t_minishell *ms)
 	head = ms->copy_env;
 	while (head)
 	{
-		if (ft_strncmp(head->word, "PATH", 4) == 0)
+		if (ft_strncmp(head->word, "PATH", head->len) == 0)
 			envp_path = head->word;
 		head = head->next;
 	}
+	// if (!envp_path)
+	// 	return (NULL);
 	return (envp_path + 5);
 }
 
@@ -80,10 +82,15 @@ char	*ft_get_right_path(char *cmd, t_minishell *ms)
 	char	*temp_path;
 	int		i;
 
-	all_paths = ft_split(ft_get_path_line(ms), ':');
 	if (access(cmd, F_OK | X_OK) == 0)
 		return (cmd);
+	all_paths = ft_split(ft_get_path_line(ms), ':');
+	if (!all_paths)
+		return (NULL);
 	i = 0;
+	// ft_putstr_fd("---", 2);
+	// ft_putstr_fd(cmd, 2);
+	// ft_putstr_fd("\n", 2);
 	while (all_paths[i])
 	{
 		temp_path = ft_join_path(all_paths[i], cmd);
