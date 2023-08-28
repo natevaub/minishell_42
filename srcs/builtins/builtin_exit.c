@@ -62,19 +62,16 @@ long long int	ft_longatoi_for_shell(char *str, t_minishell *ms)
 	result = 0;
 	neg = 1;
 	i = 0;
+	if (str[i] == '-')
+		neg = -1;
 	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			neg = -1;
 		i++;
-	}
 	while (str[i] >= '0' && str[i] <= '9' && str[i])
 	{
 		result = result * 10 + (str[i] - '0');
 		i++;
 	}
-	if (str[i] != '\0' || result > 9223372036854775807 \
-		|| (neg == -1 && result > 9223372036854775808))
+	if (str[i] != '\0' || result > 9223372036854775807)
 		return (-1);
 	if (neg == -1)
 		end = (result * neg) % 256;
