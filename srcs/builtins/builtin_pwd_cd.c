@@ -25,11 +25,12 @@ int	cmd_cd(t_lcmd *cmd, t_minishell *ms)
 	if (chdir(path) < 0)
 	{
 		free (path);
+		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(cmd->option[0], 2);
 		ft_putstr_fd(": ", 2);
 		ft_putstr_fd(cmd->option[1], 2);
 		ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
-		return (errno);
+		return (EXIT_FAILURE);
 	}
 	free(path);
 	return (EXIT_SUCCESS);

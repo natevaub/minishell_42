@@ -40,9 +40,8 @@ int	ft_exec_child(t_lcmd *cmd, char **envp, t_minishell *ms)
 {
 	char	*cmd_with_path;
 
-	ft_putstr_fd("---cmd in exec child:", 2);
-	ft_putstr_fd(cmd->cmd, 2);
-	ft_putstr_fd("\n", 2);
+	if (ft_get_path_line(ms) == NULL)
+		ft_path_failed(ms->cmd->cmd);
 	cmd_with_path = ft_get_right_path(cmd->cmd, ms);
 	if (!cmd_with_path)
 	{
