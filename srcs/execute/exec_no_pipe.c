@@ -14,7 +14,7 @@
 
 void	child_exec_no_pipe(t_minishell *ms, char **env_tab)
 {
-	char	*cmd_with_path;
+	char	*cmd_with_path;															//cd with invalid file
 	pid_t	pid;
 	int		exit_status;
 
@@ -24,11 +24,11 @@ void	child_exec_no_pipe(t_minishell *ms, char **env_tab)
 	if (pid == 0)
 	{
 		sub_dup2(ms->cmd->fd_read, ms->cmd->fd_write);
+		if (ft_get_path_line(ms) == NULL)
+			ft_path_failed(ms->cmd->cmd);
 		cmd_with_path = ft_get_right_path(ms->cmd->cmd, ms);
 		if (cmd_with_path == NULL)
-		{
 			exit(127);
-		}
 		if (execve(cmd_with_path, ms->cmd->option, env_tab) < 0)
 		{
 			ft_path_failed(ms->cmd->cmd);
@@ -37,9 +37,7 @@ void	child_exec_no_pipe(t_minishell *ms, char **env_tab)
 		}
 	}
 	else if (pid > 0)
-	{
 		parent_exec_no_pipe(&pid, &exit_status, ms);
-	}
 }
 
 void	parent_exec_no_pipe(pid_t *pid, int *exit_status, t_minishell *ms)

@@ -43,8 +43,8 @@ char	*ft_get_path_line(t_minishell *ms)
 			envp_path = head->word;
 		head = head->next;
 	}
-	// if (!envp_path)
-	// 	return (NULL);
+	if (!envp_path)
+		return (NULL);
 	return (envp_path + 5);
 }
 
@@ -88,9 +88,6 @@ char	*ft_get_right_path(char *cmd, t_minishell *ms)
 	if (!all_paths)
 		return (NULL);
 	i = 0;
-	// ft_putstr_fd("---", 2);
-	// ft_putstr_fd(cmd, 2);
-	// ft_putstr_fd("\n", 2);
 	while (all_paths[i])
 	{
 		temp_path = ft_join_path(all_paths[i], cmd);
@@ -102,6 +99,7 @@ char	*ft_get_right_path(char *cmd, t_minishell *ms)
 		free(temp_path);
 		i++;
 	}
+	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(cmd, 2);
 	ft_putstr_fd(": command not found\n", 2);
 	free_two_dimension_array(all_paths);
