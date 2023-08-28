@@ -39,23 +39,26 @@
 // 		return (0);
 // }
 
-int builtin_check(char *cmd) {
+// Check for exact matches of built-in commands
+int builtin_check(char *cmd)
+{
+	int	len;
+
+	len = ft_strlen(cmd);
 	if (!cmd)
 		return 0;
-	
-	// Check for exact matches of built-in commands
-	if (strcmp(cmd, "echo") == 0 ||
-		strcmp(cmd, "cd") == 0 ||
-		strcmp(cmd, "pwd") == 0 ||
-		strcmp(cmd, "export") == 0 ||
-		strcmp(cmd, "unset") == 0 ||
-		strcmp(cmd, "env") == 0 ||
-		strcmp(cmd, "exit") == 0 ||
-		strcmp(cmd, "minishell") == 0)
+	if (ft_strncmp(cmd, "echo", len) == 0 ||
+		ft_strncmp(cmd, "cd", len) == 0 ||
+		ft_strncmp(cmd, "pwd", len) == 0 ||
+		ft_strncmp(cmd, "export", len) == 0 ||
+		ft_strncmp(cmd, "unset", len) == 0 ||
+		ft_strncmp(cmd, "env", len) == 0 ||
+		ft_strncmp(cmd, "exit", len) == 0 ||
+		ft_strncmp(cmd, "minishell", len) == 0)
 	{
-		return 1;
+		return (1);
 	}
-	return 0;
+	return (0);
 }
 
 /*if yes, checks if there are given arguments
@@ -83,7 +86,7 @@ void	builtin_run(t_minishell *ms, t_lcmd *cmd)
 	else if (ft_strncmp(cmd->cmd, "env", ft_strlen(cmd->cmd)) == 0)
 		ms->last_exit_status = print_env(ms, cmd);
 	else if (ft_strncmp(cmd->cmd, "exit", ft_strlen(cmd->cmd)) == 0)
-		cmd_exit(ft_atoi(*((cmd->option) + 1)), ms);
+		cmd_exit(*((cmd->option) + 1), ms);
 	else if (ft_strncmp(cmd->cmd, "minishell", ft_strlen(cmd->cmd)) == 0)
 		change_shvl_in_env(1, ms);
 }
