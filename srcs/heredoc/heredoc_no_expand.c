@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_no_expand.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 19:54:02 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/24 11:40:13 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/27 19:25:39 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ t_linked_list	*ft_store_heredoc_content(char *eof)
 			handle_ctrl_d();
 		if (g_status != 0)
 			return (NULL);
-		if (ft_strncmp(line, eof, ft_strlen(eof)) == 0)
+		if (line[0] != '\0' && ft_strlen(eof) == ft_strlen(line)
+			&& ft_strcmp(eof, line) == 0)
 		{
 			free(line);
 			break ;

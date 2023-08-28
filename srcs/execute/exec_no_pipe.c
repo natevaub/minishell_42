@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_no_pipe.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/23 14:06:42 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/28 11:44:54 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,12 @@ void	ft_exec_no_pipe(t_minishell *ms, char **envp)
 	{
 		if ((builtin_check(ms->cmd->cmd)) == 1)
 		{
-			ft_putstr_fd("in builtin run\n", 2);
+			// ft_putstr_fd("in builtin run\n", 2);
 			builtin_run(ms, ms->cmd);
 		}
 		else
 		{
-			ft_putstr_fd("in child exec no pipe\n", 2);
+			// ft_putstr_fd("in child exec no pipe\n", 2);
 			child_exec_no_pipe(ms, envp);
 		}
 	}

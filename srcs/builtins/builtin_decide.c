@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_decide.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/23 12:26:44 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/26 14:50:51 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,47 @@
 // extern g_global	global;
 
 /* function assesses if argument is a built in*/
-int	builtin_check(char *cmd)
-{
+// int	builtin_check(char *cmd)
+// {
+// 	if (!cmd)
+// 		return (0);
+// 	if (ft_strncmp(cmd, "echo", ft_strlen(cmd)) == 0)
+// 		return (1);
+// 	else if (ft_strncmp(cmd, "cd", ft_strlen(cmd)) == 0)
+// 		return (1);
+// 	else if (ft_strncmp(cmd, "pwd", ft_strlen(cmd)) == 0)
+// 		return (1);
+// 	else if (ft_strncmp(cmd, "export", ft_strlen(cmd)) == 0)
+// 		return (1);
+// 	else if (ft_strncmp(cmd, "unset", ft_strlen(cmd)) == 0)
+// 		return (1);
+// 	else if (ft_strncmp(cmd, "env", ft_strlen(cmd)) == 0)
+// 		return (1);
+// 	else if (ft_strncmp(cmd, "exit", ft_strlen(cmd)) == 0)
+// 		return (1);
+// 	else if (ft_strncmp(cmd, "minishell", ft_strlen(cmd)) == 0)
+// 		return (1);
+// 	else
+// 		return (0);
+// }
+
+int builtin_check(char *cmd) {
 	if (!cmd)
-		return (0);
-	if (ft_strncmp(cmd, "echo", ft_strlen(cmd)) == 0)
-		return (1);
-	else if (ft_strncmp(cmd, "cd", ft_strlen(cmd)) == 0)
-		return (1);
-	else if (ft_strncmp(cmd, "pwd", ft_strlen(cmd)) == 0)
-		return (1);
-	else if (ft_strncmp(cmd, "export", ft_strlen(cmd)) == 0)
-		return (1);
-	else if (ft_strncmp(cmd, "unset", ft_strlen(cmd)) == 0)
-		return (1);
-	else if (ft_strncmp(cmd, "env", ft_strlen(cmd)) == 0)
-		return (1);
-	else if (ft_strncmp(cmd, "exit", ft_strlen(cmd)) == 0)
-		return (1);
-	else if (ft_strncmp(cmd, "minishell", ft_strlen(cmd)) == 0)
-		return (1);
-	else
-		return (0);
+		return 0;
+	
+	// Check for exact matches of built-in commands
+	if (strcmp(cmd, "echo") == 0 ||
+		strcmp(cmd, "cd") == 0 ||
+		strcmp(cmd, "pwd") == 0 ||
+		strcmp(cmd, "export") == 0 ||
+		strcmp(cmd, "unset") == 0 ||
+		strcmp(cmd, "env") == 0 ||
+		strcmp(cmd, "exit") == 0 ||
+		strcmp(cmd, "minishell") == 0)
+	{
+		return 1;
+	}
+	return 0;
 }
 
 /*if yes, checks if there are given arguments

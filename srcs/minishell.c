@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/24 11:59:00 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/26 16:37:16 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int ac, char **av, char **envp)
 	t_minishell		shell;
 	char			*prompt;
 	t_venv			*copy;
-	int				i;
+	// int				i;
 
 	ft_init_minishell(&shell, envp, ac, av);
 	while (1)
@@ -32,7 +32,7 @@ int	main(int ac, char **av, char **envp)
 		add_history(prompt);
 		ft_parsing(&shell, prompt);
 		copy = shell.copy_env;
-		i = 0;
+		// i = 0;
 		// while (copy)
 		// {
 		// 	i++;

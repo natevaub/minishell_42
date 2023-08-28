@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_fd_redirection.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 01:46:40 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/23 11:04:01 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/26 14:36:08 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int	ft_get_outfile_fd(t_tok **tk, t_minishell *ms)
 		return (fd);
 	while ((*tk)->type == E_SPACE)
 	{
-		printf("E_SPACE Tk Word = %s\n", (*tk)->word);
 		if ((*tk)->next == NULL)
 		{
 			(*tk) = (*tk)->next;
@@ -66,9 +65,7 @@ int	ft_get_outfile_fd(t_tok **tk, t_minishell *ms)
 	}
 	if ((*tk) != NULL)
 	{
-		printf("Open Tk Word = %s\n", (*tk)->word);
 		fd = open((*tk)->word, O_CREAT | O_TRUNC | O_RDWR, 0666);
-		printf("FD = %d\n", fd);
 	}
 	ms->last_exit_status = 0;
 	return (fd);
