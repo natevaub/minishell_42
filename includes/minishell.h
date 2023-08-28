@@ -165,8 +165,11 @@ int				find_c(char *str, char c);
 int				print_env(t_minishell *ms, t_lcmd *cmd);
 
 /*	---	builtin_exit.c	---*/
-void			cmd_exit(int status, t_minishell *ms);
+void			cmd_exit(char *status, t_minishell *ms);
 void			change_shvl_in_env(int nbr, t_minishell *ms);
+long long int	ft_longatoi_for_shell(char *str, t_minishell *ms);
+void			ft_exit_error_msg(char *opt, t_minishell *ms);
+void			ft_exit_arg_error(char *str, t_minishell *ms);
 
 /*	---	builtin_export.c	---*/
 int				check_var_format(char *var);
