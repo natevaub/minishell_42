@@ -30,9 +30,13 @@ int	print_env(t_minishell *ms, t_lcmd *cmd)
 	t_venv	*head;
 
 	head = ms->copy_env;
+	if (cmd->option[1])
+	{
+		ft_path_failed(cmd->cmd);
+		return (127);
+	}
 	while (head)
 	{
-		// ft_putstr_fd("in while loop print env\n", 2);
 		if (find_c(head->word, '='))
 		{
 			ft_putstr_fd(head->word, cmd->fd_write);

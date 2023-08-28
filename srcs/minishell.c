@@ -35,12 +35,12 @@ int	main(int ac, char **av, char **envp)
 		{
 			if (ft_count_cmds(shell.cmd) < 2)
 			{
-				ft_putstr_fd("in exec no pipe\n", 2);
+				// ft_putstr_fd("in exec no pipe\n", 2);
 				ft_exec_no_pipe(&shell, envp);
 			}
 			else
 			{
-				ft_putstr_fd("in exec pipe\n", 2);
+				// ft_putstr_fd("in exec pipe\n", 2);
 				ft_pipeline_execution(&shell, envp);
 			}
 		}

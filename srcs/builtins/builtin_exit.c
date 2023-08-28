@@ -42,13 +42,21 @@ void	change_shvl_in_env(int nbr, t_minishell *ms)
 	}
 }
 
-//bash: exit: 9999999999919999992333333333333: numeric argument required
-void	ft_exit_error_msg(char *opt, t_minishell *ms)
+//1 for numberic, 2 for too many arguments
+void	ft_exit_error_msg(char *opt, t_minishell *ms, int option)
 {
+	if (option == 1)
+	{
 		ft_putstr_fd("minishell: exit: ", 2);
 		ft_putstr_fd(opt, 2);
 		ft_putstr_fd(": numeric argument required\n", 2);
 		ms->last_exit_status = 255;
+	}
+	else if (option == 2)
+	{
+		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
+		ms->last_exit_status = 1;
+	}
 }
 
 //regular atoi using long long int
@@ -73,7 +81,7 @@ long long int	ft_longatoi_for_shell(char *str, t_minishell *ms)
 	}
 	if (str[i] != '\0' || result > 9223372036854775807)
 		return (-1);
-	if (neg == -1)
+	else if (neg == -1)
 		end = (result * neg) % 256;
 	else if (result > 255)
 		end = result % 256;
@@ -83,7 +91,7 @@ long long int	ft_longatoi_for_shell(char *str, t_minishell *ms)
 }
 
 //check if arg is not a valid nr
-void	ft_exit_arg_error(char *str, t_minishell *ms)
+void	ft_exit_arg_error(char *str, t_minishell *ms, t_lcmd *cmd)
 {
 	int				i;
 	long long int	ex_status;
@@ -95,13 +103,18 @@ void	ft_exit_arg_error(char *str, t_minishell *ms)
 		i++;
 	if (str[i] != '\0' || i > 20)
 	{
-		ft_exit_error_msg(str, ms);
+		ft_exit_error_msg(str, ms, 1);
+		return ;
+	}
+	if (cmd->option[2])
+	{
+		ft_exit_error_msg(str, ms, 2);
 		return ;
 	}
 	ex_status = ft_longatoi_for_shell(str, ms);
 	if (ex_status == -1 || ex_status > 255)
 	{
-		ft_exit_error_msg(str, ms);
+		ft_exit_error_msg(str, ms, 1);
 		return ;
 	}
 	ms->last_exit_status = ex_status;
@@ -111,21 +124,24 @@ void	ft_exit_arg_error(char *str, t_minishell *ms)
 /*The exit() function causes normal process termination and the
 least significant byte of status (i.e., status & 0xFF) is
 returned to the parent (see wait(2)).*/
-void	cmd_exit(char *status, t_minishell *ms)
+void	cmd_exit(t_lcmd *cmd, t_minishell *ms)
 {
 	char	*tmp;
 
-	ft_exit_arg_error(status, ms);
-	tmp = get_value(ms->copy_env, "SHLVL");
-	if (ft_strncmp("1", tmp, 1) == 0)
+	ft_exit_arg_error(*(cmd->option + 1), ms, cmd);
+	if (ms->last_exit_status != 1)
 	{
-		ft_putstr_fd("exit\n", 1);
-		exit(ms->last_exit_status);
+		tmp = get_value(ms->copy_env, "SHLVL");
+		if (ft_strncmp("1", tmp, 1) == 0)
+		{
+			ft_putstr_fd("exit\n", 1);
+			exit(ms->last_exit_status);
+		}
+		else
+		{
+			ft_putstr_fd("exit\n", 1);
+			change_shvl_in_env(-1, ms);
+		}
+		free(tmp);
 	}
-	else
-	{
-		ft_putstr_fd("exit\n", 1);
-		change_shvl_in_env(-1, ms);
-	}
-	free(tmp);
 }
