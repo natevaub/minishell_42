@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:38:36 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/22 16:29:08 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/29 22:35:10 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,21 @@
 char	*get_value(t_venv *env, void *var)
 {
 	char	*value;
-	int		len;
 
-	len = ft_strlen((char *)var);
+	if (!env)
+		return (NULL);
 	while (env)
 	{
-		if (ft_strncmp(env->word, var, len) == 0)
+		if (ft_strncmp(env->word, var, env->len) == 0)
+		{
 			value = env->word;
+			// ft_putstr_fd(value, 2);
+			// ft_putstr_fd("\n", 2);
+			return (value + env->len + 1);
+		}
 		env = env->next;
 	}
-	return (ft_strdup(value + len + 1));
+	return (NULL);
 }
 
 int	cmd_echo(t_lcmd *cmd)

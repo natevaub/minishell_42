@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 02:38:28 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/24 11:40:35 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/29 20:51:10 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_parsing(t_minishell *shell, char *prompt)
 	ft_tokenize_prompt(shell, prompt);
 	if (ft_heredoc_detected(shell) == 1)
 	{
-		ft_init_hd_signals(&signal_heredoc_handler);
+		// ft_init_hd_signals(&signal_heredoc_handler);
 		ft_heredoc(shell);
 		shell->heredoc = 1;
 		if (g_status != 0)

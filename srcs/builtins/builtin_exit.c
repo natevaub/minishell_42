@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:38:36 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/22 20:06:10 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/29 22:56:16 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ long long int	ft_longatoi_for_shell(char *str, t_minishell *ms)
 	unsigned long long int	result;
 	int						neg;
 	long long int			end;
+	(void) ms;
 
 	result = 0;
 	neg = 1;

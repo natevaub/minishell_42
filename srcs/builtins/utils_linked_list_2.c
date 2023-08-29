@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/22 16:29:15 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/29 23:17:41 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,12 @@ t_venv	*new_env_list(char **tab)
 
 	a = 0;
 	new_list = NULL;
-	if (!tab)
+	printf("tab: %p\n", tab);
+	printf("tab: %s\n", tab[0]);
+	if (tab[0] == NULL)
 	{
 		ft_putstr_fd("in !tab\n", 2);
+		list_append(&new_list, "SHLVL=1");
 		return (new_list);
 	}
 	while (tab[a])
@@ -80,17 +83,23 @@ int	insert_node_in_list(char *var, t_venv *head)
 	t_venv	*addback;
 	t_venv	*pre_copy;
 	t_venv	*post_copy;
+	int		len;
 
+	len = 0;
 	addback = (t_venv *)malloc(sizeof(t_venv));
 	if (!addback)
 		return (EXIT_FAILURE);
 	addback->word = ft_strdup(var);
 	if (!addback->word)
 		return (EXIT_FAILURE);
+	while (addback->word[len] != '\0' && addback->word[len] != '=')
+		len++;
+	addback->len = len;
 	pre_copy = get_node_venv(head, 10);
 	post_copy = pre_copy->next;
 	pre_copy->next = addback;
-	post_copy->prev = addback;
+	if (post_copy)
+		post_copy->prev = addback;
 	addback->prev = pre_copy;
 	addback->next = post_copy;
 	return (EXIT_SUCCESS);

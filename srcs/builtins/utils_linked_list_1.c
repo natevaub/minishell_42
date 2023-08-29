@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/22 16:21:26 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/29 23:12:38 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ t_venv	*get_node_venv(t_venv *head, int index)
 	copy = head;
 	while (i < index && copy != NULL)
 	{
+		if (copy->next == NULL && i < index)
+			return (copy);
 		copy = copy->next;
 		i++;
 	}
@@ -67,7 +69,7 @@ void	list_append(t_venv **lst, char *element)
 		return ;
 	addback->next = NULL;
 	addback->word = ft_strdup(element);
-	while(addback->word[len] != '\0' && addback->word[len] != '=')
+	while (addback->word[len] != '\0' && addback->word[len] != '=')
 		len++;
 	addback->len = len;
 	if (!addback->word)

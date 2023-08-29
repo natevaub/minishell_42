@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 01:46:40 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/24 11:59:59 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/29 22:45:58 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,6 +213,7 @@ extern void		rl_replace_line(const char *, int);
 void			signal_child_handler(int sig);
 void			signal_heredoc_handler(int sig);
 void			ft_init_hd_signals(void (*handle_signals)(int));
+void			ft_set_termios(t_minishell *ms);
 
 /*
 	expand
