@@ -91,7 +91,7 @@ long long int	ft_longatoi_for_shell(char *str, t_minishell *ms)
 }
 
 //check if arg is not a valid nr
-void	ft_exit_arg_error(char *str, t_minishell *ms, t_lcmd *cmd)
+int	ft_exit_arg_error(char *str, t_minishell *ms, t_lcmd *cmd)
 {
 	int				i;
 	long long int	ex_status;
@@ -104,20 +104,21 @@ void	ft_exit_arg_error(char *str, t_minishell *ms, t_lcmd *cmd)
 	if (str[i] != '\0' || i > 20)
 	{
 		ft_exit_error_msg(str, ms, 1);
-		return ;
+		return (0);
 	}
 	if (cmd->option[2])
 	{
 		ft_exit_error_msg(str, ms, 2);
-		return ;
+		return (1);
 	}
 	ex_status = ft_longatoi_for_shell(str, ms);
 	if (ex_status == -1 || ex_status > 255)
 	{
 		ft_exit_error_msg(str, ms, 1);
-		return ;
+		return (0);
 	}
 	ms->last_exit_status = ex_status;
+	return (0);
 }
 
 //EXIT WITH NO OPTIONS
@@ -127,9 +128,14 @@ returned to the parent (see wait(2)).*/
 void	cmd_exit(t_lcmd *cmd, t_minishell *ms)
 {
 	char	*tmp;
+	int		flag;
 
-	ft_exit_arg_error(*(cmd->option + 1), ms, cmd);
-	if (ms->last_exit_status != 1)
+	flag = 0;
+	if (*(cmd->option + 1))
+	{
+		flag = ft_exit_arg_error(*(cmd->option + 1), ms, cmd);
+	}
+	if (flag != 1)
 	{
 		tmp = get_value(ms->copy_env, "SHLVL");
 		if (ft_strncmp("1", tmp, 1) == 0)
