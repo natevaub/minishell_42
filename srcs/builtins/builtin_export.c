@@ -69,8 +69,10 @@ int	change_existing_var_in_env(char *var, t_minishell *ms)
 
 	head = ms->copy_env;
 	copy_var = trim_back(var);
-	if (copy_var == NULL)
+	if (copy_var == NULL || ft_strcmp(copy_var, "SHLVL") == 0)
+	{
 		return (EXIT_FAILURE);
+	}
 	while (head)
 	{
 		if (ft_strncmp(head->word, copy_var, head->len) == 0 \

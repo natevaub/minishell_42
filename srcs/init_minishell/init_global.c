@@ -14,20 +14,20 @@
 
 void	ft_init_minishell(t_minishell *shell, char **env, int ac, char **av)
 {
-	struct termios	termios_new;
+	// struct termios	termios_new;
 
 	(void) av;
 	(void) ac;
 	*shell = (t_minishell){};
 	shell->copy_env = new_env_list(env);
 	shell->last_exit_status = EXIT_SUCCESS;
-	// ft_set
-	if ((tcgetattr(STDIN_FILENO, &shell->termios_default)) == -1)
-		exit(EXIT_FAILURE);
-	termios_new = shell->termios_default;
-	termios_new.c_lflag &= ~(ECHOCTL);
-	if ((tcsetattr(STDIN_FILENO, TCSANOW, &termios_new)) == -1)
-		exit(EXIT_FAILURE);
+	ft_set_termios(shell);
+	// if ((tcgetattr(STDIN_FILENO, &shell->termios_default)) == -1)
+	// 	exit(EXIT_FAILURE);
+	// termios_new = shell->termios_default;
+	// termios_new.c_lflag &= ~(ECHOCTL);
+	// if ((tcsetattr(STDIN_FILENO, TCSANOW, &termios_new)) == -1)
+	// 	exit(EXIT_FAILURE);
 	g_status = 0;
 	shell->heredoc = 0;
 }

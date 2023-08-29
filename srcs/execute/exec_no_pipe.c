@@ -14,7 +14,7 @@
 
 void	child_exec_no_pipe(t_minishell *ms, char **env_tab)
 {
-	char	*cmd_with_path;															//cd with invalid file
+	char	*cmd_with_path;
 	pid_t	pid;
 	int		exit_status;
 
@@ -68,12 +68,10 @@ void	ft_exec_no_pipe(t_minishell *ms, char **envp)
 	{
 		if ((builtin_check(ms->cmd->cmd)) == 1)
 		{
-			// ft_putstr_fd("in builtin run\n", 2);
 			builtin_run(ms, ms->cmd);
 		}
 		else
 		{
-			// ft_putstr_fd("in child exec no pipe\n", 2);
 			child_exec_no_pipe(ms, envp);
 		}
 	}

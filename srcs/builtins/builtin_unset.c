@@ -21,6 +21,8 @@ void	remove_var_from_env(t_venv *list, t_minishell *ms)
 	t_venv	*pre_copy;
 	t_venv	*post_copy;
 
+	if (ft_strncmp(list->word, "SHLVL", list->len) == 0)
+		return ;
 	pre_copy = list->prev;
 	post_copy = list->next;
 	if (!pre_copy)
