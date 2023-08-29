@@ -18,27 +18,19 @@ int	cmd_cd(t_lcmd *cmd, t_minishell *ms)
 {
 	char	*path;
 
-	if (!(cmd->option[1]))													//cd: HOME not set
+	if (!(cmd->option[1]))
 	{
-		// ft_putstr_fd("in cmd option !\n", 2);
 		path = get_value(ms->copy_env, "HOME");
 		if (path == NULL)
 		{
 			ft_putstr_fd("minishell: cd: HOME not set\n", 2);
 			return (EXIT_FAILURE);
 		}
-		// else
-		// {
-		// 	ft_putstr_fd("in else\n", 2);
-		// }
 	}
-		// path = (get_value(ms->copy_env, "HOME"));
-
 	else
 		path = cmd->option[1];
 	if (chdir(path) < 0)
 	{
-		// free (path);
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(cmd->option[0], 2);
 		ft_putstr_fd(": ", 2);
@@ -46,7 +38,6 @@ int	cmd_cd(t_lcmd *cmd, t_minishell *ms)
 		ft_putstr_fd(": no such file or directory\n", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
-	// free(path);
 	return (EXIT_SUCCESS);
 }
 

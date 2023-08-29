@@ -20,11 +20,8 @@ t_venv	*new_env_list(char **tab)
 
 	a = 0;
 	new_list = NULL;
-	printf("tab: %p\n", tab);
-	printf("tab: %s\n", tab[0]);
 	if (tab[0] == NULL)
 	{
-		ft_putstr_fd("in !tab\n", 2);
 		list_append(&new_list, "SHLVL=1");
 		return (new_list);
 	}

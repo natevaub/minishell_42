@@ -77,6 +77,7 @@ void	list_append(t_venv **lst, char *element)
 	if (*lst == NULL)
 	{
 		*lst = addback;
+		addback->prev = NULL;
 		return ;
 	}
 	copy = last_node(*lst);

@@ -85,6 +85,6 @@ void	builtin_run(t_minishell *ms, t_lcmd *cmd)
 		ms->last_exit_status = print_env(ms, cmd);
 	else if (ft_strcmp(cmd->cmd, "exit") == 0)
 		cmd_exit(cmd, ms);
-	else if (ft_strcmp(cmd->cmd, "minishell") || ft_strcmp(cmd->cmd, "./minishell") == 0)
+	else if (ft_strcmp(cmd->cmd, "minishell") == 0|| ft_strcmp(cmd->cmd, "./minishell") == 0)
 		change_shvl_in_env(1, ms);
 }

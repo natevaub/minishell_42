@@ -23,7 +23,6 @@ void	change_shvl_in_env(int nbr, t_minishell *ms)
 
 	shlvl_char = get_value(ms->copy_env, "SHLVL");
 	shlvl_int = ft_atoi(shlvl_char);
-	free(shlvl_char);
 	if (nbr == 1)
 		shlvl_changed = ft_itoa(shlvl_int + 1);
 	else
@@ -33,7 +32,7 @@ void	change_shvl_in_env(int nbr, t_minishell *ms)
 	head = ms->copy_env;
 	while (head)
 	{
-		if (ft_strncmp(head->word, "SHLVL", 5) == 0)
+		if (ft_strncmp(head->word, "SHLVL", head->len) == 0)
 		{
 			free(head->word);
 			head->word = shlvl_char;
@@ -149,6 +148,5 @@ void	cmd_exit(t_lcmd *cmd, t_minishell *ms)
 			ft_putstr_fd("exit\n", 1);
 			change_shvl_in_env(-1, ms);
 		}
-		free(tmp);
 	}
 }
