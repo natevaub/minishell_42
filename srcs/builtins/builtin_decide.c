@@ -6,7 +6,7 @@
 /*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/28 21:00:02 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/28 21:27:42 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int builtin_check(char *cmd)
 		ft_strcmp(cmd, "exit") == 0 ||
 		ft_strcmp(cmd, "minishell") == 0))
 	{
-		printf("Here\n");
+		// printf("Here\n");
 		return (1);
 	}
 	return (0);
