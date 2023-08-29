@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_pipes_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/22 16:28:10 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/28 21:03:47 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ char	*ft_get_right_path(char *cmd, t_minishell *ms)
 	while (all_paths[i])
 	{
 		temp_path = ft_join_path(all_paths[i], cmd);
+		// printf("Temp Path : %s\n", temp_path);
 		if (access(temp_path, F_OK | X_OK) == 0)
 		{
 			free_two_dimension_array(all_paths);

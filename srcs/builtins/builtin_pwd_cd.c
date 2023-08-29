@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_pwd_cd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:38:36 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/22 12:53:53 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/29 17:45:04 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@ int	cmd_cd(t_lcmd *cmd, t_minishell *ms)
 {
 	char	*path;
 
+	if (cmd->option[2])
+	{
+		// ft_putstr_fd("minishell: ", 2);
+		// ft_putstr_fd(cmd->option[0], 2);
+		// ft_putstr_fd(": too many arguments\n", STDERR_FILENO);
+		return (EXIT_SUCCESS);
+	}
 	if (!(cmd->option[1]))
 		path = ft_strdup(get_value(ms->copy_env, "HOME"));
 	else
@@ -29,7 +36,7 @@ int	cmd_cd(t_lcmd *cmd, t_minishell *ms)
 		ft_putstr_fd(cmd->option[0], 2);
 		ft_putstr_fd(": ", 2);
 		ft_putstr_fd(cmd->option[1], 2);
-		ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
+		ft_putstr_fd(": no such file or directory\n", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
 	free(path);

@@ -1,1 +1,25 @@
-/home/nate/Workspace/42projects/minishell_42
+Makefile
+includes
+libft.a
+libftprintf.a
+libs
+minishell
+objs
+outfile
+ressources
+srcs
+test_files
+Makefile
+includes
+libft.a
+libftprintf.a
+libs
+minishell
+objs
+outfile
+ressources
+srcs
+test_files
+Nate
+jfsnhjkfs
+salut nvaubien
