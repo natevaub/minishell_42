@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/26 16:37:16 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/29 20:57:35 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int ac, char **av, char **envp)
 	{
 		ft_init_signals(signal_exec_handler);
 		prompt = ft_output_command_line();
-		ft_init_signals(signal_child_handler);
+		ft_init_hd_signals(&signal_heredoc_handler);
 		if (prompt == NULL)
 			exit(0);
 		add_history(prompt);
@@ -33,6 +33,7 @@ int	main(int ac, char **av, char **envp)
 		copy = shell.copy_env;
 		if (shell.syntax == 0 && shell.last_exit_status == 0)
 		{
+			ft_init_signals(signal_child_handler);
 			if (ft_count_cmds(shell.cmd) < 2)
 			{
 				// ft_putstr_fd("in exec no pipe\n", 2);

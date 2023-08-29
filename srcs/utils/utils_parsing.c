@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 16:28:22 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/22 22:57:02 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/29 20:36:17 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ int	ft_strcmp(char *str, char *comp)
 	int	i;
 
 	i = 0;
-	while (str[i] != '\0')
+	if (!str || !comp)
+		return (1);
+	while (str[i] == comp[i] && str[i] != '\0' && comp[i] != '\0')
 	{
-		if (str[i] != comp[i])
-			return (1);
 		i++;
 	}
-	return (0);
+	return (str[i] - comp[i]);
 }
 
 char	*ft_strcat(char *dest, char *src)

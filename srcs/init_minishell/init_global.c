@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 16:57:28 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/23 11:04:18 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/29 22:56:44 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	ft_init_minishell(t_minishell *shell, char **env, int ac, char **av)
 	*shell = (t_minishell){};
 	shell->copy_env = new_env_list(env);
 	shell->last_exit_status = EXIT_SUCCESS;
+	// ft_set
 	if ((tcgetattr(STDIN_FILENO, &shell->termios_default)) == -1)
 		exit(EXIT_FAILURE);
 	termios_new = shell->termios_default;

@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/22 16:20:39 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/29 23:21:39 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ int	change_existing_var_in_env(char *var, t_minishell *ms)
 		return (EXIT_FAILURE);
 	while (head)
 	{
-		if (ft_strncmp(head->word, copy_var, head->len) == 0)
+		if (ft_strncmp(head->word, copy_var, head->len) == 0 \
+			&& copy_var[head->len] == '\0')
 		{
 			free(head->word);
 			head->word = ft_strdup(var);

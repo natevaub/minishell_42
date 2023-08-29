@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 20:19:28 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/23 15:48:30 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/29 22:39:33 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char	*ft_get_venv_value(char *word, int *start, int *i, t_minishell *ms)
 			(*start)++;
 			(*i)++;
 			venv = ft_fill_word_expand(word, i, start);
-			new = getenv(venv);
+			new = get_value(ms->copy_env, venv);
 			if (new == NULL)
 				new = "";
 			free(venv);
