@@ -214,6 +214,7 @@ void			signal_child_handler(int sig);
 void			signal_heredoc_handler(int sig);
 void			ft_init_hd_signals(void (*handle_signals)(int));
 void			ft_set_termios(t_minishell *ms);
+void			ft_unset_termios(t_minishell *ms);
 
 /*
 	expand

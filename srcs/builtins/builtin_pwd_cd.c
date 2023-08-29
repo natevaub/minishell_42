@@ -20,6 +20,7 @@ int	cmd_cd(t_lcmd *cmd, t_minishell *ms)
 
 	if (!(cmd->option[1]))
 	{
+
 		path = get_value(ms->copy_env, "HOME");
 		if (path == NULL)
 		{

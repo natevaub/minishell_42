@@ -24,8 +24,8 @@ char	*get_value(t_venv *env, void *var)
 		if (ft_strncmp(env->word, var, env->len) == 0)
 		{
 			value = env->word;
-			// ft_putstr_fd(value, 2);
-			// ft_putstr_fd("\n", 2);
+			if (value + env->len + 1 == NULL)
+				return (NULL);
 			return (value + env->len + 1);
 		}
 		env = env->next;

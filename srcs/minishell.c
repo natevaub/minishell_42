@@ -28,7 +28,8 @@ int	main(int ac, char **av, char **envp)
 		ft_init_hd_signals(&signal_heredoc_handler);
 		if (prompt == NULL)
 			exit(0);
-		add_history(prompt);
+		if (prompt)
+			add_history(prompt);
 		ft_parsing(&shell, prompt);
 		copy = shell.copy_env;
 		if (shell.syntax == 0 && shell.last_exit_status == 0)
@@ -36,12 +37,10 @@ int	main(int ac, char **av, char **envp)
 			ft_init_signals(signal_child_handler);
 			if (ft_count_cmds(shell.cmd) < 2)
 			{
-				// ft_putstr_fd("in exec no pipe\n", 2);
 				ft_exec_no_pipe(&shell, envp);
 			}
 			else
 			{
-				// ft_putstr_fd("in exec pipe\n", 2);
 				ft_pipeline_execution(&shell, envp);
 			}
 		}

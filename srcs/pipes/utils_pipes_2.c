@@ -93,7 +93,6 @@ char	*ft_get_right_path(char *cmd, t_minishell *ms)
 	while (all_paths[i])
 	{
 		temp_path = ft_join_path(all_paths[i], cmd);
-		printf("Temp Path : %s\n", temp_path);
 		if (access(temp_path, F_OK | X_OK) == 0)
 		{
 			free_two_dimension_array(all_paths);

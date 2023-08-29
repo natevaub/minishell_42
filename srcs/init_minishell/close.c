@@ -31,8 +31,9 @@ void	free_env_list(t_venv *env_list)
 
 void	ft_finish_minishell(t_minishell *ms)
 {
-	if ((tcsetattr(STDIN_FILENO, TCSANOW, &ms->termios_default)) == -1)
-		exit(EXIT_FAILURE);
+	// if ((tcsetattr(STDIN_FILENO, TCSANOW, &ms->termios_default)) == -1)
+	// 	exit(EXIT_FAILURE);
+	ft_unset_termios(ms);
 	free_env_list(ms->copy_env);
 	free(ms->p);
 	exit(EXIT_SUCCESS);
