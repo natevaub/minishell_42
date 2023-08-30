@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/30 11:33:23 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 13:18:33 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(int ac, char **av, char **envp)
 			add_history(prompt);
 		ft_parsing(&shell, prompt);
 		copy = shell.copy_env;
-		if (shell.syntax == 0)			// && shell.last_exit_status == 0
+		if (shell.syntax == 0)
 		{
 			ft_init_signals(signal_child_handler);
 			if (ft_count_cmds(shell.cmd) < 2)

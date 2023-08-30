@@ -41,6 +41,7 @@ INITMS_FILES	:=	init_global.c				\
 					close.c						\
 
 EXEC_FILES	:=		exec_no_pipe.c				\
+					exec_no_pipe_utils.c		\
 
 EXPAND_FILES	:=	expand.c					\
 					expand_utils.c				\

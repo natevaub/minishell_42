@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 01:46:40 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/30 11:17:49 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 13:18:37 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ char			**ft_get_env(void);
 void			free_two_dimension_array(char **arr);
 
 /*	--- init_fd_redirection	--- */
-int				ft_get_infile_fd(t_tok **tk, t_minishell *ms);
-int				ft_get_outfile_fd(t_tok **tk, t_minishell *ms);
+char			*ft_get_infile_fd(t_tok **tk, t_minishell *ms);
+char			*ft_get_outfile_fd(t_tok **tk, t_minishell *ms);
 int				ft_get_append_outfile_fd(t_tok **tk, t_minishell *ms);
 void			ft_open_files_redirection(t_tok **tk, t_cmd *cmd,
 					t_minishell *ms);
@@ -242,10 +242,16 @@ void			ft_safe_free(char *str);
 /*
 	execute
 */
+/*	---		exec_no_pipes.c	---*/
 void			ft_exec_no_pipe(t_minishell *ms, char **envp);
 void			child_exec_no_pipe(t_minishell *ms, char **env_tab);
 void			parent_exec_no_pipe(pid_t *pid, int *exit_status,
 					t_minishell *ms);
+
+/*	---		exec_no_pipe_utils.c	---*/
+void			ft_open_files_single_cmd(t_lcmd *cmd, t_minishell *ms);
+void			ft_permission_denied_single_cmd(char *str, t_minishell *ms);
+void			ft_open_failed_single_cmd(char *str, t_minishell *ms);
 
 /*
 	pipes
@@ -273,6 +279,7 @@ void			ft_init_pipes_struct(t_minishell *shell);
 int				ft_pipe_dep_mod(t_pipex *p);
 void			ft_parent_close(t_minishell *ms);
 void			ft_path_failed(char *str);
+void			ft_open_files(t_lcmd *cmd, t_minishell *ms);
 
 /*
 	heredoc
