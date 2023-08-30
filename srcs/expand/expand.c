@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 20:20:58 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/30 19:15:26 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 19:44:17 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ char	*ft_expand_last_exit_status(t_minishell *ms)
 	else
 		status = ms->last_exit_status;
 	g_status = 0;
-	// ms->last_exit_status = 0;
 	return (ft_itoa(status));
 }
 
@@ -72,7 +71,7 @@ void	ft_expand_venv(t_minishell *shell, char	*word)
 		{
 			temp[j] = ft_dollar_alone(word, &start, &i);
 			if (temp[j] == NULL)
-				temp[j] = ft_strdup(ft_get_venv_value(word, &start, &i, shell));
+				temp[j] = ft_get_venv_value(word, &start, &i, shell);
 		}
 		j++;
 	}

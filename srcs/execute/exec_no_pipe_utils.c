@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/30 19:14:04 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 20:17:54 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_open_failed_single_cmd(t_lcmd *cmd, t_minishell *ms)
 {
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
-	ft_putstr_fd(cmd->cmd, STDERR_FILENO);
+	ft_putstr_fd(cmd->infile, STDERR_FILENO);
 	ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
 	ms->last_exit_status = 1;
 }
@@ -23,7 +23,7 @@ void	ft_open_failed_single_cmd(t_lcmd *cmd, t_minishell *ms)
 void	ft_permission_denied_single_cmd(t_lcmd *cmd, t_minishell *ms)
 {
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
-	ft_putstr_fd(cmd->cmd, STDERR_FILENO);
+	ft_putstr_fd(cmd->outfile, STDERR_FILENO);
 	ft_putstr_fd(": Permission denied\n", STDERR_FILENO);
 	ms->last_exit_status = 1;
 }
