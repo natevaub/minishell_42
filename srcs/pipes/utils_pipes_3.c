@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/30 13:14:21 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 17:08:22 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@ void	ft_parent_close(t_minishell *ms)
 {
 	if (ms->p->idx != 0)
 	{
-		close(ms->p->pipe_fd[(ms->p->idx + 1) % 2][0]);
-		close(ms->p->pipe_fd[(ms->p->idx + 1) % 2][1]);
+		close(ms->p->pipe_fd[(ms->p->idx - 1) % 2][0]);
+		close(ms->p->pipe_fd[(ms->p->idx - 1) % 2][1]);
+		// close(ms->p->pipe_fd[(ms->p->idx) % 2][0]);
+		// close(ms->p->pipe_fd[(ms->p->idx) % 2][1]);
 	}
 }
 
@@ -56,19 +58,19 @@ void	ft_open_files(t_lcmd *cmd, t_minishell *ms)
 	{
 		cmd->fd_read = open(cmd->infile, O_RDONLY, 0644);
 		if (cmd->fd_read < 0)
-			ft_open_failed(cmd->infile, ms);
+			ft_open_failed(cmd, ms);
 	}
 	if (cmd->outfile != NULL && cmd->append == 1)
 	{
-		cmd->fd_write = open(cmd->outfile, O_CREAT | O_APPEND | O_RDWR, 0644);
+		cmd->fd_write = open(cmd->outfile, O_CREAT | O_APPEND | O_RDWR, 0666);
 		if (cmd->fd_write == -1)
-			ft_permission_denied(cmd->outfile, ms);
+			ft_permission_denied(cmd, ms);
 	}
 	else if (cmd->outfile != NULL)
 	{
-		cmd->fd_write = open(cmd->outfile, O_CREAT | O_TRUNC | O_RDWR, 0644);
+		cmd->fd_write = open(cmd->outfile, O_CREAT | O_TRUNC | O_WRONLY, 0666);
 		if (cmd->fd_write == -1)
-			ft_permission_denied(cmd->outfile, ms);
+			ft_permission_denied(cmd, ms);
 	}
 	if (cmd->infile == NULL)
 		cmd->fd_read = 0;
