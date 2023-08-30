@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_parsed_token.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 02:38:28 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/30 17:33:53 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 17:56:53 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ void	ft_parse_token(t_minishell *shell)
 	{
 		if (!shell->cmd)
 		{
-			shell->cmd = ft_newlst_cmd(ft_init_cmds(&parse, shell));
+			shell->cmd = ft_newlst_cmd(ft_init_cmds(&parse));
 		}
 		else
 		{
 			ft_lstadd_back_cmd(&shell->cmd,
-				ft_newlst_cmd(ft_init_cmds(&parse, shell)));
+				ft_newlst_cmd(ft_init_cmds(&parse)));
 		}
 	}
 	shell->token = start;

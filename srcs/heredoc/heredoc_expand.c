@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_expand.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 02:38:28 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/30 17:45:54 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 17:57:26 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	*ft_list_to_char_expands(t_linked_list *head, t_minishell *ms)
+char	*ft_list_to_char_expands(t_linked_list *head)
 {
 	int				total_size;
 	t_linked_list	*curr;

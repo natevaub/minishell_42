@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_global.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 16:57:28 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/30 10:45:12 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 17:55:48 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	ft_len_cmd_opt(char **options)
 	return (i);
 }
 
-t_cmd	*ft_init_cmds(t_tok **tokens, t_minishell *ms)
+t_cmd	*ft_init_cmds(t_tok **tokens)
 {
 	t_cmd	*cmd;
 
@@ -68,7 +68,7 @@ t_cmd	*ft_init_cmds(t_tok **tokens, t_minishell *ms)
 	{
 		if ((*tokens)->type == E_REDIRECTION)
 		{
-			ft_open_files_redirection(tokens, cmd, ms);
+			ft_open_files_redirection(tokens, cmd);
 		}
 		else if ((*tokens)->type == E_STRING)
 			cmd->option = ft_store_cmd_options(tokens, cmd);

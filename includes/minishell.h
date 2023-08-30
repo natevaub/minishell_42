@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 01:46:40 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/30 17:41:45 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 17:57:59 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char			*ft_output_command_line(void);
 /*	--- init_global.c	--- */
 char			**ft_get_opt(char **option, char **tmp);
 int				ft_len_cmd_opt(char **options);
-t_cmd			*ft_init_cmds(t_tok **tokens, t_minishell *ms);
+t_cmd			*ft_init_cmds(t_tok **tokens);
 char			**ft_store_cmd_options(t_tok **tokens, t_cmd *cmd);
 void			ft_init_minishell(t_minishell *shell, char **env, \
 				int ac, char **av);
@@ -56,11 +56,9 @@ char			**ft_get_env(void);
 void			free_two_dimension_array(char **arr);
 
 /*	--- init_fd_redirection	--- */
-char			*ft_get_infile_fd(t_tok **tk, t_minishell *ms);
-char			*ft_get_outfile_fd(t_tok **tk, t_minishell *ms);
-int				ft_get_append_outfile_fd(t_tok **tk, t_minishell *ms);
-void			ft_open_files_redirection(t_tok **tk, t_cmd *cmd,
-					t_minishell *ms);
+char			*ft_get_infile_fd(t_tok **tk);
+char			*ft_get_outfile_fd(t_tok **tk);
+void			ft_open_files_redirection(t_tok **tk, t_cmd *cmd);
 
 /*	--- close.c	--- */
 void			free_env_list(t_venv *env_list);
@@ -292,7 +290,7 @@ void			ft_set_fd_first(t_pipex *p, t_lcmd *node);
 void			ft_memory_allocation_failed(void);
 
 /*	---	heredoc_expand.c	---*/
-char			*ft_list_to_char_expands(t_linked_list *head, t_minishell *ms);
+char			*ft_list_to_char_expands(t_linked_list *head);
 void			ft_replace_node_content(t_linked_list *node, t_minishell *ms);
 
 /*	---	heredoc_list_utils.c	---*/

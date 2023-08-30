@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 19:54:02 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/30 17:34:13 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 17:58:24 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_heredoc(t_minishell *shell)
 		else
 		{
 			shell->hd_words = ft_store_heredoc_content(del->value);
-			content = ft_list_to_char_expands(shell->hd_words, shell);
+			content = ft_list_to_char_expands(shell->hd_words);
 		}
 		ft_write_to_temp_file(content);
 		free_linked_list(shell->hd_words);

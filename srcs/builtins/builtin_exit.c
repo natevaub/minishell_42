@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:38:36 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/30 10:44:05 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 17:51:28 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	ft_exit_error_msg(char *opt, t_minishell *ms, int option)
 int	ft_exit_arg_check(char *str, t_minishell *ms, t_lcmd *cmd)
 {
 	int				i;
-	long long int	ex_status;
 
 	i = 0;
 	if (str[i] == '-' || str[i] == '+')
