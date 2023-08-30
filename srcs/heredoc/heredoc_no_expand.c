@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 19:54:02 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/30 09:40:40 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 17:36:05 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 void	handle_ctrl_d(void)
 {
-	rl_replace_line("", 0);
-	ft_output_command_line();
-	rl_on_new_line();
-	rl_redisplay();
+	rl_replace_line("\n", 0);
 	g_status = 1;
+	return ;
 }
 
 t_linked_list	*ft_store_heredoc_content(char *eof)
@@ -31,9 +29,7 @@ t_linked_list	*ft_store_heredoc_content(char *eof)
 	{
 		line = readline("> ");
 		if (!line)
-		{
 			handle_ctrl_d();
-		}
 		if (g_status != 0)
 			return (NULL);
 		if (line[0] != '\0' && ft_strlen(eof) == ft_strlen(line)

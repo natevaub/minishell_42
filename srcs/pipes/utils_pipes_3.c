@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/30 17:08:22 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 17:44:35 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ void	ft_parent_close(t_minishell *ms)
 	{
 		close(ms->p->pipe_fd[(ms->p->idx - 1) % 2][0]);
 		close(ms->p->pipe_fd[(ms->p->idx - 1) % 2][1]);
-		// close(ms->p->pipe_fd[(ms->p->idx) % 2][0]);
-		// close(ms->p->pipe_fd[(ms->p->idx) % 2][1]);
 	}
 }
 

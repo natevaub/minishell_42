@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 02:38:28 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/30 16:59:49 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 17:33:53 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	ft_parsing(t_minishell *shell, char *prompt)
 		ft_init_hd_signals(&signal_heredoc_handler);
 		ft_heredoc(shell);
 		shell->heredoc = 1;
+		ft_init_signals(signal_exec_handler);
 		if (g_status != 0)
 		{
 			shell->last_exit_status = g_status;

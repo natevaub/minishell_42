@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/30 17:08:57 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 17:44:41 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,7 @@
 
 void	ft_set_fd(t_pipex *p, t_lcmd *node)
 {
-	if (p->idx == 0)
-	{
-		close(p->pipe_fd[0][0]);
-		improved_dup2(node->fd_read, STDIN_FILENO);
-		if (node->fd_write > 1)
-			improved_dup2(node->fd_write, STDOUT_FILENO);
-		else
-			improved_dup2(p->pipe_fd[0][1], STDOUT_FILENO);
-	}
-	else if (p->idx != p->count_cmds - 1)
+	if (p->idx != p->count_cmds - 1)
 	{
 		close(p->pipe_fd[(p->idx - 1) % 2][1]);
 		close(p->pipe_fd[(p->idx) % 2][0]);
@@ -78,7 +69,6 @@ void	ft_exec_parent(t_minishell *ms, t_lcmd *cmd, pid_t *pid)
 		ft_parent_close(ms);
 	close(ms->p->pipe_fd[(ms->p->idx) % 2][0]);
 	close(ms->p->pipe_fd[(ms->p->idx) % 2][1]);
-	close_all_fds(ms);
 	while (++i < ms->p->count_cmds)
 	{
 		tmp = waitpid(-1, &exit_status, 0);
@@ -119,11 +109,13 @@ void	ft_pipeline_execution(t_minishell *ms, char **envp)
 	{
 		ft_pipe_dep_mod(ms->p);
 		pid = fork();
-		// ft_open_files(cmd, ms);
 		if (pid == 0)
 		{
 			ft_open_files(cmd, ms);
-			ft_set_fd(ms->p, cmd);
+			if (ms->p->idx == 0)
+				ft_set_fd_first(ms->p, cmd);
+			else
+				ft_set_fd(ms->p, cmd);
 			ft_run_multiple_cmds(ms, envp, cmd);
 		}
 		if (pid > 0)
@@ -131,5 +123,6 @@ void	ft_pipeline_execution(t_minishell *ms, char **envp)
 		ms->p->idx++;
 		cmd = cmd->next;
 	}
+	close_all_fds(ms);
 	ft_exec_parent(ms, cmd, &pid);
 }
