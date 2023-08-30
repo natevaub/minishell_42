@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 01:46:40 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/23 10:52:23 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 11:22:58 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,12 @@ typedef struct s_pipex
 	int			pipe_fd[2][2];
 }				t_pipex;
 
+typedef struct s_linked_list
+{
+	char					*value;
+	struct s_linked_list	*next;
+}				t_linked_list;
+
 //		### All Data ###
 
 typedef struct s_minishell
@@ -73,13 +79,11 @@ typedef struct s_minishell
 	t_venv				*copy_env;
 	int					last_exit_status;
 	int					heredoc;
+	t_linked_list		*hd_docs;
+	t_linked_list		*hd_words;
+	char				*infile;
+	char				*outfile;
 	struct termios		termios_default;
 }						t_minishell;
-
-typedef struct s_linked_list
-{
-	char					*value;
-	struct s_linked_list	*next;
-}				t_linked_list;
 
 #endif

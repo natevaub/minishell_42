@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/29 22:56:04 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 11:45:41 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,6 @@ void	ft_pipeline_execution(t_minishell *ms, char **envp)
 	t_lcmd	*cmd;
 	pid_t	pid;
 
-	if ((tcsetattr(STDIN_FILENO, TCSANOW, &ms->termios_default)) == -1)
-		exit(EXIT_FAILURE);
 	ft_init_pipes_struct(ms);
 	cmd = ms->cmd;
 	while (cmd != NULL)

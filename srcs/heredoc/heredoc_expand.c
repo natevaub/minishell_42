@@ -6,13 +6,13 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 02:38:28 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/29 22:45:50 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 10:24:23 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	*ft_list_to_char_expands(t_linked_list *head)
+char	*ft_list_to_char_expands(t_linked_list *head, t_minishell *ms)
 {
 	int				total_size;
 	t_linked_list	*curr;
@@ -22,7 +22,7 @@ char	*ft_list_to_char_expands(t_linked_list *head)
 	total_size = 0;
 	while (curr != NULL)
 	{
-		ft_replace_node_content(curr);
+		// ft_replace_node_content(curr, ms);
 		total_size += ft_strlen(curr->value) + 1;
 		curr = curr->next;
 	}
@@ -55,21 +55,52 @@ int	ft_str_advance(char *str)
 	return (i);
 }
 
-void	ft_replace_node_content(t_linked_list *node)
+// int	replace_node_len(t_linked_list *node, t_minishell *ms)
+// {
+// 	int		i;
+// 	int		len;
+// 	char	*val;
+
+// 	i = -1;
+// 	len = 0;
+// 	if (!node->value)
+// 		return (len);
+// 	while (node->value[++i] != '\0')
+// 	{
+// 		if (node->value[i] == '$' && node->value[i + 1] != ' ')
+// 		{
+// 			i++;
+// 			val = ft_substr(node->value, i, ft_str_advance(&node->value[i]));
+// 			i += ft_str_advance(&node->value[i]);
+// 			len += ft_strlen(get_value(ms->copy_env, val));
+// 		}
+// 		else
+// 		{
+// 			val = ft_substr(node->value, i, 1);
+// 			len += ft_strlen(val);
+// 		}
+// 		len += 1;
+// 		free(val);
+// 	}
+// 	return (len);
+// }
+
+
+void	ft_replace_node_content(t_linked_list *node, t_minishell *ms)
 {
 	int		i;
 	char	*ret;
 	char	*val;
 
 	i = -1;
-	ret = ft_strdup("");
+	ret = malloc(sizeof(char) * 1000);
 	while (node->value[++i] != '\0')
 	{
 		if (node->value[i] == '$' && node->value[i + 1] != ' ')
 		{
 			i++;
 			val = ft_substr(node->value, i, ft_str_advance(&node->value[i]));
-			ft_strcat(ret, getenv(val));
+			ft_strcat(ret, get_value(ms->copy_env, val));
 			i += ft_str_advance(&node->value[i]);
 		}
 		else

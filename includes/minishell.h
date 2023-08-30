@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 01:46:40 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/29 22:45:58 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 11:17:49 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ char			**ft_get_env(void);
 void			free_two_dimension_array(char **arr);
 
 /*	--- init_fd_redirection	--- */
-int				ft_error_red_file(char	*file);
 int				ft_get_infile_fd(t_tok **tk, t_minishell *ms);
 int				ft_get_outfile_fd(t_tok **tk, t_minishell *ms);
 int				ft_get_append_outfile_fd(t_tok **tk, t_minishell *ms);
@@ -148,6 +147,8 @@ void			ft_lstadd_back_cmd(t_lcmd **lst, t_lcmd *nw);
 /* utils1.c */
 int				ft_strcmp(char *str, char *comp);
 char			*ft_strcat(char *dest, char *src);
+void			ft_permission_denied(char *str, t_minishell *ms);
+void			ft_open_failed(char *str, t_minishell *ms);
 
 /*
 	builtins
@@ -167,9 +168,12 @@ int				print_env(t_minishell *ms, t_lcmd *cmd);
 /*	---	builtin_exit.c	---*/
 void			cmd_exit(t_lcmd *cmd, t_minishell *ms);
 void			change_shvl_in_env(int nbr, t_minishell *ms);
-long long int	ft_longatoi_for_shell(char *str, t_minishell *ms);
 void			ft_exit_error_msg(char *opt, t_minishell *ms, int option);
-int				ft_exit_arg_error(char *str, t_minishell *ms, t_lcmd *cmd);
+int				ft_exit_arg_check(char *str, t_minishell *ms, t_lcmd *cmd);
+
+/*	---	builtin_exit_utils.	---*/
+void			run_exit_atoi(char *str, t_minishell *ms);
+long long int	ft_longatoi_for_shell(char *str);
 
 /*	---	builtin_export.c	---*/
 int				check_var_format(char *var);
@@ -213,8 +217,6 @@ extern void		rl_replace_line(const char *, int);
 void			signal_child_handler(int sig);
 void			signal_heredoc_handler(int sig);
 void			ft_init_hd_signals(void (*handle_signals)(int));
-void			ft_set_termios(t_minishell *ms);
-void			ft_unset_termios(t_minishell *ms);
 
 /*
 	expand
@@ -279,8 +281,8 @@ void			ft_path_failed(char *str);
 void			ft_memory_allocation_failed(void);
 
 /*	---	heredoc_expand.c	---*/
-char			*ft_list_to_char_expands(t_linked_list *head);
-void			ft_replace_node_content(t_linked_list *node);
+char			*ft_list_to_char_expands(t_linked_list *head, t_minishell *ms);
+void			ft_replace_node_content(t_linked_list *node, t_minishell *ms);
 
 /*	---	heredoc_list_utils.c	---*/
 t_linked_list	*ft_insert_at_tail(t_linked_list *head, char *content);

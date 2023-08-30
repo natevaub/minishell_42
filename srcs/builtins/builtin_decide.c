@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/29 20:39:16 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 10:27:15 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,20 @@
 // }
 
 // Check for exact matches of built-in commands
-int builtin_check(char *cmd)
+int	builtin_check(char *cmd)
 {
 	int	len;
 
 	len = ft_strlen(cmd);
 	if (!cmd)
-		return 0;
-	if (cmd[0] != '\0' && (ft_strcmp(cmd, "echo") == 0 ||
-		ft_strcmp(cmd, "cd") == 0 ||
-		ft_strcmp(cmd, "pwd") == 0 ||
-		ft_strcmp(cmd, "export") == 0 ||
-		ft_strcmp(cmd, "unset") == 0 ||
-		ft_strcmp(cmd, "env") == 0 ||
-		ft_strcmp(cmd, "exit") == 0 ||
+		return (0);
+	if (cmd[0] != '\0' && (ft_strcmp(cmd, "echo") == 0 || \
+		ft_strcmp(cmd, "cd") == 0 || \
+		ft_strcmp(cmd, "pwd") == 0 || \
+		ft_strcmp(cmd, "export") == 0 || \
+		ft_strcmp(cmd, "unset") == 0 || \
+		ft_strcmp(cmd, "env") == 0 || \
+		ft_strcmp(cmd, "exit") == 0 || \
 		ft_strcmp(cmd, "minishell") == 0))
 	{
 		return (1);
@@ -85,6 +85,7 @@ void	builtin_run(t_minishell *ms, t_lcmd *cmd)
 		ms->last_exit_status = print_env(ms, cmd);
 	else if (ft_strcmp(cmd->cmd, "exit") == 0)
 		cmd_exit(cmd, ms);
-	else if (ft_strcmp(cmd->cmd, "minishell") == 0|| ft_strcmp(cmd->cmd, "./minishell") == 0)
+	else if (ft_strcmp(cmd->cmd, "minishell") == 0 || \
+		ft_strcmp(cmd->cmd, "./minishell") == 0)
 		change_shvl_in_env(1, ms);
 }
