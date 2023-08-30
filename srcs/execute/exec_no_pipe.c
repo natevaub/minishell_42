@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/30 17:44:59 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 19:12:50 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,14 @@ void	ft_exec_no_pipe(t_minishell *ms, char **envp)
 		ft_open_files_single_cmd(ms->cmd, ms);
 		if ((builtin_check(ms->cmd->cmd)) == 1)
 		{
+			if (ms->cmd->fd_read < 0 || ms->cmd->fd_write < 0)
+				return ;
 			builtin_run(ms, ms->cmd);
 		}
 		else
 		{
+			if (ms->cmd->fd_read < 0 || ms->cmd->fd_write < 0)
+				return ;
 			child_exec_no_pipe(ms, envp);
 		}
 	}
