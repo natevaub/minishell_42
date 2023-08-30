@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 02:38:28 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/30 10:24:23 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 11:53:13 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,37 +54,6 @@ int	ft_str_advance(char *str)
 	}
 	return (i);
 }
-
-// int	replace_node_len(t_linked_list *node, t_minishell *ms)
-// {
-// 	int		i;
-// 	int		len;
-// 	char	*val;
-
-// 	i = -1;
-// 	len = 0;
-// 	if (!node->value)
-// 		return (len);
-// 	while (node->value[++i] != '\0')
-// 	{
-// 		if (node->value[i] == '$' && node->value[i + 1] != ' ')
-// 		{
-// 			i++;
-// 			val = ft_substr(node->value, i, ft_str_advance(&node->value[i]));
-// 			i += ft_str_advance(&node->value[i]);
-// 			len += ft_strlen(get_value(ms->copy_env, val));
-// 		}
-// 		else
-// 		{
-// 			val = ft_substr(node->value, i, 1);
-// 			len += ft_strlen(val);
-// 		}
-// 		len += 1;
-// 		free(val);
-// 	}
-// 	return (len);
-// }
-
 
 void	ft_replace_node_content(t_linked_list *node, t_minishell *ms)
 {
