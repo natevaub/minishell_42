@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_free_memory.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:52:23 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/23 11:08:37 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 02:17:25 by nvaubien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,10 @@ void	ft_free_parsing(t_minishell *shell, char *prompt)
 		unlink(".heredoc");
 		shell->heredoc = 0;
 	}
+	if (shell->p)
+	{
+		free(shell->p);
+	}
+	shell->p = NULL;
 	free(prompt);
 }

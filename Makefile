@@ -1,6 +1,7 @@
 	### COMPILATION ###
 CC			:=	gcc
-CFLAGS		:=	-Wall -Wextra -Werror #-fsanitize=address #-g3
+# CFLAGS		:=	-Wall -Wextra -Werror 
+CFLAGS		:=	-fsanitize=address #-g3
 
 	### EXECUTABLE ###
 NAME		:=	minishell
