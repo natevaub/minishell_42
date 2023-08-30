@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 01:46:40 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/30 15:05:13 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 17:41:45 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -281,6 +281,9 @@ int				ft_pipe_dep_mod(t_pipex *p);
 void			ft_parent_close(t_minishell *ms);
 void			ft_path_failed(char *str);
 void			ft_open_files(t_lcmd *cmd, t_minishell *ms);
+
+/*	---	utils_pipes_4.c	---*/
+void			ft_set_fd_first(t_pipex *p, t_lcmd *node);
 
 /*
 	heredoc

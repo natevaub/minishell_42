@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 02:38:28 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/30 11:53:13 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 17:45:54 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ char	*ft_list_to_char_expands(t_linked_list *head, t_minishell *ms)
 	total_size = 0;
 	while (curr != NULL)
 	{
-		// ft_replace_node_content(curr, ms);
 		total_size += ft_strlen(curr->value) + 1;
 		curr = curr->next;
 	}

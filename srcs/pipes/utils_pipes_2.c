@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/30 15:34:42 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 17:45:17 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,6 @@ char	*ft_get_right_path(char *cmd, t_minishell *ms)
 		free(temp_path);
 		i++;
 	}
-	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(cmd, 2);
 	ft_putstr_fd(": command not found\n", 2);
 	free_two_dimension_array(all_paths);

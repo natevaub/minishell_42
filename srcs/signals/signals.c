@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/30 10:46:45 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 17:35:15 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,8 @@ void	signal_heredoc_handler(int sig)
 {
 	if (sig == SIGINT)
 	{
-		ft_putstr_fd("\n", STDOUT_FILENO);
-		ft_output_command_line();
-		rl_on_new_line();
-		rl_redisplay();
+		rl_replace_line("\n", 0);
 		g_status = 1;
+		return ;
 	}
 }
