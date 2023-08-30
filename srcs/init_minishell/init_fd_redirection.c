@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 01:46:40 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/30 13:32:44 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 14:44:44 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,27 +92,21 @@ void	ft_open_files_redirection(t_tok **tk, t_cmd *cmd, t_minishell *ms)
 	if (ft_strcmp((*tk)->word, D_INFILE) == 0)
 	{
 		cmd->infile = ft_get_infile_fd(tk, ms);
-		if ((*tk) != NULL)
-			((*tk)) = (*tk)->next;
 	}
 	else if (ft_strcmp((*tk)->word, D_OUTFILE) == 0)
 	{
 		cmd->outfile = ft_get_outfile_fd(tk, ms);
-		if ((*tk) != NULL)
-			((*tk)) = (*tk)->next;
 	}
 	else if (ft_strcmp((*tk)->word, D_APPEND) == 0)
 	{
 		cmd->outfile = ft_get_outfile_fd(tk, ms);
 		cmd->append = 1;
-		if ((*tk) != NULL)
-			((*tk)) = (*tk)->next;
 	}
 	else
 	{
 		cmd->infile = ".heredoc";
 		cmd->read = ft_get_heredoc_temp_fd(tk);
-		if ((*tk) != NULL)
-			((*tk)) = (*tk)->next;
 	}
+	if ((*tk) != NULL)
+		((*tk)) = (*tk)->next;
 }

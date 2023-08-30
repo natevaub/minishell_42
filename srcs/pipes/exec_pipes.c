@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/30 13:14:27 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 17:08:57 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,30 +17,33 @@ void	ft_set_fd(t_pipex *p, t_lcmd *node)
 	if (p->idx == 0)
 	{
 		close(p->pipe_fd[0][0]);
-		sub_dup2(node->fd_read, p->pipe_fd[0][1]);
-		if (node->fd_read != 0)
-			close(node->fd_read);
+		improved_dup2(node->fd_read, STDIN_FILENO);
+		if (node->fd_write > 1)
+			improved_dup2(node->fd_write, STDOUT_FILENO);
+		else
+			improved_dup2(p->pipe_fd[0][1], STDOUT_FILENO);
 	}
 	else if (p->idx != p->count_cmds - 1)
 	{
 		close(p->pipe_fd[(p->idx - 1) % 2][1]);
 		close(p->pipe_fd[(p->idx) % 2][0]);
-		if (node->fd_write != 1)
-		{
-			ft_putstr_fd("in first condition\n", 2);
-			sub_dup2(p->pipe_fd[(p->idx - 1) % 2][0], node->fd_write);
-		}
+		if (node->fd_write > 1)
+			improved_dup2(node->fd_write, STDOUT_FILENO);
 		else
-			sub_dup2(p->pipe_fd[(p->idx - 1) % 2][0], p->pipe_fd[(p->idx) % 2][1]);
+			improved_dup2(p->pipe_fd[(p->idx) % 2][1], STDOUT_FILENO);
+		if (node->fd_read > 0)
+			improved_dup2(node->fd_read, STDIN_FILENO);
+		else
+			improved_dup2(p->pipe_fd[(p->idx - 1) % 2][0], STDIN_FILENO);
 	}
 	else
 	{
 		close(p->pipe_fd[(p->idx - 1) % 2][1]);
-		sub_dup2(p->pipe_fd[(p->idx - 1) % 2][0], node->fd_write);
-		ft_putnbr_fd(node->fd_write, 2);
-		ft_putstr_fd("\n", 2);
-		if (node->fd_write != 1)
-			close(node->fd_write);
+		improved_dup2(node->fd_write, STDOUT_FILENO);
+		if (node->fd_read > 0)
+			improved_dup2(node->fd_read, STDIN_FILENO);
+		else
+			improved_dup2(p->pipe_fd[(p->idx - 1) % 2][0], STDIN_FILENO);
 	}
 }
 
@@ -75,6 +78,7 @@ void	ft_exec_parent(t_minishell *ms, t_lcmd *cmd, pid_t *pid)
 		ft_parent_close(ms);
 	close(ms->p->pipe_fd[(ms->p->idx) % 2][0]);
 	close(ms->p->pipe_fd[(ms->p->idx) % 2][1]);
+	close_all_fds(ms);
 	while (++i < ms->p->count_cmds)
 	{
 		tmp = waitpid(-1, &exit_status, 0);
@@ -115,6 +119,7 @@ void	ft_pipeline_execution(t_minishell *ms, char **envp)
 	{
 		ft_pipe_dep_mod(ms->p);
 		pid = fork();
+		// ft_open_files(cmd, ms);
 		if (pid == 0)
 		{
 			ft_open_files(cmd, ms);

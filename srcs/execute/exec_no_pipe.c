@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/30 13:26:06 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 17:06:24 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ void	parent_exec_no_pipe(pid_t *pid, int *exit_status, t_minishell *ms)
 
 void	ft_exec_no_pipe(t_minishell *ms, char **envp)
 {
-	ft_open_files_single_cmd(ms->cmd, ms);
 	if (ms->cmd != NULL && ms->last_exit_status == 0)
 	{
+		ft_open_files_single_cmd(ms->cmd, ms);
 		if ((builtin_check(ms->cmd->cmd)) == 1)
 		{
 			builtin_run(ms, ms->cmd);
@@ -77,5 +77,3 @@ void	ft_exec_no_pipe(t_minishell *ms, char **envp)
 		}
 	}
 }
-
-

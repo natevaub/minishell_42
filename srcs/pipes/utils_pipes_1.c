@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/30 13:08:01 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 16:11:04 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,19 @@ pid_t	improved_fork(void)
 		exit(1);
 	}
 	return (error);
+}
+
+void	close_all_fds(t_minishell *ms)
+{
+	t_lcmd	*head;
+
+	head = ms->cmd;
+	while (head)
+	{
+		if (head->fd_read != 0)
+			close(head->fd_read);
+		if (head->fd_write != 1)
+			close(head->fd_write);
+		head = head->next;
+	}
 }

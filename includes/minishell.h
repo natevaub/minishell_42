@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 01:46:40 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/30 13:18:37 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 15:05:13 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,11 +144,11 @@ t_tok			*ft_newlst_token(char *word);
 void			ft_lstadd_back_token(t_tok **lst, t_tok *nw);
 void			ft_lstadd_back_cmd(t_lcmd **lst, t_lcmd *nw);
 
-/* utils1.c */
+/* utils_parsing.c */
 int				ft_strcmp(char *str, char *comp);
 char			*ft_strcat(char *dest, char *src);
-void			ft_permission_denied(char *str, t_minishell *ms);
-void			ft_open_failed(char *str, t_minishell *ms);
+void			ft_permission_denied(t_lcmd *cmd, t_minishell *ms);
+void			ft_open_failed(t_lcmd *cmd, t_minishell *ms);
 
 /*
 	builtins
@@ -250,8 +250,8 @@ void			parent_exec_no_pipe(pid_t *pid, int *exit_status,
 
 /*	---		exec_no_pipe_utils.c	---*/
 void			ft_open_files_single_cmd(t_lcmd *cmd, t_minishell *ms);
-void			ft_permission_denied_single_cmd(char *str, t_minishell *ms);
-void			ft_open_failed_single_cmd(char *str, t_minishell *ms);
+void			ft_permission_denied_single_cmd(t_lcmd *cmd, t_minishell *ms);
+void			ft_open_failed_single_cmd(t_lcmd *cmd, t_minishell *ms);
 
 /*
 	pipes
@@ -267,6 +267,7 @@ char			*ft_get_right_path(char *cmd, t_minishell *ms);
 char			*ft_get_path_line(t_minishell *ms);
 char			*ft_join_path(char const *s1, char const *s2);
 int				ft_count_cmds(t_lcmd *shell);
+void			close_all_fds(t_minishell *ms);
 
 /*	---	utils_pipes_2.c	---*/
 int				improved_dup2(int fildes, int fildes2);

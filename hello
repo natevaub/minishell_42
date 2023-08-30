@@ -1,0 +1,11 @@
+Makefile
+hello
+includes
+libft.a
+libftprintf.a
+libs
+minishell
+objs
+ressources
+srcs
+test_files

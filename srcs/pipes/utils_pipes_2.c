@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/29 22:11:50 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 15:34:42 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ char	*ft_get_path_line(t_minishell *ms)
 		head = head->next;
 	}
 	return (NULL);
-
 }
 
 char	*ft_join_path(char const *s1, char const *s2)
