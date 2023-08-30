@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/30 11:44:09 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 13:08:01 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ void	sub_dup2(int read, int write)
 			exit(1);
 		}
 	}
-	// else
-	// 	exit(1);
 }
 
 int	improved_dup2(int fildes, int fildes2)

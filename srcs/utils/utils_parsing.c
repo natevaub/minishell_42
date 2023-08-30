@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 16:28:22 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/30 11:16:21 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 13:11:39 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	ft_open_failed(char *str, t_minishell *ms)
 	ft_putstr_fd(str, STDERR_FILENO);
 	ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
 	ms->last_exit_status = 1;
+	exit (1);
 }
 
 void	ft_permission_denied(char *str, t_minishell *ms)
@@ -60,4 +61,5 @@ void	ft_permission_denied(char *str, t_minishell *ms)
 	ft_putstr_fd(str, STDERR_FILENO);
 	ft_putstr_fd(": Permission denied\n", STDERR_FILENO);
 	ms->last_exit_status = 1;
+	exit (1);
 }

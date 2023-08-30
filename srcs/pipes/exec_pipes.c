@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/30 11:45:41 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 13:14:27 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,20 @@ void	ft_set_fd(t_pipex *p, t_lcmd *node)
 	{
 		close(p->pipe_fd[(p->idx - 1) % 2][1]);
 		close(p->pipe_fd[(p->idx) % 2][0]);
-		sub_dup2(p->pipe_fd[(p->idx - 1) % 2][0], p->pipe_fd[(p->idx) % 2][1]);
+		if (node->fd_write != 1)
+		{
+			ft_putstr_fd("in first condition\n", 2);
+			sub_dup2(p->pipe_fd[(p->idx - 1) % 2][0], node->fd_write);
+		}
+		else
+			sub_dup2(p->pipe_fd[(p->idx - 1) % 2][0], p->pipe_fd[(p->idx) % 2][1]);
 	}
 	else
 	{
 		close(p->pipe_fd[(p->idx - 1) % 2][1]);
 		sub_dup2(p->pipe_fd[(p->idx - 1) % 2][0], node->fd_write);
+		ft_putnbr_fd(node->fd_write, 2);
+		ft_putstr_fd("\n", 2);
 		if (node->fd_write != 1)
 			close(node->fd_write);
 	}
@@ -109,6 +117,7 @@ void	ft_pipeline_execution(t_minishell *ms, char **envp)
 		pid = fork();
 		if (pid == 0)
 		{
+			ft_open_files(cmd, ms);
 			ft_set_fd(ms->p, cmd);
 			ft_run_multiple_cmds(ms, envp, cmd);
 		}
@@ -118,5 +127,4 @@ void	ft_pipeline_execution(t_minishell *ms, char **envp)
 		cmd = cmd->next;
 	}
 	ft_exec_parent(ms, cmd, &pid);
-
 }

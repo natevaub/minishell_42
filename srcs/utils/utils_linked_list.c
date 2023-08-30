@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 01:46:40 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/23 11:10:54 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 12:26:08 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ t_lcmd	*ft_newlst_cmd(t_cmd *cmd)
 	new->option = cmd->option;
 	new->fd_read = cmd->read;
 	new->fd_write = cmd->write;
+	new->infile = cmd->infile;
+	new->outfile = cmd->outfile;
+	new->append = cmd->append;
 	new->next = NULL;
 	free(cmd);
 	return (new);

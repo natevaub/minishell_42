@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 19:54:02 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/30 09:19:22 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 13:19:58 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	free_linked_list(t_linked_list *head)
 	while (head != NULL)
 	{
 		next = head->next;
-		// printf("head value: %s\n", head->value);
 		free(head->value);
 		free(head);
 		head = next;

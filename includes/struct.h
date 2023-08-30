@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 01:46:40 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/30 11:22:58 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 12:23:25 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ typedef struct s_list_cmd
 	char				**option;
 	int					fd_read;
 	int					fd_write;
+	char				*infile;
+	char				*outfile;
+	int					append;
 	struct s_list_cmd	*next;
 }						t_lcmd;
 
@@ -52,6 +55,9 @@ typedef struct s_cmd
 	char				**option;
 	int					read;
 	int					write;
+	char				*infile;
+	char				*outfile;
+	int					append;
 }						t_cmd;
 
 //		### Pipe Structure ###
@@ -81,8 +87,6 @@ typedef struct s_minishell
 	int					heredoc;
 	t_linked_list		*hd_docs;
 	t_linked_list		*hd_words;
-	char				*infile;
-	char				*outfile;
 	struct termios		termios_default;
 }						t_minishell;
 
