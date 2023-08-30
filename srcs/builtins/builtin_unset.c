@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:38:36 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/29 23:26:43 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 10:44:41 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ int	cmd_unset(char **option, t_minishell *ms)
 		list = ms->copy_env;
 		while (list)
 		{
-			if (list != NULL && ft_strncmp(list->word, option[i], list->len) == 0 &&\
-				option[i][list->len] == '\0')
+			if (list != NULL && ft_strncmp(list->word, option[i], \
+				list->len) == 0 && option[i][list->len] == '\0')
 			{
 				temp = list;
 				list = list->next;

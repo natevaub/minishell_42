@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:38:36 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/29 21:56:03 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 10:44:15 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,8 @@ int	cmd_cd(t_lcmd *cmd, t_minishell *ms)
 {
 	char	*path;
 
-	if (!(cmd->option[1]))
+	if (!(cmd->option[1]) || ft_strcmp(cmd->option[1], "~") == 0)
 	{
-
 		path = get_value(ms->copy_env, "HOME");
 		if (path == NULL)
 		{

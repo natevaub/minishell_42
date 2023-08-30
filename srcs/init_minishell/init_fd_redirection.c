@@ -3,22 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init_fd_redirection.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 01:46:40 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/26 14:36:08 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/30 11:18:16 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-void	ft_open_failed(char *str, t_minishell *ms)
-{
-	ft_putstr_fd("minishell: ", STDERR_FILENO);
-	ft_putstr_fd(str, STDERR_FILENO);
-	ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
-	ms->last_exit_status = 1;
-}
 
 int	ft_get_infile_fd(t_tok **tk, t_minishell *ms)
 {
@@ -64,10 +56,11 @@ int	ft_get_outfile_fd(t_tok **tk, t_minishell *ms)
 		(*tk) = (*tk)->next;
 	}
 	if ((*tk) != NULL)
-	{
 		fd = open((*tk)->word, O_CREAT | O_TRUNC | O_RDWR, 0666);
-	}
-	ms->last_exit_status = 0;
+	if (fd == -1)
+		ft_permission_denied((*tk)->word, ms);
+	else
+		ms->last_exit_status = 0;
 	return (fd);
 }
 
@@ -90,7 +83,10 @@ int	ft_get_append_outfile_fd(t_tok **tk, t_minishell *ms)
 	}
 	if ((*tk) != NULL)
 		fd = open((*tk)->word, O_CREAT | O_APPEND | O_RDWR, 0644);
-	ms->last_exit_status = 0;
+	if (fd == -1)
+		ft_permission_denied((*tk)->word, ms);
+	else
+		ms->last_exit_status = 0;
 	return (fd);
 }
 

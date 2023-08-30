@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_no_pipe.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/28 21:34:42 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/30 11:42:38 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	parent_exec_no_pipe(pid_t *pid, int *exit_status, t_minishell *ms)
 
 void	ft_exec_no_pipe(t_minishell *ms, char **envp)
 {
-	if (ms->cmd != NULL)
+	if (ms->cmd != NULL && ms->last_exit_status == 0)
 	{
 		if ((builtin_check(ms->cmd->cmd)) == 1)
 		{

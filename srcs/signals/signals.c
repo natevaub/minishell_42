@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/29 22:56:57 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 10:46:45 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,6 @@ void	ft_init_signals(void (*handle_signals)(int))
 		perror("Error: cannot handle SIGQUIT");
 	else
 		g_status = 0;
-}
-
-void	ft_set_termios(t_minishell *ms)
-{
-	struct termios	termios_new;
-
-	if ((tcgetattr(STDIN_FILENO, &ms->termios_default)) == -1)
-		exit(EXIT_FAILURE);
-	termios_new = ms->termios_default;
-	termios_new.c_lflag &= ~(ECHOCTL);
-	if ((tcsetattr(STDIN_FILENO, TCSANOW, &termios_new)) == -1)
-		exit(EXIT_FAILURE);
-}
-
-void	ft_unset_termios(t_minishell *ms)
-{
-		if ((tcsetattr(STDIN_FILENO, TCSANOW, &ms->termios_default)) == -1)
-			exit(EXIT_FAILURE);
 }
 
 void	ft_init_hd_signals(void (*handle_signals)(int))

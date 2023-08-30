@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_pipes_1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:06:29 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/22 17:06:43 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/30 11:44:09 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,22 @@
 
 void	sub_dup2(int read, int write)
 {
-	if (read != 0)
+	if (read > 0)
 	{
 		if (improved_dup2(read, STDIN_FILENO) < 0)
 		{
 			exit(1);
 		}
 	}
-	if (write != 1)
+	if (write > 1)
 	{
 		if (improved_dup2(write, STDOUT_FILENO) < 0)
 		{
 			exit(1);
 		}
 	}
+	// else
+	// 	exit(1);
 }
 
 int	improved_dup2(int fildes, int fildes2)

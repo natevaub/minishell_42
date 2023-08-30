@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 17:58:34 by nvaubien          #+#    #+#             */
-/*   Updated: 2022/11/09 16:10:22 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/08/30 10:25:15 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	**ft_split(char const *s, char c)
 	stri = 0;
 	i = 0;
 	if (!s)
-		return(NULL);
+		return (NULL);
 	strings = gen_memory_strings(s, c);
 	if (!strings)
 		return (0);

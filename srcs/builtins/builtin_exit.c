@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:38:36 by ckarl             #+#    #+#             */
-/*   Updated: 2023/08/29 22:56:16 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 10:44:05 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,40 +58,8 @@ void	ft_exit_error_msg(char *opt, t_minishell *ms, int option)
 	}
 }
 
-//regular atoi using long long int
-long long int	ft_longatoi_for_shell(char *str, t_minishell *ms)
-{
-	int						i;
-	unsigned long long int	result;
-	int						neg;
-	long long int			end;
-	(void) ms;
-
-	result = 0;
-	neg = 1;
-	i = 0;
-	if (str[i] == '-')
-		neg = -1;
-	if (str[i] == '-' || str[i] == '+')
-		i++;
-	while (str[i] >= '0' && str[i] <= '9' && str[i])
-	{
-		result = result * 10 + (str[i] - '0');
-		i++;
-	}
-	if (str[i] != '\0' || result > 9223372036854775807)
-		return (-1);
-	else if (neg == -1)
-		end = (result * neg) % 256;
-	else if (result > 255)
-		end = result % 256;
-	else
-		end = result;
-	return (end);
-}
-
 //check if arg is not a valid nr
-int	ft_exit_arg_error(char *str, t_minishell *ms, t_lcmd *cmd)
+int	ft_exit_arg_check(char *str, t_minishell *ms, t_lcmd *cmd)
 {
 	int				i;
 	long long int	ex_status;
@@ -111,13 +79,7 @@ int	ft_exit_arg_error(char *str, t_minishell *ms, t_lcmd *cmd)
 		ft_exit_error_msg(str, ms, 2);
 		return (1);
 	}
-	ex_status = ft_longatoi_for_shell(str, ms);
-	if (ex_status == -1 || ex_status > 255)
-	{
-		ft_exit_error_msg(str, ms, 1);
-		return (0);
-	}
-	ms->last_exit_status = ex_status;
+	run_exit_atoi(str, ms);
 	return (0);
 }
 
@@ -133,7 +95,7 @@ void	cmd_exit(t_lcmd *cmd, t_minishell *ms)
 	flag = 0;
 	if (*(cmd->option + 1))
 	{
-		flag = ft_exit_arg_error(*(cmd->option + 1), ms, cmd);
+		flag = ft_exit_arg_check(*(cmd->option + 1), ms, cmd);
 	}
 	if (flag != 1)
 	{

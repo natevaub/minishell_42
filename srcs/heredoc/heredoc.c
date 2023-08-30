@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 19:54:02 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/29 22:46:32 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 10:57:51 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,29 +16,27 @@ void	ft_heredoc(t_minishell *shell)
 {
 	char			*content;
 	t_linked_list	*del;
-	t_linked_list	*head;
-	t_linked_list	*node;
 
 	del = ft_get_heredocs(shell->token);
-	head = del;
+	shell->hd_docs = del;
 	while (del != NULL && g_status == 0)
 	{
 		if (ft_eof_quoted(del->value) == 1)
 		{
 			del->value = ft_strtrim(del->value, "\"'");
-			node = ft_store_heredoc_content(del->value);
-			content = ft_list_to_char(node);
+			shell->hd_words = ft_store_heredoc_content(del->value);
+			content = ft_list_to_char(shell->hd_words);
 		}
 		else
 		{
-			node = ft_store_heredoc_content(del->value);
-			content = ft_list_to_char_expands(node);
+			shell->hd_words = ft_store_heredoc_content(del->value);
+			content = ft_list_to_char_expands(shell->hd_words, shell);
 		}
 		ft_write_to_temp_file(content);
-		free_linked_list(node);
+		free_linked_list(shell->hd_words);
 		del = del->next;
 	}
-	free_linked_list(head);
+	shell->hd_words = NULL;
 }
 
 int	ft_get_heredoc_temp_fd(t_tok **tk)

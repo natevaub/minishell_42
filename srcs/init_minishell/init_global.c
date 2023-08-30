@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 16:57:28 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/08/29 22:56:44 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/08/30 10:45:12 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,19 @@
 
 void	ft_init_minishell(t_minishell *shell, char **env, int ac, char **av)
 {
-	// struct termios	termios_new;
+	struct termios	termios_new;
 
 	(void) av;
 	(void) ac;
 	*shell = (t_minishell){};
 	shell->copy_env = new_env_list(env);
 	shell->last_exit_status = EXIT_SUCCESS;
-	ft_set_termios(shell);
-	// if ((tcgetattr(STDIN_FILENO, &shell->termios_default)) == -1)
-	// 	exit(EXIT_FAILURE);
-	// termios_new = shell->termios_default;
-	// termios_new.c_lflag &= ~(ECHOCTL);
-	// if ((tcsetattr(STDIN_FILENO, TCSANOW, &termios_new)) == -1)
-	// 	exit(EXIT_FAILURE);
+	if ((tcgetattr(STDIN_FILENO, &shell->termios_default)) == -1)
+		exit(EXIT_FAILURE);
+	termios_new = shell->termios_default;
+	termios_new.c_lflag &= ~(ECHOCTL);
+	if ((tcsetattr(STDIN_FILENO, TCSANOW, &termios_new)) == -1)
+		exit(EXIT_FAILURE);
 	g_status = 0;
 	shell->heredoc = 0;
 }
